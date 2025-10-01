@@ -1589,14 +1589,19 @@
 
     <script>
         // ===================================
-        // CONFIGURATION EmailJS - VÉRIFIEZ CES VALEURS !
+        // CONFIGURATION EmailJS
         // ===================================
-        // Remplacez par vos vraies valeurs depuis https://dashboard.emailjs.com/
-        const EMAILJS_PUBLIC_KEY = 'C5iFf_8sl2mt8Lpfw';  // Account → General
-        const EMAILJS_SERVICE_ID = 'service_3228bzz';     // Email Services
-        const EMAILJS_TEMPLATE_ID = 'template_8wwlzlw';   // Email Templates
+        const EMAILJS_PUBLIC_KEY = 'C5iFf_8sl2mt8Lpfw';
+        const EMAILJS_SERVICE_ID = 'service_3228bzz';
+        const EMAILJS_TEMPLATE_ID = 'template_8wwlzlw';
         
-        emailjs.init(EMAILJS_PUBLIC_KEY);
+        // Initialisation EmailJS
+        (function() {
+            emailjs.init({
+                publicKey: EMAILJS_PUBLIC_KEY,
+            });
+            console.log('EmailJS initialisé avec la clé:', EMAILJS_PUBLIC_KEY);
+        })();
 
         // ===================================
         // MENU MOBILE
@@ -1871,12 +1876,12 @@
                 message: messageField.value.trim()
             };
             
-            console.log('📤 Envoi avec les paramètres:', templateParams);
+            console.log('📤 Envoi du formulaire...');
             console.log('🔑 Service ID:', EMAILJS_SERVICE_ID);
             console.log('📋 Template ID:', EMAILJS_TEMPLATE_ID);
             
-            // Envoi via EmailJS
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            // Envoi via EmailJS avec sendForm (méthode alternative plus fiable)
+            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, contactForm)
                 .then((response) => {
                     console.log('✅ SUCCESS!', response.status, response.text);
                     
