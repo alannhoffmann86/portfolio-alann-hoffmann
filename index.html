@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de HOFFMANN Alann, étudiant en BTS SIO SISR spécialisé en administration système, réseaux et cybersécurité">
+    <meta name="keywords" content="BTS SIO, SISR, administration système, réseaux, cybersécurité, portfolio informatique">
+    <meta name="author" content="HOFFMANN Alann">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfolio HOFFMANN Alann - BTS SIO SISR">
+    <meta property="og:description" content="Étudiant passionné par l'informatique, les réseaux et la cybersécurité">
+    
+    <title>Portfolio BTS SIO SISR - HOFFMANN Alann</title>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        /* ===================================
+           RESET & BASE STYLES
+        =================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #00d4ff;
+            --text-dark: #333;
+            --text-light: #555;
+            --text-muted: #7f8c8d;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 10px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ===================================
+           NAVIGATION
+        =================================== */
+        nav {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+            padding: 20px 0;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 20px 30px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        nav ul li a:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: -2px;
+        }
+
+        /* ===================================
+           HERO SECTION
+        =================================== */
+        #accueil {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5em, 5vw, 4em);
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h2 {
+            font-size: clamp(1.5em, 3vw, 2em);
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: clamp(1em, 2vw, 1.2em);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            animation: fadeIn 2s ease-out;
+            margin: 10px;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 4px;
+        }
+
+        .btn-secondary {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        /* ===================================
+           SECTIONS GÉNÉRALES
+        =================================== */
+        section {
+            padding: 80px 20px;
+            scroll-margin-top: 60px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2em, 4vw, 2.5em);
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        }
+
+        /* ===================================
+           BTS SIO SECTION
+        =================================== */
+        #bts-sio {
+            background: var(--bg-light);
+        }
+
+        .bts-intro {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .bts-intro h3 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .bts-intro p {
+            color: var(--text-light);
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .specialisation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .spec-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .spec-card h4 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .spec-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .spec-card ul {
+            list-style: none;
+        }
+
+        .spec-card ul li {
+            padding: 8px 0;
+            color: var(--text-light);
+        }
+
+        .spec-card ul li::before {
+            content: '→ ';
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* ===================================
+           COMPÉTENCES SECTION
+        =================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-left-color: var(--accent-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card ul li {
+            padding: 8px 0;
+            color: var(--text-light);
+        }
+
+        .skill-card ul li::before {
+            content: '✓ ';
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* ===================================
+           PROJETS SECTION
+        =================================== */
+        #projets {
+            background: var(--bg-light);
+        }
+
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .project-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .project-body {
+            padding: 25px;
+        }
+
+        .project-body p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-badge {
+            background: #e3f2fd;
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        /* ===================================
+           VEILLE SECTION
+        =================================== */
+        #veille {
+            background: white;
+        }
+
+        .veille-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .veille-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border-top: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .veille-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .veille-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .veille-card p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        /* ===================================
+           CV SECTION
+        =================================== */
+        #cv {
+            background: var(--bg-light);
+        }
+
+        .cv-container {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cv-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .cv-header h2 {
+            font-size: clamp(2em, 4vw, 2.5em);
+            margin-bottom: 5px;
+        }
+
+        .cv-header .birth-date {
+            font-size: 1em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .cv-header .subtitle {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .cv-main {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .cv-sidebar {
+            background: #ecf0f1;
+            padding: 40px 30px;
+        }
+
+        .cv-content {
+            padding: 40px;
+        }
+
+        .cv-section {
+            margin-bottom: 35px;
+        }
+
+        .cv-section h3 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .cv-sidebar .cv-section h3 {
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .profile-text {
+            text-align: justify;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 45%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 55%;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-right: 10px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .timeline-company {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .experience-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--accent-color);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .experience-date {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .experience-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 5px 0;
+        }
+
+        .experience-company {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        .experience-description {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            padding: 10px 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .skills-list li::before {
+            content: '▸ ';
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* ===================================
+           CONTACT SECTION
+        =================================== */
+        #contact {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        #contact .section-title::after {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            font-size: 1.1em;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto 0;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea {
+            border-color: #ff4444;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .submit-btn {
+            background: white;
+            color: var(--primary-color);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .submit-btn:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(0,212,255,0.2);
+            border: 1px solid var(--accent-color);
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(255,68,68,0.2);
+            border: 1px solid #ff4444;
+            display: block;
+        }
+
+        /* ===================================
+           BACK TO TOP BUTTON
+        =================================== */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        #backToTop:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* ===================================
+           FOOTER
+        =================================== */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        /* ===================================
+           ANIMATIONS
+        =================================== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===================================
+           RESPONSIVE DESIGN
+        =================================== */
+        @media (max-width: 950px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease;
+                box-shadow: var(--shadow-md);
+                padding: 0;
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            nav ul li a {
+                padding: 20px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100% !important;
+                margin-left: 0 !important;
+                text-align: left !important;
+                padding-left: 50px;
+            }
+
+            .timeline-item .timeline-content::after {
+                display: none;
+            }
+
+            .cv-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-content h2 {
+                font-size: 1.5em;
+            }
+
+            .specialisation-grid,
+            .skills-grid,
+            .projects-grid,
+            .veille-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 0.9em;
+            }
+
+            #backToTop {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .project-filters {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 0.85em;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+        }
+
+        /* Amélioration du focus visible pour l'accessibilité */
+        *:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Réduction des animations pour les utilisateurs sensibles */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Navigation principale">
+        <div class="nav-container">
+            <div class="nav-logo">HOFFMANN Alann</div>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="#accueil" class="active">Accueil</a></li>
+                <li><a href="#bts-sio">BTS SIO SISR</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#veille">Veille Techno</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="accueil">
+        <div class="hero-content">
+            <h1>HOFFMANN Alann</h1>
+            <div class="badge">BTS SIO SISR</div>
+            <h2>Solutions d'Infrastructure, Systèmes et Réseaux</h2>
+            <p>Étudiant passionné par l'informatique, les réseaux et la cybersécurité. Spécialisé en administration système et gestion d'infrastructures.</p>
+            <a href="#cv" class="btn">Voir mon CV</a>
+            <a href="#projets" class="btn btn-secondary">Mes Projets</a>
+        </div>
+    </section>
+
+    <section id="bts-sio">
+        <div class="container">
+            <h2 class="section-title">BTS SIO - Services Informatiques aux Organisations</h2>
+            <div class="bts-intro">
+                <h3>Qu'est-ce que le BTS SIO ?</h3>
+                <p>Le BTS Services Informatiques aux Organisations forme des techniciens supérieurs capables de gérer et maintenir des infrastructures informatiques, de développer des applications, et d'accompagner les utilisateurs dans leur utilisation des systèmes d'information.</p>
+            </div>
+            <div class="specialisation-grid">
+                <div class="spec-card">
+                    <h4>SISR - Solutions d'Infrastructure, Systèmes et Réseaux</h4>
+                    <p><strong>Ma spécialisation :</strong> Administration et sécurisation des infrastructures informatiques</p>
+                    <ul>
+                        <li>Administration des systèmes (Windows Server, Linux)</li>
+                        <li>Gestion des réseaux et télécommunications</li>
+                        <li>Virtualisation et cloud computing</li>
+                        <li>Sécurité des systèmes d'information</li>
+                        <li>Support et assistance aux utilisateurs</li>
+                        <li>Gestion de parc informatique</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>SLAM - Solutions Logicielles et Applications Métiers</h4>
+                    <p><strong>L'autre option :</strong> Développement d'applications informatiques</p>
+                    <ul>
+                        <li>Conception et développement d'applications</li>
+                        <li>Programmation orientée objet</li>
+                        <li>Gestion de bases de données</li>
+                        <li>Développement web et mobile</li>
+                        <li>Maintenance applicative</li>
+                        <li>Intégration et déploiement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences">
+        <div class="container">
+            <h2 class="section-title">Mes Compétences SISR</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🖥️ Administration Systèmes</h3>
+                    <ul>
+                        <li>Windows Server (AD, DNS, DHCP)</li>
+                        <li>Linux (Debian, Ubuntu, CentOS)</li>
+                        <li>Gestion des utilisateurs et permissions</li>
+                        <li>Scripts PowerShell et Bash</li>
+                        <li>Sauvegarde et restauration</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🌐 Réseaux & Infrastructure</h3>
+                    <ul>
+                        <li>Configuration de routeurs et switchs</li>
+                        <li>Protocoles TCP/IP, VLAN, VPN</li>
+                        <li>Architecture réseau d'entreprise</li>
+                        <li>Diagnostic et résolution de pannes</li>
+                        <li>Câblage et interconnexion</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🔒 Sécurité Informatique</h3>
+                    <ul>
+                        <li>Pare-feu et filtrage réseau</li>
+                        <li>Antivirus et anti-malware</li>
+                        <li>Politiques de sécurité</li>
+                        <li>Gestion des accès et authentification</li>
+                        <li>Surveillance et détection d'incidents</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>☁️ Virtualisation & Cloud</h3>
+                    <ul>
+                        <li>VirtualBox</li>
+                        <li>Conteneurisation (Docker)</li>
+                        <li>Serveurs virtuels</li>
+                        <li>Stockage en réseau (NAS, SAN)</li>
+                        <li>Solutions cloud (Azure, AWS)</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🛠️ Support & Maintenance</h3>
+                    <ul>
+                        <li>Ticketing et gestion des incidents</li>
+                        <li>Support utilisateur niveau 1 et 2</li>
+                        <li>Installation et configuration matériel</li>
+                        <li>Maintenance préventive et corrective</li>
+                        <li>Documentation technique</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>📊 Gestion de Projet</h3>
+                    <ul>
+                        <li>Méthodes Agile et Scrum</li>
+                        <li>Planification et suivi</li>
+                        <li>Documentation projet</li>
+                        <li>Communication avec les parties prenantes</li>
+                        <li>Travail en équipe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projets">
+        <div class="container">
+            <h2 class="section-title">Mes Projets & Réalisations</h2>
+            <div class="project-filters" role="group" aria-label="Filtres de projets">
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">Tous</button>
+                <button class="filter-btn" data-filter="reseaux" aria-pressed="false">Réseaux</button>
+                <button class="filter-btn" data-filter="systemes" aria-pressed="false">Systèmes</button>
+                <button class="filter-btn" data-filter="securite" aria-pressed="false">Sécurité</button>
+                <button class="filter-btn" data-filter="virtualisation" aria-pressed="false">Virtualisation</button>
+                <button class="filter-btn" data-filter="automatisation" aria-pressed="false">Automatisation</button>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card" data-category="reseaux">
+                    <div class="project-header">
+                        <h3>Infrastructure Réseau d'Entreprise</h3>
+                        <span class="project-tag">Réseaux</span>
+                    </div>
+                    <div class="project-body">
+                        <p>Conception et mise en place d'une infrastructure réseau complète pour une PME avec segmentation VLAN, serveur DHCP/DNS et sécurisation par pare-feu.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Cisco Packet Tracer</span>
+                            <span class="tech-badge">VLAN</span>
+                            <span class="tech-badge">Routage</span>
+                            <span class="tech-badge">Firewall</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="project-card" data-category="systemes">
+                    <div class="project-header">
+                        <h3>Serveur Active Directory</h3>
+                        <span class="project-tag">Systèmes</span>
+                    </div>
+                    <div class="project-body">
+                        <p>Déploiement d'un contrôleur de domaine Active Directory avec gestion des utilisateurs, GPO, et stratégies de sécurité pour un environnement Windows.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Windows Server</span>
+                            <span class="tech-badge">Active Directory</span>
+                            <span class="tech-badge">GPO</span>
+                            <span class="tech-badge">DNS</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="project-card" data-category="virtualisation">
+                    <div class="project-header">
+                        <h3>Virtualisation avec VirtualBox</h3>
+                        <span class="project-tag">Virtualisation</span>
+                    </div>
+                    <div class="project-body">
+                        <p>Création d'une infrastructure virtualisée avec plusieurs machines virtuelles (serveurs web, BDD, firewall) et mise en place de la haute disponibilité.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">VirtualBox</span>
+                            <span class="tech-badge">vSphere</span>
+                            <span class="tech-badge">Linux</span>
+                            <span class="tech-badge">Windows Server</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="project-card" data-category="securite">
+                    <div class="project-header">
+                        <h3>Sécurisation d'Infrastructure</h3>
+                        <span class="project-tag">Sécurité</span>
+                    </div>
+                    <div class="project-body">
+                        <p>Audit de sécurité et mise en place de solutions de protection : pare-feu, VPN, politique de mots de passe, et surveillance réseau avec Wireshark.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">pfSense</span>
+                            <span class="tech-badge">VPN</span>
+                            <span class="tech-badge">Wireshark</span>
+                            <span class="tech-badge">HTTPS</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="project-card" data-category="automatisation">
+                    <div class="project-header">
+                        <h3>Automatisation avec Scripts</h3>
+                        <span class="project-tag">Automatisation</span>
+                    </div>
+                    <div class="project-body">
+                        <p>Développement de scripts PowerShell et Bash pour automatiser les tâches d'administration : création d'utilisateurs, sauvegardes, monitoring système.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">PowerShell</span>
+                            <span class="tech-badge">Bash</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Cron</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="project-card" data-category="systemes">
+                    <div class="project-header">
+                        <h3>Serveur Web Linux</h3>
+                        <span class="project-tag">Systèmes</span>
+                    </div>
+                    <div class="project-body">
+                        <p>Installation et configuration d'un serveur web sous Linux avec Apache, PHP, MySQL. Sécurisation avec certificat SSL et configuration de sauvegardes automatiques.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Linux</span>
+                            <span class="tech-badge">Apache</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">SSL/TLS</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="veille">
+        <div class="container">
+            <h2 class="section-title">Veille Technologique</h2>
+            <div class="veille-grid">
+                <article class="veille-card">
+                    <h3>🔐 Cybersécurité</h3>
+                    <p>Suivi des dernières menaces et vulnérabilités, nouvelles techniques d'attaque et solutions de protection. Sources : ANSSI, CERT-FR, Zataz.</p>
+                </article>
+                <article class="veille-card">
+                    <h3>☁️ Cloud Computing</h3>
+                    <p>Évolution des solutions cloud (AWS, Azure, Google Cloud), conteneurisation et orchestration avec Kubernetes, architectures microservices.</p>
+                </article>
+                <article class="veille-card">
+                    <h3>🌐 Réseaux & 5G</h3>
+                    <p>Nouvelles technologies réseau, déploiement de la 5G, SDN (Software Defined Networking), évolution des protocoles et standards.</p>
+                </article>
+                <article class="veille-card">
+                    <h3>🤖 DevOps & Automatisation</h3>
+                    <p>Pratiques DevOps, CI/CD, Infrastructure as Code (Terraform, Ansible), automatisation des déploiements et gestion de configuration.</p>
+                </article>
+                <article class="veille-card">
+                    <h3>🔧 Virtualisation</h3>
+                    <p>Évolution des technologies de virtualisation, containers (Docker, Podman), hyperviseurs nouvelle génération, optimisation des ressources.</p>
+                </article>
+                <article class="veille-card">
+                    <h3>📡 IoT & Edge Computing</h3>
+                    <p>Internet des objets, sécurité IoT, edge computing, traitement des données à la périphérie, intégration avec les infrastructures existantes.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="cv">
+        <div class="container">
+            <h2 class="section-title">Mon Curriculum Vitae</h2>
+ <div style="text-align: center; margin-bottom: 30px;">
+            <a href="CV_HOFFMANN_Alann.pdf" download class="btn" style="background: var(--primary-color); color: white; border-color: var(--primary-color);">
+                📄 Télécharger mon CV (PDF)
+            </a>
+        </div>
+            <div class="cv-container">
+                <div class="cv-header">
+                    <h2>HOFFMANN Alann</h2>
+                    <div class="birth-date">Né le 16 septembre 2001 (24 ans)</div>
+                    <div class="subtitle">TECHNICIEN INFORMATIQUE EN CONTRAT D'APPRENTISSAGE</div>
+                    <div class="contact-info">
+                        <div>📍 4 impasse des primevères, 57320 BRETTNACH</div>
+                        <div>📧 alannhoffmann86@gmail.com</div>
+                        <div>📱 06 46 53 09 62</div>
+                        <div>🚗 Permis B et véhicule</div>
+                    </div>
+                </div>
+                <div class="cv-main">
+                    <aside class="cv-sidebar">
+                        <div class="cv-section">
+                            <h3>Informations</h3>
+                            <div class="info-item"><strong>Loisirs</strong><br>Lecture, cinéma, jeux vidéo</div>
+                        </div>
+                        <div class="cv-section">
+                            <h3>Compétences principales</h3>
+                            <ul class="skills-list">
+                                <li>Travail en autonomie</li>
+                                <li>Communiquer auprès des clients</li>
+                                <li>Installer et intégrer le matériel</li>
+                                <li>Planifier des opérations de maintenance</li>
+                                <li>Gestion des stocks</li>
+                                <li>Structurer et synthétiser les données</li>
+                            </ul>
+                        </div>
+                    </aside>
+                    <div class="cv-content">
+                        <div class="cv-section">
+                            <h3>Profil</h3>
+                            <p class="profile-text">Actuellement étudiant en BTS Services Informatiques aux Organisations, option SISR, je me forme aux métiers de l'administration réseau et de la cybersécurité. Rigoureux, curieux et passionné par les technologies, je souhaite mettre mes compétences techniques au service d'une entreprise dynamique, tout en continuant à me perfectionner sur le terrain.</p>
+                        </div>
+                        <div class="cv-section">
+                            <h3>Expériences</h3>
+                            <div class="timeline">
+                                <article class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-date">01/09/2025</div>
+                                        <div class="timeline-title">Technicien informatique en alternance</div>
+                                        <div class="timeline-company">Viessmann Faulquemont</div>
+                                        <div class="timeline-description">Gestion du parc informatique, dépannage et maintenance</div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-date">06/01/2025 - 10/01/2025</div>
+                                        <div class="timeline-title">Stage découverte du métier de technicien informatique</div>
+                                        <div class="timeline-company">SIE Metz</div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-date">16/10/2024 - 20/12/2024</div>
+                                        <div class="timeline-title">Travail sur mon projet professionnel de technicien informatique</div>
+                                        <div class="timeline-company">Activ'projet Envergure Boulay</div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-date">11/11/2021 - 12/08/2024</div>
+                                        <div class="timeline-title">Technicien d'exploitation</div>
+                                        <div class="timeline-company">Idex Energie Ennery</div>
+                                        <div class="timeline-description">Gestion de secteur, dépannage, contrôle et maintenance</div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="cv-section">
+                            <h3>Formation</h3>
+                            <div class="experience-item">
+                                <div class="experience-date">2018 - 2020</div>
+                                <div class="experience-title">BAC MEI - Maintenance des équipements industriels</div>
+                                <div class="experience-company">Lycée inter entreprise - Boulay</div>
+                            </div>
+                            <div class="experience-item">
+                                <div class="experience-date">2016 - 2018</div>
+                                <div class="experience-title">CAP ELEC</div>
+                                <div class="experience-company">Lycée inter entreprise - Boulay</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Me Contacter</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>📧 Email</h3>
+                    <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>📱 Téléphone</h3>
+                    <p><a href="tel:0646530962">06 46 53 09 62</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>📍 Localisation</h3>
+                    <p>Brettnach, 57320<br>Lorraine, France</p>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required aria-required="true">
+                    <span class="error-message" role="alert">Veuillez entrer votre nom</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="votre@email.com" required aria-required="true">
+                    <span class="error-message" role="alert">Veuillez entrer un email valide</span>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Sujet *</label>
+                    <input type="text" id="subject" name="subject" placeholder="Sujet de votre message" required aria-required="true">
+                    <span class="error-message" role="alert">Veuillez entrer un sujet</span>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" placeholder="Votre message..." required aria-required="true"></textarea>
+                    <span class="error-message" role="alert">Veuillez entrer votre message (min. 10 caractères)</span>
+                </div>
+                <button type="submit" class="submit-btn">Envoyer le message</button>
+                <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+    </section>
+
+    <button id="backToTop" aria-label="Retour en haut de la page">↑</button>
+    
+    <footer role="contentinfo">
+        <p>&copy; 2025 HOFFMANN Alann - Portfolio BTS SIO SISR</p>
+    </footer>
+
+    <script>
+        // ===================================
+        // CONFIGURATION EmailJS
+        // ===================================
+        emailjs.init('O8EApQc4tgzJNn6j5');
+
+        // ===================================
+        // MENU MOBILE
+        // ===================================
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            const isActive = mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            
+            // Mise à jour de l'attribut ARIA
+            mobileMenu.setAttribute('aria-expanded', isActive);
+        });
+
+        // ===================================
+        // NAVIGATION SMOOTH SCROLL
+        // ===================================
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Mise à jour de la classe active
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Fermeture du menu mobile
+                    if (window.innerWidth <= 950) {
+                        mobileMenu.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        mobileMenu.setAttribute('aria-expanded', 'false');
+                    }
+                    
+                    // Mise du focus sur la section pour l'accessibilité
+                    targetSection.setAttribute('tabindex', '-1');
+                    targetSection.focus();
+                }
+            });
+        });
+
+        // ===================================
+        // ACTIVE SECTION DETECTION
+        // ===================================
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ===================================
+        // BACK TO TOP BUTTON
+        // ===================================
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // ===================================
+        // PROJECT FILTERS
+        // ===================================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Mise à jour des états actifs et ARIA
+                filterBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                // Filtrage des projets
+                projectCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        const category = card.getAttribute('data-category');
+                        if (category === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // ===================================
+        // TIMELINE ANIMATION ON SCROLL
+        // ===================================
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        timelineItems.forEach(item => {
+            timelineObserver.observe(item);
+        });
+
+        // ===================================
+        // CONTACT FORM HANDLING
+        // ===================================
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        // Validation en temps réel
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            // Validation à la perte de focus
+            input.addEventListener('blur', () => {
+                validateField(input);
+            });
+            
+            // Suppression de l'erreur lors de la saisie
+            input.addEventListener('input', () => {
+                if (input.parentElement.classList.contains('error') && input.value.trim() !== '') {
+                    input.parentElement.classList.remove('error');
+                }
+            });
+        });
+
+        // Fonction de validation d'un champ
+        function validateField(field) {
+            const parent = field.parentElement;
+            const value = field.value.trim();
+            
+            // Validation du nom
+            if (field.id === 'name') {
+                if (value === '' || value.length < 2) {
+                    parent.classList.add('error');
+                    return false;
+                } else {
+                    parent.classList.remove('error');
+                    return true;
+                }
+            }
+            
+            // Validation de l'email
+            if (field.id === 'email') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    parent.classList.add('error');
+                    return false;
+                } else {
+                    parent.classList.remove('error');
+                    return true;
+                }
+            }
+            
+            // Validation du sujet
+            if (field.id === 'subject') {
+                if (value === '' || value.length < 3) {
+                    parent.classList.add('error');
+                    return false;
+                } else {
+                    parent.classList.remove('error');
+                    return true;
+                }
+            }
+            
+            // Validation du message
+            if (field.id === 'message') {
+                if (value === '' || value.length < 10) {
+                    parent.classList.add('error');
+                    return false;
+                } else {
+                    parent.classList.remove('error');
+                    return true;
+                }
+            }
+            
+            return true;
+        }
+
+        // Soumission du formulaire
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Réinitialisation des messages
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+            
+            // Récupération des valeurs
+            const nameField = document.getElementById('name');
+            const emailField = document.getElementById('email');
+            const subjectField = document.getElementById('subject');
+            const messageField = document.getElementById('message');
+            
+            // Validation de tous les champs
+            let hasError = false;
+            
+            if (!validateField(nameField)) hasError = true;
+            if (!validateField(emailField)) hasError = true;
+            if (!validateField(subjectField)) hasError = true;
+            if (!validateField(messageField)) hasError = true;
+            
+            // Si erreur, affichage du message et arrêt
+            if (hasError) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Veuillez corriger les erreurs dans le formulaire.';
+                return;
+            }
+            
+            // Désactivation du bouton pendant l'envoi
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            
+            // Préparation des données pour EmailJS
+            const templateParams = {
+                from_name: nameField.value.trim(),
+                from_email: emailField.value.trim(),
+                subject: subjectField.value.trim(),
+                message: messageField.value.trim()
+            };
+            
+            // Envoi via EmailJS
+            emailjs.send('service_3228bzz', 'template_8wwlzlw', templateParams)
+                .then(() => {
+                    // Succès
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = 'Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
+                    
+                    // Réinitialisation du formulaire
+                    contactForm.reset();
+                    
+                    // Réactivation du bouton
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Envoyer le message';
+                    
+                    // Masquage automatique du message après 5 secondes
+                    setTimeout(() => {
+                        formMessage.className = 'form-message';
+                        formMessage.textContent = '';
+                    }, 5000);
+                })
+                .catch((error) => {
+                    // Erreur
+                    console.error('Erreur EmailJS:', error);
+                    
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = 'Erreur lors de l\'envoi. Veuillez réessayer ou me contacter directement par email.';
+                    
+                    // Réactivation du bouton
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Envoyer le message';
+                });
+        });
+
+        // ===================================
+        // ACCESSIBILITÉ : SKIP TO CONTENT
+        // ===================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ajout d'un lien "Aller au contenu" pour l'accessibilité
+            const skipLink = document.createElement('a');
+            skipLink.href = '#accueil';
+            skipLink.textContent = 'Aller au contenu principal';
+            skipLink.className = 'skip-link';
+            skipLink.style.cssText = `
+                position: absolute;
+                top: -40px;
+                left: 0;
+                background: var(--accent-color);
+                color: var(--primary-color);
+                padding: 8px 16px;
+                text-decoration: none;
+                font-weight: bold;
+                z-index: 10000;
+                transition: top 0.3s;
+            `;
+            
+            skipLink.addEventListener('focus', () => {
+                skipLink.style.top = '0';
+            });
+            
+            skipLink.addEventListener('blur', () => {
+                skipLink.style.top = '-40px';
+            });
+            
+            document.body.insertBefore(skipLink, document.body.firstChild);
+        });
+
+        // ===================================
+        // PERFORMANCE : LAZY LOADING IMAGES
+        // ===================================
+        // Si des images sont ajoutées plus tard, cette fonction les chargera de manière optimisée
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            });
+
+            document.querySelectorAll('img.lazy').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // ===================================
+        // DÉTECTION DU MODE SOMBRE SYSTÈME
+        // ===================================
+        // Pour une future implémentation du mode sombre
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // L'utilisateur préfère le mode sombre
+            // Vous pouvez ajouter une classe au body pour gérer cela
+            // document.body.classList.add('dark-mode');
+        }
+
+        // Écoute des changements de préférence
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            const newColorScheme = e.matches ? "dark" : "light";
+            // Gérer le changement de thème
+        });
+
+        // ===================================
+        // GESTION DES ERREURS GLOBALES
+        // ===================================
+        window.addEventListener('error', (e) => {
+            console.error('Erreur détectée:', e.error);
+            // Vous pouvez ajouter ici un système de reporting d'erreurs
+        });
+
+        // ===================================
+        // CONSOLE LOG DE BIENVENUE
+        // ===================================
+        console.log('%c👋 Bienvenue sur mon portfolio !', 'font-size: 20px; color: #00d4ff; font-weight: bold;');
+        console.log('%cVous êtes curieux ? Parfait ! N\'hésitez pas à me contacter 😊', 'font-size: 14px; color: #1e3c72;');
+        
+        // ===================================
+        // ANALYTICS (à activer si besoin)
+        // ===================================
+        /*
+        // Exemple avec Google Analytics
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'VOTRE_ID_GA');
+        */
+    </script>
+</body>
+</html>
