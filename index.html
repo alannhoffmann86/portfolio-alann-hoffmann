@@ -17,6 +17,9 @@
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
     <style>
         /* ===================================
            RESET & BASE STYLES
@@ -887,6 +890,12 @@
             display: block;
         }
 
+        .recaptcha-container {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+        }
+
         .submit-btn {
             background: white;
             color: var(--primary-color);
@@ -1119,15 +1128,18 @@
             section {
                 padding: 60px 20px;
             }
+
+            .recaptcha-container {
+                transform: scale(0.85);
+                transform-origin: center;
+            }
         }
 
-        /* Amélioration du focus visible pour l'accessibilité */
         *:focus-visible {
             outline: 2px solid var(--accent-color);
             outline-offset: 2px;
         }
 
-        /* Réduction des animations pour les utilisateurs sensibles */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -1322,7 +1334,7 @@
                 <article class="project-card" data-category="virtualisation">
                     <div class="project-header">
                         <h3>Virtualisation avec VirtualBox</h3>
-                        <span class="project-tag">Virtualisation</span>
+                        <span class="tech-badge">Virtualisation</span>
                     </div>
                     <div class="project-body">
                         <p>Création d'une infrastructure virtualisée avec plusieurs machines virtuelles (serveurs web, BDD, firewall) et mise en place de la haute disponibilité.</p>
@@ -1421,11 +1433,11 @@
     <section id="cv">
         <div class="container">
             <h2 class="section-title">Mon Curriculum Vitae</h2>
- <div style="text-align: center; margin-bottom: 30px;">
-            <a href="CV_HOFFMANN_Alann.pdf" download class="btn" style="background: var(--primary-color); color: white; border-color: var(--primary-color);">
-                📄 Télécharger mon CV (PDF)
-            </a>
-        </div>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="CV_HOFFMANN_Alann.pdf" download class="btn" style="background: var(--primary-color); color: white; border-color: var(--primary-color);">
+                    📄 Télécharger mon CV (PDF)
+                </a>
+            </div>
             <div class="cv-container">
                 <div class="cv-header">
                     <h2>HOFFMANN Alann</h2>
@@ -1557,6 +1569,12 @@
                     <textarea id="message" name="message" placeholder="Votre message..." required aria-required="true"></textarea>
                     <span class="error-message" role="alert">Veuillez entrer votre message (min. 10 caractères)</span>
                 </div>
+                
+                <!-- reCAPTCHA v2 -->
+                <div class="recaptcha-container">
+                    <div class="g-recaptcha" data-sitekey="6LeB49orAAAAAIsPn9RGytJBTxVA0-5x_wwIwc3B"></div>
+                </div>
+                
                 <button type="submit" class="submit-btn">Envoyer le message</button>
                 <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
             </form>
@@ -1571,9 +1589,9 @@
 
     <script>
         // ===================================
-        // CONFIGURATION EmailJS
+        // CONFIGURATION EmailJS - CLÉ PUBLIQUE MISE À JOUR
         // ===================================
-        emailjs.init('O8EApQc4tgzJNn6j5');
+        emailjs.init('C5iFf_8sl2mt8Lpfw');
 
         // ===================================
         // MENU MOBILE
@@ -1585,7 +1603,6 @@
             const isActive = mobileMenu.classList.toggle('active');
             navMenu.classList.toggle('active');
             
-            // Mise à jour de l'attribut ARIA
             mobileMenu.setAttribute('aria-expanded', isActive);
         });
 
@@ -1605,20 +1622,17 @@
                         block: 'start'
                     });
                     
-                    // Mise à jour de la classe active
                     document.querySelectorAll('nav a').forEach(link => {
                         link.classList.remove('active');
                     });
                     this.classList.add('active');
                     
-                    // Fermeture du menu mobile
                     if (window.innerWidth <= 950) {
                         mobileMenu.classList.remove('active');
                         navMenu.classList.remove('active');
                         mobileMenu.setAttribute('aria-expanded', 'false');
                     }
                     
-                    // Mise du focus sur la section pour l'accessibilité
                     targetSection.setAttribute('tabindex', '-1');
                     targetSection.focus();
                 }
@@ -1677,7 +1691,6 @@
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Mise à jour des états actifs et ARIA
                 filterBtns.forEach(b => {
                     b.classList.remove('active');
                     b.setAttribute('aria-pressed', 'false');
@@ -1687,7 +1700,6 @@
                 
                 const filter = btn.getAttribute('data-filter');
                 
-                // Filtrage des projets
                 projectCards.forEach(card => {
                     if (filter === 'all') {
                         card.classList.remove('hidden');
@@ -1726,7 +1738,7 @@
         });
 
         // ===================================
-        // CONTACT FORM HANDLING
+        // CONTACT FORM HANDLING AVEC reCAPTCHA
         // ===================================
         const contactForm = document.getElementById('contactForm');
         const formMessage = document.getElementById('formMessage');
@@ -1734,12 +1746,10 @@
         // Validation en temps réel
         const inputs = contactForm.querySelectorAll('input, textarea');
         inputs.forEach(input => {
-            // Validation à la perte de focus
             input.addEventListener('blur', () => {
                 validateField(input);
             });
             
-            // Suppression de l'erreur lors de la saisie
             input.addEventListener('input', () => {
                 if (input.parentElement.classList.contains('error') && input.value.trim() !== '') {
                     input.parentElement.classList.remove('error');
@@ -1752,7 +1762,6 @@
             const parent = field.parentElement;
             const value = field.value.trim();
             
-            // Validation du nom
             if (field.id === 'name') {
                 if (value === '' || value.length < 2) {
                     parent.classList.add('error');
@@ -1763,7 +1772,6 @@
                 }
             }
             
-            // Validation de l'email
             if (field.id === 'email') {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(value)) {
@@ -1775,7 +1783,6 @@
                 }
             }
             
-            // Validation du sujet
             if (field.id === 'subject') {
                 if (value === '' || value.length < 3) {
                     parent.classList.add('error');
@@ -1786,7 +1793,6 @@
                 }
             }
             
-            // Validation du message
             if (field.id === 'message') {
                 if (value === '' || value.length < 10) {
                     parent.classList.add('error');
@@ -1800,7 +1806,7 @@
             return true;
         }
 
-        // Soumission du formulaire
+        // Soumission du formulaire avec vérification reCAPTCHA
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -1825,10 +1831,17 @@
             if (!validateField(subjectField)) hasError = true;
             if (!validateField(messageField)) hasError = true;
             
-            // Si erreur, affichage du message et arrêt
             if (hasError) {
                 formMessage.className = 'form-message error';
                 formMessage.textContent = 'Veuillez corriger les erreurs dans le formulaire.';
+                return;
+            }
+            
+            // Vérification du reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Veuillez cocher la case "Je ne suis pas un robot".';
                 return;
             }
             
@@ -1842,7 +1855,8 @@
                 from_name: nameField.value.trim(),
                 from_email: emailField.value.trim(),
                 subject: subjectField.value.trim(),
-                message: messageField.value.trim()
+                message: messageField.value.trim(),
+                'g-recaptcha-response': recaptchaResponse
             };
             
             // Envoi via EmailJS
@@ -1852,8 +1866,9 @@
                     formMessage.className = 'form-message success';
                     formMessage.textContent = 'Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
                     
-                    // Réinitialisation du formulaire
+                    // Réinitialisation du formulaire et du reCAPTCHA
                     contactForm.reset();
+                    grecaptcha.reset();
                     
                     // Réactivation du bouton
                     submitBtn.disabled = false;
@@ -1872,6 +1887,9 @@
                     formMessage.className = 'form-message error';
                     formMessage.textContent = 'Erreur lors de l\'envoi. Veuillez réessayer ou me contacter directement par email.';
                     
+                    // Réinitialisation du reCAPTCHA
+                    grecaptcha.reset();
+                    
                     // Réactivation du bouton
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Envoyer le message';
@@ -1879,10 +1897,9 @@
         });
 
         // ===================================
-        // ACCESSIBILITÉ : SKIP TO CONTENT
+        // ACCESSIBILITÉ
         // ===================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Ajout d'un lien "Aller au contenu" pour l'accessibilité
             const skipLink = document.createElement('a');
             skipLink.href = '#accueil';
             skipLink.textContent = 'Aller au contenu principal';
@@ -1912,9 +1929,8 @@
         });
 
         // ===================================
-        // PERFORMANCE : LAZY LOADING IMAGES
+        // LAZY LOADING IMAGES
         // ===================================
-        // Si des images sont ajoutées plus tard, cette fonction les chargera de manière optimisée
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -1937,17 +1953,12 @@
         // ===================================
         // DÉTECTION DU MODE SOMBRE SYSTÈME
         // ===================================
-        // Pour une future implémentation du mode sombre
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            // L'utilisateur préfère le mode sombre
-            // Vous pouvez ajouter une classe au body pour gérer cela
             // document.body.classList.add('dark-mode');
         }
 
-        // Écoute des changements de préférence
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             const newColorScheme = e.matches ? "dark" : "light";
-            // Gérer le changement de thème
         });
 
         // ===================================
@@ -1955,25 +1966,13 @@
         // ===================================
         window.addEventListener('error', (e) => {
             console.error('Erreur détectée:', e.error);
-            // Vous pouvez ajouter ici un système de reporting d'erreurs
         });
 
         // ===================================
-        // CONSOLE LOG DE BIENVENUE
+        // CONSOLE LOG
         // ===================================
         console.log('%c👋 Bienvenue sur mon portfolio !', 'font-size: 20px; color: #00d4ff; font-weight: bold;');
-        console.log('%cVous êtes curieux ? Parfait ! N\'hésitez pas à me contacter 😊', 'font-size: 14px; color: #1e3c72;');
-        
-        // ===================================
-        // ANALYTICS (à activer si besoin)
-        // ===================================
-        /*
-        // Exemple avec Google Analytics
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'VOTRE_ID_GA');
-        */
+        console.log('%cVous êtes curieux ? N\'hésitez pas à me contacter !', 'font-size: 14px; color: #1e3c72;');
     </script>
 </body>
 </html>
