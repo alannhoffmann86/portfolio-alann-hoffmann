@@ -14,8 +14,8 @@
     
     <title>Portfolio BTS SIO SISR - HOFFMANN Alann</title>
 
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- EmailJS SDK - Version 4 (plus récente et stable) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <!-- Google reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -1589,9 +1589,14 @@
 
     <script>
         // ===================================
-        // CONFIGURATION EmailJS - CLÉ PUBLIQUE MISE À JOUR
+        // CONFIGURATION EmailJS - VÉRIFIEZ CES VALEURS !
         // ===================================
-        emailjs.init('C5iFf_8sl2mt8Lpfw');
+        // Remplacez par vos vraies valeurs depuis https://dashboard.emailjs.com/
+        const EMAILJS_PUBLIC_KEY = 'C5iFf_8sl2mt8Lpfw';  // Account → General
+        const EMAILJS_SERVICE_ID = 'service_3228bzz';     // Email Services
+        const EMAILJS_TEMPLATE_ID = 'template_8wwlzlw';   // Email Templates
+        
+        emailjs.init(EMAILJS_PUBLIC_KEY);
 
         // ===================================
         // MENU MOBILE
@@ -1810,6 +1815,8 @@
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            console.log('📧 Tentative d\'envoi du formulaire...');
+            
             // Réinitialisation des messages
             document.querySelectorAll('.form-group').forEach(group => {
                 group.classList.remove('error');
@@ -1832,18 +1839,24 @@
             if (!validateField(messageField)) hasError = true;
             
             if (hasError) {
+                console.error('❌ Erreur de validation des champs');
                 formMessage.className = 'form-message error';
                 formMessage.textContent = 'Veuillez corriger les erreurs dans le formulaire.';
                 return;
             }
             
+            console.log('✅ Validation des champs OK');
+            
             // Vérification du reCAPTCHA
             const recaptchaResponse = grecaptcha.getResponse();
             if (!recaptchaResponse) {
+                console.error('❌ reCAPTCHA non validé');
                 formMessage.className = 'form-message error';
                 formMessage.textContent = 'Veuillez cocher la case "Je ne suis pas un robot".';
                 return;
             }
+            
+            console.log('✅ reCAPTCHA validé');
             
             // Désactivation du bouton pendant l'envoi
             const submitBtn = contactForm.querySelector('.submit-btn');
@@ -1855,13 +1868,18 @@
                 from_name: nameField.value.trim(),
                 from_email: emailField.value.trim(),
                 subject: subjectField.value.trim(),
-                message: messageField.value.trim(),
-                'g-recaptcha-response': recaptchaResponse
+                message: messageField.value.trim()
             };
             
+            console.log('📤 Envoi avec les paramètres:', templateParams);
+            console.log('🔑 Service ID:', EMAILJS_SERVICE_ID);
+            console.log('📋 Template ID:', EMAILJS_TEMPLATE_ID);
+            
             // Envoi via EmailJS
-            emailjs.send('service_3228bzz', 'template_8wwlzlw', templateParams)
-                .then(() => {
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then((response) => {
+                    console.log('✅ SUCCESS!', response.status, response.text);
+                    
                     // Succès
                     formMessage.className = 'form-message success';
                     formMessage.textContent = 'Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
@@ -1881,11 +1899,26 @@
                     }, 5000);
                 })
                 .catch((error) => {
+                    console.error('❌ ERREUR DÉTAILLÉE:', error);
+                    console.error('Type d\'erreur:', error.name);
+                    console.error('Message d\'erreur:', error.text || error.message);
+                    console.error('Status:', error.status);
+                    
                     // Erreur
-                    console.error('Erreur EmailJS:', error);
+                    let errorMsg = 'Erreur lors de l\'envoi. ';
+                    
+                    if (error.text) {
+                        errorMsg += 'Détails: ' + error.text;
+                    } else if (error.status === 400) {
+                        errorMsg += 'Vérifiez votre configuration EmailJS (Service ID / Template ID).';
+                    } else if (error.status === 401) {
+                        errorMsg += 'Clé publique EmailJS invalide.';
+                    } else {
+                        errorMsg += 'Veuillez me contacter directement par email.';
+                    }
                     
                     formMessage.className = 'form-message error';
-                    formMessage.textContent = 'Erreur lors de l\'envoi. Veuillez réessayer ou me contacter directement par email.';
+                    formMessage.textContent = errorMsg;
                     
                     // Réinitialisation du reCAPTCHA
                     grecaptcha.reset();
