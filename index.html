@@ -1119,22 +1119,6 @@
             min-height: 140px;
         }
 
-        .form-group.error input,
-        .form-group.error textarea {
-            border-color: #e74c3c;
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 0.85em;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .form-group.error .error-message {
-            display: block;
-        }
-
         .recaptcha-container {
             margin: 20px 0;
             display: flex;
@@ -1162,26 +1146,6 @@
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-        }
-
-        .form-message {
-            margin-top: 20px;
-            padding: 14px;
-            border-radius: 6px;
-            text-align: center;
-            display: none;
-        }
-
-        .form-message.success {
-            background: rgba(52,152,219,0.3);
-            border: 1px solid var(--accent-light);
-            display: block;
-        }
-
-        .form-message.error {
-            background: rgba(231,76,60,0.3);
-            border: 1px solid #e74c3c;
-            display: block;
         }
 
         /* BACK TO TOP */
@@ -1361,7 +1325,7 @@
             <h2>BTS Services Informatiques aux Organisations - SISR</h2>
             <p>Spécialisé en administration système, gestion d'infrastructures réseaux et sécurité informatique. Compétences en virtualisation, scripting et support technique avancé.</p>
             <a href="#cv" class="btn">Consulter mon parcours</a>
-            <a href="#projets" class="btn btn-secondary">Voir mes réalisations</a>
+            <a href="#tp" class="btn btn-secondary">Voir mes réalisations</a>
         </div>
     </section>
 
@@ -1613,7 +1577,6 @@
         </div>
     </section>
 
-    <!-- NOUVELLE SECTION IA -->
     <section id="ia">
         <div class="container">
             <h2 class="section-title">Intelligence Artificielle & Outils IA</h2>
@@ -1842,26 +1805,33 @@
                     <p>Brettnach, 57320<br>Lorraine, France</p>
                 </div>
             </div>
-            <form class="contact-form" id="contactForm" novalidate>
+            
+            <!-- FORMULAIRE CORRIGÉ AVEC FORMSUBMIT -->
+            <form class="contact-form" action="https://formsubmit.co/alannhoffmann86@gmail.com" method="POST">
+                <!-- Configuration FormSubmit -->
+                <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio">
+                <input type="hidden" name="_template" value="table">
+                <!-- IMPORTANT: Remplacez l'URL ci-dessous par l'URL de votre site GitHub Pages -->
+                <input type="hidden" name="_next" value="https://alann-hoffmann.github.io/Porte folio BTS/#contact">
+                
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
-                    <input type="text" id="name" name="name" placeholder="Votre nom" required>
-                    <span class="error-message">Veuillez entrer votre nom</span>
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required minlength="2">
                 </div>
+                
                 <div class="form-group">
                     <label for="email">Email *</label>
                     <input type="email" id="email" name="email" placeholder="votre@email.com" required>
-                    <span class="error-message">Veuillez entrer un email valide</span>
                 </div>
+                
                 <div class="form-group">
                     <label for="subject">Sujet *</label>
-                    <input type="text" id="subject" name="subject" placeholder="Objet du message" required>
-                    <span class="error-message">Veuillez entrer un sujet</span>
+                    <input type="text" id="subject" name="subject" placeholder="Objet du message" required minlength="3">
                 </div>
+                
                 <div class="form-group">
                     <label for="message">Message *</label>
-                    <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
-                    <span class="error-message">Veuillez entrer votre message (min. 10 caractères)</span>
+                    <textarea id="message" name="message" placeholder="Votre message..." required minlength="10"></textarea>
                 </div>
                 
                 <div class="recaptcha-container">
@@ -1869,7 +1839,6 @@
                 </div>
                 
                 <button type="submit" class="submit-btn">Envoyer le message</button>
-                <div class="form-message" id="formMessage"></div>
             </form>
         </div>
     </section>
@@ -1881,9 +1850,6 @@
     </footer>
 
     <script>
-        // Configuration de l'API backend
-        const API_URL = 'http://localhost:3000/api/send-email';
-
         // Animation de particules pour la section accueil
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
@@ -2062,128 +2028,6 @@
                     }
                 });
             });
-        });
-
-        // Contact form validation and submission
-        const contactForm = document.getElementById('contactForm');
-        const formMessage = document.getElementById('formMessage');
-
-        function validateField(field) {
-            const parent = field.parentElement;
-            const value = field.value.trim();
-            
-            if (field.id === 'name' && (value === '' || value.length < 2)) {
-                parent.classList.add('error');
-                return false;
-            }
-            
-            if (field.id === 'email') {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(value)) {
-                    parent.classList.add('error');
-                    return false;
-                }
-            }
-            
-            if (field.id === 'subject' && (value === '' || value.length < 3)) {
-                parent.classList.add('error');
-                return false;
-            }
-            
-            if (field.id === 'message' && (value === '' || value.length < 10)) {
-                parent.classList.add('error');
-                return false;
-            }
-            
-            parent.classList.remove('error');
-            return true;
-        }
-
-        document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
-            input.addEventListener('blur', () => validateField(input));
-            input.addEventListener('input', () => {
-                if (input.parentElement.classList.contains('error') && input.value.trim() !== '') {
-                    input.parentElement.classList.remove('error');
-                }
-            });
-        });
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            document.querySelectorAll('.form-group').forEach(group => group.classList.remove('error'));
-            formMessage.className = 'form-message';
-            formMessage.textContent = '';
-
-            const fields = ['name', 'email', 'subject', 'message'];
-            let hasError = false;
-
-            fields.forEach(fieldId => {
-                if (!validateField(document.getElementById(fieldId))) {
-                    hasError = true;
-                }
-            });
-
-            if (hasError) {
-                formMessage.className = 'form-message error';
-                formMessage.textContent = 'Veuillez corriger les erreurs dans le formulaire.';
-                return;
-            }
-
-            const recaptchaResponse = grecaptcha.getResponse();
-            if (!recaptchaResponse) {
-                formMessage.className = 'form-message error';
-                formMessage.textContent = 'Veuillez valider le reCAPTCHA.';
-                return;
-            }
-
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Envoi en cours...';
-
-            try {
-                const formData = {
-                    name: document.getElementById('name').value.trim(),
-                    email: document.getElementById('email').value.trim(),
-                    subject: document.getElementById('subject').value.trim(),
-                    message: document.getElementById('message').value.trim(),
-                    recaptchaToken: recaptchaResponse
-                };
-
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    formMessage.className = 'form-message success';
-                    formMessage.textContent = 'Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
-
-                    contactForm.reset();
-                    grecaptcha.reset();
-
-                    setTimeout(() => {
-                        formMessage.className = 'form-message';
-                        formMessage.textContent = '';
-                    }, 5000);
-                } else {
-                    throw new Error(data.message || 'Erreur lors de l\'envoi');
-                }
-
-            } catch (error) {
-                console.error('Erreur:', error);
-                formMessage.className = 'form-message error';
-                formMessage.textContent = error.message || 'Erreur lors de l\'envoi. Veuillez me contacter directement par email.';
-                grecaptcha.reset();
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Envoyer le message';
-            }
         });
     </script>
 </body>
