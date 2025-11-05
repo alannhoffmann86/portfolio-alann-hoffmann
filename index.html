@@ -27,6 +27,8 @@
             --secondary-color: #2c3e50;
             --accent-color: #3498db;
             --accent-light: #5dade2;
+            --ai-gradient-start: #1e3a5f;
+            --ai-gradient-end: #2c5f8d;
             --text-dark: #2c3e50;
             --text-light: #555;
             --text-muted: #7f8c8d;
@@ -119,10 +121,10 @@
             display: block;
             color: white;
             text-decoration: none;
-            padding: 18px 24px;
+            padding: 18px 20px;
             transition: var(--transition);
             font-weight: 500;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
         nav ul li a:hover,
@@ -667,6 +669,141 @@
             line-height: 1.6;
         }
 
+        /* SECTION IA */
+        #ia {
+            background: linear-gradient(135deg, var(--ai-gradient-start) 0%, var(--ai-gradient-end) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #ia::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.03)" width="50" height="50"/><rect fill="rgba(255,255,255,0.03)" x="50" y="50" width="50" height="50"/></svg>');
+            opacity: 0.5;
+        }
+
+        #ia .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #ia .section-title {
+            color: white;
+        }
+
+        #ia .section-title::after {
+            background: white;
+        }
+
+        .ia-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .ai-tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .ai-tool-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .ai-tool-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .ai-tool-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .ai-tool-card p {
+            line-height: 1.6;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .ai-tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 3px;
+        }
+
+        .ai-applications {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+        }
+
+        .ai-applications h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .ai-use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .ai-use-case {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .ai-use-case-icon {
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+
+        .ai-use-case-content h4 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .ai-use-case-content p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
         /* CV SECTION */
         #cv {
             background: var(--bg-light);
@@ -1170,7 +1307,8 @@
             .specialisation-grid,
             .skills-grid,
             .projects-grid,
-            .veille-grid {
+            .veille-grid,
+            .ai-tools-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1208,6 +1346,7 @@
                 <li><a href="#projets">Réalisations</a></li>
                 <li><a href="#tp">Travaux Pratiques</a></li>
                 <li><a href="#veille">Veille Technique</a></li>
+                <li><a href="#ia">Intelligence Artificielle</a></li>
                 <li><a href="#cv">CV</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1371,7 +1510,6 @@
                         </div>
                     </div>
                 </article>
-                
 
                 <article class="project-card" data-category="securite">
                     <div class="project-header">
@@ -1388,9 +1526,6 @@
                         </div>
                     </div>
                 </article>
-                
-
-
             </div>
         </div>
     </section>
@@ -1399,7 +1534,6 @@
         <div class="container">
             <h2 class="section-title">Travaux Pratiques</h2>
             <div class="tp-grid">
-                <!-- TP 1 - Incident WannaCry -->
                 <article class="tp-card">
                     <div class="tp-image">
                         <img src="tp/tp1-preview.jpg" alt="Aperçu TP WannaCry" onerror="this.parentElement.innerHTML='🔒'">
@@ -1422,7 +1556,6 @@
                     </div>
                 </article>
 
-                <!-- TP 2 - Configuration Windows -->
                 <article class="tp-card">
                     <div class="tp-image">
                         <img src="tp/tp2-preview.jpg" alt="Aperçu TP Configuration Windows" onerror="this.parentElement.innerHTML='💻'">
@@ -1456,7 +1589,7 @@
                     <h3>Cybersécurité</h3>
                     <p>Suivi actif des vulnérabilités CVE, nouvelles menaces informatiques et solutions de protection. Consultation régulière de l'ANSSI, CERT-FR et bases de données de sécurité.</p>
                 </article>
-<article class="veille-card">
+                <article class="veille-card">
                     <h3>Technologies Réseau</h3>
                     <p>Nouveaux standards réseau, déploiement 5G, Software-Defined Networking (SDN), évolution des protocoles de routage et optimisation WAN.</p>
                 </article>
@@ -1468,7 +1601,7 @@
                     <h3>Monitoring & Supervision</h3>
                     <p>Outils de monitoring des systèmes et réseaux (Zabbix, Prometheus, Grafana), supervision des performances, alerting automatisé et analyse des logs.</p>
                 </article>
-<article class="veille-card">
+                <article class="veille-card">
                     <h3>IoT & Edge Computing</h3>
                     <p>Internet des objets, sécurité IoT, edge computing, traitement distribué des données et intégration avec les infrastructures traditionnelles.</p>
                 </article>
@@ -1476,6 +1609,115 @@
                     <h3>Hardware & Composants</h3>
                     <p>Évolution des processeurs (Intel, AMD, ARM), technologies des cartes graphiques (NVIDIA, AMD Radeon), performances des cartes mères, gestion thermique et consommation énergétique des équipements informatiques.</p>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOUVELLE SECTION IA -->
+    <section id="ia">
+        <div class="container">
+            <h2 class="section-title">Intelligence Artificielle & Outils IA</h2>
+            <p class="ia-intro">
+                L'intelligence artificielle révolutionne le secteur informatique. J'intègre des outils IA dans mon travail quotidien pour améliorer ma productivité, automatiser des tâches complexes, et optimiser la résolution de problèmes techniques.
+            </p>
+            
+            <div class="ai-tools-grid">
+                <article class="ai-tool-card">
+                    <span class="ai-tool-icon">🤖</span>
+                    <h3>Claude (Anthropic)</h3>
+                    <p>Assistant IA avancé que j'utilise pour l'analyse de problèmes techniques complexes, la génération de scripts (PowerShell, Bash), la documentation technique et la résolution de bugs système.</p>
+                    <div>
+                        <span class="ai-tool-badge">Scripting</span>
+                        <span class="ai-tool-badge">Documentation</span>
+                        <span class="ai-tool-badge">Débogage</span>
+                    </div>
+                </article>
+
+                <article class="ai-tool-card">
+                    <span class="ai-tool-icon">💬</span>
+                    <h3>ChatGPT</h3>
+                    <p>Utilisé pour la recherche rapide de solutions, l'explication de concepts techniques, et l'assistance dans l'apprentissage de nouvelles technologies et protocoles réseau.</p>
+                    <div>
+                        <span class="ai-tool-badge">Recherche</span>
+                        <span class="ai-tool-badge">Formation</span>
+                        <span class="ai-tool-badge">Veille</span>
+                    </div>
+                </article>
+
+                <article class="ai-tool-card">
+                    <span class="ai-tool-icon">🔧</span>
+                    <h3>GitHub Copilot</h3>
+                    <p>Assistance au développement de scripts d'automatisation, suggestions de code pour l'administration système et aide à la création de playbooks Ansible.</p>
+                    <div>
+                        <span class="ai-tool-badge">Automatisation</span>
+                        <span class="ai-tool-badge">Scripts</span>
+                        <span class="ai-tool-badge">IaC</span>
+                    </div>
+                </article>
+
+                <article class="ai-tool-card">
+                    <span class="ai-tool-icon">📊</span>
+                    <h3>Outils d'Analyse IA</h3>
+                    <p>Exploitation d'outils d'analyse de logs basés sur l'IA pour détecter des anomalies réseau, prédire les pannes matérielles et optimiser les performances système.</p>
+                    <div>
+                        <span class="ai-tool-badge">Monitoring</span>
+                        <span class="ai-tool-badge">Prédiction</span>
+                        <span class="ai-tool-badge">Optimisation</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="ai-applications">
+                <h3>Applications Concrètes de l'IA dans Mon Travail</h3>
+                <div class="ai-use-cases">
+                    <div class="ai-use-case">
+                        <span class="ai-use-case-icon">⚡</span>
+                        <div class="ai-use-case-content">
+                            <h4>Automatisation Système</h4>
+                            <p>Génération rapide de scripts PowerShell et Bash pour automatiser les tâches répétitives d'administration et gagner un temps précieux.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-use-case">
+                        <span class="ai-use-case-icon">🐛</span>
+                        <div class="ai-use-case-content">
+                            <h4>Débogage Avancé</h4>
+                            <p>Analyse de logs complexes et identification rapide des causes racines des incidents système grâce à l'assistance IA.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-use-case">
+                        <span class="ai-use-case-icon">📚</span>
+                        <div class="ai-use-case-content">
+                            <h4>Documentation</h4>
+                            <p>Création de documentation technique claire et complète, génération de procédures et guides utilisateur structurés.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-use-case">
+                        <span class="ai-use-case-icon">🔍</span>
+                        <div class="ai-use-case-content">
+                            <h4>Recherche & Veille</h4>
+                            <p>Accélération de la recherche de solutions techniques, synthèse d'informations et veille technologique ciblée sur les nouveautés IT.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-use-case">
+                        <span class="ai-use-case-icon">🎓</span>
+                        <div class="ai-use-case-content">
+                            <h4>Formation Continue</h4>
+                            <p>Apprentissage accéléré de nouvelles technologies, clarification de concepts complexes et simulation de scénarios techniques.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-use-case">
+                        <span class="ai-use-case-icon">🛡️</span>
+                        <div class="ai-use-case-content">
+                            <h4>Sécurité Proactive</h4>
+                            <p>Analyse de vulnérabilités, suggestions de durcissement système et veille sur les menaces émergentes en cybersécurité.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1515,7 +1757,7 @@
                         </div>
                         <div class="cv-section">
                             <h3>Centres d'Intérêt</h3>
-                            <p style="color: var(--text-light); line-height: 1.6;">Lecture technique, cinéma, jeux vidéo, veille technologique</p>
+                            <p style="color: var(--text-light); line-height: 1.6;">Lecture technique, cinéma, jeux vidéo, veille technologique, intelligence artificielle</p>
                         </div>
                     </aside>
                     <div class="cv-content">
@@ -1582,24 +1824,24 @@
     <section id="contact">
         <div class="container">
             <h2 class="section-title">Contact</h2>
-           <div class="contact-grid">
-    <div class="contact-card">
-        <h3>Email</h3>
-        <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
-    </div>
-    <div class="contact-card">
-        <h3>Téléphone</h3>
-        <p><a href="tel:0646530962">06 46 53 09 62</a></p>
-    </div>
-    <div class="contact-card">
-        <h3>LinkedIn</h3>
-        <p><a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" rel="noopener noreferrer">Voir mon profil</a></p>
-    </div>
-    <div class="contact-card">
-        <h3>Localisation</h3>
-        <p>Brettnach, 57320<br>Lorraine, France</p>
-    </div>
-</div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Email</h3>
+                    <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>Téléphone</h3>
+                    <p><a href="tel:0646530962">06 46 53 09 62</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>LinkedIn</h3>
+                    <p><a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" rel="noopener noreferrer">Voir mon profil</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>Localisation</h3>
+                    <p>Brettnach, 57320<br>Lorraine, France</p>
+                </div>
+            </div>
             <form class="contact-form" id="contactForm" novalidate>
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
@@ -1708,16 +1950,13 @@
         }
 
         function initParticles() {
-            // Annuler l'animation précédente si elle existe
             if (animationId) {
                 cancelAnimationFrame(animationId);
             }
 
-            // Redimensionner le canvas
             canvas.width = accueilSection.offsetWidth;
             canvas.height = accueilSection.offsetHeight;
 
-            // Recréer les particules
             particles = [];
             const particleCount = window.innerWidth < 768 ? 50 : 100;
 
@@ -1725,16 +1964,13 @@
                 particles.push(new Particle());
             }
 
-            // Lancer l'animation
             animate();
         }
 
-        // Initialiser après le chargement complet de la page
         window.addEventListener('load', () => {
             setTimeout(initParticles, 100);
         });
 
-        // Réinitialiser lors du redimensionnement
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
