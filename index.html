@@ -1905,129 +1905,13 @@
         const printCVBtn = document.getElementById('printCV');
 
         downloadCVBtn.addEventListener('click', () => {
-            // Créer un contenu HTML complet pour le CV
-            const cvContent = `
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - HOFFMANN Alann</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #3498db; text-align: center; margin-bottom: 10px; }
-        h2 { color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 25px; }
-        h3 { color: #2c3e50; margin-top: 15px; margin-bottom: 5px; }
-        .header { text-align: center; margin-bottom: 30px; background: #2c3e50; color: white; padding: 30px; border-radius: 8px; }
-        .header h1 { color: white; margin: 0; }
-        .header p { margin: 5px 0; }
-        .section { margin-bottom: 25px; }
-        .experience-item { margin-bottom: 20px; padding-left: 15px; border-left: 3px solid #3498db; }
-        .experience-date { color: #3498db; font-weight: bold; font-size: 0.9em; }
-        .experience-title { font-size: 1.1em; font-weight: bold; margin: 5px 0; }
-        .experience-company { color: #7f8c8d; font-style: italic; margin-bottom: 5px; }
-        .contact-info { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 15px; }
-        .contact-info span { background: #f4f6f8; padding: 5px 10px; border-radius: 4px; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>HOFFMANN Alann</h1>
-        <p style="font-size: 1.2em; margin-top: 10px;">Technicien Infrastructure & Réseaux</p>
-        <p style="font-size: 1.1em; color: #5dade2;">BTS SIO SISR</p>
-        <div class="contact-info">
-            <span>📧 alannhoffmann86@gmail.com</span>
-            <span>📱 06 46 53 09 62</span>
-            <span>📍 Brettnach, 57320, France</span>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Profil</h2>
-        <p>Étudiant en BTS SIO option SISR, passionné par l'administration système, les réseaux et la cybersécurité. Fort d'une expérience en maintenance industrielle, je transpose mes compétences techniques vers l'informatique avec rigueur et méthode.</p>
-    </div>
-
-    <div class="section">
-        <h2>Compétences Techniques</h2>
-        <p><strong>Systèmes :</strong> Windows Server, Linux (Debian/Ubuntu), Active Directory, Virtualisation (VMware, Hyper-V)</p>
-        <p><strong>Réseaux :</strong> TCP/IP, Routage & Switching, VPN, Cisco, Packet Tracer</p>
-        <p><strong>Outils :</strong> PowerShell, Bash, Docker, Git, Monitoring (Nagios, Zabbix)</p>
-        <p><strong>Sécurité :</strong> Pare-feu, VPN IPsec, Audit de sécurité</p>
-    </div>
-
-    <div class="section">
-        <h2>Formation</h2>
-        <div class="experience-item">
-            <div class="experience-date">2024 - 2026</div>
-            <div class="experience-title">BTS SIO Option SISR</div>
-            <div class="experience-company">Lycée professionnel Raymond-Poincaré - BAR LE DUC</div>
-            <p>Formation spécialisée en Solutions d'Infrastructure, Systèmes et Réseaux. Apprentissage approfondi de l'administration système, des réseaux, de la virtualisation et de la cybersécurité.</p>
-        </div>
-        <div class="experience-item">
-            <div class="experience-date">2018 - 2020</div>
-            <div class="experience-title">BAC Professionnel MEI</div>
-            <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
-            <p>Formation technique complète en maintenance mécanique, électrique et pneumatique.</p>
-        </div>
-        <div class="experience-item">
-            <div class="experience-date">2016 - 2018</div>
-            <div class="experience-title">CAP Électricien</div>
-            <div class="experience-company">Lycée inter entreprise Boulay</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Expérience Professionnelle</h2>
-        <div class="experience-item">
-            <div class="experience-date">2020 - 2024</div>
-            <div class="experience-title">Technicien de Maintenance</div>
-            <div class="experience-company">METALOR Technologies France - METZ</div>
-            <p>Maintenance préventive et curative d'équipements industriels complexes. Utilisation de GMAO pour la gestion des interventions. Diagnostic de pannes et résolution de problèmes techniques.</p>
-        </div>
-        <div class="experience-item">
-            <div class="experience-date">2019 - 2020</div>
-            <div class="experience-title">Technicien de Maintenance</div>
-            <div class="experience-company">BOULANGERIE François - METZ</div>
-            <p>Gestion de secteur, dépannage, contrôle et maintenance technique des équipements de production.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Projets Réalisés</h2>
-        <div class="experience-item">
-            <div class="experience-title">Infrastructure Active Directory</div>
-            <p>Déploiement complet d'un environnement Active Directory avec gestion des utilisateurs, GPO, et intégration de services (DNS, DHCP).</p>
-        </div>
-        <div class="experience-item">
-            <div class="experience-title">Architecture Réseau d'Entreprise</div>
-            <p>Conception et mise en place d'une architecture réseau segmentée avec VLANs, routage inter-VLAN, et configuration de switchs managés.</p>
-        </div>
-        <div class="experience-item">
-            <div class="experience-title">Solution VPN Site-à-Site</div>
-            <p>Configuration d'un tunnel VPN IPsec entre deux sites distants pour sécuriser les communications.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Centres d'Intérêt</h2>
-        <p>Veille technologique en infrastructure et cybersécurité • Participation à des projets open source • Auto-formation continue sur les nouvelles technologies</p>
-    </div>
-</body>
-</html>`;
-
-            // Créer un blob avec le contenu
-            const blob = new Blob([cvContent], { type: 'text/html' });
-            const url = window.URL.createObjectURL(blob);
-            
-            // Créer un lien de téléchargement
+            // Créer un lien de téléchargement pour le PDF
             const a = document.createElement('a');
-            a.href = url;
-            a.download = 'CV_HOFFMANN_Alann.html';
+            a.href = 'CV_HOFFMANN_Alann.pdf';
+            a.download = 'CV_HOFFMANN_Alann.pdf';
+            a.target = '_blank';
             document.body.appendChild(a);
             a.click();
-            
-            // Nettoyer
-            window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         });
 
