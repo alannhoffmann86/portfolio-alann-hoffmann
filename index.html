@@ -10,6 +10,10 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="HOFFMANN Alann - Technicien Infrastructure & Réseaux">
     <meta property="og:description" content="Technicien informatique spécialisé en administration système et réseaux">
+    <meta property="og:url" content="https://votre-domaine.com">
+    <meta property="og:image" content="https://votre-domaine.com/preview.jpg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     
     <title>HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</title>
 
@@ -26,6 +30,7 @@
             --secondary-color: #2c3e50;
             --accent-color: #3498db;
             --accent-light: #5dade2;
+            --accent-hover: #2980b9;
             --ai-gradient-start: #1e3a5f;
             --ai-gradient-end: #2c5f8d;
             --text-dark: #2c3e50;
@@ -36,8 +41,12 @@
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
             --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+            --shadow-hover: 0 12px 40px rgba(0,0,0,0.15);
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 8px;
+            --border-radius-lg: 12px;
         }
 
         body {
@@ -45,6 +54,7 @@
             line-height: 1.6;
             color: var(--text-dark);
             overflow-x: hidden;
+            background: var(--bg-light);
         }
 
         /* NAVIGATION */
@@ -54,7 +64,8 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -72,6 +83,11 @@
             font-size: 1.1em;
             padding: 18px 0;
             letter-spacing: 0.5px;
+            transition: var(--transition-fast);
+        }
+
+        .nav-logo:hover {
+            opacity: 0.9;
         }
 
         .menu-toggle {
@@ -121,14 +137,32 @@
             color: white;
             text-decoration: none;
             padding: 18px 20px;
-            transition: var(--transition);
+            transition: var(--transition-fast);
             font-weight: 500;
             font-size: 0.9em;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-light);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 70%;
         }
 
         nav ul li a:hover,
         nav ul li a.active {
-            background: var(--accent-color);
+            background: rgba(52, 152, 219, 0.1);
             color: white;
         }
 
@@ -154,11 +188,13 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            will-change: transform;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero-content h1 {
@@ -166,6 +202,7 @@
             margin-bottom: 15px;
             font-weight: 700;
             animation: fadeInDown 0.8s ease-out;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
         }
 
         .hero-content .badge {
@@ -178,6 +215,13 @@
             font-size: 0.95em;
             margin-bottom: 25px;
             animation: fadeIn 1.2s ease-out;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            transition: var(--transition);
+        }
+
+        .hero-content .badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
         }
 
         .hero-content h2 {
@@ -210,11 +254,17 @@
             margin: 8px;
             border: 2px solid white;
             font-size: 0.95em;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
@@ -240,661 +290,507 @@
         }
 
         .section-title {
+            font-size: clamp(2em, 4vw, 2.5em);
             text-align: center;
-            font-size: clamp(2em, 4vw, 2.3em);
-            margin-bottom: 50px;
-            color: var(--primary-color);
+            margin-bottom: 60px;
+            color: var(--text-dark);
             position: relative;
-            padding-bottom: 20px;
             font-weight: 700;
         }
 
         .section-title::after {
             content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
             width: 80px;
-            height: 3px;
-            background: var(--accent-color);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            margin: 20px auto 0;
+            border-radius: 2px;
         }
 
-        /* BTS SIO SECTION */
-        #bts-sio {
+        /* ABOUT SECTION */
+        #apropos {
+            background: var(--bg-white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .about-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid transparent;
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-light);
+        }
+
+        .about-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .about-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        /* COMPETENCES */
+        #competences {
             background: var(--bg-light);
         }
 
-        .bts-intro {
-            background: white;
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            margin-bottom: 40px;
-        }
-
-        .bts-intro h3 {
-            color: var(--primary-color);
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .bts-intro p {
-            color: var(--text-light);
-            font-size: 1.05em;
-            line-height: 1.8;
-        }
-
-        .specialisation-grid {
+        .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
-        .spec-card {
-            background: white;
+        .skill-category {
+            background: var(--bg-white);
             padding: 35px;
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow-md);
             transition: var(--transition);
             border-top: 4px solid var(--accent-color);
         }
 
-        .spec-card:hover {
-            transform: translateY(-8px);
+        .skill-category:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
 
-        .spec-card h4 {
-            color: var(--primary-color);
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            font-weight: 700;
+        .skill-category h3 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            font-weight: 600;
         }
 
-        .spec-card p {
-            color: var(--text-light);
+        .skill-item {
             margin-bottom: 20px;
-            line-height: 1.6;
         }
 
-        .spec-card ul {
-            list-style: none;
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
         }
 
-        .spec-card ul li {
-            padding: 8px 0;
-            color: var(--text-light);
-            padding-left: 24px;
+        .skill-bar {
+            height: 8px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
             position: relative;
         }
 
-        .spec-card ul li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        /* COMPÉTENCES */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .skill-card {
-            background: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-6px);
-            border-left-color: var(--accent-color);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .skill-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            font-weight: 700;
-        }
-
-        .skill-card ul {
-            list-style: none;
-        }
-
-        .skill-card ul li {
-            padding: 7px 0;
-            color: var(--text-light);
-            padding-left: 20px;
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            border-radius: 10px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
         }
 
-        .skill-card ul li::before {
-            content: '•';
+        .skill-progress::after {
+            content: '';
             position: absolute;
+            top: 0;
             left: 0;
-            color: var(--accent-color);
-            font-weight: bold;
-            font-size: 1.2em;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* PROJETS */
         #projets {
-            background: var(--bg-light);
+            background: var(--bg-white);
         }
 
         .project-filters {
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
         }
 
         .filter-btn {
             padding: 10px 24px;
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid #ddd;
-            border-radius: 6px;
+            border: 2px solid var(--accent-color);
+            background: transparent;
+            color: var(--accent-color);
+            border-radius: 24px;
             cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
+            transition: var(--transition-fast);
+            font-weight: 500;
             font-size: 0.9em;
         }
 
-        .filter-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
+        .filter-btn:hover,
         .filter-btn.active {
             background: var(--accent-color);
             color: white;
-            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
         }
 
         .project-card {
-            background: white;
-            border-radius: var(--border-radius);
+            background: var(--bg-light);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-light);
         }
 
         .project-card.hidden {
             display: none;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
         .project-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 25px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
             color: white;
-            padding: 24px;
         }
 
         .project-header h3 {
             font-size: 1.3em;
-            margin-bottom: 10px;
-            font-weight: 700;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
-        .project-tag {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            padding: 4px 14px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .project-category {
+            font-size: 0.85em;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         .project-body {
-            padding: 24px;
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .project-body p {
+        .project-description {
             color: var(--text-light);
-            margin-bottom: 18px;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
 
-        .project-tech {
+        .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 15px;
+            margin-top: auto;
         }
 
-        .tech-badge {
-            background: #e8f4f8;
-            color: var(--primary-color);
-            padding: 5px 12px;
-            border-radius: 4px;
+        .project-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 14px;
             font-size: 0.8em;
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        /* TRAVAUX PRATIQUES */
-        #tp {
-            background: white;
-        }
-
-        .tp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .tp-card {
-            background: var(--bg-light);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            border-top: 4px solid var(--accent-color);
-        }
-
-        .tp-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .tp-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3em;
-            font-weight: bold;
-        }
-
-        .tp-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .tp-content {
-            padding: 25px;
-        }
-
-        .tp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .tp-title {
-            color: var(--primary-color);
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .tp-type {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .tp-description {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .tp-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-
-        .tp-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .tp-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .tp-btn {
-            flex: 1;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .tp-btn-primary {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .tp-btn-primary:hover {
-            background: var(--accent-light);
-            transform: translateY(-2px);
-        }
-
-        .tp-btn-secondary {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .tp-btn-secondary:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* VEILLE */
+        /* VEILLE TECHNOLOGIQUE */
         #veille {
-            background: white;
+            background: var(--bg-white);
         }
 
         .veille-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .veille-card {
             background: var(--bg-light);
-            padding: 28px;
-            border-radius: var(--border-radius);
-            border-top: 3px solid var(--accent-color);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
-        }
-
-        .veille-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .veille-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 12px;
-            font-size: 1.2em;
-            font-weight: 700;
-        }
-
-        .veille-card p {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .veille-links {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .veille-links a {
-            display: inline-block;
-            padding: 8px 16px;
-            background: var(--accent-color);
-            color: white;
+            border: 2px solid transparent;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.85em;
-            font-weight: 600;
-            transition: var(--transition);
-            border: 2px solid var(--accent-color);
-        }
-
-        .veille-links a:hover {
-            background: white;
-            color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-        }
-
-        /* SECTION IA */
-        #ia {
-            background: linear-gradient(135deg, var(--ai-gradient-start) 0%, var(--ai-gradient-end) 100%);
-            color: white;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
 
-        #ia::before {
+        .veille-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.03)" width="50" height="50"/><rect fill="rgba(255,255,255,0.03)" x="50" y="50" width="50" height="50"/></svg>');
-            opacity: 0.5;
-        }
-
-        #ia .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        #ia .section-title {
-            color: white;
-        }
-
-        #ia .section-title::after {
-            background: white;
-        }
-
-        .ia-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 50px;
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
-
-        .ai-tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .ai-tool-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: var(--border-radius);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            transform: scaleX(0);
             transition: var(--transition);
         }
 
-        .ai-tool-card:hover {
+        .veille-card:hover {
             transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-light);
         }
 
-        .ai-tool-icon {
+        .veille-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .veille-icon {
             font-size: 3em;
             margin-bottom: 15px;
-            display: block;
+            transition: var(--transition);
         }
 
-        .ai-tool-card h3 {
-            font-size: 1.4em;
-            margin-bottom: 12px;
-            font-weight: 700;
+        .veille-card:hover .veille-icon {
+            transform: scale(1.1);
         }
 
-        .ai-tool-card p {
-            line-height: 1.6;
-            opacity: 0.95;
+        .veille-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .veille-card:hover h3 {
+            color: var(--accent-hover);
+        }
+
+        .veille-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            flex-grow: 1;
             margin-bottom: 15px;
         }
 
-        .ai-tool-badge {
+        .veille-tag {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
-            border-radius: 4px;
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
-            margin: 3px;
+            margin-top: auto;
+            transition: var(--transition-fast);
         }
 
-        .ai-applications {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            margin-top: 40px;
+        .veille-card:hover .veille-tag {
+            background: var(--accent-hover);
+            transform: scale(1.05);
         }
 
-        .ai-applications h3 {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .ai-use-cases {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .ai-use-case {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .ai-use-case-icon {
-            font-size: 2em;
-            flex-shrink: 0;
-        }
-
-        .ai-use-case-content h4 {
-            font-size: 1.1em;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .ai-use-case-content p {
-            font-size: 0.95em;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        /* CV SECTION */
-        #cv {
+        /* PARCOURS */
+        #parcours {
             background: var(--bg-light);
         }
 
-        .cv-download {
-            text-align: center;
-            margin-bottom: 35px;
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 0;
         }
 
-        .cv-container {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-color), var(--accent-light));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 40px);
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 40px);
+        }
+
+        .timeline-content {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
 
-        .cv-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        .timeline-date {
+            display: inline-block;
+            background: var(--accent-color);
             color: white;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .cv-header h2 {
-            font-size: clamp(2em, 4vw, 2.3em);
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .cv-header .birth-date {
-            font-size: 0.95em;
-            color: var(--accent-light);
-            margin-bottom: 12px;
-        }
-
-        .cv-header .subtitle {
-            font-size: 1.15em;
-            color: var(--accent-light);
+            padding: 6px 16px;
+            border-radius: 20px;
             font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
         }
 
-        .contact-info {
+        .timeline-title {
+            font-size: 1.3em;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .timeline-company {
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border: 4px solid var(--bg-light);
+            border-radius: 50%;
+            top: 30px;
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+        }
+
+        /* CV MODAL */
+        .cv-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease-out;
+            backdrop-filter: blur(5px);
+        }
+
+        .cv-modal.active {
             display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-
-        .cv-main {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-        }
-
-        .cv-sidebar {
-            background: #f8f9fa;
-            padding: 40px 30px;
         }
 
         .cv-content {
+            background: var(--bg-white);
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.4s ease-out;
+            position: relative;
+        }
+
+        .cv-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-cv {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: var(--transition-fast);
+        }
+
+        .close-cv:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+
+        .cv-body {
             padding: 40px;
         }
 
@@ -903,275 +799,95 @@
         }
 
         .cv-section h3 {
-            color: var(--primary-color);
-            font-size: 1.4em;
+            color: var(--accent-color);
+            font-size: 1.5em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent-color);
-            font-weight: 700;
-        }
-
-        .profile-text {
-            text-align: justify;
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: var(--accent-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            width: 45%;
-        }
-
-        .timeline-item:nth-child(odd) {
-            margin-left: 0;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-left: 55%;
-            text-align: left;
-        }
-
-        .timeline-content {
-            background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .timeline-date {
-            color: var(--accent-color);
-            font-weight: 700;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-        }
-
-        .timeline-title {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 1.1em;
-            margin-bottom: 4px;
-        }
-
-        .timeline-company {
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 8px;
-            font-size: 0.95em;
-        }
-
-        .timeline-description {
-            color: var(--text-light);
-            line-height: 1.5;
-            font-size: 0.95em;
+            border-bottom: 2px solid var(--accent-light);
+            font-weight: 600;
         }
 
         .experience-item {
-            margin-bottom: 20px;
-            position: relative;
-            padding-left: 18px;
-            border-left: 2px solid var(--accent-color);
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-light);
+            transition: var(--transition-fast);
         }
 
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 5px;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-color);
-            border-radius: 50%;
+        .experience-item:hover {
+            border-left-color: var(--accent-color);
+            padding-left: 25px;
         }
 
         .experience-date {
-            color: var(--secondary-color);
+            color: var(--accent-color);
             font-weight: 600;
-            font-size: 0.85em;
+            font-size: 0.9em;
+            margin-bottom: 5px;
         }
 
         .experience-title {
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 5px 0;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
         }
 
         .experience-company {
             color: var(--text-muted);
+            margin-bottom: 8px;
             font-style: italic;
-            font-size: 0.9em;
-        }
-
-        .skills-list {
-            list-style: none;
-        }
-
-        .skills-list li {
-            padding: 10px 0;
-            color: var(--primary-color);
-            border-bottom: 1px solid #e0e0e0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .skills-list li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-weight: bold;
         }
 
         /* CONTACT */
         #contact {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-        }
-
-        #contact .section-title {
-            color: white;
-        }
-
-        #contact .section-title::after {
-            background: white;
+            background: var(--bg-white);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 30px;
         }
 
         .contact-card {
-            background: rgba(255,255,255,0.1);
-            padding: 28px;
-            border-radius: var(--border-radius);
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
             text-align: center;
-            backdrop-filter: blur(10px);
             transition: var(--transition);
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: var(--shadow-sm);
+            border: 2px solid transparent;
         }
 
         .contact-card:hover {
-            transform: translateY(-6px);
-            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-light);
         }
 
         .contact-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 12px;
-            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
         }
 
         .contact-card p {
-            font-size: 1.05em;
+            color: var(--text-light);
+            line-height: 1.6;
         }
 
         .contact-card a {
-            color: white;
+            color: var(--accent-color);
             text-decoration: none;
-            transition: var(--transition);
+            font-weight: 500;
+            transition: var(--transition-fast);
         }
 
         .contact-card a:hover {
-            color: var(--accent-light);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 40px auto 0;
-            background: rgba(255,255,255,0.1);
-            padding: 35px;
-            border-radius: var(--border-radius);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 6px;
-            font-size: 1em;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-light);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        .recaptcha-container {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .submit-btn {
-            background: white;
-            color: var(--primary-color);
-            padding: 14px 36px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 1em;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            color: var(--accent-hover);
+            text-decoration: underline;
         }
 
         /* BACK TO TOP */
@@ -1181,19 +897,16 @@
             right: 30px;
             background: var(--accent-color);
             color: white;
-            width: 48px;
-            height: 48px;
-            border-radius: 6px;
             border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             font-size: 1.5em;
-            box-shadow: var(--shadow-md);
+            cursor: pointer;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
+            box-shadow: var(--shadow-md);
             z-index: 999;
         }
 
@@ -1203,21 +916,30 @@
         }
 
         #backToTop:hover {
-            transform: translateY(-4px);
+            background: var(--accent-hover);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-            background: var(--accent-light);
         }
 
         /* FOOTER */
         footer {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             text-align: center;
-            padding: 28px 20px;
-            font-size: 0.95em;
+            padding: 30px 20px;
+            font-size: 0.9em;
         }
 
         /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -1240,11 +962,13 @@
             }
         }
 
-        @keyframes fadeIn {
+        @keyframes slideUp {
             from {
+                transform: translateY(50px);
                 opacity: 0;
             }
             to {
+                transform: translateY(0);
                 opacity: 1;
             }
         }
@@ -1260,62 +984,113 @@
                 left: -100%;
                 top: 60px;
                 flex-direction: column;
-                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                background: var(--primary-color);
                 width: 100%;
                 text-align: center;
-                transition: left 0.3s ease;
-                box-shadow: var(--shadow-md);
-                max-height: calc(100vh - 60px);
-                overflow-y: auto;
+                transition: var(--transition);
+                box-shadow: var(--shadow-lg);
             }
 
             nav ul.active {
                 left: 0;
             }
 
-            nav ul li {
+            nav ul li a {
+                padding: 18px 20px;
                 border-bottom: 1px solid rgba(255,255,255,0.1);
             }
 
+            nav ul li a::after {
+                display: none;
+            }
+
             .timeline::before {
-                left: 20px;
+                left: 0;
             }
 
-            .timeline-item {
-                width: 100% !important;
-                margin-left: 0 !important;
-                text-align: left !important;
-                padding-left: 50px;
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-right: 0;
+                padding-left: 40px;
             }
 
-            .cv-main {
-                grid-template-columns: 1fr;
+            .timeline-dot {
+                left: 0;
+                transform: translateX(-50%);
             }
         }
 
         @media (max-width: 768px) {
-            .specialisation-grid,
-            .skills-grid,
-            .projects-grid,
-            .veille-grid,
-            .ai-tools-grid {
-                grid-template-columns: 1fr;
-            }
-
             section {
                 padding: 60px 20px;
             }
 
-            .recaptcha-container {
-                transform: scale(0.85);
-                transform-origin: center;
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cv-body {
+                padding: 25px;
+            }
+
+            #backToTop {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
         }
 
-        @media (min-width: 769px) and (max-width: 1100px) {
-            .skills-grid,
-            .veille-grid {
-                grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2em;
+            }
+
+            .hero-content h2 {
+                font-size: 1.2em;
+            }
+
+            .btn {
+                padding: 12px 28px;
+                font-size: 0.9em;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        *:focus-visible {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+
+        /* PERFORMANCE */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -1324,68 +1099,55 @@
     <nav role="navigation" aria-label="Navigation principale">
         <div class="nav-container">
             <div class="nav-logo">HOFFMANN Alann</div>
-            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+            <button class="menu-toggle" id="mobile-menu" aria-label="Menu de navigation" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul id="nav-menu">
-                <li><a href="#accueil" class="active">Accueil</a></li>
-                <li><a href="#bts-sio">Formation</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#projets">Réalisations</a></li>
-                <li><a href="#tp">Travaux Pratiques</a></li>
-                <li><a href="#veille">Veille Technique</a></li>
-                <li><a href="#ia">Intelligence Artificielle</a></li>
-                <li><a href="#cv">CV</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul id="nav-menu" role="menubar">
+                <li role="none"><a href="#accueil" class="active" role="menuitem">Accueil</a></li>
+                <li role="none"><a href="#apropos" role="menuitem">À propos</a></li>
+                <li role="none"><a href="#competences" role="menuitem">Compétences</a></li>
+                <li role="none"><a href="#projets" role="menuitem">Projets</a></li>
+                <li role="none"><a href="#veille" role="menuitem">Veille Techno</a></li>
+                <li role="none"><a href="#parcours" role="menuitem">Parcours</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <section id="accueil">
-        <canvas id="particleCanvas"></canvas>
+    <section id="accueil" aria-label="Section d'accueil">
+        <canvas id="particleCanvas" aria-hidden="true"></canvas>
         <div class="hero-content">
+            <div class="badge">BTS SIO SISR</div>
             <h1>HOFFMANN Alann</h1>
-            <div class="badge">Technicien Infrastructure & Réseaux</div>
-            <h2>BTS Services Informatiques aux Organisations - SISR</h2>
-            <p>Spécialisé en administration système, gestion d'infrastructures réseaux et sécurité informatique. Compétences en virtualisation, scripting et support technique avancé.</p>
-            <a href="#cv" class="btn">Consulter mon parcours</a>
-            <a href="#tp" class="btn btn-secondary">Voir mes réalisations</a>
+            <h2>Technicien Infrastructure & Réseaux</h2>
+            <p>Passionné par l'administration système, les réseaux et la cybersécurité. Actuellement en formation BTS SIO option SISR, je développe des compétences techniques solides pour concevoir, déployer et administrer des infrastructures informatiques performantes.</p>
+            <div>
+                <a href="#projets" class="btn">Voir mes projets</a>
+                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+            </div>
         </div>
     </section>
 
-    <section id="bts-sio">
+    <section id="apropos">
         <div class="container">
-            <h2 class="section-title">Formation BTS SIO</h2>
-            <div class="bts-intro">
-                <h3>Services Informatiques aux Organisations</h3>
-                <p>Le BTS SIO forme des techniciens supérieurs capables de gérer l'infrastructure informatique d'une organisation, d'assurer la maintenance des systèmes, de sécuriser les données et d'accompagner les utilisateurs dans l'exploitation des ressources informatiques.</p>
-            </div>
-            <div class="specialisation-grid">
-                <div class="spec-card">
-                    <h4>SISR - Solutions d'Infrastructure, Systèmes et Réseaux</h4>
-                    <p><strong>Ma spécialisation :</strong> Administration et sécurisation des infrastructures informatiques d'entreprise</p>
-                    <ul>
-                        <li>Administration des systèmes Windows Server et Linux</li>
-                        <li>Conception et gestion d'architectures réseaux</li>
-                        <li>Virtualisation et cloud computing</li>
-                        <li>Sécurisation des systèmes d'information</li>
-                        <li>Support technique et maintenance</li>
-                        <li>Gestion et supervision de parc informatique</li>
-                    </ul>
+            <h2 class="section-title">À propos</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon" aria-hidden="true">🎓</div>
+                    <h3>Formation</h3>
+                    <p>Étudiant en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux), je me spécialise dans l'administration système et réseau.</p>
                 </div>
-                <div class="spec-card">
-                    <h4>SLAM - Solutions Logicielles et Applications Métiers</h4>
-                    <p><strong>Autre option du BTS SIO :</strong> Développement et maintenance d'applications</p>
-                    <ul>
-                        <li>Conception et développement d'applications métier</li>
-                        <li>Programmation orientée objet</li>
-                        <li>Administration de bases de données</li>
-                        <li>Développement web et applications mobiles</li>
-                        <li>Maintenance et évolution applicative</li>
-                        <li>Tests et déploiement d'applications</li>
-                    </ul>
+                <div class="about-card">
+                    <div class="about-icon" aria-hidden="true">💼</div>
+                    <h3>Expérience</h3>
+                    <p>Fort d'une expérience en maintenance industrielle, je transpose mes compétences techniques vers l'informatique avec rigueur et méthode.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon" aria-hidden="true">🚀</div>
+                    <h3>Objectif</h3>
+                    <p>Devenir un expert en infrastructure IT, capable de concevoir et maintenir des systèmes informatiques robustes et sécurisés.</p>
                 </div>
             </div>
         </div>
@@ -1393,67 +1155,126 @@
 
     <section id="competences">
         <div class="container">
-            <h2 class="section-title">Compétences Techniques</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Administration Systèmes</h3>
-                    <ul>
-                        <li>Windows Server (Active Directory, DNS, DHCP, GPO)</li>
-                        <li>Distributions Linux (Debian, Ubuntu, CentOS)</li>
-                        <li>Gestion des utilisateurs et des droits d'accès</li>
-                        <li>Scripting PowerShell et Bash</li>
-                        <li>Stratégies de sauvegarde et restauration</li>
-                    </ul>
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Administration Système</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Windows Server</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Linux (Debian/Ubuntu)</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Active Directory</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Virtualisation (VMware, Hyper-V)</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <h3>Réseaux & Télécommunications</h3>
-                    <ul>
-                        <li>Configuration routeurs et commutateurs Cisco</li>
-                        <li>Protocoles réseau (TCP/IP, VLAN, VPN, Routing)</li>
-                        <li>Architecture et segmentation réseau</li>
-                        <li>Diagnostic et résolution d'incidents réseau</li>
-                        <li>Câblage structuré et interconnexion</li>
-                    </ul>
+
+                <div class="skill-category">
+                    <h3>Réseaux & Infrastructure</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>TCP/IP</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Routage & Switching</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>VPN & Sécurité réseau</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Configuration Cisco/Packet Tracer</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <h3>Sécurité des Systèmes</h3>
-                    <ul>
-                        <li>Configuration pare-feu et filtrage réseau</li>
-                        <li>Solutions antivirus et anti-malware</li>
-                        <li>Politiques de sécurité et conformité</li>
-                        <li>Gestion des authentifications et certificats</li>
-                        <li>Surveillance et analyse de logs</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>Virtualisation & Infrastructure</h3>
-                    <ul>
-                        <li>VirtualBox et environnements virtualisés</li>
-                        <li>Conteneurisation Docker</li>
-                        <li>Gestion de serveurs virtuels</li>
-                        <li>Stockage en réseau (NAS, SAN)</li>
-                        <li>Plateformes cloud (Azure, AWS)</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>Support & Exploitation</h3>
-                    <ul>
-                        <li>Gestion de tickets et incidents (ITIL)</li>
-                        <li>Support utilisateur niveaux 1 et 2</li>
-                        <li>Installation et configuration matériel</li>
-                        <li>Maintenance préventive et corrective</li>
-                        <li>Rédaction de documentation technique</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>Gestion de Projet IT</h3>
-                    <ul>
-                        <li>Méthodologies Agile et Scrum</li>
-                        <li>Planification et suivi de projets</li>
-                        <li>Documentation technique et fonctionnelle</li>
-                        <li>Communication avec les parties prenantes</li>
-                        <li>Travail collaboratif en équipe</li>
-                    </ul>
+
+                <div class="skill-category">
+                    <h3>Outils & Technologies</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>PowerShell / Bash</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Docker</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="65"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Git / GitHub</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Monitoring (Nagios, Zabbix)</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="60"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1461,109 +1282,103 @@
 
     <section id="projets">
         <div class="container">
-            <h2 class="section-title">Réalisations Techniques</h2>
+            <h2 class="section-title">Mes Projets</h2>
+            
             <div class="project-filters" role="group" aria-label="Filtres de projets">
                 <button class="filter-btn active" data-filter="all" aria-pressed="true">Tous</button>
-                <button class="filter-btn" data-filter="reseaux" aria-pressed="false">Réseaux</button>
-                <button class="filter-btn" data-filter="systemes" aria-pressed="false">Systèmes</button>
+                <button class="filter-btn" data-filter="infrastructure" aria-pressed="false">Infrastructure</button>
+                <button class="filter-btn" data-filter="reseau" aria-pressed="false">Réseau</button>
                 <button class="filter-btn" data-filter="securite" aria-pressed="false">Sécurité</button>
+                <button class="filter-btn" data-filter="developpement" aria-pressed="false">Développement</button>
             </div>
+
             <div class="projects-grid">
-                <article class="project-card" data-category="reseaux">
+                <article class="project-card" data-category="infrastructure">
                     <div class="project-header">
-                        <h3>Infrastructure Réseau PME</h3>
-                        <span class="project-tag">Réseaux</span>
+                        <h3>Infrastructure Active Directory</h3>
+                        <p class="project-category">Infrastructure</p>
                     </div>
                     <div class="project-body">
-                        <p>Conception et implémentation d'une architecture réseau complète incluant segmentation VLAN, services DHCP/DNS centralisés et sécurisation par pare-feu applicatif. Configuration de politiques de QoS pour optimiser les flux critiques.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Cisco Packet Tracer</span>
-                            <span class="tech-badge">VLAN 802.1Q</span>
-                            <span class="tech-badge">Routage Inter-VLAN</span>
-                            <span class="tech-badge">pfSense</span>
+                        <p class="project-description">Déploiement complet d'un environnement Active Directory avec gestion des utilisateurs, GPO, et intégration de services (DNS, DHCP). Configuration de la réplication entre contrôleurs de domaine.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Windows Server</span>
+                            <span class="project-tag">Active Directory</span>
+                            <span class="project-tag">GPO</span>
                         </div>
                     </div>
                 </article>
-                
-                <article class="project-card" data-category="systemes">
+
+                <article class="project-card" data-category="reseau">
                     <div class="project-header">
-                        <h3>Déploiement Active Directory</h3>
-                        <span class="project-tag">Systèmes</span>
+                        <h3>Architecture Réseau d'Entreprise</h3>
+                        <p class="project-category">Réseau</p>
                     </div>
                     <div class="project-body">
-                        <p>Mise en place d'un environnement Active Directory avec hiérarchie OU structurée, déploiement de GPO pour la sécurisation des postes, intégration LDAP et configuration des services de domaine (DNS, DHCP, DFS).</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Windows Server 2019</span>
-                            <span class="tech-badge">Active Directory</span>
-                            <span class="tech-badge">Group Policy</span>
-                            <span class="tech-badge">PowerShell</span>
+                        <p class="project-description">Conception et mise en place d'une architecture réseau segmentée avec VLANs, routage inter-VLAN, et configuration de switchs managés. Simulation sur Packet Tracer.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Cisco</span>
+                            <span class="project-tag">VLAN</span>
+                            <span class="project-tag">Routage</span>
                         </div>
                     </div>
                 </article>
 
                 <article class="project-card" data-category="securite">
                     <div class="project-header">
-                        <h3>Audit & Sécurisation</h3>
-                        <span class="project-tag">Sécurité</span>
+                        <h3>Solution VPN Site-à-Site</h3>
+                        <p class="project-category">Sécurité</p>
                     </div>
                     <div class="project-body">
-                        <p>Audit de sécurité approfondi d'une infrastructure existante, implémentation de solutions de protection multicouches : pare-feu applicatif, VPN site-à-site, politiques de mots de passe renforcées et supervision réseau avec Wireshark.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">pfSense</span>
-                            <span class="tech-badge">OpenVPN</span>
-                            <span class="tech-badge">Wireshark</span>
-                            <span class="tech-badge">SSL/TLS</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="tp">
-        <div class="container">
-            <h2 class="section-title">Travaux Pratiques</h2>
-            <div class="tp-grid">
-                <article class="tp-card">
-                    <div class="tp-image">
-                        <img src="tp/tp1-preview.jpg" alt="Aperçu TP WannaCry" onerror="this.parentElement.innerHTML='🔒'">
-                    </div>
-                    <div class="tp-content">
-                        <div class="tp-header">
-                            <h3 class="tp-title">Incident WannaCry</h3>
-                            <span class="tp-type">PDF</span>
-                        </div>
-                        <div class="tp-meta">
-                            <span>📅 Octobre 2025</span>
-                            <span>🔐 Cybersécurité</span>
-                        </div>
-                        <p class="tp-description">
-                            Analyse complète de l'incident WannaCry de 2017 : vulnérabilités exploitées (EternalBlue), impacts mondiaux, réponses et leçons apprises. Étude d'une attaque ransomware majeure.
-                        </p>
-                        <div class="tp-actions">
-                            <a href="tp/tp1-incident-wannacry.pdf" class="tp-btn tp-btn-primary" target="_blank">Voir le TP</a>
+                        <p class="project-description">Configuration d'un tunnel VPN IPsec entre deux sites distants pour sécuriser les communications. Mise en place de règles de pare-feu et tests de sécurité.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">VPN</span>
+                            <span class="project-tag">IPsec</span>
+                            <span class="project-tag">Firewall</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="tp-card">
-                    <div class="tp-image">
-                        <img src="tp/tp2-preview.jpg" alt="Aperçu TP Configuration Windows" onerror="this.parentElement.innerHTML='💻'">
+                <article class="project-card" data-category="infrastructure">
+                    <div class="project-header">
+                        <h3>Infrastructure Virtualisée</h3>
+                        <p class="project-category">Infrastructure</p>
                     </div>
-                    <div class="tp-content">
-                        <div class="tp-header">
-                            <h3 class="tp-title">Configuration PC Windows et Windows Server</h3>
-                            <span class="tp-type">PDF</span>
+                    <div class="project-body">
+                        <p class="project-description">Création d'une infrastructure complète sur VMware incluant serveurs web, bases de données, et services réseau. Gestion des ressources et haute disponibilité.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">VMware</span>
+                            <span class="project-tag">Linux</span>
+                            <span class="project-tag">Virtualisation</span>
                         </div>
-                        <div class="tp-meta">
-                            <span>📅 Septembre 2025</span>
-                            <span>🖥️ Systèmes</span>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="developpement">
+                    <div class="project-header">
+                        <h3>Scripts d'Automatisation</h3>
+                        <p class="project-category">Développement</p>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">Développement de scripts PowerShell et Bash pour automatiser les tâches d'administration : gestion des utilisateurs, sauvegardes, monitoring et rapports.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">PowerShell</span>
+                            <span class="project-tag">Bash</span>
+                            <span class="project-tag">Automatisation</span>
                         </div>
-                        <p class="tp-description">
-                            Guide complet de configuration d'une infrastructure Windows : Active Directory, GPO, DHCP, DNS, gestion des utilisateurs et ressources, checklist complète.
-                        </p>
-                        <div class="tp-actions">
-                            <a href="tp/tp2-configuration-windows.pdf" class="tp-btn tp-btn-primary" target="_blank">Voir le TP</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="securite">
+                    <div class="project-header">
+                        <h3>Audit de Sécurité Réseau</h3>
+                        <p class="project-category">Sécurité</p>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">Réalisation d'un audit de sécurité complet : scan de vulnérabilités, test de pénétration, analyse des logs, et recommandations de sécurisation.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Sécurité</span>
+                            <span class="project-tag">Audit</span>
+                            <span class="project-tag">Pentest</span>
                         </div>
                     </div>
                 </article>
@@ -1574,272 +1389,215 @@
     <section id="veille">
         <div class="container">
             <h2 class="section-title">Veille Technologique</h2>
-            <div class="veille-grid">
-                <article class="veille-card">
-                    <h3>Cybersécurité</h3>
-                    <p>Suivi actif des vulnérabilités CVE, nouvelles menaces informatiques et solutions de protection. Consultation régulière de l'ANSSI, CERT-FR et bases de données de sécurité.</p>
-                    <div class="veille-links">
-                        <a href="https://www.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">🔐 ANSSI</a>
-                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">🛡️ CERT-FR</a>
-                        <a href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener noreferrer">💻 Bleeping Computer</a>
-                        <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer">📰 The Hacker News</a>
-                    </div>
-                </article>
-                <article class="veille-card">
-                    <h3>Technologies Réseau</h3>
-                    <p>Nouveaux standards réseau, déploiement 5G, Software-Defined Networking (SDN), évolution des protocoles de routage et optimisation WAN.</p>
-                    <div class="veille-links">
-                        <a href="https://blogs.cisco.com/" target="_blank" rel="noopener noreferrer">🌐 Cisco Blog</a>
-                        <a href="https://www.networkworld.com/" target="_blank" rel="noopener noreferrer">📡 Network World</a>
-                        <a href="https://www.sdxcentral.com/" target="_blank" rel="noopener noreferrer">☁️ SDxCentral</a>
-                    </div>
-                </article>
-                <article class="veille-card">
-                    <h3>DevOps & Infrastructure as Code</h3>
-                    <p>Pratiques DevOps, pipelines CI/CD, Infrastructure as Code avec Terraform et Ansible, automatisation des déploiements et gestion de configuration.</p>
-                    <div class="veille-links">
-                        <a href="https://devops.com/" target="_blank" rel="noopener noreferrer">🚀 DevOps.com</a>
-                        <a href="https://www.hashicorp.com/blog" target="_blank" rel="noopener noreferrer">⚙️ HashiCorp Blog</a>
-                        <a href="https://www.ansible.com/blog" target="_blank" rel="noopener noreferrer">🔧 Ansible Blog</a>
-                    </div>
-                </article>
-                <article class="veille-card">
-                    <h3>Monitoring & Supervision</h3>
-                    <p>Outils de monitoring des systèmes et réseaux (Zabbix, Prometheus, Grafana), supervision des performances, alerting automatisé et analyse des logs.</p>
-                    <div class="veille-links">
-                        <a href="https://grafana.com/blog/" target="_blank" rel="noopener noreferrer">📊 Grafana Blog</a>
-                        <a href="https://prometheus.io/blog/" target="_blank" rel="noopener noreferrer">📈 Prometheus Blog</a>
-                        <a href="https://www.zabbix.com/blog" target="_blank" rel="noopener noreferrer">👁️ Zabbix Blog</a>
-                    </div>
-                </article>
-                <article class="veille-card">
-                    <h3>IoT & Edge Computing</h3>
-                    <p>Internet des objets, sécurité IoT, edge computing, traitement distribué des données et intégration avec les infrastructures traditionnelles.</p>
-                    <div class="veille-links">
-                        <a href="https://www.iotforall.com/" target="_blank" rel="noopener noreferrer">🌐 IoT For All</a>
-                        <a href="https://www.iotworldtoday.com/" target="_blank" rel="noopener noreferrer">📡 IoT World Today</a>
-                        <a href="https://edgecomputing-news.com/" target="_blank" rel="noopener noreferrer">⚡ Edge Computing News</a>
-                    </div>
-                </article>
-                <article class="veille-card">
-                    <h3>Hardware & Composants</h3>
-                    <p>Évolution des processeurs (Intel, AMD, ARM), technologies des cartes graphiques (NVIDIA, AMD Radeon), performances des cartes mères, gestion thermique et consommation énergétique des équipements informatiques.</p>
-                    <div class="veille-links">
-                        <a href="https://www.tomshardware.com/" target="_blank" rel="noopener noreferrer">💻 Tom's Hardware</a>
-                        <a href="https://www.anandtech.com/" target="_blank" rel="noopener noreferrer">🔬 AnandTech</a>
-                        <a href="https://www.techpowerup.com/" target="_blank" rel="noopener noreferrer">⚙️ TechPowerUp</a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="ia">
-        <div class="container">
-            <h2 class="section-title">Intelligence Artificielle & Outils IA</h2>
-            <p class="ia-intro">
-                L'intelligence artificielle révolutionne le secteur informatique. J'intègre des outils IA dans mon travail quotidien pour améliorer ma productivité, automatiser des tâches complexes, et optimiser la résolution de problèmes techniques.
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; color: var(--text-light); font-size: 1.1em;">
+                Dans le domaine de l'informatique, la veille technologique est essentielle. Voici mes sources d'information pour rester à jour sur les dernières tendances en infrastructure, réseaux et cybersécurité.
             </p>
             
-            <div class="ai-tools-grid">
-                <article class="ai-tool-card">
-                    <span class="ai-tool-icon">🤖</span>
-                    <h3>Claude (Anthropic)</h3>
-                    <p>Assistant IA avancé que j'utilise pour l'analyse de problèmes techniques complexes, la génération de scripts (PowerShell, Bash), la documentation technique et la résolution de bugs système.</p>
-                    <div>
-                        <span class="ai-tool-badge">Scripting</span>
-                        <span class="ai-tool-badge">Documentation</span>
-                        <span class="ai-tool-badge">Débogage</span>
-                    </div>
-                </article>
+            <div class="veille-grid">
+                <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🖥️</div>
+                    <h3>IT-Connect</h3>
+                    <p>Tutoriels et actualités sur Windows Server, Active Directory, virtualisation et réseaux</p>
+                    <span class="veille-tag">Infrastructure</span>
+                </a>
 
-                <article class="ai-tool-card">
-                    <span class="ai-tool-icon">💬</span>
-                    <h3>ChatGPT</h3>
-                    <p>Utilisé pour la recherche rapide de solutions, l'explication de concepts techniques, et l'assistance dans l'apprentissage de nouvelles technologies et protocoles réseau.</p>
-                    <div>
-                        <span class="ai-tool-badge">Recherche</span>
-                        <span class="ai-tool-badge">Formation</span>
-                        <span class="ai-tool-badge">Veille</span>
-                    </div>
-                </article>
+                <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🔐</div>
+                    <h3>Korben</h3>
+                    <p>Actualités tech, cybersécurité, outils et astuces pour les passionnés d'informatique</p>
+                    <span class="veille-tag">Cybersécurité</span>
+                </a>
 
-                <article class="ai-tool-card">
-                    <span class="ai-tool-icon">🔧</span>
-                    <h3>GitHub Copilot</h3>
-                    <p>Assistance au développement de scripts d'automatisation, suggestions de code pour l'administration système et aide à la création de playbooks Ansible.</p>
-                    <div>
-                        <span class="ai-tool-badge">Automatisation</span>
-                        <span class="ai-tool-badge">Scripts</span>
-                        <span class="ai-tool-badge">IaC</span>
-                    </div>
-                </article>
+                <a href="https://www.lemondeinformatique.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">📰</div>
+                    <h3>Le Monde Informatique</h3>
+                    <p>Actualités IT professionnelles, cloud, infrastructure et transformation digitale</p>
+                    <span class="veille-tag">Actualités IT</span>
+                </a>
 
-                <article class="ai-tool-card">
-                    <span class="ai-tool-icon">📊</span>
-                    <h3>Outils d'Analyse IA</h3>
-                    <p>Exploitation d'outils d'analyse de logs basés sur l'IA pour détecter des anomalies réseau, prédire les pannes matérielles et optimiser les performances système.</p>
-                    <div>
-                        <span class="ai-tool-badge">Monitoring</span>
-                        <span class="ai-tool-badge">Prédiction</span>
-                        <span class="ai-tool-badge">Optimisation</span>
-                    </div>
-                </article>
-            </div>
+                <a href="https://www.nextinpact.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">⚡</div>
+                    <h3>Next INpact</h3>
+                    <p>Actualités tech, juridique et société numérique avec analyses approfondies</p>
+                    <span class="veille-tag">Tech & Société</span>
+                </a>
 
-            <div class="ai-applications">
-                <h3>Applications Concrètes de l'IA dans Mon Travail</h3>
-                <div class="ai-use-cases">
-                    <div class="ai-use-case">
-                        <span class="ai-use-case-icon">⚡</span>
-                        <div class="ai-use-case-content">
-                            <h4>Automatisation Système</h4>
-                            <p>Génération rapide de scripts PowerShell et Bash pour automatiser les tâches répétitives d'administration et gagner un temps précieux.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-use-case">
-                        <span class="ai-use-case-icon">🐛</span>
-                        <div class="ai-use-case-content">
-                            <h4>Débogage Avancé</h4>
-                            <p>Analyse de logs complexes et identification rapide des causes racines des incidents système grâce à l'assistance IA.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-use-case">
-                        <span class="ai-use-case-icon">📚</span>
-                        <div class="ai-use-case-content">
-                            <h4>Documentation</h4>
-                            <p>Création de documentation technique claire et complète, génération de procédures et guides utilisateur structurés.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-use-case">
-                        <span class="ai-use-case-icon">🔍</span>
-                        <div class="ai-use-case-content">
-                            <h4>Recherche & Veille</h4>
-                            <p>Accélération de la recherche de solutions techniques, synthèse d'informations et veille technologique ciblée sur les nouveautés IT.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-use-case">
-                        <span class="ai-use-case-icon">🎓</span>
-                        <div class="ai-use-case-content">
-                            <h4>Formation Continue</h4>
-                            <p>Apprentissage accéléré de nouvelles technologies, clarification de concepts complexes et simulation de scénarios techniques.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-use-case">
-                        <span class="ai-use-case-icon">🛡️</span>
-                        <div class="ai-use-case-content">
-                            <h4>Sécurité Proactive</h4>
-                            <p>Analyse de vulnérabilités, suggestions de durcissement système et veille sur les menaces émergentes en cybersécurité.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <a href="https://www.silicon.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">💼</div>
+                    <h3>Silicon.fr</h3>
+                    <p>L'actualité IT et digitale pour les professionnels et décideurs</p>
+                    <span class="veille-tag">IT Pro</span>
+                </a>
 
-    <section id="cv">
-        <div class="container">
-            <h2 class="section-title">Curriculum Vitae</h2>
-            <div class="cv-download">
-                <a href="CV_HOFFMANN_Alann.pdf" download class="btn" style="background: var(--primary-color); color: white; border-color: var(--primary-color);">
-                    Télécharger le CV (PDF)
+                <a href="https://www.undernews.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🌐</div>
+                    <h3>Undernews</h3>
+                    <p>Flux d'actualités technologiques, sécurité informatique et innovations</p>
+                    <span class="veille-tag">Tech News</span>
+                </a>
+
+                <a href="https://blog.cisco.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🔌</div>
+                    <h3>Cisco Blog</h3>
+                    <p>Blog officiel Cisco sur les réseaux, la sécurité et les infrastructures</p>
+                    <span class="veille-tag">Réseaux</span>
+                </a>
+
+                <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🛡️</div>
+                    <h3>The Hacker News</h3>
+                    <p>Actualités cybersécurité, vulnérabilités et menaces informatiques</p>
+                    <span class="veille-tag">Cybersécurité</span>
+                </a>
+
+                <a href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🔍</div>
+                    <h3>Bleeping Computer</h3>
+                    <p>Support technique, actualités sécurité et tutoriels informatiques</p>
+                    <span class="veille-tag">Support & Sécurité</span>
+                </a>
+
+                <a href="https://www.lemondeinformatique.fr/flux-rss/thematique/securite/rss.xml" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">📡</div>
+                    <h3>Flux RSS Sécurité</h3>
+                    <p>Abonnement RSS aux actualités sécurité du Monde Informatique</p>
+                    <span class="veille-tag">RSS</span>
+                </a>
+
+                <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🇫🇷</div>
+                    <h3>CERT-FR</h3>
+                    <p>Alertes et bulletins de sécurité officiels de l'ANSSI</p>
+                    <span class="veille-tag">Sécurité Nationale</span>
+                </a>
+
+                <a href="https://www.redhat.com/fr/blog" target="_blank" rel="noopener noreferrer" class="veille-card">
+                    <div class="veille-icon">🐧</div>
+                    <h3>Red Hat Blog</h3>
+                    <p>Actualités Linux, conteneurs, cloud et open source</p>
+                    <span class="veille-tag">Linux & Cloud</span>
                 </a>
             </div>
-            <div class="cv-container">
-                <div class="cv-header">
-                    <h2>HOFFMANN Alann</h2>
-                    <div class="birth-date">Né le 16 septembre 2001 (24 ans)</div>
-                    <div class="subtitle">Technicien Informatique - Contrat d'Apprentissage</div>
-                    <div class="contact-info">
-                        <div>4 impasse des primevères, 57320 BRETTNACH</div>
-                        <div>alannhoffmann86@gmail.com</div>
-                        <div>06 46 53 09 62</div>
-                        <div>Permis B + Véhicule</div>
+        </div>
+    </section>
+
+    <section id="parcours">
+        <div class="container">
+            <h2 class="section-title">Parcours</h2>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <button class="btn" id="viewCV" aria-label="Voir mon CV complet">Voir mon CV complet</button>
+            </div>
+            
+            <div class="timeline">
+                <article class="timeline-item">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 - 2026</div>
+                        <h3 class="timeline-title">BTS SIO Option SISR</h3>
+                        <p class="timeline-company">Lycée professionnel Raymond-Poincaré - BAR LE DUC</p>
+                        <p class="timeline-description">Formation spécialisée en Solutions d'Infrastructure, Systèmes et Réseaux. Apprentissage approfondi de l'administration système, des réseaux, de la virtualisation et de la cybersécurité.</p>
                     </div>
-                </div>
-                <div class="cv-main">
-                    <aside class="cv-sidebar">
-                        <div class="cv-section">
-                            <h3>Compétences Clés</h3>
-                            <ul class="skills-list">
-                                <li>Autonomie et rigueur</li>
-                                <li>Communication professionnelle</li>
-                                <li>Installation matériel</li>
-                                <li>Planification maintenance</li>
-                                <li>Gestion de stocks</li>
-                                <li>Analyse et synthèse</li>
-                            </ul>
-                        </div>
-                        <div class="cv-section">
-                            <h3>Centres d'Intérêt</h3>
-                            <p style="color: var(--text-light); line-height: 1.6;">Lecture technique, cinéma, jeux vidéo, veille technologique, intelligence artificielle</p>
-                        </div>
-                    </aside>
-                    <div class="cv-content">
-                        <div class="cv-section">
-                            <h3>Profil</h3>
-                            <p class="profile-text">Actuellement en formation BTS Services Informatiques aux Organisations option SISR, je développe mes compétences en administration système et infrastructure réseau. Rigoureux et passionné par les technologies de l'information, je recherche à mettre en pratique mes connaissances techniques dans un environnement professionnel dynamique tout en poursuivant ma montée en compétences.</p>
-                        </div>
-                        <div class="cv-section">
-                            <h3>Expérience Professionnelle</h3>
-                            <div class="timeline">
-                                <article class="timeline-item">
-                                    <div class="timeline-content">
-                                        <div class="timeline-date">Depuis septembre 2025</div>
-                                        <div class="timeline-title">Technicien Informatique</div>
-                                        <div class="timeline-company">Viessmann Faulquemont - Alternance</div>
-                                        <div class="timeline-description">Gestion du parc informatique, support utilisateur, dépannage et maintenance système</div>
-                                    </div>
-                                </article>
-                                <article class="timeline-item">
-                                    <div class="timeline-content">
-                                        <div class="timeline-date">Janvier 2025</div>
-                                        <div class="timeline-title">Stage Technicien Informatique</div>
-                                        <div class="timeline-company">SIE Metz</div>
-                                        <div class="timeline-description">Découverte du métier, assistance support technique</div>
-                                    </div>
-                                </article>
-                                <article class="timeline-item">
-                                    <div class="timeline-content">
-                                        <div class="timeline-date">Octobre - Décembre 2024</div>
-                                        <div class="timeline-title">Projet Professionnel</div>
-                                        <div class="timeline-company">Activ'projet Envergure Boulay</div>
-                                        <div class="timeline-description">Élaboration projet professionnel technicien informatique</div>
-                                    </div>
-                                </article>
-                                <article class="timeline-item">
-                                    <div class="timeline-content">
-                                        <div class="timeline-date">2021 - 2024</div>
-                                        <div class="timeline-title">Technicien d'Exploitation</div>
-                                        <div class="timeline-company">Idex Energie Ennery</div>
-                                        <div class="timeline-description">Gestion de secteur, dépannage, contrôle et maintenance technique</div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                        <div class="cv-section">
-                            <h3>Formation</h3>
-                            <div class="experience-item">
-                                <div class="experience-date">2018 - 2020</div>
-                                <div class="experience-title">BAC Professionnel MEI</div>
-                                <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
-                            </div>
-                            <div class="experience-item">
-                                <div class="experience-date">2016 - 2018</div>
-                                <div class="experience-title">CAP Électricien</div>
-                                <div class="experience-company">Lycée inter entreprise Boulay</div>
-                            </div>
-                        </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2024</div>
+                        <h3 class="timeline-title">Technicien de Maintenance</h3>
+                        <p class="timeline-company">METALOR Technologies France - METZ</p>
+                        <p class="timeline-description">Maintenance préventive et curative d'équipements industriels. Gestion de la maintenance assistée par ordinateur (GMAO), diagnostic de pannes et interventions techniques.</p>
                     </div>
-                </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019 - 2020</div>
+                        <h3 class="timeline-title">Technicien de Maintenance</h3>
+                        <p class="timeline-company">BOULANGERIE François-Metz</p>
+                        <p class="timeline-description">Gestion de secteur, dépannage, contrôle et maintenance technique des équipements de boulangerie industrielle.</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2020</div>
+                        <h3 class="timeline-title">BAC Professionnel MEI</h3>
+                        <p class="timeline-company">Lycée inter entreprise Boulay</p>
+                        <p class="timeline-description">Maintenance des Équipements Industriels - Formation technique complète en maintenance mécanique, électrique et pneumatique.</p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
+
+    <div id="cvModal" class="cv-modal" role="dialog" aria-labelledby="cvTitle" aria-modal="true">
+        <div class="cv-content">
+            <div class="cv-header">
+                <button class="close-cv" id="closeCV" aria-label="Fermer le CV">&times;</button>
+                <h2 id="cvTitle">Curriculum Vitae</h2>
+                <h3>HOFFMANN Alann</h3>
+                <p>Technicien Infrastructure & Réseaux</p>
+                <div style="margin-top: 20px;">
+                    <button class="btn" id="downloadCV" style="margin: 0 8px;">📥 Télécharger le CV</button>
+                    <button class="btn btn-secondary" id="printCV" style="margin: 0 8px;">🖨️ Imprimer</button>
+                </div>
+            </div>
+            <div class="cv-body">
+                <div class="cv-section">
+                    <h3>Informations Personnelles</h3>
+                    <p><strong>Localisation :</strong> Brettnach, 57320, Lorraine, France</p>
+                    <p><strong>Email :</strong> <a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
+                    <p><strong>Téléphone :</strong> <a href="tel:0646530962">06 46 53 09 62</a></p>
+                    <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" rel="noopener noreferrer">Voir mon profil</a></p>
+                </div>
+
+                <div class="cv-section">
+                    <h3>Expérience Professionnelle</h3>
+                    <div class="experience-item">
+                        <div class="experience-date">2020 - 2024</div>
+                        <div class="experience-title">Technicien de Maintenance</div>
+                        <div class="experience-company">METALOR Technologies France - METZ</div>
+                        <p>Maintenance préventive et curative d'équipements industriels complexes. Utilisation de GMAO pour la gestion des interventions. Diagnostic de pannes et résolution de problèmes techniques.</p>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2019 - 2020</div>
+                        <div class="experience-title">Technicien de Maintenance</div>
+                        <div class="experience-company">BOULANGERIE François - METZ</div>
+                        <p>Gestion de secteur, dépannage, contrôle et maintenance technique des équipements de production.</p>
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <h3>Formation</h3>
+                    <div class="experience-item">
+                        <div class="experience-date">2024 - 2026</div>
+                        <div class="experience-title">BTS SIO Option SISR</div>
+                        <div class="experience-company">Lycée professionnel Raymond-Poincaré - BAR LE DUC</div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2018 - 2020</div>
+                        <div class="experience-title">BAC Professionnel MEI</div>
+                        <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2016 - 2018</div>
+                        <div class="experience-title">CAP Électricien</div>
+                        <div class="experience-company">Lycée inter entreprise Boulay</div>
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <h3>Compétences Techniques</h3>
+                    <p><strong>Systèmes :</strong> Windows Server, Linux (Debian/Ubuntu), Active Directory, Virtualisation (VMware, Hyper-V)</p>
+                    <p><strong>Réseaux :</strong> TCP/IP, Routage & Switching, VPN, Cisco, Packet Tracer</p>
+                    <p><strong>Outils :</strong> PowerShell, Bash, Docker, Git, Monitoring (Nagios, Zabbix)</p>
+                    <p><strong>Sécurité :</strong> Pare-feu, VPN IPsec, Audit de sécurité</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="contact">
         <div class="container">
@@ -1862,7 +1620,6 @@
                     <p>Brettnach, 57320<br>Lorraine, France</p>
                 </div>
             </div>
-        
         </div>
     </section>
 
@@ -1873,13 +1630,14 @@
     </footer>
 
     <script>
-        // Animation de particules pour la section accueil
+        // Optimized Particle Animation with Performance Improvements
         const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true });
         const accueilSection = document.getElementById('accueil');
 
         let particles = [];
         let animationId;
+        let isAnimating = false;
 
         class Particle {
             constructor() {
@@ -1907,15 +1665,16 @@
         }
 
         function connectParticles() {
+            const maxDistance = 120;
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 120) {
+                    if (distance < maxDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / 120)})`;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / maxDistance)})`;
                         ctx.lineWidth = 0.5;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -1926,6 +1685,8 @@
         }
 
         function animate() {
+            if (!isAnimating) return;
+            
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             particles.forEach(particle => {
@@ -1947,26 +1708,50 @@
             canvas.height = accueilSection.offsetHeight;
 
             particles = [];
-            const particleCount = window.innerWidth < 768 ? 50 : 100;
+            const particleCount = window.innerWidth < 768 ? 40 : 80;
 
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
 
+            isAnimating = true;
             animate();
         }
+
+        function stopParticles() {
+            isAnimating = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        // Intersection Observer for performance
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!isAnimating) initParticles();
+                } else {
+                    stopParticles();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(accueilSection);
 
         window.addEventListener('load', () => {
             setTimeout(initParticles, 100);
         });
 
+        // Debounced resize handler
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(initParticles, 200);
+            resizeTimeout = setTimeout(() => {
+                if (isAnimating) initParticles();
+            }, 250);
         });
 
-        // Navigation mobile
+        // Mobile Navigation
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
 
@@ -1974,9 +1759,10 @@
             const isActive = mobileMenu.classList.toggle('active');
             navMenu.classList.toggle('active');
             mobileMenu.setAttribute('aria-expanded', isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
         });
 
-        // Navigation smooth scroll
+        // Smooth Scroll Navigation
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1992,30 +1778,38 @@
                         mobileMenu.classList.remove('active');
                         navMenu.classList.remove('active');
                         mobileMenu.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
                     }
                 }
             });
         });
 
-        // Active section highlighting
+        // Active Section Highlighting with Throttle
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            let current = '';
-            document.querySelectorAll('section').forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    let current = '';
+                    document.querySelectorAll('section').forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        if (window.pageYOffset >= sectionTop - 100) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+                    
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + current) {
+                            link.classList.add('active');
+                        }
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
 
-        // Back to top button
+        // Back to Top Button
         const backToTopBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
@@ -2029,7 +1823,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Project filters
+        // Project Filters
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
@@ -2052,6 +1846,245 @@
                 });
             });
         });
+
+        // Skill Progress Animation
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const progress = bar.getAttribute('data-progress');
+                        bar.style.width = progress + '%';
+                    });
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            skillObserver.observe(category);
+        });
+
+        // CV Modal
+        const cvModal = document.getElementById('cvModal');
+        const viewCVBtn = document.getElementById('viewCV');
+        const closeCVBtn = document.getElementById('closeCV');
+
+        viewCVBtn.addEventListener('click', () => {
+            cvModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCVBtn.addEventListener('click', () => {
+            cvModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        cvModal.addEventListener('click', (e) => {
+            if (e.target === cvModal) {
+                cvModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Keyboard Accessibility for Modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && cvModal.classList.contains('active')) {
+                cvModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // CV Download and Print Functions
+        const downloadCVBtn = document.getElementById('downloadCV');
+        const printCVBtn = document.getElementById('printCV');
+
+        downloadCVBtn.addEventListener('click', () => {
+            // Créer un contenu HTML complet pour le CV
+            const cvContent = `
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - HOFFMANN Alann</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { color: #3498db; text-align: center; margin-bottom: 10px; }
+        h2 { color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 25px; }
+        h3 { color: #2c3e50; margin-top: 15px; margin-bottom: 5px; }
+        .header { text-align: center; margin-bottom: 30px; background: #2c3e50; color: white; padding: 30px; border-radius: 8px; }
+        .header h1 { color: white; margin: 0; }
+        .header p { margin: 5px 0; }
+        .section { margin-bottom: 25px; }
+        .experience-item { margin-bottom: 20px; padding-left: 15px; border-left: 3px solid #3498db; }
+        .experience-date { color: #3498db; font-weight: bold; font-size: 0.9em; }
+        .experience-title { font-size: 1.1em; font-weight: bold; margin: 5px 0; }
+        .experience-company { color: #7f8c8d; font-style: italic; margin-bottom: 5px; }
+        .contact-info { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 15px; }
+        .contact-info span { background: #f4f6f8; padding: 5px 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>HOFFMANN Alann</h1>
+        <p style="font-size: 1.2em; margin-top: 10px;">Technicien Infrastructure & Réseaux</p>
+        <p style="font-size: 1.1em; color: #5dade2;">BTS SIO SISR</p>
+        <div class="contact-info">
+            <span>📧 alannhoffmann86@gmail.com</span>
+            <span>📱 06 46 53 09 62</span>
+            <span>📍 Brettnach, 57320, France</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Profil</h2>
+        <p>Étudiant en BTS SIO option SISR, passionné par l'administration système, les réseaux et la cybersécurité. Fort d'une expérience en maintenance industrielle, je transpose mes compétences techniques vers l'informatique avec rigueur et méthode.</p>
+    </div>
+
+    <div class="section">
+        <h2>Compétences Techniques</h2>
+        <p><strong>Systèmes :</strong> Windows Server, Linux (Debian/Ubuntu), Active Directory, Virtualisation (VMware, Hyper-V)</p>
+        <p><strong>Réseaux :</strong> TCP/IP, Routage & Switching, VPN, Cisco, Packet Tracer</p>
+        <p><strong>Outils :</strong> PowerShell, Bash, Docker, Git, Monitoring (Nagios, Zabbix)</p>
+        <p><strong>Sécurité :</strong> Pare-feu, VPN IPsec, Audit de sécurité</p>
+    </div>
+
+    <div class="section">
+        <h2>Formation</h2>
+        <div class="experience-item">
+            <div class="experience-date">2024 - 2026</div>
+            <div class="experience-title">BTS SIO Option SISR</div>
+            <div class="experience-company">Lycée professionnel Raymond-Poincaré - BAR LE DUC</div>
+            <p>Formation spécialisée en Solutions d'Infrastructure, Systèmes et Réseaux. Apprentissage approfondi de l'administration système, des réseaux, de la virtualisation et de la cybersécurité.</p>
+        </div>
+        <div class="experience-item">
+            <div class="experience-date">2018 - 2020</div>
+            <div class="experience-title">BAC Professionnel MEI</div>
+            <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
+            <p>Formation technique complète en maintenance mécanique, électrique et pneumatique.</p>
+        </div>
+        <div class="experience-item">
+            <div class="experience-date">2016 - 2018</div>
+            <div class="experience-title">CAP Électricien</div>
+            <div class="experience-company">Lycée inter entreprise Boulay</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Expérience Professionnelle</h2>
+        <div class="experience-item">
+            <div class="experience-date">2020 - 2024</div>
+            <div class="experience-title">Technicien de Maintenance</div>
+            <div class="experience-company">METALOR Technologies France - METZ</div>
+            <p>Maintenance préventive et curative d'équipements industriels complexes. Utilisation de GMAO pour la gestion des interventions. Diagnostic de pannes et résolution de problèmes techniques.</p>
+        </div>
+        <div class="experience-item">
+            <div class="experience-date">2019 - 2020</div>
+            <div class="experience-title">Technicien de Maintenance</div>
+            <div class="experience-company">BOULANGERIE François - METZ</div>
+            <p>Gestion de secteur, dépannage, contrôle et maintenance technique des équipements de production.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Projets Réalisés</h2>
+        <div class="experience-item">
+            <div class="experience-title">Infrastructure Active Directory</div>
+            <p>Déploiement complet d'un environnement Active Directory avec gestion des utilisateurs, GPO, et intégration de services (DNS, DHCP).</p>
+        </div>
+        <div class="experience-item">
+            <div class="experience-title">Architecture Réseau d'Entreprise</div>
+            <p>Conception et mise en place d'une architecture réseau segmentée avec VLANs, routage inter-VLAN, et configuration de switchs managés.</p>
+        </div>
+        <div class="experience-item">
+            <div class="experience-title">Solution VPN Site-à-Site</div>
+            <p>Configuration d'un tunnel VPN IPsec entre deux sites distants pour sécuriser les communications.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Centres d'Intérêt</h2>
+        <p>Veille technologique en infrastructure et cybersécurité • Participation à des projets open source • Auto-formation continue sur les nouvelles technologies</p>
+    </div>
+</body>
+</html>`;
+
+            // Créer un blob avec le contenu
+            const blob = new Blob([cvContent], { type: 'text/html' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // Créer un lien de téléchargement
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'CV_HOFFMANN_Alann.html';
+            document.body.appendChild(a);
+            a.click();
+            
+            // Nettoyer
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        });
+
+        printCVBtn.addEventListener('click', () => {
+            // Créer une fenêtre d'impression avec le contenu du CV
+            const printWindow = window.open('', '_blank');
+            const cvBody = document.querySelector('.cv-body').innerHTML;
+            const cvHeader = `
+                <div style="text-align: center; margin-bottom: 30px; background: #2c3e50; color: white; padding: 30px; border-radius: 8px;">
+                    <h1 style="color: white; margin: 0;">HOFFMANN Alann</h1>
+                    <p style="font-size: 1.2em; margin-top: 10px;">Technicien Infrastructure & Réseaux</p>
+                    <p style="font-size: 1.1em; color: #5dade2;">BTS SIO SISR</p>
+                    <div style="margin-top: 15px;">
+                        <p style="margin: 5px;">📧 alannhoffmann86@gmail.com | 📱 06 46 53 09 62</p>
+                        <p style="margin: 5px;">📍 Brettnach, 57320, Lorraine, France</p>
+                    </div>
+                </div>
+            `;
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>CV - HOFFMANN Alann</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px; }
+                        h2, h3 { color: #3498db; }
+                        h3 { border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+                        .cv-section { margin-bottom: 25px; page-break-inside: avoid; }
+                        .experience-item { margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #3498db; }
+                        .experience-date { color: #3498db; font-weight: bold; }
+                        .experience-title { font-size: 1.1em; font-weight: bold; margin: 5px 0; }
+                        .experience-company { color: #7f8c8d; font-style: italic; }
+                        @media print {
+                            body { padding: 0; }
+                            .no-print { display: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${cvHeader}
+                    ${cvBody}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            
+            // Attendre que le contenu soit chargé avant d'imprimer
+            setTimeout(() => {
+                printWindow.print();
+            }, 250);
+        });
+
+        // Prefers Reduced Motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            stopParticles();
+        }
     </script>
 </body>
 </html>
