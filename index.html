@@ -668,6 +668,33 @@
             line-height: 1.6;
         }
 
+        .veille-links {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .veille-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+        }
+
+        .veille-links a:hover {
+            background: white;
+            color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
         /* SECTION IA */
         #ia {
             background: linear-gradient(135deg, var(--ai-gradient-start) 0%, var(--ai-gradient-end) 100%);
@@ -1551,26 +1578,57 @@
                 <article class="veille-card">
                     <h3>Cybersécurité</h3>
                     <p>Suivi actif des vulnérabilités CVE, nouvelles menaces informatiques et solutions de protection. Consultation régulière de l'ANSSI, CERT-FR et bases de données de sécurité.</p>
+                    <div class="veille-links">
+                        <a href="https://www.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">🔐 ANSSI</a>
+                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">🛡️ CERT-FR</a>
+                        <a href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener noreferrer">💻 Bleeping Computer</a>
+                        <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer">📰 The Hacker News</a>
+                    </div>
                 </article>
                 <article class="veille-card">
                     <h3>Technologies Réseau</h3>
                     <p>Nouveaux standards réseau, déploiement 5G, Software-Defined Networking (SDN), évolution des protocoles de routage et optimisation WAN.</p>
+                    <div class="veille-links">
+                        <a href="https://blogs.cisco.com/" target="_blank" rel="noopener noreferrer">🌐 Cisco Blog</a>
+                        <a href="https://www.networkworld.com/" target="_blank" rel="noopener noreferrer">📡 Network World</a>
+                        <a href="https://www.sdxcentral.com/" target="_blank" rel="noopener noreferrer">☁️ SDxCentral</a>
+                    </div>
                 </article>
                 <article class="veille-card">
                     <h3>DevOps & Infrastructure as Code</h3>
                     <p>Pratiques DevOps, pipelines CI/CD, Infrastructure as Code avec Terraform et Ansible, automatisation des déploiements et gestion de configuration.</p>
+                    <div class="veille-links">
+                        <a href="https://devops.com/" target="_blank" rel="noopener noreferrer">🚀 DevOps.com</a>
+                        <a href="https://www.hashicorp.com/blog" target="_blank" rel="noopener noreferrer">⚙️ HashiCorp Blog</a>
+                        <a href="https://www.ansible.com/blog" target="_blank" rel="noopener noreferrer">🔧 Ansible Blog</a>
+                    </div>
                 </article>
                 <article class="veille-card">
                     <h3>Monitoring & Supervision</h3>
                     <p>Outils de monitoring des systèmes et réseaux (Zabbix, Prometheus, Grafana), supervision des performances, alerting automatisé et analyse des logs.</p>
+                    <div class="veille-links">
+                        <a href="https://grafana.com/blog/" target="_blank" rel="noopener noreferrer">📊 Grafana Blog</a>
+                        <a href="https://prometheus.io/blog/" target="_blank" rel="noopener noreferrer">📈 Prometheus Blog</a>
+                        <a href="https://www.zabbix.com/blog" target="_blank" rel="noopener noreferrer">👁️ Zabbix Blog</a>
+                    </div>
                 </article>
                 <article class="veille-card">
                     <h3>IoT & Edge Computing</h3>
                     <p>Internet des objets, sécurité IoT, edge computing, traitement distribué des données et intégration avec les infrastructures traditionnelles.</p>
+                    <div class="veille-links">
+                        <a href="https://www.iotforall.com/" target="_blank" rel="noopener noreferrer">🌐 IoT For All</a>
+                        <a href="https://www.iotworldtoday.com/" target="_blank" rel="noopener noreferrer">📡 IoT World Today</a>
+                        <a href="https://edgecomputing-news.com/" target="_blank" rel="noopener noreferrer">⚡ Edge Computing News</a>
+                    </div>
                 </article>
                 <article class="veille-card">
                     <h3>Hardware & Composants</h3>
                     <p>Évolution des processeurs (Intel, AMD, ARM), technologies des cartes graphiques (NVIDIA, AMD Radeon), performances des cartes mères, gestion thermique et consommation énergétique des équipements informatiques.</p>
+                    <div class="veille-links">
+                        <a href="https://www.tomshardware.com/" target="_blank" rel="noopener noreferrer">💻 Tom's Hardware</a>
+                        <a href="https://www.anandtech.com/" target="_blank" rel="noopener noreferrer">🔬 AnandTech</a>
+                        <a href="https://www.techpowerup.com/" target="_blank" rel="noopener noreferrer">⚙️ TechPowerUp</a>
+                    </div>
                 </article>
             </div>
         </div>
