@@ -642,9 +642,9 @@
 
         .timeline {
             position: relative;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 0;
+            padding: 20px 0;
         }
 
         .timeline::before {
@@ -659,7 +659,7 @@
         }
 
         .timeline-item {
-            margin-bottom: 50px;
+            margin-bottom: 25px;
             position: relative;
         }
 
@@ -673,7 +673,7 @@
 
         .timeline-content {
             background: var(--bg-white);
-            padding: 30px;
+            padding: 20px 25px;
             border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow-md);
             position: relative;
@@ -689,29 +689,31 @@
             display: inline-block;
             background: var(--accent-color);
             color: white;
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 0.85em;
-            margin-bottom: 15px;
+            font-size: 0.8em;
+            margin-bottom: 10px;
         }
 
         .timeline-title {
-            font-size: 1.3em;
+            font-size: 1.1em;
             color: var(--text-dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
         }
 
         .timeline-company {
             color: var(--accent-color);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             font-weight: 500;
+            font-size: 0.95em;
         }
 
         .timeline-description {
             color: var(--text-light);
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.95em;
         }
 
         .timeline-dot {
@@ -723,7 +725,7 @@
             background: var(--accent-color);
             border: 4px solid var(--bg-light);
             border-radius: 50%;
-            top: 30px;
+            top: 20px;
             z-index: 1;
             box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
         }
@@ -1560,8 +1562,7 @@
                 <h3>HOFFMANN Alann</h3>
                 <p>Technicien Informatique en Contrat d'Apprentissage</p>
                 <div style="margin-top: 20px;">
-                    <button class="btn" id="downloadCV" style="margin: 0 8px;">📥 Télécharger le CV</button>
-                    <button class="btn btn-secondary" id="printCV" style="margin: 0 8px;">🖨️ Imprimer</button>
+                    <button class="btn" id="downloadCV">📥 Télécharger le CV</button>
                 </div>
             </div>
             <div class="cv-body">
@@ -1667,7 +1668,7 @@
         <p>&copy; 2025 HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Optimized Particle Animation with Performance Improvements
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d', { alpha: true });
@@ -1938,9 +1939,8 @@
             }
         });
 
-        // CV Download and Print Functions
+        // CV Download Function
         const downloadCVBtn = document.getElementById('downloadCV');
-        const printCVBtn = document.getElementById('printCV');
 
         downloadCVBtn.addEventListener('click', () => {
             // Créer un lien de téléchargement pour le PDF
@@ -1952,60 +1952,6 @@
             a.click();
             document.body.removeChild(a);
         });
-
-        printCVBtn.addEventListener('click', () => {
-            // Créer une fenêtre d'impression avec le contenu du CV
-            const printWindow = window.open('', '_blank');
-            const cvBody = document.querySelector('.cv-body').innerHTML;
-            const cvHeader = `
-                <div style="text-align: center; margin-bottom: 30px; background: #2c3e50; color: white; padding: 30px; border-radius: 8px;">
-                    <h1 style="color: white; margin: 0;">HOFFMANN Alann</h1>
-                    <p style="font-size: 1.2em; margin-top: 10px;">Technicien Informatique en Contrat d'Apprentissage</p>
-                    <div style="margin-top: 15px;">
-                        <p style="margin: 5px;">📧 alannhoffmann86@gmail.com | 📱 06 46 53 09 62</p>
-                        <p style="margin: 5px;">📍 4 impasse des primevères, 57320 Brettnach</p>
-                    </div>
-                </div>
-            `;
-            
-            printWindow.document.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>CV - HOFFMANN Alann</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px; }
-                        h2, h3 { color: #3498db; }
-                        h3 { border-bottom: 2px solid #3498db; padding-bottom: 5px; }
-                        .cv-section { margin-bottom: 25px; page-break-inside: avoid; }
-                        .experience-item { margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #3498db; }
-                        .experience-date { color: #3498db; font-weight: bold; }
-                        .experience-title { font-size: 1.1em; font-weight: bold; margin: 5px 0; }
-                        .experience-company { color: #7f8c8d; font-style: italic; }
-                        @media print {
-                            body { padding: 0; }
-                            .no-print { display: none; }
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${cvHeader}
-                    ${cvBody}
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            
-            // Attendre que le contenu soit chargé avant d'imprimer
-            setTimeout(() => {
-                printWindow.print();
-            }, 250);
-        });
-
-        // Prefers Reduced Motion
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            stopParticles();
-        }
     </script>
 </body>
 </html>
