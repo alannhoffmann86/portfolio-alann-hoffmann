@@ -1750,14 +1750,14 @@
                 <h3>HOFFMANN Alann</h3>
                 <p>Technicien Informatique en Contrat d'Apprentissage</p>
                 <div style="margin-top: 20px;">
-                    <button class="btn" id="downloadCV">📥 Télécharger le CV</button>
+                    <a href="CV_HOFFMANN_Alann.pdf" download="CV_HOFFMANN_Alann.pdf" class="btn">📥 Télécharger le CV</a>
                 </div>
             </div>
             <div class="cv-body">
                 <div class="cv-section">
                     <h3>Informations Personnelles</h3>
                     <p><strong>Adresse :</strong> 4 impasse des primevères, 57320 Brettnach</p>
-                    <p><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection#bfded3ded1d1d7d0d9d9d2ded1d18789ffd8d2ded6d391dcd0d2"><span class="__cf_email__" data-cfemail="23424f424d4d4b4c45454e424d4d1b1563444e424a4f0d404c4e">[email&#160;protected]</span></a></p>
+                    <p><strong>Email :</strong> <a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
                     <p><strong>Téléphone :</strong> <a href="tel:0646530962">06 46 53 09 62</a></p>
                     <p><strong>Date de naissance :</strong> 16/09/2001</p>
                     <p><strong>Permis :</strong> Permis B + Véhicule</p>
@@ -1832,7 +1832,7 @@
             <div class="contact-grid">
                 <div class="contact-card">
                     <h3>Email</h3>
-                    <p><a href="/cdn-cgi/l/email-protection#ddbcb1bcb3b3b5b2bbbbb0bcb3b3e5eb9dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="d8b9b4b9b6b6b0b7bebeb5b9b6b6e0ee98bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></p>
+                    <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
                 </div>
                 <div class="contact-card">
                     <h3>Téléphone</h3>
@@ -1852,7 +1852,6 @@
 
     <button id="backToTop" aria-label="Retour en haut">↑</button>
     
-    <!-- BTS SIO Modal -->
     <div id="btsModal" class="bts-modal" role="dialog" aria-labelledby="btsTitle" aria-modal="true">
         <div class="bts-modal-content">
             <div class="bts-modal-header">
@@ -2205,14 +2204,6 @@
                 cvModal.classList.remove('active');
                 document.body.style.overflow = '';
             }
-        });
-
-        // CV Download Function
-        const downloadCVBtn = document.getElementById('downloadCV');
-
-        downloadCVBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Fonction de téléchargement du CV - À implémenter');
         });
 
         // BTS Modal
