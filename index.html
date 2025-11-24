@@ -1264,660 +1264,515 @@
             overflow: hidden;
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
-            border-width: 0;
+            border: 0;
         }
 
-        *:focus-visible {
-            outline: 3px solid var(--accent-color);
-            outline-offset: 3px;
-        }
-
-        /* PERFORMANCE */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
     </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMD/CDQ+09iH5D9FzV8Dk9T8E3n4eJ0lU0P2lXk/wVf5Pz/f8eJtG7G6jH6y+Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <nav role="navigation" aria-label="Navigation principale">
+
+    <nav>
         <div class="nav-container">
-            <div class="nav-logo">HOFFMANN Alann</div>
-            <button class="menu-toggle" id="mobile-menu" aria-label="Menu de navigation" aria-expanded="false">
+            <a href="#accueil" class="nav-logo">HOFFMANN Alann</a>
+            <button class="menu-toggle" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul id="nav-menu" role="menubar">
-                <li role="none"><a href="#accueil" class="active" role="menuitem">Accueil</a></li>
-                <li role="none"><a href="#apropos" role="menuitem">À propos</a></li>
-                <li role="none"><a href="#competences" role="menuitem">Compétences</a></li>
-                <li role="none"><a href="#projets" role="menuitem">Projets</a></li>
-                <li role="none"><a href="#veille" role="menuitem">Veille Techno</a></li>
-                <li role="none"><a href="#parcours" role="menuitem">Parcours</a></li>
-                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+            <ul id="navMenu">
+                <li><a href="#accueil" class="active">Accueil</a></li>
+                <li><a href="#apropos">À Propos</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#veille">Veille</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="javascript:void(0);" id="openCVModal">CV (Modal)</a></li>
+                <li><a href="javascript:void(0);" id="downloadCV" class="btn-secondary" style="padding: 8px 15px; margin: 10px 0; border: none; background: var(--accent-color); color: white; border-radius: 4px; display: none;">Télécharger CV</a></li>
             </ul>
         </div>
     </nav>
 
-    <section id="accueil" aria-label="Section d'accueil">
-        <canvas id="particleCanvas" aria-hidden="true"></canvas>
-        <div class="hero-content">
-            <div class="badge">BTS SIO SISR en Alternance</div>
-            <h1>HOFFMANN Alann</h1>
-            <h2>Technicien Informatique en Contrat d'Apprentissage</h2>
-            <p>Doté d'un bon sens du relationnel et d'un bon contact client et ayant une appétence particulière pour le domaine de l'informatique, je souhaite donner un nouveau tournant à ma carrière professionnelle en me formant et en travaillant en tant que technicien de maintenance. Motivé et volontaire, j'ai pu découvrir ce métier lors d'un stage en entreprise.</p>
-            <div>
-                <a href="#projets" class="btn">Voir mes projets</a>
-                <a href="#contact" class="btn btn-secondary">Me contacter</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="apropos">
-        <div class="container">
-            <h2 class="section-title">À propos</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <div class="about-icon" aria-hidden="true">🎓</div>
-                    <h3>Formation</h3>
-                    <p>Actuellement en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux) en alternance chez Viessmann à Faulquemont. BAC MEI et CAP Électricien.</p>
-                    <a href="javascript:void(0);" class="learn-more-link" id="openBTSModal">Voir plus</a>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon" aria-hidden="true">💼</div>
-                    <h3>Expérience</h3>
-                    <p>Technicien d'exploitation chez Idex Energie (2021-2024) avec gestion de secteur, dépannage et maintenance. Stage découverte en informatique chez SIE Metz (2025).</p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon" aria-hidden="true">🚀</div>
-                    <h3>Objectif</h3>
-                    <p>Me spécialiser en administration système et réseaux, devenir un technicien de maintenance informatique compétent capable d'installer, configurer et maintenir des infrastructures IT.</p>
+    <main>
+        <section id="accueil">
+            <canvas id="particleCanvas"></canvas>
+            <div class="hero-content">
+                <span class="badge">BTS SIO SISR en Alternance</span>
+                <h1>HOFFMANN Alann</h1>
+                <h2>Technicien Infrastructure, Systèmes et Réseaux</h2>
+                <p>Doté d'un bon sens du relationnel et d'un bon contact client et ayant une appétence particulière pour le domaine de l'informatique, je souhaite donner un nouveau tournant à ma carrière professionnelle en me formant et en travaillant en tant que technicien de maintenance. Motivé et volontaire, j'ai pu découvrir ce métier lors d'un stage en entreprise.</p>
+                <div>
+                    <a href="#projets" class="btn">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-secondary">Me contacter</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="competences">
-        <div class="container">
-            <h2 class="section-title">Compétences</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Administration Système</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Windows Server</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="85"></div>
-                        </div>
+        <section id="apropos">
+            <div class="container">
+                <h2 class="section-title">À propos</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon" aria-hidden="true">🎓</div>
+                        <h3>Formation</h3>
+                        <p>Actuellement en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux) en alternance chez Viessmann à Faulquemont. BAC MEI et CAP Électricien.</p>
+                        <a href="javascript:void(0);" class="learn-more-link" id="openBTSModal">Voir plus</a>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Linux (Debian/Ubuntu)</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="80"></div>
-                        </div>
+                    <div class="about-card">
+                        <div class="about-icon" aria-hidden="true">💼</div>
+                        <h3>Expérience</h3>
+                        <p>Technicien d'exploitation chez Idex Energie (2021-2024) avec gestion de secteur, dépannage et maintenance. Stage découverte en informatique chez SIE Metz (2025).</p>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Active Directory</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Virtualisation (VMware, Hyper-V)</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="75"></div>
-                        </div>
+                    <div class="about-card">
+                        <div class="about-icon" aria-hidden="true">🚀</div>
+                        <h3>Objectif</h3>
+                        <p>Me spécialiser en administration système et réseaux, devenir un technicien de maintenance informatique compétent capable d'installer, configurer et maintenir des infrastructures IT.</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="skill-category">
-                    <h3>Réseaux & Infrastructure</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>TCP/IP</span>
-                            <span>85%</span>
+        <section id="competences">
+            <div class="container">
+                <h2 class="section-title">Compétences</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Administration Système</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Windows Server</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="85"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Linux (Debian/Ubuntu)</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Routage & Switching</span>
-                            <span>75%</span>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Active Directory</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="75"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>VPN & Sécurité réseau</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="70"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Configuration Cisco/Packet Tracer</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="75"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Outils & Technologies</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>PowerShell / Bash</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="75"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Virtualisation (VMware, Hyper-V)</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="75"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Docker</span>
-                            <span>65%</span>
+                    <div class="skill-category">
+                        <h3>Réseaux & Infrastructure</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Routage & Switching (Cisco)</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="70"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="65"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Protocoles TCP/IP</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Git / GitHub</span>
-                            <span>70%</span>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Sécurité (Firewall/VPN)</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="65"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="70"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Monitoring (Nagios, Zabbix)</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="60"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Monitoring (Nagios, Zabbix)</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="60"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projets">
-        <div class="container">
-            <h2 class="section-title">Mes Projets</h2>
-            
-            <div class="project-filters" role="group" aria-label="Filtres de projets">
-                <button class="filter-btn active" data-filter="all" aria-pressed="true">Tous</button>
-                <button class="filter-btn" data-filter="infrastructure" aria-pressed="false">Infrastructure</button>
-                <button class="filter-btn" data-filter="reseau" aria-pressed="false">Réseau</button>
-                <button class="filter-btn" data-filter="securite" aria-pressed="false">Sécurité</button>
-                <button class="filter-btn" data-filter="developpement" aria-pressed="false">Développement</button>
-            </div>
-
-            <div class="projects-grid">
-                <article class="project-card" data-category="infrastructure">
-                    <div class="project-header">
-                        <h3>Infrastructure Active Directory</h3>
-                        <p class="project-category">Infrastructure</p>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-description">Déploiement complet d'un environnement Active Directory avec gestion des utilisateurs, GPO, et intégration de services (DNS, DHCP). Configuration de la réplication entre contrôleurs de domaine.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Windows Server</span>
-                            <span class="project-tag">Active Directory</span>
-                            <span class="project-tag">GPO</span>
+        <section id="projets">
+            <div class="container">
+                <h2 class="section-title">Mes Projets</h2>
+                <div class="project-filters" role="group" aria-label="Filtres de projets">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">Tous</button>
+                    <button class="filter-btn" data-filter="infrastructure" aria-pressed="false">Infrastructure</button>
+                    <button class="filter-btn" data-filter="reseau" aria-pressed="false">Réseau</button>
+                    <button class="filter-btn" data-filter="securite" aria-pressed="false">Sécurité</button>
+                    <button class="filter-btn" data-filter="developpement" aria-pressed="false">Développement</button>
+                </div>
+                <div class="projects-grid">
+                    <article class="project-card" data-category="infrastructure">
+                        <div class="project-header">
+                            <h3>Infrastructure Active Directory</h3>
+                            <p class="project-category">Infrastructure</p>
                         </div>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="reseau">
-                    <div class="project-header">
-                        <h3>Architecture Réseau d'Entreprise</h3>
-                        <p class="project-category">Réseau</p>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-description">Conception et mise en place d'une architecture réseau segmentée avec VLANs, routage inter-VLAN, et configuration de switchs managés. Simulation sur Packet Tracer.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Cisco</span>
-                            <span class="project-tag">VLAN</span>
-                            <span class="project-tag">Routage</span>
+                        <div class="project-body">
+                            <p class="project-description">Déploiement complet d'un environnement Active Directory avec gestion des utilisateurs, GPO, et intégration de services (DNS, DHCP). Configuration de la réplication entre contrôleurs de domaine.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Windows Server</span>
+                                <span class="project-tag">Active Directory</span>
+                                <span class="project-tag">GPO</span>
+                            </div>
                         </div>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="securite">
-                    <div class="project-header">
-                        <h3>Solution VPN Site-à-Site</h3>
-                        <p class="project-category">Sécurité</p>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-description">Configuration d'un tunnel VPN IPsec entre deux sites distants pour sécuriser les communications. Mise en place de règles de pare-feu et tests de sécurité.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">VPN</span>
-                            <span class="project-tag">IPsec</span>
-                            <span class="project-tag">Firewall</span>
+                    </article>
+                    <article class="project-card" data-category="reseau">
+                        <div class="project-header">
+                            <h3>Architecture Réseau d'Entreprise</h3>
+                            <p class="project-category">Réseau</p>
                         </div>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="infrastructure">
-                    <div class="project-header">
-                        <h3>Infrastructure Virtualisée</h3>
-                        <p class="project-category">Infrastructure</p>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-description">Création d'une infrastructure complète sur VMware incluant serveurs web, bases de données, et services réseau. Gestion des ressources et haute disponibilité.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">VMware</span>
-                            <span class="project-tag">Linux</span>
-                            <span class="project-tag">Virtualisation</span>
+                        <div class="project-body">
+                            <p class="project-description">Conception et mise en place d'une architecture réseau segmentée avec VLANs, routage inter-VLAN, et configuration de switchs managés. Simulation sur Packet Tracer.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Cisco</span>
+                                <span class="project-tag">VLAN</span>
+                                <span class="project-tag">Routage</span>
+                            </div>
                         </div>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="developpement">
-                    <div class="project-header">
-                        <h3>Scripts d'Automatisation</h3>
-                        <p class="project-category">Développement</p>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-description">Développement de scripts PowerShell et Bash pour automatiser les tâches d'administration : gestion des utilisateurs, sauvegardes, monitoring et rapports.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">PowerShell</span>
-                            <span class="project-tag">Bash</span>
-                            <span class="project-tag">Automatisation</span>
+                    </article>
+                    <article class="project-card" data-category="securite">
+                        <div class="project-header">
+                            <h3>Solution VPN Site-à-Site</h3>
+                            <p class="project-category">Sécurité</p>
                         </div>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="securite">
-                    <div class="project-header">
-                        <h3>Audit de Sécurité Réseau</h3>
-                        <p class="project-category">Sécurité</p>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-description">Réalisation d'un audit de sécurité complet : scan de vulnérabilités, test de pénétration, analyse des logs, et recommandations de sécurisation.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Sécurité</span>
-                            <span class="project-tag">Audit</span>
-                            <span class="project-tag">Pentest</span>
+                        <div class="project-body">
+                            <p class="project-description">Configuration d'un tunnel VPN IPsec entre deux sites distants pour sécuriser les communications. Mise en place de règles de pare-feu et tests de sécurité.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">VPN</span>
+                                <span class="project-tag">IPsec</span>
+                                <span class="project-tag">Firewall</span>
+                            </div>
                         </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="veille">
-        <div class="container">
-            <h2 class="section-title">Veille Technologique</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; color: var(--text-light); font-size: 1.1em;">
-                Dans le domaine de l'informatique, la veille technologique est essentielle. Voici mes sources d'information pour rester à jour sur les dernières tendances en infrastructure, réseaux et cybersécurité.
-            </p>
-            
-            <div class="veille-grid">
-                <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🖥️</div>
-                    <h3>IT-Connect</h3>
-                    <p>Tutoriels et actualités sur Windows Server, Active Directory, virtualisation et réseaux</p>
-                    <span class="veille-tag">Infrastructure</span>
-                </a>
-
-                <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🔐</div>
-                    <h3>Korben</h3>
-                    <p>Actualités tech, cybersécurité, outils et astuces pour les passionnés d'informatique</p>
-                    <span class="veille-tag">Cybersécurité</span>
-                </a>
-
-                <a href="https://www.lemondeinformatique.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">📰</div>
-                    <h3>Le Monde Informatique</h3>
-                    <p>Actualités IT professionnelles, cloud, infrastructure et transformation digitale</p>
-                    <span class="veille-tag">Actualités IT</span>
-                </a>
-
-                <a href="https://www.nextinpact.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">⚡</div>
-                    <h3>Next INpact</h3>
-                    <p>Actualités tech, juridique et société numérique avec analyses approfondies</p>
-                    <span class="veille-tag">Tech & Société</span>
-                </a>
-
-                <a href="https://www.silicon.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">💼</div>
-                    <h3>Silicon.fr</h3>
-                    <p>L'actualité IT et digitale pour les professionnels et décideurs</p>
-                    <span class="veille-tag">IT Pro</span>
-                </a>
-
-                <a href="https://www.undernews.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🌐</div>
-                    <h3>Undernews</h3>
-                    <p>Flux d'actualités technologiques, sécurité informatique et innovations</p>
-                    <span class="veille-tag">Tech News</span>
-                </a>
-
-                <a href="https://blog.cisco.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🔌</div>
-                    <h3>Cisco Blog</h3>
-                    <p>Blog officiel Cisco sur les réseaux, la sécurité et les infrastructures</p>
-                    <span class="veille-tag">Réseaux</span>
-                </a>
-
-                <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🛡️</div>
-                    <h3>The Hacker News</h3>
-                    <p>Actualités cybersécurité, vulnérabilités et menaces informatiques</p>
-                    <span class="veille-tag">Cybersécurité</span>
-                </a>
-
-                <a href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🔍</div>
-                    <h3>Bleeping Computer</h3>
-                    <p>Support technique, actualités sécurité et tutoriels informatiques</p>
-                    <span class="veille-tag">Support & Sécurité</span>
-                </a>
-
-                <a href="https://www.lemondeinformatique.fr/flux-rss/thematique/securite/rss.xml" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">📡</div>
-                    <h3>Flux RSS Sécurité</h3>
-                    <p>Abonnement RSS aux actualités sécurité du Monde Informatique</p>
-                    <span class="veille-tag">RSS</span>
-                </a>
-
-                <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🇫🇷</div>
-                    <h3>CERT-FR</h3>
-                    <p>Alertes et bulletins de sécurité officiels de l'ANSSI</p>
-                    <span class="veille-tag">Sécurité Nationale</span>
-                </a>
-
-                <a href="https://www.redhat.com/fr/blog" target="_blank" rel="noopener noreferrer" class="veille-card">
-                    <div class="veille-icon">🐧</div>
-                    <h3>Red Hat Blog</h3>
-                    <p>Actualités Linux, conteneurs, cloud et open source</p>
-                    <span class="veille-tag">Linux & Cloud</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="parcours">
-        <div class="container">
-            <h2 class="section-title">Parcours</h2>
-            <div style="text-align: center; margin-bottom: 40px;">
-                <button class="btn" id="viewCV" aria-label="Voir mon CV complet">Voir mon CV complet</button>
-            </div>
-            
-            <div class="timeline">
-                <article class="timeline-item">
-                    <div class="timeline-dot" aria-hidden="true"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2025 - 2027</div>
-                        <h3 class="timeline-title">BTS SIO Option SISR</h3>
-                        <p class="timeline-company">Viessmann - Faulquemont</p>
-                        <p class="timeline-description">Formation en alternance en Solutions d'Infrastructure, Systèmes et Réseaux. Apprentissage de l'administration système, des réseaux et de la maintenance informatique.</p>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="timeline-dot" aria-hidden="true"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Janvier 2025</div>
-                        <h3 class="timeline-title">Stage découverte du métier de technicien informatique</h3>
-                        <p class="timeline-company">SIE Metz</p>
-                        <p class="timeline-description">Stage d'immersion pour découvrir le métier de technicien informatique.</p>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="timeline-dot" aria-hidden="true"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Octobre 2024 - Décembre 2024</div>
-                        <h3 class="timeline-title">Travail sur mon projet professionnel de technicien informatique</h3>
-                        <p class="timeline-company">Activ'projet Envergure Boulay</p>
-                        <p class="timeline-description">Accompagnement dans la construction de mon projet professionnel et préparation de ma reconversion en informatique.</p>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="timeline-dot" aria-hidden="true"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Novembre 2021 - Août 2024</div>
-                        <h3 class="timeline-title">Technicien d'exploitation</h3>
-                        <p class="timeline-company">Idex Energie - Ennery</p>
-                        <p class="timeline-description">Gestion de secteur, dépannage, contrôle et maintenance des équipements énergétiques.</p>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="timeline-dot" aria-hidden="true"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2018 - 2020</div>
-                        <h3 class="timeline-title">BAC Professionnel MEI</h3>
-                        <p class="timeline-company">Lycée inter entreprise Boulay</p>
-                        <p class="timeline-description">Maintenance des Équipements Industriels - Formation technique complète en maintenance mécanique, électrique et pneumatique.</p>
-                    </div>
-                </article>
-
-                <article class="timeline-item">
-                    <div class="timeline-dot" aria-hidden="true"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2016 - 2018</div>
-                        <h3 class="timeline-title">CAP Électricien</h3>
-                        <p class="timeline-company">Lycée inter entreprise Boulay</p>
-                        <p class="timeline-description">Formation en électricité et installations électriques.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <div id="cvModal" class="cv-modal" role="dialog" aria-labelledby="cvTitle" aria-modal="true">
-        <div class="cv-content">
-            <div class="cv-header">
-                <button class="close-cv" id="closeCV" aria-label="Fermer le CV">&times;</button>
-                <h2 id="cvTitle">Curriculum Vitae</h2>
-                <h3>HOFFMANN Alann</h3>
-                <p>Technicien Informatique en Contrat d'Apprentissage</p>
-                <div style="margin-top: 20px;">
-                    <button class="btn" id="downloadCV">📥 Télécharger le CV</button>
+                    </article>
+                    <article class="project-card" data-category="infrastructure">
+                        <div class="project-header">
+                            <h3>Infrastructure Virtualisée</h3>
+                            <p class="project-category">Infrastructure</p>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">Création d'un environnement de virtualisation (Hyper-V) pour héberger plusieurs serveurs et services, optimisant les ressources matérielles et facilitant les tests.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Hyper-V</span>
+                                <span class="project-tag">Virtualisation</span>
+                                <span class="project-tag">Windows Server</span>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <div class="cv-body">
-                <div class="cv-section">
-                    <h3>Informations Personnelles</h3>
-                    <p><strong>Adresse :</strong> 4 impasse des primevères, 57320 Brettnach</p>
-                    <p><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection#bfded3ded1d1d7d0d9d9d2ded1d18789ffd8d2ded6d391dcd0d2"><span class="__cf_email__" data-cfemail="23424f424d4d4b4c45454e424d4d1b1563444e424a4f0d404c4e">[email&#160;protected]</span></a></p>
-                    <p><strong>Téléphone :</strong> <a href="tel:0646530962">06 46 53 09 62</a></p>
-                    <p><strong>Date de naissance :</strong> 16/09/2001</p>
-                    <p><strong>Permis :</strong> Permis B + Véhicule</p>
-                    <p><strong>Loisirs :</strong> Lecture, cinéma</p>
-                </div>
+        </section>
 
-                <div class="cv-section">
-                    <h3>Expérience Professionnelle</h3>
-                    <div class="experience-item">
-                        <div class="experience-date">2025 - 2027</div>
-                        <div class="experience-title">Apprenti Technicien Informatique</div>
-                        <div class="experience-company">Viessmann - Faulquemont (Alternance BTS SIO SISR)</div>
-                        <p>Formation en alternance en administration système, réseaux et maintenance informatique. Installation et intégration de matériel, planification de maintenance, gestion de stocks.</p>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">Janvier 2025</div>
-                        <div class="experience-title">Stage découverte du métier de technicien informatique</div>
-                        <div class="experience-company">SIE Metz</div>
-                        <p>Stage d'immersion pour découvrir le métier de technicien informatique et ses différentes facettes.</p>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">Octobre 2024 - Décembre 2024</div>
-                        <div class="experience-title">Travail sur mon projet professionnel de technicien informatique</div>
-                        <div class="experience-company">Activ'projet Envergure Boulay</div>
-                        <p>Accompagnement dans la construction du projet professionnel et préparation de la reconversion en informatique.</p>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">Novembre 2021 - Août 2024</div>
-                        <div class="experience-title">Technicien d'exploitation</div>
-                        <div class="experience-company">Idex Energie - Ennery</div>
-                        <p>Gestion de secteur, dépannage, contrôle et maintenance des équipements énergétiques.</p>
-                    </div>
+        <section id="veille">
+            <div class="container">
+                <h2 class="section-title">Veille Technologique</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; color: var(--text-light); font-size: 1.1em;">
+                    Dans le domaine de l'informatique, la veille technologique est essentielle. Voici mes sources d'information pour rester à jour sur les dernières tendances en infrastructure, réseaux et cybersécurité.
+                </p>
+                <div class="veille-grid">
+                    <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">🖥️</div>
+                        <h3>IT-Connect</h3>
+                        <p>Tutoriels et actualités sur Windows Server, Active Directory, virtualisation et réseaux</p>
+                        <span class="veille-tag">Infrastructure</span>
+                    </a>
+                    <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">🔐</div>
+                        <h3>Korben</h3>
+                        <p>Actualités tech, cybersécurité, outils et astuces pour les passionnés d'informatique</p>
+                        <span class="veille-tag">Cybersécurité</span>
+                    </a>
+                    <a href="https://www.lemondeinformatique.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">📰</div>
+                        <h3>Le Monde Informatique</h3>
+                        <p>Actualités IT professionnelles, cloud, infrastructure et transformation digitale</p>
+                        <span class="veille-tag">Actualités IT</span>
+                    </a>
+                    <a href="https://www.nextinpact.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">⚡</div>
+                        <h3>Next INpact</h3>
+                        <p>Actualités tech, juridique et société numérique avec analyses approfondies</p>
+                        <span class="veille-tag">Tech & Société</span>
+                    </a>
+                    <a href="https://www.silicon.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">💼</div>
+                        <h3>Silicon.fr</h3>
+                        <p>L'actualité IT et digitale pour les professionnels et décideurs</p>
+                        <span class="veille-tag">IT Pro</span>
+                    </a>
+                    <a href="https://www.undernews.fr/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">🌐</div>
+                        <h3>Undernews</h3>
+                        <p>Flux d'actualités technologiques, sécurité informatique et innovations</p>
+                        <span class="veille-tag">Tech News</span>
+                    </a>
+                    <a href="https://blog.cisco.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">🔌</div>
+                        <h3>Cisco Blog</h3>
+                        <p>Blog officiel Cisco sur les réseaux, la sécurité et les infrastructures</p>
+                        <span class="veille-tag">Réseaux</span>
+                    </a>
+                    <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">🛡️</div>
+                        <h3>The Hacker News</h3>
+                        <p>Actualités cybersécurité, vulnérabilités et menaces informatiques</p>
+                        <span class="veille-tag">Cybersécurité</span>
+                    </a>
+                    <a href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener noreferrer" class="veille-card">
+                        <div class="veille-icon">🔍</div>
+                        <h3>Bleeping Computer</h3>
+                        <p>Support technique, actualités sécurité et tutoriels informatiques</p>
+                        <span class="veille-tag">Sécurité</span>
+                    </a>
                 </div>
+            </div>
+        </section>
 
-                <div class="cv-section">
-                    <h3>Formation</h3>
-                    <div class="experience-item">
-                        <div class="experience-date">2025 - 2027</div>
-                        <div class="experience-title">BTS SIO Option SISR</div>
-                        <div class="experience-company">Viessmann - Faulquemont (en alternance)</div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">2018 - 2020</div>
-                        <div class="experience-title">BAC Professionnel MEI</div>
-                        <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">2016 - 2018</div>
-                        <div class="experience-title">CAP Électricien</div>
-                        <div class="experience-company">Lycée inter entreprise Boulay</div>
-                    </div>
+        <section id="parcours">
+            <div class="container">
+                <h2 class="section-title">Mon Parcours</h2>
+                <div class="timeline">
+                    <article class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2025 - 2027</div>
+                            <h3 class="timeline-title">BTS SIO Option SISR en Alternance</h3>
+                            <p class="timeline-company">Viessmann - Faulquemont</p>
+                            <p class="timeline-description">Brevet de Technicien Supérieur - Solutions d'Infrastructure, Systèmes et Réseaux. Apprentissage de l'administration système, des réseaux et de la maintenance informatique.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Janvier 2025</div>
+                            <h3 class="timeline-title">Stage découverte du métier de technicien informatique</h3>
+                            <p class="timeline-company">SIE Metz</p>
+                            <p class="timeline-description">Stage d'immersion pour découvrir le métier de technicien informatique.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Octobre 2024 - Décembre 2024</div>
+                            <h3 class="timeline-title">Travail sur mon projet professionnel de technicien informatique</h3>
+                            <p class="timeline-company">Activ'projet Envergure Boulay</p>
+                            <p class="timeline-description">Accompagnement dans la construction de mon projet professionnel et préparation de ma reconversion en informatique.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Novembre 2021 - Août 2024</div>
+                            <h3 class="timeline-title">Technicien d'exploitation</h3>
+                            <p class="timeline-company">Idex Energie - Ennery</p>
+                            <p class="timeline-description">Gestion de secteur, dépannage, contrôle et maintenance des équipements énergétiques.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2018 - 2020</div>
+                            <h3 class="timeline-title">BAC Professionnel MEI</h3>
+                            <p class="timeline-company">Lycée inter entreprise Boulay</p>
+                            <p class="timeline-description">Maintenance des Équipements Industriels - Formation technique complète en maintenance mécanique, électrique et pneumatique.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2016 - 2018</div>
+                            <h3 class="timeline-title">CAP Électricien</h3>
+                            <p class="timeline-company">Lycée inter entreprise Boulay</p>
+                            <p class="timeline-description">Formation en électricité et installations électriques.</p>
+                        </div>
+                    </article>
                 </div>
+            </div>
+        </section>
 
-                <div class="cv-section">
-                    <h3>Compétences Principales</h3>
-                    <ul>
-                        <li>Travail en autonomie</li>
-                        <li>Communiquer auprès des clients</li>
-                        <li>Installer et intégrer le matériel (station, équipement réseau...)</li>
-                        <li>Planifier des opérations de maintenance</li>
-                        <li>Gestion des stocks</li>
-                        <li>Structurer et synthétiser les données</li>
-                    </ul>
+        <div id="cvModal" class="cv-modal" role="dialog" aria-labelledby="cvTitle" aria-modal="true">
+            <div class="cv-content">
+                <div class="cv-header">
+                    <button class="close-cv" id="closeCV" aria-label="Fermer le CV">&times;</button>
+                    <h2 id="cvTitle">Curriculum Vitae</h2>
+                    <h3>HOFFMANN Alann</h3>
+                    <p>Technicien Informatique en Contrat d'Apprentissage</p>
+                </div>
+                <div class="cv-body">
+                    <div class="cv-section">
+                        <h3>Profil</h3>
+                        <p>Doté d'un bon sens du relationnel et d'un bon contact client et ayant une appétence particulière pour le domaine de l'informatique, je souhaite donner un nouveau tournant à ma carrière professionnelle en me formant et en travaillant en tant que technicien de maintenance. Motivé et volontaire, j'ai pu découvrir ce métier lors d'un stage en entreprise.</p>
+                        <a href="javascript:void(0);" id="downloadCVFromModal" class="btn" style="margin-top: 20px;">Télécharger le CV (PDF)</a>
+                    </div>
+                    <div class="cv-section">
+                        <h3>Expériences Professionnelles</h3>
+                        <div class="experience-item">
+                            <div class="experience-date">Janvier 2025</div>
+                            <div class="experience-title">Stage découverte du métier de technicien informatique</div>
+                            <div class="experience-company">SIE Metz</div>
+                            <p>Stage d'immersion pour découvrir le métier de technicien informatique.</p>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-date">Octobre 2024 - Décembre 2024</div>
+                            <div class="experience-title">Travail sur mon projet professionnel de technicien informatique</div>
+                            <div class="experience-company">Activ'projet Envergure Boulay</div>
+                            <p>Accompagnement dans la construction du projet professionnel et préparation de la reconversion en informatique.</p>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-date">Novembre 2021 - Août 2024</div>
+                            <div class="experience-title">Technicien d'exploitation</div>
+                            <div class="experience-company">Idex Energie - Ennery</div>
+                            <p>Gestion de secteur, dépannage, contrôle et maintenance des équipements énergétiques.</p>
+                        </div>
+                    </div>
+                    <div class="cv-section">
+                        <h3>Formation</h3>
+                        <div class="experience-item">
+                            <div class="experience-date">2025 - 2027</div>
+                            <div class="experience-title">BTS SIO Option SISR</div>
+                            <div class="experience-company">Viessmann - Faulquemont (en alternance)</div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-date">2018 - 2020</div>
+                            <div class="experience-title">BAC Professionnel MEI</div>
+                            <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-date">2016 - 2018</div>
+                            <div class="experience-title">CAP Électricien</div>
+                            <div class="experience-company">Lycée inter entreprise Boulay</div>
+                        </div>
+                    </div>
+                    <div class="cv-section">
+                        <h3>Compétences Principales</h3>
+                        <ul>
+                            <li>Travail en autonomie</li>
+                            <li>Communiquer auprès des clients</li>
+                            <li>Installer et intégrer le matériel (station, équipement réseau...)</li>
+                            <li>Planifier des opérations de maintenance</li>
+                            <li>Gestion des stocks</li>
+                            <li>Structurer et synthétiser les données</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h3>Email</h3>
-                    <p><a href="/cdn-cgi/l/email-protection#ddbcb1bcb3b3b5b2bbbbb0bcb3b3e5eb9dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="d8b9b4b9b6b6b0b7bebeb5b9b6b6e0ee98bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></p>
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Email</h3>
+                        <p><a href="/cdn-cgi/l/email-protection#ddbcb1bcb3b3b5b2bbbbb0bcb3b3e5eb9dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="d8b9b4b9b6b6b0b7bebeb5b9b6b6e0ee98bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:+33646530962">06 46 53 09 62</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Localisation</h3>
+                        <p>Brettnach, 57320</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Réseaux</h3>
+                        <p><a href="https://www.linkedin.com/in/alann-hoffmann" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+                    </div>
                 </div>
-                <div class="contact-card">
-                    <h3>Téléphone</h3>
-                    <p><a href="tel:0646530962">06 46 53 09 62</a></p>
+            </div>
+        </section>
+
+        <div id="btsModal" class="bts-modal" role="dialog" aria-labelledby="btsTitle" aria-modal="true">
+            <div class="bts-modal-content">
+                <div class="bts-modal-header">
+                    <button class="close-bts-modal" id="closeBTSModal" aria-label="Fermer les détails du BTS SIO">&times;</button>
+                    <h2 id="btsTitle">Détails sur le BTS SIO</h2>
+                    <p>Brevet de Technicien Supérieur - Services Informatiques aux Organisations</p>
                 </div>
-                <div class="contact-card">
-                    <h3>LinkedIn</h3>
-                    <p><a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" rel="noopener noreferrer">Voir mon profil</a></p>
-                </div>
-                <div class="contact-card">
-                    <h3>Localisation</h3>
-                    <p>Brettnach, 57320<br>Lorraine, France</p>
+                <div class="bts-modal-body">
+                    <div class="bts-section">
+                        <h3>Présentation Générale</h3>
+                        <p>Le BTS SIO est un diplôme national de niveau bac+2 qui forme des professionnels capables de gérer, maintenir et faire évoluer le système d'information d'une entreprise.</p>
+                        <p>Il est divisé en deux options principales, permettant une spécialisation adaptée aux besoins du marché.</p>
+                    </div>
+                    <div class="bts-section">
+                        <h3>Les Options du BTS SIO</h3>
+                        <div class="option-comparison">
+                            <div class="option-card slame">
+                                <h4>SLAM</h4>
+                                <p><strong>Solutions Logicielles et Applications Métiers</strong></p>
+                                <p>Cette option est orientée vers le développement, la conception et l'amélioration de solutions logicielles adaptées aux besoins des entreprises.</p>
+                                <ul>
+                                    <li>Développement d'applications web et mobiles</li>
+                                    <li>Programmation (Java, Python, PHP, etc.)</li>
+                                    <li>Gestion de bases de données</li>
+                                    <li>Conception et maintenance d'applications</li>
+                                </ul>
+                            </div>
+                            <div class="option-card sisr">
+                                <h4>SISR</h4>
+                                <p><strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong></p>
+                                <p>Cette option se concentre sur l'administration des systèmes, la gestion des réseaux et la sécurité des infrastructures informatiques.</p>
+                                <ul>
+                                    <li>Administration de serveurs (Windows Server, Linux)</li>
+                                    <li>Configuration et gestion de réseaux</li>
+                                    <li>Virtualisation et cloud computing</li>
+                                    <li>Sécurité informatique et maintenance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bts-section">
+                        <h3>Pourquoi j'ai choisi SISR</h3>
+                        <div class="highlight-box">
+                            <p>🔧 J'ai choisi l'option SISR car j'ai toujours été passionné par le côté matériel et infrastructure de l'informatique.</p>
+                        </div>
+                        <p>Ce qui m'attire particulièrement dans SISR, c'est la possibilité de travailler concrètement avec le hardware et les réseaux. J'apprécie comprendre comment les systèmes communiquent entre eux, comment optimiser les performances d'une infrastructure, et résoudre les problèmes techniques au niveau matériel.</p>
+                        <p>L'aspect pratique et tangible de l'administration système et réseau correspond parfaitement à mon profil. Avec mon parcours en maintenance industrielle (BAC MEI) et en électricité (CAP Électricien), la transition vers l'infrastructure informatique était une évolution naturelle qui combine mes compétences techniques antérieures avec ma passion pour l'informatique.</p>
+                        <p>En SISR, je développe des compétences en :</p>
+                        <ul>
+                            <li><strong>Administration système :</strong> Gestion de serveurs Windows et Linux, Active Directory, GPO</li>
+                            <li><strong>Réseaux :</strong> Configuration de routeurs et switchs, protocoles TCP/IP, VPN</li>
+                            <li><strong>Virtualisation :</strong> VMware, Hyper-V, conteneurisation avec Docker</li>
+                            <li><strong>Sécurité :</strong> Pare-feu, antivirus, sauvegardes, monitoring</li>
+                            <li><strong>Support technique :</strong> Dépannage, maintenance préventive et corrective</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <button id="backToTop" aria-label="Retour en haut">↑</button>
-    
-    <!-- BTS SIO Modal -->
-    <div id="btsModal" class="bts-modal" role="dialog" aria-labelledby="btsTitle" aria-modal="true">
-        <div class="bts-modal-content">
-            <div class="bts-modal-header">
-                <button class="close-bts-modal" id="closeBTSModal" aria-label="Fermer">&times;</button>
-                <h2 id="btsTitle">BTS SIO - Services Informatiques aux Organisations</h2>
-                <p>Tout savoir sur ma formation</p>
-            </div>
-            <div class="bts-modal-body">
-                <div class="bts-section">
-                    <h3>Qu'est-ce que le BTS SIO ?</h3>
-                    <p>Le BTS SIO (Services Informatiques aux Organisations) est un diplôme de niveau Bac+2 qui forme des techniciens capables de gérer et de maintenir des infrastructures informatiques au sein d'une organisation.</p>
-                    <p>Cette formation s'adresse aux passionnés d'informatique souhaitant développer des compétences techniques solides dans un environnement professionnel. Le BTS SIO se déroule sur 2 ans et peut être réalisé en formation initiale ou en alternance.</p>
-                </div>
+    <button id="backToTop" aria-label="Retour en haut de page">↑</button>
 
-                <div class="bts-section">
-                    <h3>Les deux options : SLAM vs SISR</h3>
-                    <p>Le BTS SIO se décline en deux spécialisations distinctes, chacune ciblant un domaine précis de l'informatique :</p>
-                    
-                    <div class="option-comparison">
-                        <div class="option-card">
-                            <h4>SLAM</h4>
-                            <p><strong>Solutions Logicielles et Applications Métiers</strong></p>
-                            <p>Cette option est orientée vers le développement d'applications, la programmation et la création de solutions logicielles adaptées aux besoins des entreprises.</p>
-                            <ul>
-                                <li>Développement d'applications web et mobiles</li>
-                                <li>Programmation (Java, Python, PHP, etc.)</li>
-                                <li>Gestion de bases de données</li>
-                                <li>Conception et maintenance d'applications</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="option-card sisr">
-                            <h4>SISR</h4>
-                            <p><strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong></p>
-                            <p>Cette option se concentre sur l'administration des systèmes, la gestion des réseaux et la sécurité des infrastructures informatiques.</p>
-                            <ul>
-                                <li>Administration de serveurs (Windows Server, Linux)</li>
-                                <li>Configuration et gestion de réseaux</li>
-                                <li>Virtualisation et cloud computing</li>
-                                <li>Sécurité informatique et maintenance</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bts-section">
-                    <h3>Pourquoi j'ai choisi SISR</h3>
-                    <div class="highlight-box">
-                        <p>🔧 J'ai choisi l'option SISR car j'ai toujours été passionné par le côté matériel et infrastructure de l'informatique.</p>
-                    </div>
-                    <p>Ce qui m'attire particulièrement dans SISR, c'est la possibilité de travailler concrètement avec le hardware et les réseaux. J'apprécie comprendre comment les systèmes communiquent entre eux, comment optimiser les performances d'une infrastructure, et résoudre les problèmes techniques au niveau matériel.</p>
-                    <p>L'aspect pratique et tangible de l'administration système et réseau correspond parfaitement à mon profil. Avec mon parcours en maintenance industrielle (BAC MEI) et en électricité (CAP Électricien), la transition vers l'infrastructure informatique était une évolution naturelle qui combine mes compétences techniques antérieures avec ma passion pour l'informatique.</p>
-                    <p>En SISR, je développe des compétences en :</p>
-                    <ul>
-                        <li><strong>Administration système :</strong> Gestion de serveurs Windows et Linux, Active Directory, GPO</li>
-                        <li><strong>Réseaux :</strong> Configuration de routeurs et switchs, protocoles TCP/IP, VPN</li>
-                        <li><strong>Virtualisation :</strong> VMware, Hyper-V, conteneurisation avec Docker</li>
-                        <li><strong>Sécurité :</strong> Pare-feu, antivirus, sauvegardes, monitoring</li>
-                        <li><strong>Support technique :</strong> Dépannage, maintenance préventive et corrective</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <footer>
         <p>&copy; 2025 HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</p>
     </footer>
@@ -1925,40 +1780,26 @@
     <script>
         // Optimized Particle Animation with Performance Improvements
         const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas ? canvas.getContext('2d', { alpha: true }) : null;
+        const ctx = canvas.getContext('2d');
         const accueilSection = document.getElementById('accueil');
-
-        console.log('Éléments trouvés:', {
-            canvas: !!canvas,
-            ctx: !!ctx,
-            accueilSection: !!accueilSection
-        });
-
-        if (!canvas || !ctx || !accueilSection) {
-            console.error('Éléments manquants pour les particules');
-        }
-
         let particles = [];
-        let animationId;
         let isAnimating = false;
+        let animationId = null;
 
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.vx = Math.random() * 2 - 1;
+                this.vy = Math.random() * 2 - 1;
             }
-
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
-
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -1989,16 +1830,12 @@
 
         function animate() {
             if (!isAnimating) return;
-            
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             particles.forEach(particle => {
                 particle.update();
                 particle.draw();
             });
-            
             connectParticles();
-            
             animationId = requestAnimationFrame(animate);
         }
 
@@ -2006,17 +1843,13 @@
             if (animationId) {
                 cancelAnimationFrame(animationId);
             }
-
             canvas.width = accueilSection.offsetWidth;
             canvas.height = accueilSection.offsetHeight;
-
             particles = [];
             const particleCount = window.innerWidth < 768 ? 40 : 80;
-
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
-
             isAnimating = true;
             animate();
         }
@@ -2049,47 +1882,127 @@
             }, 100);
         });
 
-        // Debounced resize handler
-        let resizeTimeout;
         window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                if (isAnimating) initParticles();
-            }, 250);
+            initParticles();
         });
 
-        // Mobile Navigation
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
 
-        mobileMenu.addEventListener('click', function() {
-            const isActive = mobileMenu.classList.toggle('active');
+        // Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            mobileMenu.setAttribute('aria-expanded', isActive);
-            document.body.style.overflow = isActive ? 'hidden' : '';
+            menuToggle.classList.toggle('active');
+            const isExpanded = menuToggle.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
         });
 
-        // Smooth Scroll Navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Close menu on link click for mobile
+                if (window.innerWidth <= 950) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // CV Modal Logic
+        const cvModal = document.getElementById('cvModal');
+        const openCVModalBtn = document.getElementById('openCVModal');
+        const closeCVBtn = document.getElementById('closeCV');
+        // Get the download button from INSIDE the modal
+        const downloadCVFromModalBtn = document.getElementById('downloadCVFromModal');
+
+        if (openCVModalBtn && cvModal && closeCVBtn && downloadCVFromModalBtn) {
+            openCVModalBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    if (window.innerWidth <= 950) {
-                        mobileMenu.classList.remove('active');
-                        navMenu.classList.remove('active');
-                        mobileMenu.setAttribute('aria-expanded', 'false');
+                cvModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeCVBtn.addEventListener('click', () => {
+                cvModal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            cvModal.addEventListener('click', (e) => {
+                if (e.target === cvModal) {
+                    cvModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Keyboard Accessibility for CV Modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (cvModal.classList.contains('active')) {
+                        cvModal.classList.remove('active');
                         document.body.style.overflow = '';
                     }
                 }
             });
-        });
+        }
+
+
+        // CV Download Function - MODIFIÉ POUR LE TÉLÉCHARGEMENT DIRECT
+        const downloadCVBtn = document.getElementById('downloadCV'); // Bouton dans la navbar
+
+        // Chemin du fichier CV (défini selon votre demande)
+        const cvFilePath = 'CV_HOFFMANN_Alann.pdf'; 
+
+        const handleDownload = (e) => {
+            e.preventDefault();
+            
+            // Créer un élément <a> temporaire
+            const link = document.createElement('a');
+            link.href = cvFilePath; 
+            
+            // Définir le nom de fichier pour le téléchargement
+            link.download = 'CV_HOFFMANN_Alann.pdf'; 
+            
+            // Déclencher le clic
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Fermer la modale du CV si elle est ouverte (pour une meilleure UX)
+            if (cvModal && cvModal.classList.contains('active')) {
+                cvModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        };
+        
+        // Attacher la fonction de téléchargement aux deux boutons
+        if(downloadCVBtn) downloadCVBtn.addEventListener('click', handleDownload);
+        if(downloadCVFromModalBtn) downloadCVFromModalBtn.addEventListener('click', handleDownload);
+
+
+        // Progress Bar Animation (Skills)
+        const skillProgresses = document.querySelectorAll('.skill-progress');
+        const skillSection = document.getElementById('competences');
+
+        const animateSkills = () => {
+            skillProgresses.forEach(progress => {
+                const percentage = progress.getAttribute('data-progress');
+                progress.style.width = percentage + '%';
+            });
+        };
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkills();
+                    skillObserver.unobserve(skillSection); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.2 });
+
+        if (skillSection) {
+            skillObserver.observe(skillSection);
+        }
 
         // Active Section Highlighting with Throttle
         let ticking = false;
@@ -2103,7 +2016,7 @@
                             current = section.getAttribute('id');
                         }
                     });
-                    
+
                     document.querySelectorAll('nav a').forEach(link => {
                         link.classList.remove('active');
                         if (link.getAttribute('href') === '#' + current) {
@@ -2140,82 +2053,27 @@
                     b.classList.remove('active');
                     b.setAttribute('aria-pressed', 'false');
                 });
+
                 btn.classList.add('active');
                 btn.setAttribute('aria-pressed', 'true');
-                
                 const filter = btn.getAttribute('data-filter');
+
                 projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
                         card.classList.remove('hidden');
+                        card.style.display = 'flex'; // Use flex for better alignment
+                        setTimeout(() => card.style.opacity = 1, 10);
                     } else {
-                        card.classList.add('hidden');
+                        card.style.opacity = 0;
+                        setTimeout(() => card.classList.add('hidden'), 300); // Hide after fade out
                     }
                 });
             });
         });
 
-        // Skill Progress Animation
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
 
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progressBars = entry.target.querySelectorAll('.skill-progress');
-                    progressBars.forEach(bar => {
-                        const progress = bar.getAttribute('data-progress');
-                        bar.style.width = progress + '%';
-                    });
-                    skillObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.skill-category').forEach(category => {
-            skillObserver.observe(category);
-        });
-
-        // CV Modal
-        const cvModal = document.getElementById('cvModal');
-        const viewCVBtn = document.getElementById('viewCV');
-        const closeCVBtn = document.getElementById('closeCV');
-
-        viewCVBtn.addEventListener('click', () => {
-            cvModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeCVBtn.addEventListener('click', () => {
-            cvModal.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        cvModal.addEventListener('click', (e) => {
-            if (e.target === cvModal) {
-                cvModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Keyboard Accessibility for Modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && cvModal.classList.contains('active')) {
-                cvModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // CV Download Function
-        const downloadCVBtn = document.getElementById('downloadCV');
-
-        downloadCVBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Fonction de téléchargement du CV - À implémenter');
-        });
-
-        // BTS Modal
+        // BTS SIO Modal Logic
         const btsModal = document.getElementById('btsModal');
         const openBTSModalBtn = document.getElementById('openBTSModal');
         const closeBTSModalBtn = document.getElementById('closeBTSModal');
