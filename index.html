@@ -348,6 +348,31 @@
             line-height: 1.7;
         }
 
+        .learn-more-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .learn-more-link::after {
+            content: '→';
+            margin-left: 5px;
+            transition: var(--transition-fast);
+        }
+
+        .learn-more-link:hover {
+            color: var(--accent-hover);
+        }
+
+        .learn-more-link:hover::after {
+            margin-left: 10px;
+        }
+
         .about-icon {
             font-size: 3em;
             margin-bottom: 15px;
@@ -892,6 +917,168 @@
             text-decoration: underline;
         }
 
+        /* BTS SIO MODAL */
+        .bts-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bts-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .bts-modal-content {
+            background: var(--bg-white);
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.4s ease-out;
+            position: relative;
+        }
+
+        .bts-modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+            border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        }
+
+        .bts-modal-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .bts-modal-header p {
+            opacity: 0.9;
+            font-size: 1.05em;
+        }
+
+        .close-bts-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8em;
+            color: white;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: var(--transition-fast);
+            border: none;
+        }
+
+        .close-bts-modal:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+
+        .bts-modal-body {
+            padding: 40px;
+        }
+
+        .bts-section {
+            margin-bottom: 35px;
+        }
+
+        .bts-section h3 {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-light);
+            font-weight: 600;
+        }
+
+        .bts-section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .bts-section ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .bts-section li {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .bts-section li strong {
+            color: var(--accent-color);
+        }
+
+        .option-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .option-card {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .option-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .option-card h4 {
+            color: var(--accent-color);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .option-card.sisr {
+            border-left-color: #27ae60;
+        }
+
+        .option-card.sisr h4 {
+            color: #27ae60;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
         /* BACK TO TOP */
         #backToTop {
             position: fixed;
@@ -1140,6 +1327,7 @@
                     <div class="about-icon" aria-hidden="true">🎓</div>
                     <h3>Formation</h3>
                     <p>Actuellement en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux) en alternance chez Viessmann à Faulquemont. BAC MEI et CAP Électricien.</p>
+                    <a href="javascript:void(0);" class="learn-more-link" id="openBTSModal">Voir plus</a>
                 </div>
                 <div class="about-card">
                     <div class="about-icon" aria-hidden="true">💼</div>
@@ -1569,7 +1757,7 @@
                 <div class="cv-section">
                     <h3>Informations Personnelles</h3>
                     <p><strong>Adresse :</strong> 4 impasse des primevères, 57320 Brettnach</p>
-                    <p><strong>Email :</strong> <a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
+                    <p><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection#bfded3ded1d1d7d0d9d9d2ded1d18789ffd8d2ded6d391dcd0d2"><span class="__cf_email__" data-cfemail="23424f424d4d4b4c45454e424d4d1b1563444e424a4f0d404c4e">[email&#160;protected]</span></a></p>
                     <p><strong>Téléphone :</strong> <a href="tel:0646530962">06 46 53 09 62</a></p>
                     <p><strong>Date de naissance :</strong> 16/09/2001</p>
                     <p><strong>Permis :</strong> Permis B + Véhicule</p>
@@ -1644,7 +1832,7 @@
             <div class="contact-grid">
                 <div class="contact-card">
                     <h3>Email</h3>
-                    <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#ddbcb1bcb3b3b5b2bbbbb0bcb3b3e5eb9dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="d8b9b4b9b6b6b0b7bebeb5b9b6b6e0ee98bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></p>
                 </div>
                 <div class="contact-card">
                     <h3>Téléphone</h3>
@@ -1664,15 +1852,91 @@
 
     <button id="backToTop" aria-label="Retour en haut">↑</button>
     
+    <!-- BTS SIO Modal -->
+    <div id="btsModal" class="bts-modal" role="dialog" aria-labelledby="btsTitle" aria-modal="true">
+        <div class="bts-modal-content">
+            <div class="bts-modal-header">
+                <button class="close-bts-modal" id="closeBTSModal" aria-label="Fermer">&times;</button>
+                <h2 id="btsTitle">BTS SIO - Services Informatiques aux Organisations</h2>
+                <p>Tout savoir sur ma formation</p>
+            </div>
+            <div class="bts-modal-body">
+                <div class="bts-section">
+                    <h3>Qu'est-ce que le BTS SIO ?</h3>
+                    <p>Le BTS SIO (Services Informatiques aux Organisations) est un diplôme de niveau Bac+2 qui forme des techniciens capables de gérer et de maintenir des infrastructures informatiques au sein d'une organisation.</p>
+                    <p>Cette formation s'adresse aux passionnés d'informatique souhaitant développer des compétences techniques solides dans un environnement professionnel. Le BTS SIO se déroule sur 2 ans et peut être réalisé en formation initiale ou en alternance.</p>
+                </div>
+
+                <div class="bts-section">
+                    <h3>Les deux options : SLAM vs SISR</h3>
+                    <p>Le BTS SIO se décline en deux spécialisations distinctes, chacune ciblant un domaine précis de l'informatique :</p>
+                    
+                    <div class="option-comparison">
+                        <div class="option-card">
+                            <h4>SLAM</h4>
+                            <p><strong>Solutions Logicielles et Applications Métiers</strong></p>
+                            <p>Cette option est orientée vers le développement d'applications, la programmation et la création de solutions logicielles adaptées aux besoins des entreprises.</p>
+                            <ul>
+                                <li>Développement d'applications web et mobiles</li>
+                                <li>Programmation (Java, Python, PHP, etc.)</li>
+                                <li>Gestion de bases de données</li>
+                                <li>Conception et maintenance d'applications</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="option-card sisr">
+                            <h4>SISR</h4>
+                            <p><strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong></p>
+                            <p>Cette option se concentre sur l'administration des systèmes, la gestion des réseaux et la sécurité des infrastructures informatiques.</p>
+                            <ul>
+                                <li>Administration de serveurs (Windows Server, Linux)</li>
+                                <li>Configuration et gestion de réseaux</li>
+                                <li>Virtualisation et cloud computing</li>
+                                <li>Sécurité informatique et maintenance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bts-section">
+                    <h3>Pourquoi j'ai choisi SISR</h3>
+                    <div class="highlight-box">
+                        <p>🔧 J'ai choisi l'option SISR car j'ai toujours été passionné par le côté matériel et infrastructure de l'informatique.</p>
+                    </div>
+                    <p>Ce qui m'attire particulièrement dans SISR, c'est la possibilité de travailler concrètement avec le hardware et les réseaux. J'apprécie comprendre comment les systèmes communiquent entre eux, comment optimiser les performances d'une infrastructure, et résoudre les problèmes techniques au niveau matériel.</p>
+                    <p>L'aspect pratique et tangible de l'administration système et réseau correspond parfaitement à mon profil. Avec mon parcours en maintenance industrielle (BAC MEI) et en électricité (CAP Électricien), la transition vers l'infrastructure informatique était une évolution naturelle qui combine mes compétences techniques antérieures avec ma passion pour l'informatique.</p>
+                    <p>En SISR, je développe des compétences en :</p>
+                    <ul>
+                        <li><strong>Administration système :</strong> Gestion de serveurs Windows et Linux, Active Directory, GPO</li>
+                        <li><strong>Réseaux :</strong> Configuration de routeurs et switchs, protocoles TCP/IP, VPN</li>
+                        <li><strong>Virtualisation :</strong> VMware, Hyper-V, conteneurisation avec Docker</li>
+                        <li><strong>Sécurité :</strong> Pare-feu, antivirus, sauvegardes, monitoring</li>
+                        <li><strong>Support technique :</strong> Dépannage, maintenance préventive et corrective</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2025 HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Optimized Particle Animation with Performance Improvements
         const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d', { alpha: true });
+        const ctx = canvas ? canvas.getContext('2d', { alpha: true }) : null;
         const accueilSection = document.getElementById('accueil');
+
+        console.log('Éléments trouvés:', {
+            canvas: !!canvas,
+            ctx: !!ctx,
+            accueilSection: !!accueilSection
+        });
+
+        if (!canvas || !ctx || !accueilSection) {
+            console.error('Éléments manquants pour les particules');
+        }
 
         let particles = [];
         let animationId;
@@ -1778,7 +2042,11 @@
         observer.observe(accueilSection);
 
         window.addEventListener('load', () => {
-            setTimeout(initParticles, 100);
+            console.log('Page chargée, initialisation des particules...');
+            setTimeout(() => {
+                initParticles();
+                console.log('Particules initialisées:', particles.length, 'particules');
+            }, 100);
         });
 
         // Debounced resize handler
@@ -1942,16 +2210,51 @@
         // CV Download Function
         const downloadCVBtn = document.getElementById('downloadCV');
 
-        downloadCVBtn.addEventListener('click', () => {
-            // Créer un lien de téléchargement pour le PDF
-            const a = document.createElement('a');
-            a.href = 'CV_HOFFMANN_Alann.pdf';
-            a.download = 'CV_HOFFMANN_Alann.pdf';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+        downloadCVBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Fonction de téléchargement du CV - À implémenter');
         });
+
+        // BTS Modal
+        const btsModal = document.getElementById('btsModal');
+        const openBTSModalBtn = document.getElementById('openBTSModal');
+        const closeBTSModalBtn = document.getElementById('closeBTSModal');
+
+        if (openBTSModalBtn && btsModal && closeBTSModalBtn) {
+            openBTSModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                btsModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeBTSModalBtn.addEventListener('click', () => {
+                btsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            btsModal.addEventListener('click', (e) => {
+                if (e.target === btsModal) {
+                    btsModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Keyboard Accessibility for BTS Modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (btsModal.classList.contains('active')) {
+                        btsModal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        } else {
+            console.error('Éléments BTS modal non trouvés:', {
+                btsModal: !!btsModal,
+                openBTSModalBtn: !!openBTSModalBtn,
+                closeBTSModalBtn: !!closeBTSModalBtn
+            });
+        }
     </script>
 </body>
 </html>
