@@ -770,118 +770,6 @@
         }
 
         /* CV MODAL */
-        .cv-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            animation: fadeIn 0.3s ease-out;
-            backdrop-filter: blur(5px);
-        }
-
-        .cv-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cv-content {
-            background: var(--bg-white);
-            max-width: 900px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-lg);
-            animation: slideUp 0.4s ease-out;
-            position: relative;
-        }
-
-        .cv-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .close-cv {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2em;
-            color: white;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            transition: var(--transition-fast);
-        }
-
-        .close-cv:hover {
-            background: rgba(255,255,255,0.2);
-            transform: rotate(90deg);
-        }
-
-        .cv-body {
-            padding: 40px;
-        }
-
-        .cv-section {
-            margin-bottom: 35px;
-        }
-
-        .cv-section h3 {
-            color: var(--accent-secondary);
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent-light);
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .experience-item {
-            margin-bottom: 25px;
-            padding-left: 20px;
-            border-left: 3px solid var(--accent-light);
-            transition: var(--transition-fast);
-        }
-
-        .experience-item:hover {
-            border-left-color: var(--accent-secondary);
-            padding-left: 25px;
-        }
-
-        .experience-date {
-            color: var(--accent-secondary);
-            font-weight: 600;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .experience-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: var(--text-dark);
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 5px;
-        }
-
-        .experience-company {
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            font-style: italic;
-        }
-
         /* CONTACT */
         #contact {
             background: var(--bg-white);
@@ -1762,89 +1650,6 @@
         </div>
     </section>
 
-    <div id="cvModal" class="cv-modal" role="dialog" aria-labelledby="cvTitle" aria-modal="true">
-        <div class="cv-content">
-            <div class="cv-header">
-                <button class="close-cv" id="closeCV" aria-label="Fermer le CV">&times;</button>
-                <h2 id="cvTitle">Curriculum Vitae</h2>
-                <h3>HOFFMANN Alann</h3>
-                <p>Technicien Informatique en Contrat d'Apprentissage</p>
-                <div style="margin-top: 20px;">
-                    <a href="CV_HOFFMANN_Alann.pdf" download="CV_HOFFMANN_Alann.pdf" class="btn">📥 Télécharger le CV</a>
-                </div>
-            </div>
-            <div class="cv-body">
-                <div class="cv-section">
-                    <h3>Informations Personnelles</h3>
-                    <p><strong>Adresse :</strong> 4 impasse des primevères, 57320 Brettnach</p>
-                    <p><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection#23424f424d4d4b4c45454e424d4d1b1563444e424a4f0d404c4e"><span class="__cf_email__" data-cfemail="3f5e535e515157505959525e515107097f58525e5653115c5052">[email&#160;protected]</span></a></p>
-                    <p><strong>Téléphone :</strong> <a href="tel:0646530962">06 46 53 09 62</a></p>
-                    <p><strong>Date de naissance :</strong> 16/09/2001</p>
-                    <p><strong>Permis :</strong> Permis B + Véhicule</p>
-                    <p><strong>Loisirs :</strong> Lecture, cinéma</p>
-                </div>
-
-                <div class="cv-section">
-                    <h3>Expérience Professionnelle</h3>
-                    <div class="experience-item">
-                        <div class="experience-date">2025 - 2027</div>
-                        <div class="experience-title">Apprenti Technicien Informatique</div>
-                        <div class="experience-company">Viessmann - Faulquemont (Alternance BTS SIO SISR)</div>
-                        <p>Formation en alternance en administration système, réseaux et maintenance informatique. Installation et intégration de matériel, planification de maintenance, gestion de stocks.</p>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">Janvier 2025</div>
-                        <div class="experience-title">Stage découverte du métier de technicien informatique</div>
-                        <div class="experience-company">SIE Metz</div>
-                        <p>Stage d'immersion pour découvrir le métier de technicien informatique et ses différentes facettes.</p>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">Octobre 2024 - Décembre 2024</div>
-                        <div class="experience-title">Travail sur mon projet professionnel de technicien informatique</div>
-                        <div class="experience-company">Activ'projet Envergure Boulay</div>
-                        <p>Accompagnement dans la construction du projet professionnel et préparation de la reconversion en informatique.</p>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">Novembre 2021 - Août 2024</div>
-                        <div class="experience-title">Technicien d'exploitation</div>
-                        <div class="experience-company">Idex Energie - Ennery</div>
-                        <p>Gestion de secteur, dépannage, contrôle et maintenance des équipements énergétiques.</p>
-                    </div>
-                </div>
-
-                <div class="cv-section">
-                    <h3>Formation</h3>
-                    <div class="experience-item">
-                        <div class="experience-date">2025 - 2027</div>
-                        <div class="experience-title">BTS SIO Option SISR</div>
-                        <div class="experience-company">Viessmann - Faulquemont (en alternance)</div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">2018 - 2020</div>
-                        <div class="experience-title">BAC Professionnel MEI</div>
-                        <div class="experience-company">Maintenance des Équipements Industriels - Lycée inter entreprise Boulay</div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-date">2016 - 2018</div>
-                        <div class="experience-title">CAP Électricien</div>
-                        <div class="experience-company">Lycée inter entreprise Boulay</div>
-                    </div>
-                </div>
-
-                <div class="cv-section">
-                    <h3>Compétences Principales</h3>
-                    <ul>
-                        <li>Travail en autonomie</li>
-                        <li>Communiquer auprès des clients</li>
-                        <li>Installer et intégrer le matériel (station, équipement réseau...)</li>
-                        <li>Planifier des opérations de maintenance</li>
-                        <li>Gestion des stocks</li>
-                        <li>Structurer et synthétiser les données</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <section id="contact">
         <div class="container">
@@ -1941,7 +1746,7 @@
         <p>&copy; 2025 HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Optimized Particle Animation with Performance Improvements
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas ? canvas.getContext('2d', { alpha: true }) : null;
@@ -2196,34 +2001,11 @@
             skillObserver.observe(category);
         });
 
-        // CV Modal
-        const cvModal = document.getElementById('cvModal');
+        // CV Button - Opens cv.html in new tab
         const viewCVBtn = document.getElementById('viewCV');
-        const closeCVBtn = document.getElementById('closeCV');
 
         viewCVBtn.addEventListener('click', () => {
-            cvModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeCVBtn.addEventListener('click', () => {
-            cvModal.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        cvModal.addEventListener('click', (e) => {
-            if (e.target === cvModal) {
-                cvModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Keyboard Accessibility for Modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && cvModal.classList.contains('active')) {
-                cvModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            window.open('cv.html', '_blank');
         });
 
         // BTS Modal
