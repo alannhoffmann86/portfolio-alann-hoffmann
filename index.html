@@ -204,7 +204,6 @@
         }
 
         .hero-content .badge,
-        .hero-content h1,
         .hero-content h2,
         .hero-content p,
         .hero-content .btn {
@@ -217,17 +216,30 @@
             font-weight: 700;
             font-family: 'Poppins', sans-serif;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+
+        .hero-content h1 .letter {
+            display: inline-block;
+            opacity: 0;
+            cursor: default;
+        }
+
+        .hero-content h1 .space {
+            display: inline-block;
+            width: 0.3em;
         }
 
         .hero-content .badge {
-            display: inline-block;
+            display: block;
+            width: fit-content;
+            margin: 0 auto 25px auto;
             background: var(--accent-secondary);
             color: white;
             padding: 8px 24px;
             border-radius: 24px;
             font-weight: 600;
             font-size: 0.95em;
-            margin-bottom: 25px;
             box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
             transition: var(--transition);
         }
@@ -1659,7 +1671,11 @@
         <canvas id="particleCanvas" aria-hidden="true"></canvas>
         <div class="hero-content">
             <div class="badge">BTS SIO SISR en Alternance</div>
-            <h1>HOFFMANN Alann</h1>
+            <h1 id="animated-name">
+                <span class="letter">H</span><span class="letter">O</span><span class="letter">F</span><span class="letter">F</span><span class="letter">M</span><span class="letter">A</span><span class="letter">N</span><span class="letter">N</span>
+                <span class="space"> </span>
+                <span class="letter">A</span><span class="letter">l</span><span class="letter">a</span><span class="letter">n</span><span class="letter">n</span>
+            </h1>
             <h2>Technicien Informatique en Contrat d'Apprentissage</h2>
             <p>Doté d'un bon sens du relationnel et d'un bon contact client et ayant une appétence particulière pour le domaine de l'informatique, je souhaite donner un nouveau tournant à ma carrière professionnelle en me formant et en travaillant en tant que technicien de maintenance. Motivé et volontaire, j'ai pu découvrir ce métier lors d'un stage en entreprise.</p>
             <div>
@@ -2098,7 +2114,7 @@
             <div class="contact-grid">
                 <div class="contact-card">
                     <h3>Email</h3>
-                    <p><a href="mailto:alann.music@gmail.com">alann.music@gmail.com</a></p>
+                    <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
                 </div>
                 <div class="contact-card">
                     <h3>Téléphone</h3>
@@ -2210,7 +2226,7 @@
                                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                                     </svg>
-                                    <span><a href="mailto:alann.music@gmail.com">alann.music@gmail.com</a></span>
+                                    <span><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></span>
                                 </div>
                                 
                                 <div class="contact-item">
@@ -2384,7 +2400,7 @@
         <p>&copy; 2025 HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ==========================================
         // PARTICLES CANVAS
         // ==========================================
@@ -2934,17 +2950,97 @@
                 }
             });
         }, { threshold: 0.1 });
+        
+        if (accueilSection) particleObserver.observe(accueilSection);
 
-        particleObserver.observe(accueilSection);
+        // ============================
+        // ANIME.JS - ANIMATION NOM
+        // ============================
 
-        // Resize handler
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                if (isAnimating) initParticles();
-            }, 250);
+        // Animation des lettres du nom avec effet spectaculaire
+        anime.timeline({loop: false})
+            .add({
+                targets: '#animated-name .letter',
+                scale: [4, 1],
+                opacity: [0, 1],
+                translateZ: 0,
+                easing: "easeOutExpo",
+                duration: 950,
+                delay: (el, i) => 70 * i
+            })
+            .add({
+                targets: '#animated-name .letter',
+                rotateY: [-90, 0],
+                duration: 1300,
+                delay: (el, i) => 50 * i
+            }, '-=800')
+            .add({
+                targets: '#animated-name .letter',
+                translateY: [
+                    {value: -40, duration: 500, easing: 'easeOutExpo'},
+                    {value: 0, duration: 500, easing: 'easeOutBounce'}
+                ],
+                delay: (el, i) => 100 * i
+            }, '-=1000');
+
+        // Animation continue de brillance sur les lettres
+        anime({
+            targets: '#animated-name .letter',
+            textShadow: [
+                '2px 2px 8px rgba(0,0,0,0.2)',
+                '2px 2px 20px rgba(100, 255, 218, 0.6)',
+                '2px 2px 8px rgba(0,0,0,0.2)'
+            ],
+            duration: 3000,
+            loop: true,
+            delay: anime.stagger(200),
+            easing: 'easeInOutSine'
         });
+
+        // Effet de hover sur chaque lettre
+        document.querySelectorAll('#animated-name .letter').forEach((letter, index) => {
+            letter.addEventListener('mouseenter', function() {
+                anime({
+                    targets: this,
+                    scale: 1.3,
+                    color: '#64FFDA',
+                    translateY: -20,
+                    rotate: anime.random(-15, 15),
+                    duration: 300,
+                    easing: 'easeOutElastic(1, .6)'
+                });
+            });
+
+            letter.addEventListener('mouseleave', function() {
+                anime({
+                    targets: this,
+                    scale: 1,
+                    color: '#ffffff',
+                    translateY: 0,
+                    rotate: 0,
+                    duration: 300,
+                    easing: 'easeOutElastic(1, .6)'
+                });
+            });
+        });
+
+        // Animation de vague aléatoire toutes les 8 secondes
+        setInterval(() => {
+            anime({
+                targets: '#animated-name .letter',
+                translateY: [
+                    {value: -20, duration: 400, easing: 'easeOutQuad'},
+                    {value: 0, duration: 400, easing: 'easeInQuad'}
+                ],
+                scale: [
+                    {value: 1.2, duration: 400, easing: 'easeOutQuad'},
+                    {value: 1, duration: 400, easing: 'easeInQuad'}
+                ],
+                delay: anime.stagger(80, {direction: 'reverse'}),
+                loop: false
+            });
+        }, 8000);
+
     </script>
 </body>
 </html>
