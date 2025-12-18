@@ -223,6 +223,7 @@
             display: inline-block;
             opacity: 0;
             cursor: default;
+            transform: scale(1);
         }
 
         .hero-content h1 .space {
@@ -2114,7 +2115,7 @@
             <div class="contact-grid">
                 <div class="contact-card">
                     <h3>Email</h3>
-                    <p><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#39585558575751565f5f54585757010f795e54585055175a5654"><span class="__cf_email__" data-cfemail="6f0e030e010107000909020e010157592f08020e0603410c0002">[email&#160;protected]</span></a></p>
                 </div>
                 <div class="contact-card">
                     <h3>Téléphone</h3>
@@ -2226,7 +2227,7 @@
                                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                                     </svg>
-                                    <span><a href="mailto:alannhoffmann86@gmail.com">alannhoffmann86@gmail.com</a></span>
+                                    <span><a href="/cdn-cgi/l/email-protection#49282528272721262f2f24282727717f092e24282025672a2624"><span class="__cf_email__" data-cfemail="21404d404f4f494e47474c404f4f191761464c40484d0f424e4c">[email&#160;protected]</span></a></span>
                                 </div>
                                 
                                 <div class="contact-item">
@@ -2400,7 +2401,7 @@
         <p>&copy; 2025 HOFFMANN Alann - Technicien Infrastructure & Réseaux | BTS SIO SISR</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ==========================================
         // PARTICLES CANVAS
         // ==========================================
@@ -2958,30 +2959,39 @@
         // ============================
 
         // Animation des lettres du nom avec effet spectaculaire
-        anime.timeline({loop: false})
+        const nameTimeline = anime.timeline({loop: false});
+        
+        nameTimeline
             .add({
                 targets: '#animated-name .letter',
-                scale: [4, 1],
+                scale: [0, 1],
                 opacity: [0, 1],
                 translateZ: 0,
                 easing: "easeOutExpo",
-                duration: 950,
-                delay: (el, i) => 70 * i
+                duration: 800,
+                delay: (el, i) => 60 * i
             })
             .add({
                 targets: '#animated-name .letter',
                 rotateY: [-90, 0],
-                duration: 1300,
-                delay: (el, i) => 50 * i
-            }, '-=800')
+                duration: 1000,
+                delay: (el, i) => 40 * i
+            }, '-=600')
             .add({
                 targets: '#animated-name .letter',
                 translateY: [
-                    {value: -40, duration: 500, easing: 'easeOutExpo'},
-                    {value: 0, duration: 500, easing: 'easeOutBounce'}
+                    {value: -30, duration: 400, easing: 'easeOutExpo'},
+                    {value: 0, duration: 400, easing: 'easeOutBounce'}
                 ],
-                delay: (el, i) => 100 * i
-            }, '-=1000');
+                delay: (el, i) => 80 * i,
+                complete: function() {
+                    // Forcer les valeurs finales à rester appliquées
+                    document.querySelectorAll('#animated-name .letter').forEach(letter => {
+                        letter.style.transform = 'scale(1) translateY(0) rotateY(0)';
+                        letter.style.opacity = '1';
+                    });
+                }
+            }, '-=800');
 
         // Animation continue de brillance sur les lettres
         anime({
@@ -3018,8 +3028,12 @@
                     color: '#ffffff',
                     translateY: 0,
                     rotate: 0,
+                    rotateY: 0,
                     duration: 300,
-                    easing: 'easeOutElastic(1, .6)'
+                    easing: 'easeOutElastic(1, .6)',
+                    complete: () => {
+                        this.style.transform = 'scale(1) translateY(0) rotateY(0) rotate(0)';
+                    }
                 });
             });
         });
@@ -3032,15 +3046,48 @@
                     {value: -20, duration: 400, easing: 'easeOutQuad'},
                     {value: 0, duration: 400, easing: 'easeInQuad'}
                 ],
-                scale: [
-                    {value: 1.2, duration: 400, easing: 'easeOutQuad'},
-                    {value: 1, duration: 400, easing: 'easeInQuad'}
-                ],
-                delay: anime.stagger(80, {direction: 'reverse'}),
-                loop: false
+                delay: (el, i) => anime.random(0, 200)
             });
         }, 8000);
 
+        // Animation après chargement des autres éléments
+        setTimeout(() => {
+            anime({
+                targets: '.hero-content .badge',
+                opacity: [0, 1],
+                translateY: [-20, 0],
+                duration: 600,
+                easing: 'easeOutCubic'
+            });
+            
+            anime({
+                targets: '.hero-content h2',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 600,
+                delay: 200,
+                easing: 'easeOutCubic'
+            });
+            
+            anime({
+                targets: '.hero-content p',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 600,
+                delay: 400,
+                easing: 'easeOutCubic'
+            });
+            
+            anime({
+                targets: '.hero-content .btn',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                scale: [0.9, 1],
+                duration: 600,
+                delay: anime.stagger(100, {start: 600}),
+                easing: 'easeOutCubic'
+            });
+        }, 100);
     </script>
 </body>
 </html>
