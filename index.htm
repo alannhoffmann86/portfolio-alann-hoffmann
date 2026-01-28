@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio HOFFMANN Alann - Technicien Système & Réseaux (SISR)">
+    <meta name="author" content="HOFFMANN Alann">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfolio Alann HOFFMANN | Expert SISR">
+    <meta property="og:description" content="Technicien Système & Réseaux. Découvrez mes projets Infrastructure, Cisco et Linux.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/0a0a0a/00ff41?text=PORTFOLIO+SISR+ACCESS">
+    <meta property="og:url" content="https://ton-site-web.github.io"> 
+    
+    <title>Portfolio de Alann HOFFMANN | SISR</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2300ff41%22>_&gt;</text></svg>">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CONFIGURATION STYLE TERMINAL / MATRIX --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --bg-card: rgba(20, 20, 20, 0.85);
+            --primary-color: #00ff41;
+            --secondary-color: #008f11;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            
+            /* COULEUR CYBER LINKEDIN */
+            --linkedin-color: #00a0dc;
+            
+            --font-main: 'Fira Code', 'Courier New', monospace; 
+            
+            --nav-height: 70px;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* RESET & BASICS */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* --- EFFETS VISUELS (SCANLINES & MATRIX) --- */
+        #matrix-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.15;
+            display: block;
+        }
+
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none; z-index: 9999;
+        }
+
+        /* TITRES & TEXTES */
+        h1, h2, h3, h4, .nav-logo, .btn, .timeline-date, .skill-header {
+            font-family: var(--font-main);
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* EFFET GLITCH */
+        .glitch { position: relative; color: var(--primary-color); }
+        .glitch::before, .glitch::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; background: var(--bg-color);
+        }
+        .glitch::before {
+            left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 30px, 0); }
+            20% { clip: rect(80px, 9999px, 100px, 0); }
+            40% { clip: rect(20px, 9999px, 60px, 0); }
+            60% { clip: rect(60px, 9999px, 10px, 0); }
+            80% { clip: rect(50px, 9999px, 90px, 0); }
+            100% { clip: rect(10px, 9999px, 40px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(60px, 9999px, 10px, 0); }
+            20% { clip: rect(10px, 9999px, 30px, 0); }
+            40% { clip: rect(50px, 9999px, 90px, 0); }
+            60% { clip: rect(20px, 9999px, 60px, 0); }
+            80% { clip: rect(60px, 9999px, 10px, 0); }
+            100% { clip: rect(10px, 9999px, 40px, 0); }
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+        ::selection { background: var(--primary-color); color: #000; }
+
+        /* BARRE PROGRESSION */
+        #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 2001; background: transparent; }
+        #progress-bar { height: 100%; background: var(--primary-color); width: 0%; box-shadow: 0 0 10px var(--primary-color); }
+
+        /* NAVIGATION */
+        nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(5px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            height: var(--nav-height); border-bottom: 1px solid var(--secondary-color);
+            display: flex; align-items: center; transition: top 0.3s;
+        }
+        .nav-container {
+            width: 100%; max-width: 1300px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 25px;
+        }
+        .nav-logo { font-weight: 700; font-size: 1rem; color: var(--primary-color); text-decoration: none; text-shadow: 0 0 5px var(--primary-color); }
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links li a {
+            color: var(--text-color); text-decoration: none; font-size: 0.85rem;
+            transition: var(--transition); display: flex; align-items: center; cursor: pointer;
+            position: relative;
+        }
+        .nav-links li a:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-color); }
+        
+        /* POINT 4 : Style du lien actif */
+        .nav-links li a.active {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .nav-links li a .num { color: var(--primary-color); margin-right: 5px; font-size: 0.8rem; }
+        
+        .menu-toggle { display: none; color: var(--primary-color); font-size: 1.8rem; cursor: pointer; background: none; border: none; }
+
+        /* HERO SECTION */
+        #accueil {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 20px; position: relative; overflow: hidden;
+        }
+
+        .hero-content { max-width: 900px; z-index: 1; text-align: left; background: rgba(10,10,10,0.6); padding: 20px; border-left: 2px solid var(--primary-color); }
+        .hero-pre { color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 10px; }
+        .hero-title {
+            font-size: clamp(40px, 8vw, 80px); font-weight: 800; color: var(--primary-color); line-height: 1.1; margin-bottom: 10px;
+        }
+        .hero-subtitle {
+            font-size: clamp(18px, 5vw, 40px); font-weight: 700; color: var(--text-color); line-height: 1.2; margin-bottom: 30px;
+        }
+        #typewriter { border-right: 2px solid var(--primary-color); animation: blink 0.75s step-end infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero-desc { max-width: 600px; font-size: 1rem; color: var(--text-muted); margin-bottom: 40px; }
+        
+        /* BOUTONS PAR DEFAUT */
+        .btn {
+            color: var(--primary-color); background: transparent;
+            border: 1px solid var(--primary-color); border-radius: 0;
+            padding: 1rem 1.5rem; font-size: 0.9rem; text-decoration: none;
+            cursor: pointer; transition: var(--transition); display: inline-block; 
+            margin: 5px;
+        }
+        .btn:hover { 
+            background: var(--primary-color); color: #000; 
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        /* --- STYLE SPECIFIQUE LINKEDIN --- */
+        .btn-linkedin {
+            color: var(--linkedin-color);
+            border-color: var(--linkedin-color);
+        }
+        
+        .btn-linkedin:hover {
+            background: var(--linkedin-color);
+            color: #fff;
+            box-shadow: 0 0 20px var(--linkedin-color);
+            text-shadow: 0 0 5px #fff;
+            transform: translateY(-2px);
+        }
+        
+        .btn-linkedin i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        /* SECTIONS */
+        section { padding: 100px 0; max-width: 1000px; margin: 0 auto; }
+        .section-header { display: flex; align-items: center; margin-bottom: 40px; }
+        .section-title {
+            font-size: clamp(26px, 5vw, 32px); color: var(--text-color); font-weight: 700; white-space: nowrap; display: flex; align-items: center;
+        }
+        .section-title::before {
+            content: attr(data-num); color: var(--primary-color);
+            font-size: 1.2rem; margin-right: 10px; font-weight: 400;
+        }
+        .section-line { display: block; height: 1px; background: var(--secondary-color); width: 100%; margin-left: 20px; max-width: 300px; }
+
+        /* ABOUT */
+        .about-inner { display: grid; grid-template-columns: 3fr 2fr; gap: 50px; }
+        .about-text p { margin-bottom: 15px; color: var(--text-muted); }
+        .tech-grid { display: grid; grid-template-columns: repeat(2, minmax(140px, 200px)); gap: 10px; margin-top: 20px; }
+        .tech-item { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; }
+        .tech-item i { color: var(--primary-color); margin-right: 8px; font-size: 0.6rem; }
+
+        /* SKILLS */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .skill-card {
+            background: var(--bg-card); padding: 25px; border: 1px solid var(--secondary-color);
+            transition: var(--transition); box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .skill-card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); }
+        .skill-header { color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; font-size: 1.1rem; }
+        .skill-header i { color: var(--primary-color); margin-right: 10px; }
+        .skill-row { margin-bottom: 15px; }
+        .skill-meta { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-muted); }
+        .skill-blocks { letter-spacing: 2px; font-size: 14px; }
+        .block-filled { color: var(--primary-color); text-shadow: 0 0 5px var(--primary-color); }
+        .block-empty { color: #333; }
+
+        /* PROJETS */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .project-card {
+            background: var(--bg-card); padding: 2rem 1.75rem; border: 1px solid var(--secondary-color);
+            transition: var(--transition); display: flex; flex-direction: column;
+            height: 100%; position: relative; overflow: hidden;
+        }
+        .project-card:hover { transform: translateY(-7px); border-color: var(--primary-color); }
+        .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .folder-ico { color: var(--primary-color); font-size: 40px; }
+        .links-ico i { color: var(--text-color); margin-left: 10px; transition: 0.3s; }
+        .links-ico i:hover { color: var(--primary-color); }
+        .project-title { color: var(--text-color); font-size: 1.4rem; margin-bottom: 10px; font-weight: 700; transition: var(--transition); }
+        .project-card:hover .project-title { color: var(--primary-color); }
+        .project-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
+        .project-tech-list { display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.8rem; color: var(--secondary-color); list-style: none; }
+
+        .btn-report {
+            display: block; width: 100%; margin-top: 25px; padding: 12px 0;
+            background: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);
+            text-align: center; font-weight: 600; cursor: pointer;
+            transition: var(--transition); font-family: var(--font-main); font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-report:hover { background: var(--primary-color); color: #000; text-decoration: none; }
+
+        .btn-disabled {
+            display: block; width: 100%; margin-top: 25px; padding: 12px 0;
+            text-align: center; font-weight: 600;
+            font-family: var(--font-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+            opacity: 0.5; cursor: not-allowed; border: 1px dashed var(--text-muted); color: var(--text-muted); background: rgba(255,255,255,0.02);
+        }
+
+        /* TIMELINE */
+        .timeline-container { position: relative; border-left: 2px solid var(--secondary-color); margin-left: 10px; padding-left: 30px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px;
+            border-radius: 50%; background: var(--bg-color); border: 2px solid var(--primary-color);
+            box-shadow: 0 0 5px var(--primary-color);
+        }
+        .timeline-date { color: var(--primary-color); font-size: 0.9rem; margin-bottom: 5px; }
+        .timeline-title { color: var(--text-color); font-size: 1.2rem; margin-bottom: 5px; font-weight: 600; }
+        .timeline-place { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; font-style: italic; }
+        .timeline-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* VEILLE */
+        .veille-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .veille-item {
+            background: var(--bg-card); padding: 20px; text-align: center; text-decoration: none;
+            transition: var(--transition); border: 1px solid var(--secondary-color); display: flex; flex-direction: column; align-items: center;
+        }
+        .veille-item:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: 0 0 10px rgba(0,255,65,0.2); }
+        .veille-icon { font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; }
+        .veille-name { color: var(--text-color); font-weight: 600; margin-bottom: 5px; }
+        .veille-type { color: var(--text-muted); font-size: 0.8rem; }
+
+        /* CONTACT */
+        .contact-section { text-align: center; max-width: 600px; margin: 0 auto 100px; }
+        .contact-title { font-size: 40px; color: var(--text-color); font-weight: 700; margin-bottom: 20px; }
+        .contact-text { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 50px; }
+        
+        /* Conteneur pour aligner les boutons */
+        .contact-buttons {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
+        }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid #111; }
+        footer a { color: var(--text-muted); text-decoration: none; cursor: pointer; }
+        footer a:hover { color: var(--primary-color); }
+
+        /* MODALES */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;
+        }
+        .modal.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: #0f0f0f; width: 90%; max-width: 900px; padding: 40px;
+            border: 1px solid var(--primary-color); position: relative;
+            max-height: 90vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
+        }
+        .close-modal { position: absolute; top: 20px; right: 20px; color: var(--primary-color); font-size: 2rem; cursor: pointer; transition: 0.3s; }
+        .close-modal:hover { transform: rotate(90deg); text-shadow: 0 0 10px var(--primary-color); }
+        .modal-h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.8rem; text-transform: uppercase; }
+        .modal-body { color: var(--text-color); line-height: 1.7; }
+        .modal-body h3 { color: var(--primary-color); margin: 25px 0 15px; font-size: 1.1rem; }
+        .modal-body ul { margin-left: 20px; margin-bottom: 15px; }
+        .modal-body li { margin-bottom: 5px; }
+        
+        .slam-sisr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        .option-box { padding: 25px; background: rgba(255,255,255,0.03); border: 1px solid #333; }
+        .option-box.sisr { border-color: var(--primary-color); background: rgba(0, 255, 65, 0.05); position: relative; }
+        .badge-choice {
+            position: absolute; top: -10px; right: 20px; background: var(--primary-color); color: #000;
+            padding: 2px 10px; font-size: 0.75rem; font-weight: bold; font-family: var(--font-main);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed; top: 0; right: 0; height: 100vh; width: 75%; background: #000;
+                flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%);
+                transition: transform 0.3s ease-in-out; border-left: 1px solid var(--primary-color);
+            }
+            .nav-links.active { transform: translateX(0); }
+            .menu-toggle { display: block; z-index: 2000; }
+            #accueil { padding: 0 25px; align-items: center; text-align: left; }
+            .hero-title { font-size: 45px; }
+            .about-inner { grid-template-columns: 1fr; }
+            .slam-sisr-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    
+    <canvas id="matrix-bg"></canvas>
+    
+    <div class="scanlines"></div>
+
+    <div id="progress-container"><div id="progress-bar"></div></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">root@portfolio:~#</a>
+            
+            <button class="menu-toggle" aria-label="Ouvrir le menu de navigation"><i class="fas fa-bars"></i></button>
+            
+            <ul class="nav-links">
+                <li><a href="#accueil" class="active"><span class="num">01.</span>/ACCUEIL</a></li>
+                <li><a href="#apropos"><span class="num">02.</span>/PROFIL</a></li>
+                <li><a href="#competences"><span class="num">03.</span>/COMPÉTENCES</a></li>
+                <li><a href="#projets"><span class="num">04.</span>/PROJETS</a></li>
+                <li><a href="#parcours"><span class="num">05.</span>/PARCOURS</a></li>
+                <li><a href="#veille"><span class="num">06.</span>/VEILLE TECHNO</a></li>
+                <li><a href="#contact"><span class="num">07.</span>/CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="accueil">
+        <div class="hero-content">
+            <div class="hero-pre">Initialisation du système...</div>
+            <h1 class="hero-title glitch" data-text="HOFFMANN Alann">HOFFMANN Alann</h1>
+            <h2 class="hero-subtitle"><span id="typewriter"></span></h2>
+            <p class="hero-desc">
+                [SISR] Solutions d'Infrastructure, Systèmes et Réseaux.<br>
+                Je construis des infrastructures réseaux sécurisées et performantes.
+            </p>
+            <div style="margin-top: 40px;">
+                <a href="#projets" class="btn">_ACCÉDER AUX DONNÉES</a>
+                <a href="#contact" class="btn">_CONTACTER</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="apropos">
+        <div class="section-header">
+            <h2 class="section-title" data-num="02.">/PROFIL</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="about-inner">
+            <div class="about-text">
+                <p>Bonjour ! Je suis Alann. Mon objectif : concevoir des architectures résilientes.</p>
+                <p>Mon parcours est atypique : j'ai commencé par la maintenance industrielle (BAC Pro MEI & CAP Électricien), ce qui m'a forgé une logique de dépannage "terrain" très solide.</p>
+                <p>J'ai pivoté vers l'IT pour travailler sur des systèmes complexes. Voici ma pile technologique actuelle :</p>
+                <div class="tech-grid">
+                    <span class="tech-item"><i class="fas fa-angle-right"></i> Windows Server / AD</span>
+                    <span class="tech-item"><i class="fas fa-angle-right"></i> Linux (Debian/Ubuntu)</span>
+                    <span class="tech-item"><i class="fas fa-angle-right"></i> VMware ESXi</span>
+                    <span class="tech-item"><i class="fas fa-angle-right"></i> Cisco IOS (VLAN/Routing)</span>
+                    <span class="tech-item"><i class="fas fa-angle-right"></i> PowerShell & Bash</span>
+                    <span class="tech-item"><i class="fas fa-angle-right"></i> PfSense / Pare-feu</span>
+                </div>
+            </div>
+            <div class="about-img">
+                <div style="border: 1px solid var(--primary-color); padding: 20px; text-align: center; position: relative; background: rgba(0,255,65,0.05);">
+                    <i class="fas fa-server" style="font-size: 8rem; color: var(--primary-color); opacity: 0.5;"></i>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-weight: bold; background: #000; padding: 5px;">
+                        &lt;SISR /&gt;
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" id="openBTSModal" style="color: var(--primary-color); text-decoration: none; border-bottom: 1px dashed var(--primary-color);">[INFO_BTS_SIO]</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences">
+        <div class="section-header">
+            <h2 class="section-title" data-num="03.">/COMPÉTENCES</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="skills-container">
+            <div class="skill-card">
+                <div class="skill-header"><i class="fab fa-windows"></i> [SYSTÈME]</div>
+                <div class="skill-list">
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Windows Server / AD</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Linux (Debian)</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮</span><span class="block-empty">▯▯</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Virtualisation</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header"><i class="fas fa-network-wired"></i> [RÉSEAU]</div>
+                <div class="skill-list">
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Switching / VLANs</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Routage / TCP-IP</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮</span><span class="block-empty">▯▯</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Cisco Packet Tracer</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header"><i class="fas fa-terminal"></i> [OUTILS]</div>
+                <div class="skill-list">
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Scripting (Bash/PS)</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮</span><span class="block-empty">▯▯▯</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Git / GitHub</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮</span><span class="block-empty">▯▯▯▯</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projets">
+        <div class="section-header">
+            <h2 class="section-title" data-num="04.">/PROJETS</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="far fa-folder folder-ico"></i>
+                    <div class="links-ico">
+                        <i class="fab fa-linux"></i>
+                    </div>
+                </div>
+                <h3 class="project-title">Serveur Web & Fichiers</h3>
+                <div class="project-desc">
+                    <p>Déploiement complet d'un serveur Linux Ubuntu. Installation d'un serveur Web Nginx avec gestion des Virtual Hosts et mise en place d'un partage de fichiers Samba sécurisé.</p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>> Linux CLI</li>
+                    <li>> Nginx</li>
+                    <li>> Samba</li>
+                </ul>
+                <button onclick="openPDFModal()" class="btn-report">[VOIR LE COMPTE-RENDU]</button>
+            </div>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="far fa-folder folder-ico"></i>
+                    <div class="links-ico">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                </div>
+                <h3 class="project-title">Architecture VLANs</h3>
+                <div class="project-desc">
+                    <p>Conception d'une architecture réseau segmentée sous Cisco Packet Tracer. Création de VLANs (Direction, IT, Compta), routage inter-VLAN et sécurisation des ports.</p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>> Cisco IOS</li>
+                    <li>> VLANs</li>
+                    <li>> Sécurité</li>
+                </ul>
+                <span class="btn-disabled">En Cours...</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="parcours">
+        <div class="section-header">
+            <h2 class="section-title" data-num="05.">/PARCOURS</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-date">2025 - Présent</div>
+                <h3 class="timeline-title">BTS SIO SISR (Alternance)</h3>
+                <p class="timeline-place">Viessmann - Faulquemont</p>
+                <p class="timeline-desc">Technicien support et infrastructure. Gestion de parc, tickets GLPI, projets d'amélioration réseau.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2021 - 2024</div>
+                <h3 class="timeline-title">Technicien d'Exploitation</h3>
+                <p class="timeline-place">Idex Energie</p>
+                <p class="timeline-desc">Maintenance préventive et curative, gestion d'un secteur en autonomie, relation client.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2018 - 2020</div>
+                <h3 class="timeline-title">BAC Pro MEI</h3>
+                <p class="timeline-place">Lycée Inter-Entreprises</p>
+                <p class="timeline-desc">Maintenance des Équipements Industriels. Bases solides en électricité et mécanique.</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="#" onclick="openModal('cvModal'); return false;" class="btn">_TÉLÉCHARGER_CV.PDF</a>
+        </div>
+    </section>
+
+    <section id="veille">
+        <div class="section-header">
+            <h2 class="section-title" data-num="06.">/VEILLE TECHNO</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="veille-grid">
+            <a href="https://www.it-connect.fr/" target="_blank" class="veille-item" aria-label="Visiter IT-Connect">
+                <i class="fas fa-laptop-code veille-icon"></i>
+                <div class="veille-name">IT-Connect</div>
+                <div class="veille-type">Tutoriels SysAdmin</div>
+            </a>
+            <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="veille-item" aria-label="Visiter CERT-FR">
+                <i class="fas fa-shield-alt veille-icon"></i>
+                <div class="veille-name">CERT-FR</div>
+                <div class="veille-type">Alertes Cybersécurité</div>
+            </a>
+            <a href="https://korben.info/" target="_blank" class="veille-item" aria-label="Visiter Korben">
+                <i class="fas fa-rss veille-icon"></i>
+                <div class="veille-name">Korben</div>
+                <div class="veille-type">Actualités Tech</div>
+            </a>
+            <a href="https://thehackernews.com/" target="_blank" class="veille-item" aria-label="Visiter The Hacker News">
+                <i class="fas fa-globe veille-icon"></i>
+                <div class="veille-name">The Hacker News</div>
+                <div class="veille-type">Actualités Internationales</div>
+            </a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header">
+            <h2 class="section-title" data-num="07.">/CONTACT</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="contact-section">
+            <h2 class="contact-title">Initialiser Communication</h2>
+            <p class="contact-text">
+                Je suis actuellement à la recherche de nouvelles opportunités. Ma boîte de réception est ouverte pour toute demande technique.
+            </p>
+            
+            <div class="contact-buttons">
+                <a href="mailto:alannhoffmann86@gmail.com" class="btn">ENVOYER EMAIL</a>
+                <a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" class="btn btn-linkedin">
+                    <i class="fab fa-linkedin"></i> LINKEDIN
+                </a>
+            </div>
+
+            <div style="margin-top: 40px; color: var(--primary-color);">
+                <p><i class="fas fa-phone"></i> 06 46 53 09 62</p>
+                <p style="margin-top:10px;"><i class="fas fa-map-marker-alt"></i> Brettnach (57320)</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Système prêt. Développé par HOFFMANN Alann.</p>
+        <p><a href="#" onclick="openMentionsModal(); return false;">Mentions Légales</a> | <a href="#" onclick="openModal('cvModal'); return false;">CV</a></p>
+    </footer>
+
+    <div id="pdfModal" class="modal"><div class="modal-content" style="height: 90vh; padding: 0;"><span class="close-modal" id="closePdf">&times;</span><iframe src="documents/Compte_rendu_serveur_web_nginx_et_samba.pdf" width="100%" height="100%" style="border:none;"></iframe></div></div>
+    <div id="cvModal" class="modal"><div class="modal-content" style="text-align: center;"><span class="close-modal" id="closeCv">&times;</span><h2 class="modal-h2">Fichier CV</h2><p style="margin-bottom: 30px;">Extraction du fichier PDF...</p><a href="documents/CV_Alann_HOFFMANN.pdf" target="_blank" class="btn">Télécharger</a></div></div>
+    
+    <div id="mentionsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeMentions">&times;</span>
+            <h2 class="modal-h2">Mentions Légales</h2>
+            <div class="modal-body">
+                <p>Site édité par HOFFMANN Alann.</p>
+                <p>Hébergé par GitHub Pages.</p>
+                <p style="margin-top: 15px; font-style: italic; color: var(--text-muted);">Développement assisté par Intelligence Artificielle.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="btsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeBts">&times;</span>
+            <h2 class="modal-h2">Le Diplôme BTS SIO</h2>
+            <div class="modal-body">
+                <p style="margin-bottom: 20px;">Le BTS <strong>Services Informatiques aux Organisations</strong> est un diplôme d'État (Bac+2) formant des experts IT. Il se divise en deux spécialités distinctes :</p>
+                
+                <div class="slam-sisr-grid">
+                    <div class="option-box">
+                        <h3 style="margin-top:0;">Option A : SLAM</h3>
+                        <p style="font-size:0.8rem; color: var(--secondary-color); margin-bottom: 10px;">Solutions Logicielles et Applications Métiers</p>
+                        <p>Orienté <strong>Développement</strong>.</p>
+                        <ul style="margin-top:10px; font-size:0.85rem; color:var(--text-muted);">
+                            <li><i class="fas fa-code"></i> Conception de logiciels</li>
+                            <li><i class="fas fa-database"></i> Bases de données (SQL)</li>
+                            <li><i class="fas fa-laptop-code"></i> Langages (Java, C#, Python)</li>
+                        </ul>
+                    </div>
+
+                    <div class="option-box sisr">
+                        <div class="badge-choice">MON CHOIX</div>
+                        <h3 style="margin-top:0;">Option B : SISR</h3>
+                        <p style="font-size:0.8rem; color: var(--secondary-color); margin-bottom: 10px;">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                        <p>Orienté <strong>Infrastructure & Réseaux</strong>.</p>
+                        <ul style="margin-top:10px; font-size:0.85rem; color:var(--text-color);">
+                            <li><i class="fas fa-server"></i> Administration Serveurs (Windows/Linux)</li>
+                            <li><i class="fas fa-network-wired"></i> Architecture Réseau (Switching/Routing)</li>
+                            <li><i class="fas fa-shield-alt"></i> Cybersécurité & Virtualisation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 1px dashed var(--secondary-color); padding-top: 20px;">
+                    <h3 style="color: var(--primary-color);">Pourquoi avoir choisi l'option SISR ?</h3>
+                    <p>
+                        Mon parcours initial en <strong>Maintenance des Équipements Industriels (MEI)</strong> et en électricité m'a donné le goût du concret et du fonctionnement technique des systèmes.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        L'option SISR est la suite logique de cette expérience : plutôt que de créer du code "abstrait" (SLAM), je préfère concevoir et maintenir l'infrastructure qui permet aux données de circuler. J'aime comprendre comment interconnecter les équipements, sécuriser les flux et garantir que le "cœur" du système d'information reste opérationnel.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ANIMATION TYPEWRITER ---
+        const textToType = "Technicien Système et Réseaux...";
+        const typeWriterElement = document.getElementById('typewriter');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < textToType.length) {
+                typeWriterElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 80); 
+            }
+        }
+        setTimeout(typeWriter, 500);
+
+        // --- MATRIX RAIN EFFECT (CORRIGÉ & OPTIMISÉ) ---
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        // Initialisation des variables
+        const katakana = '01'; 
+        const alphabet = katakana;
+        const fontSize = 16;
+        let columns = 0;
+        let rainDrops = [];
+
+        // Fonction pour initialiser ou réinitialiser le canvas lors du redimensionnement
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Calculer le nouveau nombre de colonnes
+            const newColumns = Math.ceil(canvas.width / fontSize);
+            
+            // Si on a plus de colonnes qu'avant (agrandissement), on remplit le tableau
+            for (let x = 0; x < newColumns; x++) {
+                if (rainDrops[x] === undefined) {
+                    // Pour les nouvelles colonnes, on commence aléatoirement pour éviter l'effet "mur"
+                    rainDrops[x] = Math.floor(Math.random() * canvas.height/fontSize);
+                }
+            }
+            columns = newColumns;
+        }
+
+        // Appel initial
+        resizeCanvas();
+
+        // Écouteur d'événement sur le redimensionnement de la fenêtre
+        window.addEventListener('resize', resizeCanvas);
+
+        // Configuration du framerate
+        let lastTime = 0;
+        const fps = 30;
+        const nextFrame = 1000 / fps;
+
+        const drawMatrix = () => {
+            // Fond noir avec opacité pour l'effet de traînée
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; 
+            ctx.font = fontSize + 'px monospace';
+
+            // On utilise la variable columns mise à jour
+            for(let i = 0; i < columns; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        // Boucle d'animation
+        const animate = (time) => {
+            const deltaTime = time - lastTime;
+            
+            if (deltaTime > nextFrame) {
+                drawMatrix();
+                lastTime = time;
+            }
+            requestAnimationFrame(animate);
+        };
+        
+        animate(0);
+
+        // --- PROGRESS BAR ---
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // --- POINT 4 : SCROLLSPY (Menu Actif) CORRIGÉ ---
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('.nav-links li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            // 1. Détection standard par position
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // 2. FORCE "CONTACT" SI ON EST TOUT EN BAS DE LA PAGE
+            // (window.innerHeight + window.scrollY) donne la position du bas de l'écran par rapport au document
+            // document.body.offsetHeight donne la hauteur totale de la page
+            // On enlève 10px pour être sûr que ça déclenche même s'il manque 1px
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+                current = 'contact';
+            }
+
+            // 3. Application de la classe active
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                // On vérifie si le href du lien correspond à l'ID courant
+                if (a.getAttribute('href') === '#' + current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // --- MENU MOBILE ---
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+        menuToggle.addEventListener('click', () => { navUl.classList.toggle('active'); });
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => { navUl.classList.remove('active'); });
+        });
+
+        // --- GESTION DES MODALES ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.getElementById('closeCv').onclick = () => closeModal('cvModal');
+        document.getElementById('closePdf').onclick = () => closeModal('pdfModal');
+        document.getElementById('openBTSModal').onclick = (e) => { e.preventDefault(); openModal('btsModal'); };
+        document.getElementById('closeBts').onclick = () => closeModal('btsModal');
+        
+        window.openPDFModal = function() { openModal('pdfModal'); };
+        window.openMentionsModal = function() { openModal('mentionsModal'); };
+        document.getElementById('closeMentions').onclick = () => closeModal('mentionsModal');
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // --- ANIMATIONS D'ENTRÉE ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    anime({ 
+                        targets: entry.target, 
+                        opacity: [0, 1], 
+                        translateY: [20, 0], 
+                        duration: 600, 
+                        easing: 'easeOutQuad' 
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.skill-card, .project-card, .about-text, .section-title, .timeline-item, .veille-item').forEach(el => {
+            el.style.opacity = 0; 
+            observer.observe(el);
+        });
+
+        // Easter Egg Console
+        console.log(
+            "%c STOP ! %c\nVous avez trouvé l'accès administrateur ?\nNon, je plaisante. Mais si vous cherchez un profil curieux, contactez-moi : alannhoffmann86@gmail.com",
+            "color: red; font-size: 30px; font-weight: bold;",
+            "color: #00ff41; font-size: 16px; font-family: monospace;"
+        );
+    </script>
+</body>
+</html>
