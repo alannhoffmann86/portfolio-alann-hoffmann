@@ -1025,6 +1025,7 @@
                         break;
                     case 'veille':
                     case 'news':
+                    case 'veille techno':
                         document.getElementById('veille').scrollIntoView({ behavior: 'smooth' });
                         responseLine.innerText = 'Ouverture du flux de veille...';
                         break;
@@ -1033,6 +1034,18 @@
                         responseLine.innerHTML = 'Initialisation du protocole de contact...<br>Email : alannhoffmann86@gmail.com';
                         break;
                     
+                    // --- LE SECRET (EASTER EGG) ---
+                    case 'sysadmin_access':
+                        responseLine.innerHTML = `
+                            <br>
+                            <span style="color: #ff00c1; font-weight: bold; font-size: 1.1em;">[ ACCÈS AUTORISÉ - MODE ROOT ]</span><br>
+                            <br>
+                            > Félicitations, vous avez trouvé le code secret.<br>
+                            <br>
+                            <span style="color: var(--secondary-color);">Statut : Prêt.</span><br>
+                        `;
+                        break;
+
                     // --- COMMANDES UTILITAIRES ---
                     case 'cv':
                         responseLine.innerText = 'Ouverture de la fenêtre de téléchargement du CV...';
@@ -1064,11 +1077,11 @@
             }
         });
 
-        // Easter Egg Console
+        // Easter Egg Console (Indice pour trouver le mot caché)
         console.log(
-            "%c STOP ! %c\nVous avez trouvé l'accès administrateur ?\nNon, je plaisante. Mais si vous cherchez un profil curieux, contactez-moi : alannhoffmann86@gmail.com",
+            "%c STOP ! %c\nVous avez trouvé l'accès console ?\nIl y a un secret caché quelque part dans le code source HTML...\nCherchez le commentaire tout en haut du fichier.",
             "color: red; font-size: 30px; font-weight: bold;",
-            "color: #00ff41; font-size: 16px; font-family: monospace;"
+            "color: #00ff41; font-size: 14px; font-family: monospace;"
         );
     </script>
 </body>
