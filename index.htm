@@ -375,6 +375,61 @@
             .about-inner { grid-template-columns: 1fr; }
             .slam-sisr-grid { grid-template-columns: 1fr; }
         }
+
+        /* --- STYLE DU TERMINAL INTERACTIF --- */
+        #open-terminal-btn {
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--bg-card); border: 1px solid var(--primary-color);
+            color: var(--primary-color); width: 50px; height: 50px; border-radius: 50%;
+            cursor: pointer; z-index: 9999; font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+            transition: var(--transition);
+        }
+
+        #open-terminal-btn:hover {
+            background: var(--primary-color); color: #000;
+            box-shadow: 0 0 20px var(--primary-color); transform: rotate(360deg);
+        }
+
+        #terminal-container {
+            display: none; /* Caché par défaut */
+            position: fixed; bottom: 80px; right: 20px;
+            width: 90%; max-width: 500px; height: 350px;
+            background: rgba(10, 10, 10, 0.95); border: 1px solid var(--primary-color);
+            z-index: 9999; box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            flex-direction: column; font-family: 'Fira Code', monospace;
+            font-size: 0.85rem; backdrop-filter: blur(5px);
+        }
+
+        #terminal-container.active { display: flex; animation: popIn 0.3s ease-out; }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .terminal-header {
+            background: var(--secondary-color); color: #000;
+            padding: 5px 10px; font-weight: bold; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+
+        #close-terminal { background: none; border: none; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
+
+        .terminal-body { flex-grow: 1; padding: 10px; overflow-y: auto; color: var(--text-color); }
+        .terminal-line { margin-bottom: 5px; line-height: 1.4; }
+        .cmd-highlight { color: var(--primary-color); }
+
+        .terminal-input-area {
+            display: flex; padding: 10px; border-top: 1px solid #333; background: rgba(0,0,0,0.5);
+        }
+
+        .prompt { color: var(--primary-color); margin-right: 8px; }
+
+        #terminal-input {
+            background: transparent; border: none; color: var(--text-color);
+            font-family: 'Fira Code', monospace; flex-grow: 1; outline: none;
+        }
     </style>
 </head>
 <body>
@@ -703,6 +758,22 @@
         </div>
     </div>
 
+    <div id="terminal-container">
+        <div class="terminal-header">
+            <span>root@portfolio:~ (bash)</span>
+            <button id="close-terminal">_</button>
+        </div>
+        <div class="terminal-body" id="terminal-output">
+            <div class="terminal-line">Bienvenue, visiteur. Tapez <span class="cmd-highlight">'help'</span> pour la liste des commandes.</div>
+        </div>
+        <div class="terminal-input-area">
+            <span class="prompt">root@portfolio:~$</span>
+            <input type="text" id="terminal-input" autocomplete="off" autofocus>
+        </div>
+    </div>
+
+    <button id="open-terminal-btn" title="Ouvrir le terminal"><i class="fas fa-terminal"></i></button>
+
     <script>
         // --- ANIMATION TYPEWRITER ---
         const textToType = "Technicien Système et Réseaux...";
@@ -887,6 +958,110 @@
         document.querySelectorAll('.skill-card, .project-card, .about-text, .section-title, .timeline-item, .veille-item').forEach(el => {
             el.style.opacity = 0; 
             observer.observe(el);
+        });
+
+        // --- LOGIQUE DU TERMINAL ---
+        const termContainer = document.getElementById('terminal-container');
+        const termInput = document.getElementById('terminal-input');
+        const termOutput = document.getElementById('terminal-output');
+        const openTermBtn = document.getElementById('open-terminal-btn');
+        const closeTermBtn = document.getElementById('close-terminal');
+
+        // Ouvrir / Fermer
+        openTermBtn.addEventListener('click', () => {
+            termContainer.classList.toggle('active');
+            if(termContainer.classList.contains('active')) termInput.focus();
+        });
+        closeTermBtn.addEventListener('click', () => {
+            termContainer.classList.remove('active');
+        });
+
+        // Gestion des commandes
+        termInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.trim().toLowerCase();
+                
+                // Créer la ligne de l'historique
+                const inputLine = document.createElement('div');
+                inputLine.className = 'terminal-line';
+                inputLine.innerHTML = `<span class="prompt">root@portfolio:~$</span> ${this.value}`;
+                termOutput.appendChild(inputLine);
+
+                // Traitement de la réponse
+                const responseLine = document.createElement('div');
+                responseLine.className = 'terminal-line';
+                
+                switch(command) {
+                    case 'help':
+                        responseLine.innerHTML = 'Commandes globales : <span class="cmd-highlight">cv, clear, exit</span><br>' +
+                                                 'Navigation : <span class="cmd-highlight">accueil, profil, competences, projets, parcours, veille, contact</span>';
+                        break;
+                    
+                    // --- COMMANDES DE NAVIGATION (Smooth Scroll) ---
+                    case 'accueil':
+                    case 'home':
+                        document.getElementById('accueil').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Navigation vers l\'accueil...';
+                        break;
+                    case 'profil':
+                    case 'apropos':
+                        document.getElementById('apropos').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Chargement du profil...';
+                        break;
+                    case 'competences':
+                    case 'skills':
+                        document.getElementById('competences').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Affichage des compétences...';
+                        break;
+                    case 'projets':
+                    case 'projects':
+                        document.getElementById('projets').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Accès à la base de données projets...';
+                        break;
+                    case 'parcours':
+                    case 'exp':
+                        document.getElementById('parcours').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Historique du parcours professionnel...';
+                        break;
+                    case 'veille':
+                    case 'news':
+                        document.getElementById('veille').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Ouverture du flux de veille...';
+                        break;
+                    case 'contact':
+                        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerHTML = 'Initialisation du protocole de contact...<br>Email : alannhoffmann86@gmail.com';
+                        break;
+                    
+                    // --- COMMANDES UTILITAIRES ---
+                    case 'cv':
+                        responseLine.innerText = 'Ouverture de la fenêtre de téléchargement du CV...';
+                        openModal('cvModal');
+                        break;
+                    case 'clear':
+                    case 'cls':
+                        termOutput.innerHTML = ''; 
+                        responseLine.remove(); 
+                        break;
+                    case 'exit':
+                        termContainer.classList.remove('active');
+                        responseLine.remove();
+                        break;
+                    case '':
+                        responseLine.remove();
+                        break;
+                    default:
+                        responseLine.innerHTML = `Commande inconnue : ${command}. Tapez <span class="cmd-highlight">'help'</span> pour la liste.`;
+                }
+
+                if(command !== 'clear' && command !== '') {
+                    termOutput.appendChild(responseLine);
+                }
+
+                // Scroll et reset
+                termOutput.scrollTop = termOutput.scrollHeight;
+                this.value = '';
+            }
         });
 
         // Easter Egg Console
