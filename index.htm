@@ -48,6 +48,9 @@
         html { 
             scroll-behavior: smooth; 
             scroll-padding-top: var(--nav-height);
+            /* CORRECTION SCROLLBAR HORIZONTALE */
+            overflow-x: hidden; 
+            width: 100%;
         }
 
         body {
@@ -60,9 +63,12 @@
             color: var(--text-color);
             font-family: var(--font-main);
             line-height: 1.6;
-            overflow-x: hidden;
-            width: 100vw;
+            
+            /* CORRECTION SCROLLBAR HORIZONTALE */
+            width: 100%; 
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
         /* --- EFFETS VISUELS (SCANLINES & MATRIX) --- */
@@ -73,7 +79,10 @@
         }
 
         .scanlines {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; 
+            /* CORRECTION SCROLLBAR HORIZONTALE */
+            width: 100%; 
+            height: 100vh;
             background: linear-gradient(
                 to bottom,
                 rgba(255,255,255,0),
@@ -154,7 +163,7 @@
         }
         .nav-links li a:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-color); }
         
-        /* POINT 4 : Style du lien actif */
+        /* LIEN ACTIF */
         .nav-links li a.active {
             color: var(--primary-color);
             text-shadow: 0 0 10px var(--primary-color);
@@ -790,7 +799,7 @@
             document.getElementById("progress-bar").style.width = scrolled + "%";
         };
 
-        // --- POINT 4 : SCROLLSPY (Menu Actif) CORRIGÉ ---
+        // --- SCROLLSPY (Menu Actif) CORRIGÉ ---
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('.nav-links li a');
 
@@ -806,9 +815,6 @@
             });
 
             // 2. FORCE "CONTACT" SI ON EST TOUT EN BAS DE LA PAGE
-            // (window.innerHeight + window.scrollY) donne la position du bas de l'écran par rapport au document
-            // document.body.offsetHeight donne la hauteur totale de la page
-            // On enlève 10px pour être sûr que ça déclenche même s'il manque 1px
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
                 current = 'contact';
             }
@@ -816,7 +822,6 @@
             // 3. Application de la classe active
             navLi.forEach(a => {
                 a.classList.remove('active');
-                // On vérifie si le href du lien correspond à l'ID courant
                 if (a.getAttribute('href') === '#' + current) {
                     a.classList.add('active');
                 }
