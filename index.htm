@@ -48,7 +48,6 @@
         html { 
             scroll-behavior: smooth; 
             scroll-padding-top: var(--nav-height);
-            /* CORRECTION SCROLLBAR HORIZONTALE */
             overflow-x: hidden; 
             width: 100%;
         }
@@ -64,7 +63,6 @@
             font-family: var(--font-main);
             line-height: 1.6;
             
-            /* CORRECTION SCROLLBAR HORIZONTALE */
             width: 100%; 
             min-height: 100vh;
             overflow-x: hidden;
@@ -80,7 +78,6 @@
 
         .scanlines {
             position: fixed; top: 0; left: 0; 
-            /* CORRECTION SCROLLBAR HORIZONTALE */
             width: 100%; 
             height: 100vh;
             background: linear-gradient(
@@ -260,7 +257,7 @@
         .block-filled { color: var(--primary-color); text-shadow: 0 0 5px var(--primary-color); }
         .block-empty { color: #333; }
 
-        /* PROJETS */
+        /* PROJETS & PROCEDURES */
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .project-card {
             background: var(--bg-card); padding: 2rem 1.75rem; border: 1px solid var(--secondary-color);
@@ -283,6 +280,7 @@
             text-align: center; font-weight: 600; cursor: pointer;
             transition: var(--transition); font-family: var(--font-main); font-size: 0.85rem;
             text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; /* Important pour les liens */
         }
         .btn-report:hover { background: var(--primary-color); color: #000; text-decoration: none; }
 
@@ -451,9 +449,10 @@
                 <li><a href="#apropos"><span class="num">02.</span>/PROFIL</a></li>
                 <li><a href="#competences"><span class="num">03.</span>/COMPÉTENCES</a></li>
                 <li><a href="#projets"><span class="num">04.</span>/PROJETS</a></li>
-                <li><a href="#parcours"><span class="num">05.</span>/PARCOURS</a></li>
-                <li><a href="#veille"><span class="num">06.</span>/VEILLE TECHNO</a></li>
-                <li><a href="#contact"><span class="num">07.</span>/CONTACT</a></li>
+                <li><a href="#documentations"><span class="num">05.</span>/DOCUMENTATION</a></li>
+                <li><a href="#parcours"><span class="num">06.</span>/PARCOURS</a></li>
+                <li><a href="#veille"><span class="num">07.</span>/VEILLE</a></li>
+                <li><a href="#contact"><span class="num">08.</span>/CONTACT</a></li>
             </ul>
         </div>
     </nav>
@@ -573,25 +572,6 @@
                 <div class="project-top">
                     <i class="far fa-folder folder-ico"></i>
                     <div class="links-ico">
-                        <i class="fab fa-linux"></i>
-                    </div>
-                </div>
-                <h3 class="project-title">Serveur Web & Fichiers</h3>
-                <div class="project-desc">
-                    <p>Déploiement complet d'un serveur Linux Ubuntu. Installation d'un serveur Web Nginx avec gestion des Virtual Hosts et mise en place d'un partage de fichiers Samba sécurisé.</p>
-                </div>
-                <ul class="project-tech-list">
-                    <li>> Linux CLI</li>
-                    <li>> Nginx</li>
-                    <li>> Samba</li>
-                </ul>
-                <button onclick="openPDFModal()" class="btn-report">[VOIR LE COMPTE-RENDU]</button>
-            </div>
-
-            <div class="project-card">
-                <div class="project-top">
-                    <i class="far fa-folder folder-ico"></i>
-                    <div class="links-ico">
                         <i class="fas fa-network-wired"></i>
                     </div>
                 </div>
@@ -609,9 +589,75 @@
         </div>
     </section>
 
+    <section id="documentations">
+        <div class="section-header">
+            <h2 class="section-title" data-num="05.">/DOCUMENTATION</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="fas fa-server folder-ico"></i> <div class="links-ico">
+                        <i class="fab fa-linux"></i>
+                    </div>
+                </div>
+                <h3 class="project-title">Serveur Web & Fichiers</h3>
+                <div class="project-desc">
+                    <p>Déploiement complet d'un serveur Linux Ubuntu. Installation d'un serveur Web Nginx avec gestion des Virtual Hosts et mise en place d'un partage de fichiers Samba sécurisé.</p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>> Linux CLI</li>
+                    <li>> Nginx</li>
+                    <li>> Samba</li>
+                </ul>
+                <button onclick="openPDFModal()" class="btn-report">[VOIR LE COMPTE-RENDU]</button>
+            </div>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="fas fa-book folder-ico"></i>
+                    <div class="links-ico">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                </div>
+                <h3 class="project-title">Mémento Commandes Linux</h3>
+                <div class="project-desc">
+                    <p>Guide de référence rapide regroupant les commandes essentielles pour l'administration quotidienne : navigation, manipulation de fichiers, et gestion des processus.</p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>> Bash CLI</li>
+                    <li>> Cheatsheet</li>
+                    <li>> Débutant</li>
+                </ul>
+                <a href="documents/Memo_Commandes_Linux.pdf" target="_blank" class="btn-report">[OUVRIR LE PDF]</a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="fas fa-file-contract folder-ico"></i>
+                    <div class="links-ico">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                </div>
+                <h3 class="project-title">Procédures Système & Sécurité</h3>
+                <div class="project-desc">
+                    <p>Documentation technique avancée pour le déploiement et la sécurisation de serveurs. Couvre l'installation de services web, pare-feu UFW, et sauvegardes automatisées.</p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>> Sécurité</li>
+                    <li>> SysAdmin</li>
+                    <li>> Avancé</li>
+                </ul>
+                <a href="documents/Procedures_Linux_Avancees.pdf" target="_blank" class="btn-report">[OUVRIR LE PDF]</a>
+            </div>
+
+        </div>
+    </section>
+
     <section id="parcours">
         <div class="section-header">
-            <h2 class="section-title" data-num="05.">/PARCOURS</h2>
+            <h2 class="section-title" data-num="06.">/PARCOURS</h2>
             <span class="section-line"></span>
         </div>
         <div class="timeline-container">
@@ -641,7 +687,7 @@
 
     <section id="veille">
         <div class="section-header">
-            <h2 class="section-title" data-num="06.">/VEILLE TECHNO</h2>
+            <h2 class="section-title" data-num="07.">/VEILLE TECHNO</h2>
             <span class="section-line"></span>
         </div>
         <div class="veille-grid">
@@ -670,7 +716,7 @@
 
     <section id="contact">
         <div class="section-header">
-            <h2 class="section-title" data-num="07.">/CONTACT</h2>
+            <h2 class="section-title" data-num="08.">/CONTACT</h2>
             <span class="section-line"></span>
         </div>
         <div class="contact-section">
@@ -789,59 +835,43 @@
         }
         setTimeout(typeWriter, 500);
 
-        // --- MATRIX RAIN EFFECT (CORRIGÉ & OPTIMISÉ) ---
+        // --- MATRIX RAIN EFFECT ---
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
-
-        // Initialisation des variables
         const katakana = '01'; 
         const alphabet = katakana;
         const fontSize = 16;
         let columns = 0;
         let rainDrops = [];
 
-        // Fonction pour initialiser ou réinitialiser le canvas lors du redimensionnement
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            
-            // Calculer le nouveau nombre de colonnes
             const newColumns = Math.ceil(canvas.width / fontSize);
-            
-            // Si on a plus de colonnes qu'avant (agrandissement), on remplit le tableau
             for (let x = 0; x < newColumns; x++) {
                 if (rainDrops[x] === undefined) {
-                    // Pour les nouvelles colonnes, on commence aléatoirement pour éviter l'effet "mur"
                     rainDrops[x] = Math.floor(Math.random() * canvas.height/fontSize);
                 }
             }
             columns = newColumns;
         }
 
-        // Appel initial
         resizeCanvas();
-
-        // Écouteur d'événement sur le redimensionnement de la fenêtre
         window.addEventListener('resize', resizeCanvas);
 
-        // Configuration du framerate
         let lastTime = 0;
         const fps = 30;
         const nextFrame = 1000 / fps;
 
         const drawMatrix = () => {
-            // Fond noir avec opacité pour l'effet de traînée
             ctx.fillStyle = 'rgba(10, 10, 10, 0.05)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
             ctx.fillStyle = '#0F0'; 
             ctx.font = fontSize + 'px monospace';
 
-            // On utilise la variable columns mise à jour
             for(let i = 0; i < columns; i++) {
                 const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
                 ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
                 if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
                     rainDrops[i] = 0;
                 }
@@ -849,10 +879,8 @@
             }
         };
 
-        // Boucle d'animation
         const animate = (time) => {
             const deltaTime = time - lastTime;
-            
             if (deltaTime > nextFrame) {
                 drawMatrix();
                 lastTime = time;
@@ -870,14 +898,13 @@
             document.getElementById("progress-bar").style.width = scrolled + "%";
         };
 
-        // --- SCROLLSPY (Menu Actif) CORRIGÉ ---
+        // --- SCROLLSPY ---
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('.nav-links li a');
 
         window.addEventListener('scroll', () => {
             let current = '';
             
-            // 1. Détection standard par position
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 if (window.scrollY >= (sectionTop - 150)) {
@@ -885,12 +912,10 @@
                 }
             });
 
-            // 2. FORCE "CONTACT" SI ON EST TOUT EN BAS DE LA PAGE
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
                 current = 'contact';
             }
 
-            // 3. Application de la classe active
             navLi.forEach(a => {
                 a.classList.remove('active');
                 if (a.getAttribute('href') === '#' + current) {
@@ -960,14 +985,13 @@
             observer.observe(el);
         });
 
-        // --- LOGIQUE DU TERMINAL ---
+        // --- TERMINAL INTERACTIF ---
         const termContainer = document.getElementById('terminal-container');
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
         const openTermBtn = document.getElementById('open-terminal-btn');
         const closeTermBtn = document.getElementById('close-terminal');
 
-        // Ouvrir / Fermer
         openTermBtn.addEventListener('click', () => {
             termContainer.classList.toggle('active');
             if(termContainer.classList.contains('active')) termInput.focus();
@@ -976,28 +1000,24 @@
             termContainer.classList.remove('active');
         });
 
-        // Gestion des commandes
         termInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 const command = this.value.trim().toLowerCase();
                 
-                // Créer la ligne de l'historique
                 const inputLine = document.createElement('div');
                 inputLine.className = 'terminal-line';
                 inputLine.innerHTML = `<span class="prompt">root@portfolio:~$</span> ${this.value}`;
                 termOutput.appendChild(inputLine);
 
-                // Traitement de la réponse
                 const responseLine = document.createElement('div');
                 responseLine.className = 'terminal-line';
                 
                 switch(command) {
                     case 'help':
+                        // Modification ici : "procedures" devient "documentation"
                         responseLine.innerHTML = 'Commandes globales : <span class="cmd-highlight">cv, clear, exit</span><br>' +
-                                                 'Navigation : <span class="cmd-highlight">accueil, profil, competences, projets, parcours, veille, contact</span>';
+                                                 'Navigation : <span class="cmd-highlight">accueil, profil, competences, projets, documentation, parcours, veille, contact</span>';
                         break;
-                    
-                    // --- COMMANDES DE NAVIGATION (Smooth Scroll) ---
                     case 'accueil':
                     case 'home':
                         document.getElementById('accueil').scrollIntoView({ behavior: 'smooth' });
@@ -1014,39 +1034,28 @@
                         responseLine.innerText = 'Affichage des compétences...';
                         break;
                     case 'projets':
-                    case 'projects':
                         document.getElementById('projets').scrollIntoView({ behavior: 'smooth' });
                         responseLine.innerText = 'Accès à la base de données projets...';
                         break;
+                    // Modification ici : commande "documentation"
+                    case 'documentation':
+                    case 'docs':
+                    case 'man':
+                        document.getElementById('documentations').scrollIntoView({ behavior: 'smooth' });
+                        responseLine.innerText = 'Accès à la documentation technique...';
+                        break;
                     case 'parcours':
-                    case 'exp':
                         document.getElementById('parcours').scrollIntoView({ behavior: 'smooth' });
                         responseLine.innerText = 'Historique du parcours professionnel...';
                         break;
                     case 'veille':
-                    case 'news':
-                    case 'veille techno':
                         document.getElementById('veille').scrollIntoView({ behavior: 'smooth' });
                         responseLine.innerText = 'Ouverture du flux de veille...';
                         break;
                     case 'contact':
                         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-                        responseLine.innerHTML = 'Initialisation du protocole de contact...<br>Email : alannhoffmann86@gmail.com';
+                        responseLine.innerHTML = 'Initialisation du protocole de contact...';
                         break;
-                    
-                    // --- LE SECRET (EASTER EGG) ---
-                    case 'sysadmin_access':
-                        responseLine.innerHTML = `
-                            <br>
-                            <span style="color: #ff00c1; font-weight: bold; font-size: 1.1em;">[ ACCÈS AUTORISÉ - MODE ROOT ]</span><br>
-                            <br>
-                            > Félicitations, vous avez trouvé le code secret.<br>
-                            <br>
-                            <span style="color: var(--secondary-color);">Statut : Prêt.</span><br>
-                        `;
-                        break;
-
-                    // --- COMMANDES UTILITAIRES ---
                     case 'cv':
                         responseLine.innerText = 'Ouverture de la fenêtre de téléchargement du CV...';
                         openModal('cvModal');
@@ -1071,18 +1080,10 @@
                     termOutput.appendChild(responseLine);
                 }
 
-                // Scroll et reset
                 termOutput.scrollTop = termOutput.scrollHeight;
                 this.value = '';
             }
         });
-
-        // Easter Egg Console (Indice pour trouver le mot caché)
-        console.log(
-            "%c STOP ! %c\nVous avez trouvé l'accès console ?\nIl y a un secret caché quelque part dans le code source HTML...\nCherchez le commentaire tout en haut du fichier.",
-            "color: red; font-size: 30px; font-weight: bold;",
-            "color: #00ff41; font-size: 14px; font-family: monospace;"
-        );
     </script>
 </body>
 </html>
