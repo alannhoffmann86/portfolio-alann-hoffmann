@@ -12,6 +12,10 @@
     <meta property="og:image" content="https://via.placeholder.com/1200x630/0a0a0a/00ff41?text=PORTFOLIO+SISR+ACCESS">
     <meta property="og:url" content="https://ton-site-web.github.io"> 
     
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio Alann HOFFMANN | Expert SISR">
+    <meta name="twitter:description" content="Technicien Système & Réseaux. Découvrez mes projets Infrastructure, Cisco et Linux.">
+    
     <title>Portfolio de Alann HOFFMANN | SISR</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2300ff41%22>_&gt;</text></svg>">
@@ -68,6 +72,12 @@
             overflow-x: hidden;
             position: relative;
         }
+
+        /* Classes utilitaires pour remplacer le style en ligne */
+        .mt-40 { margin-top: 40px; }
+        .mt-20 { margin-top: 20px; }
+        .mt-10 { margin-top: 10px; }
+        .text-center { text-align: center; }
 
         /* --- EFFETS VISUELS (SCANLINES & MATRIX) --- */
         #matrix-bg {
@@ -262,6 +272,12 @@
         .tech-grid { display: grid; grid-template-columns: repeat(2, minmax(140px, 200px)); gap: 10px; margin-top: 20px; }
         .tech-item { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; }
         .tech-item i { color: var(--primary-color); margin-right: 8px; font-size: 0.6rem; }
+        
+        /* Box Serveur profil */
+        .about-server-box { border: 1px solid var(--primary-color); padding: 20px; text-align: center; position: relative; background: rgba(0,255,65,0.05); }
+        .about-server-icon { font-size: 8rem; color: var(--primary-color); opacity: 0.5; }
+        .about-server-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-weight: bold; background: #000; padding: 5px; }
+        .about-server-status { color: var(--primary-color); opacity: 0.6; font-family: var(--font-main); }
 
         /* SKILLS */
         .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -345,6 +361,8 @@
         .contact-buttons {
             display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
         }
+        
+        .contact-details { margin-top: 40px; color: var(--primary-color); }
 
         /* FOOTER */
         footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid #111; }
@@ -364,6 +382,15 @@
             border: 1px solid var(--primary-color); position: relative;
             max-height: 90vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
         }
+        
+        .pdf-modal-content { height: 90vh; padding: 0; }
+        .pdf-iframe { width: 100%; height: 100%; border: none; }
+        
+        .cv-modal-content { text-align: center; }
+        .docs-links-container { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
+        .doc-btn { text-align:center; padding: 20px; }
+        .doc-btn i { margin-right: 10px; }
+
         .close-modal { position: absolute; top: 20px; right: 20px; color: var(--primary-color); font-size: 2rem; cursor: pointer; transition: 0.3s; }
         .close-modal:hover { transform: rotate(90deg); text-shadow: 0 0 10px var(--primary-color); }
         .modal-h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.8rem; text-transform: uppercase; }
@@ -570,7 +597,7 @@
                 [SISR] Solutions d'Infrastructure, Systèmes et Réseaux.<br>
                 Je construis des infrastructures réseaux sécurisées et performantes.
             </p>
-            <div style="margin-top: 40px;">
+            <div class="mt-40">
                 <a href="#projets" class="btn">_ACCÉDER AUX DONNÉES</a>
                 <a href="#contact" class="btn">_CONTACTER</a>
             </div>
@@ -588,7 +615,7 @@
                 <p>Après plusieurs années d'expérience en tant que technicien d'exploitation, je donne aujourd'hui une nouvelle impulsion à ma carrière. Je me spécialise dans l'administration système et la maintenance IT à travers un BTS SIO option SISR en alternance.<br>
                 <a href="#" id="openBTSModal" class="cyber-link">&gt;_ [REQUÊTE] En savoir plus sur la formation BTS SIO</a></p>
                 <p>Mon parcours initial en maintenance industrielle (BAC Pro MEI & CAP Électricien) m'a forgé une rigueur de dépannage "terrain" particulièrement méthodique. Récemment conforté par une immersion réussie au sein du SIE de Metz, je suis déterminé à assurer la fiabilité et la performance des systèmes d'information, tout en accompagnant efficacement les utilisateurs au quotidien.</p>
-                <p style="margin-top: 15px;">Pile technologique actuelle :</p>
+                <p class="mt-10">Pile technologique actuelle :</p>
                 <div class="tech-grid">
                     <span class="tech-item"><i class="fas fa-angle-right"></i> Windows Server / AD</span>
                     <span class="tech-item"><i class="fas fa-angle-right"></i> Linux (Debian/Ubuntu)</span>
@@ -599,14 +626,12 @@
                 </div>
             </div>
             <div class="about-img">
-                <div style="border: 1px solid var(--primary-color); padding: 20px; text-align: center; position: relative; background: rgba(0,255,65,0.05);">
-                    <i class="fas fa-server" style="font-size: 8rem; color: var(--primary-color); opacity: 0.5;"></i>
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-weight: bold; background: #000; padding: 5px;">
-                        &lt;SISR /&gt;
-                    </div>
+                <div class="about-server-box">
+                    <i class="fas fa-server about-server-icon"></i>
+                    <div class="about-server-badge">&lt;SISR /&gt;</div>
                 </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <span style="color: var(--primary-color); opacity: 0.6; font-family: var(--font-main);">[STATUS: ACTIVE]</span>
+                <div class="text-center mt-20">
+                    <span class="about-server-status">[STATUS: ACTIVE]</span>
                 </div>
             </div>
         </div>
@@ -623,15 +648,15 @@
                 <div class="skill-list">
                     <div class="skill-row">
                         <div class="skill-meta"><span>Windows Server / AD</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-meta"><span>Linux (Debian)</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮</span><span class="block-empty">▯▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-meta"><span>Virtualisation</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                 </div>
             </div>
@@ -640,15 +665,15 @@
                 <div class="skill-list">
                     <div class="skill-row">
                         <div class="skill-meta"><span>Switching / VLANs</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-meta"><span>Routage / TCP-IP</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮</span><span class="block-empty">▯▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-meta"><span>Cisco Packet Tracer</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮▮▮</span><span class="block-empty">▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                 </div>
             </div>
@@ -657,11 +682,11 @@
                 <div class="skill-list">
                     <div class="skill-row">
                         <div class="skill-meta"><span>Scripting (Bash/PS)</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮▮</span><span class="block-empty">▯▯▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-meta"><span>Git / GitHub</span></div>
-                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮▮</span><span class="block-empty">▯▯▯▯</span></div>
+                        <div class="skill-blocks"><span class="block-filled">▮▮▮▮▮</span><span class="block-empty">▯▯▯▯▯</span></div>
                     </div>
                 </div>
             </div>
@@ -739,6 +764,25 @@
                 <button onclick="openModal('docsTechniquesModal')" class="btn-report">[ACCÉDER AUX FICHIERS]</button>
             </div>
 
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="fas fa-ticket-alt folder-ico"></i>
+                    <div class="links-ico">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                </div>
+                <h3 class="project-title">Gestion de Parc (GLPI)</h3>
+                <div class="project-desc">
+                    <p>Déploiement et utilisation de la solution GLPI pour la gestion du parc informatique et le centre de support (Helpdesk).</p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>> GLPI</li>
+                    <li>> Ticketing</li>
+                    <li>> ITSM</li>
+                </ul>
+                <a href="documents/Documentation_GLPI.pdf" target="_blank" rel="noopener noreferrer" class="btn-report">[VOIR LA DOCUMENTATION]</a>
+            </div>
+
         </div>
     </section>
 
@@ -767,7 +811,7 @@
                 <p class="timeline-desc">Maintenance des Équipements Industriels. Bases solides en électricité et mécanique.</p>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 40px;">
+        <div class="text-center mt-40">
             <a href="#" onclick="openModal('cvModal'); return false;" class="btn">_TÉLÉCHARGER_CV.PDF</a>
         </div>
     </section>
@@ -778,22 +822,22 @@
             <span class="section-line"></span>
         </div>
         <div class="veille-grid">
-            <a href="https://www.it-connect.fr/" target="_blank" class="veille-item" aria-label="Visiter IT-Connect">
+            <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="veille-item" aria-label="Visiter IT-Connect">
                 <i class="fas fa-laptop-code veille-icon"></i>
                 <div class="veille-name">IT-Connect</div>
                 <div class="veille-type">Tutoriels SysAdmin</div>
             </a>
-            <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="veille-item" aria-label="Visiter CERT-FR">
+            <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer" class="veille-item" aria-label="Visiter CERT-FR">
                 <i class="fas fa-shield-alt veille-icon"></i>
                 <div class="veille-name">CERT-FR</div>
                 <div class="veille-type">Alertes Cybersécurité</div>
             </a>
-            <a href="https://korben.info/" target="_blank" class="veille-item" aria-label="Visiter Korben">
+            <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="veille-item" aria-label="Visiter Korben">
                 <i class="fas fa-rss veille-icon"></i>
                 <div class="veille-name">Korben</div>
                 <div class="veille-type">Actualités Tech</div>
             </a>
-            <a href="https://thehackernews.com/" target="_blank" class="veille-item" aria-label="Visiter The Hacker News">
+            <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer" class="veille-item" aria-label="Visiter The Hacker News">
                 <i class="fas fa-globe veille-icon"></i>
                 <div class="veille-name">The Hacker News</div>
                 <div class="veille-type">Actualités Internationales</div>
@@ -814,14 +858,14 @@
             
             <div class="contact-buttons">
                 <a href="mailto:alannhoffmann86@gmail.com" class="btn">ENVOYER EMAIL</a>
-                <a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" class="btn btn-linkedin">
+                <a href="https://www.linkedin.com/in/alann-hoffmann-515897359" target="_blank" rel="noopener noreferrer" class="btn btn-linkedin">
                     <i class="fab fa-linkedin"></i> LINKEDIN
                 </a>
             </div>
 
-            <div style="margin-top: 40px; color: var(--primary-color);">
+            <div class="contact-details">
                 <p><i class="fas fa-phone"></i> 06 46 53 09 62</p>
-                <p style="margin-top:10px;"><i class="fas fa-map-marker-alt"></i> Brettnach (57320)</p>
+                <p class="mt-10"><i class="fas fa-map-marker-alt"></i> Brettnach (57320)</p>
             </div>
         </div>
     </section>
@@ -831,8 +875,21 @@
         <p><a href="#" onclick="openMentionsModal(); return false;">Mentions Légales</a> | <a href="#" onclick="openModal('cvModal'); return false;">CV</a></p>
     </footer>
 
-    <div id="pdfModal" class="modal"><div class="modal-content" style="height: 90vh; padding: 0;"><span class="close-modal" id="closePdf">&times;</span><iframe src="documents/Compte_rendu_serveur_web_nginx_et_samba.pdf" width="100%" height="100%" style="border:none;"></iframe></div></div>
-    <div id="cvModal" class="modal"><div class="modal-content" style="text-align: center;"><span class="close-modal" id="closeCv">&times;</span><h2 class="modal-h2">Fichier CV</h2><p style="margin-bottom: 30px;">Extraction du fichier PDF...</p><a href="documents/CV_Alann_HOFFMANN.pdf" target="_blank" class="btn">Télécharger</a></div></div>
+    <div id="pdfModal" class="modal">
+        <div class="modal-content pdf-modal-content">
+            <span class="close-modal" id="closePdf">&times;</span>
+            <iframe src="documents/Compte_rendu_serveur_web_nginx_et_samba.pdf" class="pdf-iframe" loading="lazy"></iframe>
+        </div>
+    </div>
+    
+    <div id="cvModal" class="modal">
+        <div class="modal-content cv-modal-content">
+            <span class="close-modal" id="closeCv">&times;</span>
+            <h2 class="modal-h2">Fichier CV</h2>
+            <p style="margin-bottom: 30px;">Extraction du fichier PDF...</p>
+            <a href="documents/CV_Alann_HOFFMANN.pdf" target="_blank" rel="noopener noreferrer" class="btn">Télécharger</a>
+        </div>
+    </div>
     
     <div id="docsTechniquesModal" class="modal">
         <div class="modal-content">
@@ -840,12 +897,12 @@
             <h2 class="modal-h2">Documentation Technique</h2>
             <div class="modal-body">
                 <p>Veuillez sélectionner le document de référence que vous souhaitez consulter :</p>
-                <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 30px;">
-                    <a href="documents/Memo_Commandes_Linux.pdf" target="_blank" class="btn" style="text-align:center; padding: 20px;">
-                        <i class="fas fa-terminal" style="margin-right:10px;"></i> OUVRIR MÉMENTO COMMANDES LINUX
+                <div class="docs-links-container">
+                    <a href="documents/Memo_Commandes_Linux.pdf" target="_blank" rel="noopener noreferrer" class="btn doc-btn">
+                        <i class="fas fa-terminal"></i> OUVRIR MÉMENTO COMMANDES LINUX
                     </a>
-                    <a href="documents/Procedures_Linux_Avancees.pdf" target="_blank" class="btn" style="text-align:center; padding: 20px;">
-                        <i class="fas fa-shield-alt" style="margin-right:10px;"></i> OUVRIR PROCÉDURE SYSTÈME & SÉCURITÉ
+                    <a href="documents/Procedures_Linux_Avancees.pdf" target="_blank" rel="noopener noreferrer" class="btn doc-btn">
+                        <i class="fas fa-shield-alt"></i> OUVRIR PROCÉDURE SYSTÈME & SÉCURITÉ
                     </a>
                 </div>
             </div>
@@ -857,7 +914,7 @@
             <span class="close-modal" id="closeMentions">&times;</span>
             <h2 class="modal-h2">Mentions Légales</h2>
             <div class="modal-body">
-                <p>Site édité par HOFFMANN Alann.</p>
+                <p>Site édité par HOFFMANN Alann avec l'aide de Gemini.</p>
                 <p>Hébergé par GitHub Pages.</p>
             </div>
         </div>
@@ -911,7 +968,7 @@
         </div>
         <div class="terminal-input-area">
             <span class="prompt">root@portfolio:~$</span>
-            <input type="text" id="terminal-input" autocomplete="off">
+            <input type="text" id="terminal-input" autocomplete="off" aria-label="Saisie du terminal">
         </div>
     </div>
     <button id="open-terminal-btn" title="Ouvrir le terminal"><i class="fas fa-terminal"></i></button>
@@ -925,28 +982,47 @@
             <div class="chat-msg msg-bot">Bonjour ! Je suis l'assistant virtuel d'Alann. Posez-moi vos questions sur son profil (ex: "CV", "Projets", "Contact", "BTS").</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Posez votre question..." autocomplete="off">
-            <button id="send-chat-btn"><i class="fas fa-paper-plane"></i></button>
+            <input type="text" id="chat-input" placeholder="Posez votre question..." autocomplete="off" aria-label="Message pour le chatbot">
+            <button id="send-chat-btn" aria-label="Envoyer le message"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
     <button id="open-chat-btn" title="Discuter avec l'IA"><i class="fas fa-comment-dots"></i></button>
 
     <script>
-        // --- ANIMATION TYPEWRITER ---
-        const textToType = "Technicien Système et Réseaux...";
+        // --- ANIMATION TYPEWRITER DYNAMIQUE ---
+        const rolesToType = ["Technicien Système et Réseaux...", "Administrateur Infrastructure...", "Expert en Cybersécurité..."];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
         const typeWriterElement = document.getElementById('typewriter');
-        let i = 0;
         
         function typeWriter() {
-            if (i < textToType.length) {
-                typeWriterElement.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80); 
+            const currentRole = rolesToType[roleIndex];
+            
+            if (isDeleting) {
+                typeWriterElement.innerHTML = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeWriterElement.innerHTML = currentRole.substring(0, charIndex + 1);
+                charIndex++;
             }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000; // Pause avant effacement
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % rolesToType.length;
+                typeSpeed = 500; // Pause avant d'écrire le prochain
+            }
+
+            setTimeout(typeWriter, typeSpeed);
         }
         setTimeout(typeWriter, 500);
 
-        // --- MATRIX RAIN EFFECT ---
+        // --- MATRIX RAIN EFFECT OPTIMISÉ ---
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         const katakana = '01'; 
@@ -973,6 +1049,7 @@
         let lastTime = 0;
         const fps = 30;
         const nextFrame = 1000 / fps;
+        let animationId;
 
         const drawMatrix = () => {
             ctx.fillStyle = 'rgba(10, 10, 10, 0.05)'; 
@@ -996,10 +1073,20 @@
                 drawMatrix();
                 lastTime = time;
             }
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
         };
         
         animate(0);
+
+        // Pause de l'animation quand l'onglet n'est pas actif pour économiser les perfs
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationId);
+            } else {
+                lastTime = performance.now();
+                animate(performance.now());
+            }
+        });
 
         // --- PROGRESS BAR ---
         window.onscroll = function() {
@@ -1101,12 +1188,15 @@
             observer.observe(el);
         });
 
-        // --- TERMINAL INTERACTIF ---
+        // --- TERMINAL INTERACTIF AVEC HISTORIQUE ---
         const termContainer = document.getElementById('terminal-container');
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
         const openTermBtn = document.getElementById('open-terminal-btn');
         const closeTermBtn = document.getElementById('close-terminal');
+        
+        let commandHistory = [];
+        let historyIndex = -1;
 
         openTermBtn.addEventListener('click', () => {
             termContainer.classList.toggle('active');
@@ -1118,7 +1208,13 @@
 
         termInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const command = this.value.trim().toLowerCase();
+                const command = this.value.trim();
+                const commandLower = command.toLowerCase();
+                
+                if (command !== '') {
+                    commandHistory.push(command);
+                    historyIndex = commandHistory.length;
+                }
                 
                 const inputLine = document.createElement('div');
                 inputLine.className = 'terminal-line';
@@ -1128,7 +1224,7 @@
                 const responseLine = document.createElement('div');
                 responseLine.className = 'terminal-line';
                 
-                switch(command) {
+                switch(commandLower) {
                     case 'help':
                         responseLine.innerHTML = 'Commandes globales : <span class="cmd-highlight">cv, clear, exit</span><br>' +
                                                  'Navigation : <span class="cmd-highlight">accueil, profil, competences, projets, documentation, parcours, veille, contact</span>';
@@ -1209,12 +1305,28 @@
                         responseLine.innerHTML = `Commande inconnue : ${command}. Tapez <span class="cmd-highlight">'help'</span> pour la liste.`;
                 }
 
-                if(command !== 'clear' && command !== '') {
+                if(commandLower !== 'clear' && commandLower !== '') {
                     termOutput.appendChild(responseLine);
                 }
 
                 termOutput.scrollTop = termOutput.scrollHeight;
                 this.value = '';
+                
+            } else if (e.key === 'ArrowUp') {
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    this.value = commandHistory[historyIndex];
+                }
+                e.preventDefault();
+            } else if (e.key === 'ArrowDown') {
+                if (historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    this.value = commandHistory[historyIndex];
+                } else {
+                    historyIndex = commandHistory.length;
+                    this.value = '';
+                }
+                e.preventDefault();
             }
         });
 
@@ -1248,14 +1360,16 @@
             chatInput.value = '';
             chatOutput.scrollTop = chatOutput.scrollHeight;
 
-            // Réponse du bot avec un léger délai
+            // Délai aléatoire pour faire plus "humain"
+            const randomDelay = Math.floor(Math.random() * 700) + 500;
+
             setTimeout(() => {
                 const botMsg = document.createElement('div');
                 botMsg.className = 'chat-msg msg-bot';
                 botMsg.innerHTML = getBotResponse(inputTxt.toLowerCase());
                 chatOutput.appendChild(botMsg);
                 chatOutput.scrollTop = chatOutput.scrollHeight;
-            }, 500);
+            }, randomDelay);
         }
 
         chatInput.addEventListener('keydown', (e) => {
@@ -1263,7 +1377,7 @@
         });
         sendChatBtn.addEventListener('click', processChatMsg);
 
-        // LOGIQUE DU CHATBOT (Mots-clés & Redirections)
+        // LOGIQUE DU CHATBOT
         function getBotResponse(input) {
             if (input.includes('cv') || input.includes('curriculum')) {
                 setTimeout(() => openModal('cvModal'), 800);
