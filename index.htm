@@ -1412,11 +1412,11 @@
             chatContainer.classList.remove('active');
         });
 
-        function processChatMsg() {
+        async function processChatMsg() {
             const inputTxt = chatInput.value.trim();
             if(!inputTxt) return;
 
-            // Ajout message utilisateur
+            // Affichage du message de l'utilisateur
             const userMsg = document.createElement('div');
             userMsg.className = 'chat-msg msg-user';
             userMsg.innerText = inputTxt;
@@ -1425,62 +1425,40 @@
             chatInput.value = '';
             chatOutput.scrollTop = chatOutput.scrollHeight;
 
-            // Délai aléatoire pour faire plus "humain"
-            const randomDelay = Math.floor(Math.random() * 700) + 500;
+            // Ajout d'un indicateur de chargement pour faire patienter l'utilisateur
+            const typingMsg = document.createElement('div');
+            typingMsg.className = 'chat-msg msg-bot';
+            typingMsg.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Traitement de la requête...';
+            chatOutput.appendChild(typingMsg);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
 
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = 'chat-msg msg-bot';
-                botMsg.innerHTML = getBotResponse(inputTxt.toLowerCase());
-                chatOutput.appendChild(botMsg);
-                chatOutput.scrollTop = chatOutput.scrollHeight;
-            }, randomDelay);
+            try {
+                // URL de ton API Vercel
+                const vercelURL = 'https://api-portfolio-v2.vercel.app/api/chat';
+
+                const response = await fetch(vercelURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: inputTxt })
+                });
+                
+                const data = await response.json();
+                
+                // On remplace le message de chargement par la vraie réponse de l'IA
+                typingMsg.innerHTML = data.reply;
+                
+            } catch (error) {
+                typingMsg.innerHTML = "<span style='color:red;'>[Erreur] Communication avec l'hôte distante perdue.</span>";
+                console.error("Erreur Fetch API:", error);
+            }
+            
+            chatOutput.scrollTop = chatOutput.scrollHeight;
         }
 
         chatInput.addEventListener('keydown', (e) => {
             if(e.key === 'Enter') processChatMsg();
         });
         sendChatBtn.addEventListener('click', processChatMsg);
-
-        // LOGIQUE DU CHATBOT
-        function getBotResponse(input) {
-            if (input.includes('cv') || input.includes('curriculum')) {
-                setTimeout(() => openModal('cvModal'), 800);
-                return "Bien sûr ! Voici le CV d'Alann. Je vous l'ouvre à l'écran.";
-            }
-            if (input.includes('projet') || input.includes('portfolio') || input.includes('realisation')) {
-                document.getElementById('projets').scrollIntoView({ behavior: 'smooth' });
-                return "Alann a réalisé plusieurs projets (VLANs, Serveur Linux, Sécurité). Je vous redirige vers la section Projets.";
-            }
-            if (input.includes('contact') || input.includes('email') || input.includes('mail') || input.includes('joindre') || input.includes('appeler')) {
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-                return "Vous souhaitez contacter Alann ? Voici la section contact. Son email est <strong>alannhoffmann86@gmail.com</strong>.";
-            }
-            if (input.includes('bts') || input.includes('sio') || input.includes('formation') || input.includes('etude') || input.includes('ecole')) {
-                setTimeout(() => openModal('btsModal'), 800);
-                return "Alann est actuellement en <strong>BTS SIO option SISR</strong> en alternance. Je vous ouvre les détails de cette formation.";
-            }
-            if (input.includes('competence') || input.includes('skill') || input.includes('techno') || input.includes('logiciel')) {
-                document.getElementById('competences').scrollIntoView({ behavior: 'smooth' });
-                return "Alann maîtrise Windows Server, Linux (Debian), Cisco, et la virtualisation. Je vous amène à ses compétences.";
-            }
-            if (input.includes('parcours') || input.includes('experience') || input.includes('cv')) {
-                document.getElementById('parcours').scrollIntoView({ behavior: 'smooth' });
-                return "Voici son parcours professionnel. Il est actuellement en alternance chez Viessmann.";
-            }
-            if (input.includes('bonjour') || input.includes('salut') || input.includes('hey') || input.includes('coucou')) {
-                return "Bonjour ! 👋 Je suis l'assistant d'Alann. Que souhaitez-vous savoir ? (Ex: CV, projets, contact, compétences)";
-            }
-            if (input.includes('qui es tu') || input.includes('qui est tu') || input.includes('bot')) {
-                return "Je suis un assistant virtuel IA conçu pour vous guider sur ce portfolio. Posez-moi des questions sur les compétences ou les projets d'Alann !";
-            }
-            if (input.includes('merci')) {
-                return "De rien ! N'hésitez pas si vous avez d'autres questions.";
-            }
-            
-            // Réponse par défaut
-            return "Je ne suis pas sûr de comprendre. 🤖<br>Essayez de me demander : <em>'Montre-moi ton CV'</em>, <em>'Quels sont tes projets ?'</em>, ou <em>'Comment te contacter ?'</em>";
-        }
     </script>
 </body>
 </html>
