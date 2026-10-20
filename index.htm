@@ -768,8 +768,11 @@
             <div class="timeline-item">
                 <div class="timeline-date">2025 - Présent</div>
                 <h3 class="timeline-title">BTS SIO SISR (Alternance)</h3>
-                <p class="timeline-place">Viessmann - Faulquemont</p>
-                <p class="timeline-desc">Technicien support et infrastructure. Gestion de parc, tickets GLPI, projets d'amélioration réseau.</p>
+                <p class="timeline-place">Viessmann - Faulquemont (57)</p>
+                <p class="timeline-desc">
+                    Technicien support et infrastructure. Gestion de parc, administration système, tickets GLPI et projets d'amélioration réseau.<br>
+                    <a href="#" id="openViessmannModal" class="cyber-link">&gt;_ [REQUÊTE] Présentation de l'entreprise Viessmann</a>
+                </p>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">2021 - 2024</div>
@@ -938,6 +941,48 @@
                     <h3 style="color: var(--primary-color);">Déploiement SISR</h3>
                     <p>Mon parcours initial en <strong>Maintenance des Équipements Industriels (MEI)</strong> et en électricité m'a donné le goût du concret et du fonctionnement technique des systèmes physiques.</p>
                     <p style="margin-top: 10px;">L'option SISR est la suite logique de cette expérience : concevoir et maintenir l'infrastructure qui permet aux données de circuler. J'aime comprendre comment interconnecter les équipements matériels, sécuriser les flux de bout en bout et garantir la haute disponibilité des services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE PRESENTATION ENTREPRISE VIESSMANN -->
+    <div id="viessmannModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeViessmann">&times;</span>
+            <h2 class="modal-h2">Entreprise d'Accueil : Viessmann</h2>
+            <div class="modal-body">
+                <p style="margin-bottom: 20px;">
+                    Implanté en Moselle depuis <strong>1971</strong>, le site de <strong>Faulquemont</strong> regroupe l'usine de production (<em>Viessmann Faulquemont SAS</em>) et le siège social commercial (<em>Viessmann France SAS</em>). Intégré à <strong>Carrier Global Corporation</strong> (division <em>Viessmann Climate Solutions</em>), ce site est un pilier industriel majeur de la transition énergétique en Europe.
+                </p>
+
+                <div class="slam-sisr-grid">
+                    <div class="option-box">
+                        <h3 style="margin-top:0;"><i class="fas fa-industry"></i> Pôle Industriel & R&D</h3>
+                        <p style="font-size:0.8rem; color: var(--text-muted); margin-bottom: 10px;">Centre de Compétence Mondial</p>
+                        <ul style="margin-top:10px; font-size:0.85rem; color:var(--text-color); list-style: none; margin-left: 0;">
+                            <li style="margin-bottom: 8px;"><i class="fas fa-users" style="color:var(--secondary-color); width:20px;"></i> <strong>Effectif :</strong> ~860 collaborateurs sur site</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-warehouse" style="color:var(--secondary-color); width:20px;"></i> <strong>Surface :</strong> 85 000 m² couverts (dont 19 000 m² de centre logistique)</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-solar-panel" style="color:var(--secondary-color); width:20px;"></i> <strong>Production :</strong> Ballons d'eau chaude sanitaire (ECS), capteurs solaires thermiques (1er fabricant français), pompes à chaleur et stockage d'énergie (Vitocharge VX3)</li>
+                        </ul>
+                    </div>
+
+                    <div class="option-box sisr">
+                        <div class="badge-choice">ENVIRONNEMENT IT</div>
+                        <h3 style="margin-top:0;"><i class="fas fa-network-wired"></i> Infrastructure & SISR</h3>
+                        <p style="font-size:0.8rem; color: var(--secondary-color); margin-bottom: 10px;">Maintien en Condition Opérationnelle</p>
+                        <p style="font-size:0.85rem;">Un site de production fonctionnant à flux tendu exige une <strong>haute disponibilité</strong> permanente du réseau et des systèmes :</p>
+                        <ul style="margin-top:10px; font-size:0.85rem; color:var(--text-color); list-style: none; margin-left: 0;">
+                            <li style="margin-bottom: 6px;"><i class="fas fa-headset" style="color:var(--primary-color); width:20px;"></i> Support IT (Helpdesk GLPI) Bureautique & Usine</li>
+                            <li style="margin-bottom: 6px;"><i class="fas fa-print" style="color:var(--primary-color); width:20px;"></i> Gestion du parc et terminaux industriels (imprimantes thermiques TSC / BarTender, scanners)</li>
+                            <li style="margin-bottom: 6px;"><i class="fas fa-server" style="color:var(--primary-color); width:20px;"></i> Administration Active Directory, brassage et segmentation VLAN</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 1px dashed rgba(0, 180, 216, 0.3); padding-top: 20px;">
+                    <h3 style="color: var(--primary-color); margin-top: 0;">Mes missions au quotidien</h3>
+                    <p>Au sein du service informatique de Faulquemont, j'assure le support technique de proximité auprès des équipes administratives, logistiques et des lignes de production. Mon rôle consiste à garantir la continuité de service du parc informatique, déployer et sécuriser les postes de travail, automatiser les tâches récurrentes et participer aux projets d'évolution de l'infrastructure réseau.</p>
                 </div>
             </div>
         </div>
@@ -1139,6 +1184,12 @@
             openBTSModalBtn.onclick = (e) => { e.preventDefault(); openModal('btsModal'); };
         }
         document.getElementById('closeBts').onclick = () => closeModal('btsModal');
+
+        const openViessmannModalBtn = document.getElementById('openViessmannModal');
+        if (openViessmannModalBtn) {
+            openViessmannModalBtn.onclick = (e) => { e.preventDefault(); openModal('viessmannModal'); };
+        }
+        document.getElementById('closeViessmann').onclick = () => closeModal('viessmannModal');
         
         window.openMentionsModal = function() { openModal('mentionsModal'); };
         document.getElementById('closeMentions').onclick = () => closeModal('mentionsModal');
@@ -1209,7 +1260,7 @@
                 
                 switch(commandLower) {
                     case 'help':
-                        responseLine.innerHTML = 'Commandes système disponibles : <span class="cmd-highlight">cv, clear, exit, ping, status</span><br>' +
+                        responseLine.innerHTML = 'Commandes système disponibles : <span class="cmd-highlight">cv, viessmann, clear, exit, ping, status</span><br>' +
                                                  'Navigation : <span class="cmd-highlight">accueil, profil, competences, projets, documentation, parcours, veille, contact</span>';
                         break;
                     case 'ping':
@@ -1258,6 +1309,11 @@
                     case 'cv':
                         responseLine.innerText = 'Téléchargement de l\'archive CV en cours...';
                         openModal('cvModal');
+                        break;
+                    case 'viessmann':
+                    case 'entreprise':
+                        responseLine.innerText = 'Chargement des informations sur Viessmann Faulquemont...';
+                        openModal('viessmannModal');
                         break;
                     case 'sysadmin':
                     case 'admin':
