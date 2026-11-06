@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-06",
+  "genere": "2026-11-06T10:25:12.817Z",
+  "modele": "qwen3:14b",
+  "articles": [
+    {
+      "source": "korben.info",
+      "titre": "War.app - Le jeu de conquête où personne n'attend son tour",
+      "resume": "War.app, ex-Warzone, a changé de nom en avril après un accord avec Activision. Le jeu reste gratuit dans le navigateur avec de la pub, sans dés par défaut, avec des ordres simultanés sur une carte du monde.",
+      "lien": "https://korben.info/war-app-warzone-risk-navigateur.html?utm_source=rss&utm_medium=feed&utm_campaign=flux-principal"
+    },
+    {
+      "source": "korben.info",
+      "titre": "Comment activer XeSS et sa génération de frames en x4 dans vos jeux Linux",
+      "resume": "Le projet xess-xmx-linux permet d'activer XeSS d'Intel sur les Arc XMX dans les jeux Proton avec génération de frames x4, selon la release 20261104, encore expérimental.",
+      "lien": "https://korben.info/xess-xmx-linux-proton.html?utm_source=rss&utm_medium=feed&utm_campaign=flux-principal"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "DigiCert : une erreur de migration expose les données et pièces d’identité de clients",
+      "resume": "Une erreur de migration chez DigiCert a exposé les données et pièces d’identité des clients, selon IT-Connect.",
+      "lien": "https://www.it-connect.fr/digicert-une-erreur-de-migration-expose-les-donnees-et-pieces-didentite-de-clients/"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "Après l’Europe, le FBI et la CISA alertent sur les cyberattaques contre les systèmes de réfrigération",
+      "resume": "Le FBI et la CISA alertent sur des cyberattaques ciblant les systèmes de réfrigération industriels, après des alertes précédentes sur les supermarchés et l'EFS.",
+      "lien": "https://www.it-connect.fr/fbi-cisa-alerte-cyberattaques-systemes-refrigeration/"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "*sshole : sur Alpine Linux, un mot de passe trop long peut mener à un accès root via SSH",
+      "resume": "La faille *sshole (CVE-2026-123158) permet à Alpine Linux d'accéder à root via SSH avec un mot de passe trop long, sans mot de passe.",
+      "lien": "https://www.it-connect.fr/faille-openssh-musl-sshhole-alpine-linux/"
+    },
+    {
+      "source": "next.ink",
+      "titre": "☕️ Vivaldi 8.3 devient plus agressif contre les publicités et les traqueurs",
+      "resume": "Nouvelle version de Vivaldi 8.3, basé sur Chromium, introduit un nouveau sélecteur pour bloquer les publicités et traqueurs plus efficacement, ciblant les utilisateurs avancés.",
+      "lien": "https://next.ink/brief-article/vivaldi-8-3-devient-plus-agressif-contre-les-publicites-et-les-traqueurs/"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "Chainalysis Breach Exposes All Users' Credentials, Forces Shutdown of Key Services",
+      "resume": "Chainalysis a révélé une fuite exposant noms, identifiants et tokens de tous les utilisateurs, forçant la fermeture de Reactor et Data Solutions, sans preuve d'accès à ces données.",
+      "lien": "https://thehackernews.com/2026/11/chainalysis-breach-exposes-all-users.html"
+    },
+    {
+      "source": "next.ink",
+      "titre": "Téléphonie mobile : Bouygues Telecom et Orange réorganisent leur spectre 900 et 2 100 MHz",
+      "resume": "Bouygues Telecom et Orange réorganisent leur spectre 900 et 2 100 MHz : Orange supprime la 2G et réalloue des fréquences, Bouygues Telecom démonte 9 000 sites 2 100 MHz pour la 5G.",
+      "lien": "https://next.ink/265942/telephonie-mobile-bouygues-telecom-et-orange-reorganisent-leur-spectre-900-et-2-100-mhz/"
+    },
+    {
+      "source": "next.ink",
+      "titre": "OpenAI débauche une responsable de Claude Code et lorgne du côté de GitHub",
+      "resume": "OpenAI recrute la directrice produit ex-Claude Code pour renforcer Codex, outil de génération, stockage et revue de code, visant à devenir indispensable aux développeurs.",
+      "lien": "https://next.ink/266026/openai-debauche-une-responsable-de-claude-code-et-lorgne-du-cote-de-github/"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "Hackers Hide Linux Backdoor in Control Web Panel Server to Execute Commands Without Logs",
+      "resume": "Hackers ont découvert un backdoor dans le serveur web de Control Web Panel (CWP), permettant d'exécuter des commandes sans traces dans les logs, nécessitant l'accès root.",
+      "lien": "https://thehackernews.com/2026/11/hackers-hide-linux-backdoor-in-control.html"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "Experts Demonstrate Barracuda Email Security Gateway Chain Enabling Root Access Without Login",
+      "resume": "Deux vulnérabilités dans le Barracuda Email Security Gateway permettent d'obtenir un accès root sans connexion, via CVE-2026-116606 ; des correctifs ont été publiés le lundi, et watchTowr a détaillé la chaîne d'attaque le jeudi.",
+      "lien": "https://thehackernews.com/2026/11/experts-demonstrate-barracuda-email.html"
+    },
+    {
+      "source": "cert.cyber.gouv.fr",
+      "titre": "Vulnérabilité dans OpenSSH (05 novembre 2026)",
+      "resume": "Le 5 novembre 2026, OpenSSH a signalé une vulnérabilité permettant de contourner l'authentification SSH sur Linux utilisant la bibliothèque musl C sans support PAM.",
+      "lien": "https://www.cert.cyber.gouv.fr/alerte/CERTFR-2026-ALE-015/"
+    },
+    {
+      "source": "korben.info",
+      "titre": "Botnet XCPE - La backdoor restera en place dans les box Android TV",
+      "resume": "Google et partenaires ont coupé le botnet XCPE et banni Videostrong, responsable de 1,3 million d'appareils Android infectés, mais la backdoor persiste, avec reset d'usine chez Plume et poubelle chez Synthient.",
+      "lien": "https://korben.info/botnet-xcpe-videostrong-box-android-tv.html?utm_source=rss&utm_medium=feed&utm_campaign=flux-principal"
+    }
+  ]
+}
