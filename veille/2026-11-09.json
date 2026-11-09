@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-09",
+  "genere": "2026-11-09T07:06:42.679Z",
+  "modele": "qwen3:14b",
+  "articles": [
+    {
+      "source": "it-connect.fr",
+      "titre": "Bon plan VZMORE AX9 MAX : ce mini-PC Ryzen AI 9 HX 470 à son prix le plus bas sur le Web",
+      "resume": "Jusqu'au 22 novembre 2026, le mini-PC VZMORE AX9 MAX (Ryzen AI 9 HX 470) est à 1 310 € au lieu de 1 549 € grâce au code réservé aux lecteurs d'IT-Connect.",
+      "lien": "https://www.it-connect.fr/bon-plan-vzmore-ax9-max-novembre-2026/"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "Phishing : 7,3 milliards de menaces par e-mail au troisième trimestre 2026, voici ce que révèle Microsoft",
+      "resume": "Microsoft a détecté 7,3 milliards d'e-mails de phishing au troisième trimestre 2026, incluant des faux DocuSign, SVG et codes d'appareil.",
+      "lien": "https://www.it-connect.fr/microsoft-rapport-menaces-email-phishing-exceptions/"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "U.S. Agencies Warn Refrigeration Controller Attacks Could Cause Fires and Inventory Losses",
+      "resume": "Les agences américaines alertent sur des attaques ciblant les contrôleurs de réfrigération industrielle, pouvant provoquer des incendies et des pertes d'inventaire en exploitant des vulnérabilités non corrigées.",
+      "lien": "https://thehackernews.com/2026/11/us-agencies-warn-refrigeration.html"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "CISA Flags SonicWall SonicOS MFA Bypass Flaw Amid Reports of Possible Exploitation",
+      "resume": "CISA a ajouté une vulnérabilité critique (CVE-2026-19868, CVSS 7.1/7.5) dans SonicWall SonicOS à son catalogue KEV après des rapports d'exploitation réelle via un bypass MFA.",
+      "lien": "https://thehackernews.com/2026/11/cisa-flags-sonicwall-sonicos-mfa-bypass.html"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "Firefox cache un jeu Snake dans sa barre d’adresse : voici comment le lancer",
+      "resume": "Firefox cache un jeu Snake dans sa barre d’adresse : saisissez 150 pour débloquer cet Easter egg, selon IT-Connect.",
+      "lien": "https://www.it-connect.fr/firefox-jeu-snake-cache-barre-adresse/"
+    }
+  ]
+}
