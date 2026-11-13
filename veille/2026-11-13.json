@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-13",
+  "genere": "2026-11-13T07:10:32.836Z",
+  "modele": "qwen3:14b",
+  "articles": [
+    {
+      "source": "next.ink",
+      "titre": "☕️ [MàJ] Outlook, Teams : plusieurs services de Microsoft sont toujours en panne après 12h",
+      "resume": "Microsoft Outlook, Teams et services liés à Exchange Online souffrent de dysfonctionnements majeurs 12 heures après les premiers signalements, avec des retards persistants en France.",
+      "lien": "https://next.ink/brief-article/outlook-teams-plusieurs-services-de-microsoft-sont-en-panne/"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "Panne mondiale de Microsoft 365 : Outlook, Teams et Copilot perturbés depuis plus de 11 heures",
+      "resume": "Panne mondiale de Microsoft 365 : Outlook, Teams et Copilot perturbés depuis plus de 11 heures, non résolu le 13 novembre 2026.",
+      "lien": "https://www.it-connect.fr/panne-mondiale-microsoft-365-exchange-online-outlook-teams/"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "SignDrop : cette faille zero-day détourne la protection CLFS de Windows pour obtenir les droits SYSTEM",
+      "resume": "SignDrop, une faille zero-day publiée par Nightmare Eclipse, détourne la protection CLFS de Windows pour obtenir les droits SYSTEM, selon IT-Connect.",
+      "lien": "https://www.it-connect.fr/signdrop-zero-day-windows-clfs-system/"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "Hackers Exploit N-central Flaws to Infect 21 Servers, Including 19 Running Hotfix 2",
+      "resume": "Hackers exploit les vulnérabilités N-central 4EverAble2Shell et Agent2Shell, infectant 21 serveurs, dont 19 avec Hotfix 2 ; N-able restreint des fonctionnalités.",
+      "lien": "https://thehackernews.com/2026/11/hackers-exploit-n-central-flaws-to.html"
+    },
+    {
+      "source": "it-connect.fr",
+      "titre": "Serveurs Apache : cette faille critique dans HTTP/2 permet d’exécuter du code à distance",
+      "resume": "Une faille critique CVE-2026-119618 dans le module HTTP/2 d'Apache permet l'exécution à distance de code, selon IT-Connect.",
+      "lien": "https://www.it-connect.fr/faille-apache-http2-cve-2026-119618-rce/"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "Webinar: See How Identity Blind Spots Put Your SOC at Risk and How to Close Them",
+      "resume": "Le webinar \"See How Identity Blind Spots Put Your SOC at Risk and How to Close Them\" souligne que les lacunes d'identité dans le SOC exposent les organisations à des risques, malgré un nombre accru d'alertes et d'outils, en rendant difficile l'identification rapide des attaquants.",
+      "lien": "https://thehackernews.com/2026/11/your-soc-sees-alert-but-does-it-know.html"
+    },
+    {
+      "source": "thehackernews.com",
+      "titre": "ThreatsDay: 59 Linux Kernel Bugs, Falcon Spyware, GSocket Backdoors + 17 More Stories",
+      "resume": "ThreatsDay: 59 bugs du noyau Linux, Falcon Spyware, GSocket Backdoors et 17 autres histoires sur thehackernews.com.",
+      "lien": "https://thehackernews.com/2026/11/threatsday-59-linux-kernel-bugs-falcon.html"
+    },
+    {
+      "source": "next.ink",
+      "titre": "☕️ La PS5 passe les 100 millions, mais les ventes ralentissent",
+      "resume": "Sony a vendu 100 millions de PS5 (10 novembre) et la PS2 reste la console la plus vendue avec 160 millions, malgré un ralentissement des ventes.",
+      "lien": "https://next.ink/brief-article/la-ps5-passe-les-100-millions-mais-les-ventes-ralentissent/"
+    },
+    {
+      "source": "next.ink",
+      "titre": "United Airlines ferme ses réservations aux agents IA",
+      "resume": "United Airlines bloque les réservations par les agents IA en raison de la sécurité des données et des règles aériennes, malgré leur faible impact sur les transactions.",
+      "lien": "https://next.ink/267253/united-airlines-ferme-ses-reservations-aux-agents-ia/"
+    },
+    {
+      "source": "korben.info",
+      "titre": "Modern Web Guidance - Votre agent IA va enfin goûter au code web moderne",
+      "resume": "Modern Web Guidance intègre des guides sur les fonctionnalités natives du navigateur dans votre agent IA, couvrant l'installation, le scan, la télémétrie et les limites.",
+      "lien": "https://korben.info/modern-web-guidance-agents-web.html?utm_source=rss&utm_medium=feed&utm_campaign=flux-principal"
+    },
+    {
+      "source": "korben.info",
+      "titre": "Synctrain - Vos fichiers Syncthing à la demande sur iPhone",
+      "resume": "Synctrain est un client Syncthing gratuit et open source pour iPhone, iPad et Mac qui conserve uniquement les fichiers sélectionnés et diffuse le reste depuis vos appareils.",
+      "lien": "https://korben.info/synctrain-syncthing-iphone-ipad-mac.html?utm_source=rss&utm_medium=feed&utm_campaign=flux-principal"
+    }
+  ]
+}
