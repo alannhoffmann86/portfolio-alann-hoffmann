@@ -215,6 +215,30 @@ a.vtitle:hover{color:var(--accent)}
 #shutdown{position:fixed;inset:0;background:#000;z-index:9500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;font-size:18px;text-align:center;padding:20px}
 .spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* Lecteur PDF */
+.pdfv{display:flex;flex-direction:column;height:calc(100% + 44px);margin:-22px -26px}
+.pdf-tb{display:flex;align-items:center;gap:3px;padding:6px 10px;background:#1c2433;border-bottom:1px solid var(--border);flex-wrap:wrap;font-size:12.5px;user-select:none}
+.pdf-tb button,.pdf-tb a{height:30px;min-width:30px;padding:0 9px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;gap:5px;color:#fff;text-decoration:none;cursor:pointer}
+.pdf-tb button:hover,.pdf-tb a:hover{background:rgba(255,255,255,.1)}
+.pdf-tb button:disabled{opacity:.35;cursor:default;background:none}
+.pdf-tb .sep{width:1px;height:20px;background:var(--border);margin:0 5px}
+.pdf-tb input{width:42px;height:26px;background:#0f141e;border:1px solid var(--border);color:#fff;border-radius:4px;text-align:center;font:inherit}
+.pdf-tb .zl{min-width:46px;text-align:center;color:var(--muted)}
+.pdf-tb .grow{flex:1}
+.pdf-tb .pr{background:var(--accent2)}.pdf-tb .pr:hover{background:#0891b2}
+.pdf-pages{flex:1;overflow:auto;background:#252c39;padding:16px;position:relative;display:flex;flex-direction:column}
+.pdf-pages canvas{display:block;margin:0 auto 14px;box-shadow:0 4px 18px rgba(0,0,0,.5);background:#fff;flex-shrink:0}
+.pdf-msg{color:var(--muted);text-align:center;margin:auto;padding:30px;display:flex;flex-direction:column;align-items:center;gap:14px}
+#printArea{display:none}
+@media print{
+  body.printing{height:auto!important;overflow:visible!important;background:#fff!important}
+  body.printing>*:not(#printArea){display:none!important}
+  body.printing #printArea{display:block!important}
+  #printArea img{display:block;width:100%;break-after:page;page-break-after:always}
+  #printArea img:last-child{break-after:auto;page-break-after:auto}
+  @page{margin:0}
+}
+@media (max-width:700px){.pdf-tb .zl,.pdf-tb .fitlbl{display:none}}
 .net-svg{width:100%;max-width:640px;display:block;margin:6px auto 14px}
 
 @media (max-width:700px){
@@ -275,6 +299,7 @@ a.vtitle:hover{color:var(--accent)}
   <div data-a="about">👤 Propriétés (profil)</div>
 </div>
 <div id="toast"></div>
+<div id="printArea" aria-hidden="true"></div>
 <div id="shutdown"><div class="spinner"></div><div id="sdText">Arrêt en cours…</div></div>
 
 <script>
@@ -292,12 +317,13 @@ const ME = {
   ville: "Brettnach (57320)",
   linkedin: "https://www.linkedin.com/in/alann-hoffmann-515897359",
   github: "https://github.com/alannhoffmann86",
-  cv: "documents/CV_Alann_HOFFMANN.pdf"
+  cv: "CV_Alann_HOFFMANN.pdf"   // dans documents/
 };
 const ROLES = ["Technicien Système et Réseaux...","Administrateur Infrastructure...","Gestionnaire de Parc IT...","Déploiement Serveurs & Sécurité..."];
 const CHAT_API_URL = "https://portfolio-chat-api-ub2n.vercel.app/api/chat";
 const VEILLE_DOSSIER = "veille", VEILLE_JOURS_RECHERCHE = 14, VEILLE_JOURS_VISIBLES = 5;
 const doc = f => "documents/" + encodeURI(f);
+const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
 
 /* ===================== ICÔNES SVG ===================== */
 const I = {
@@ -366,7 +392,7 @@ const FOLDERS = {
      <span class="btn off">Documentation en cours de rédaction</span>`},
     {id:"portfolio", nom:"Portfolio_Web", ico:"web", type:"Web", tags:["HTML/CSS/JS","GitHub Pages","Vercel","API Gemini"],
      html:`<h1>🌐 Ce portfolio</h1><p class="muted">Tu es dedans 😄</p>
-     <h2>⚙️ Technique</h2><ul><li>Page unique HTML/CSS/JS, hébergée sur <b>GitHub Pages</b></li><li>Interface façon bureau : fenêtres déplaçables, barre des tâches, menu Démarrer, terminal</li><li><b>Assistant IA</b> via une fonction serverless <b>Vercel</b> + API <b>Gemini</b> (réponses filtrées par DOMPurify)</li><li><b>Veille</b> alimentée chaque jour par mon serveur IA local</li></ul>
+     <h2>⚙️ Technique</h2><ul><li>Page unique HTML/CSS/JS, hébergée sur <b>GitHub Pages</b></li><li>Interface façon bureau : fenêtres déplaçables, barre des tâches, menu Démarrer, terminal</li><li><b>Assistant IA</b> via une fonction serverless <b>Vercel</b> + API <b>Gemini</b> (réponses filtrées par DOMPurify)</li><li><b>Veille</b> alimentée chaque jour par mon serveur IA local</li><li><b>Lecteur PDF intégré</b> (pdf.js) : lecture et impression des documentations sans quitter le bureau</li></ul>
      <a class="btn" href="${ME.github}" target="_blank" rel="noopener noreferrer">🐙 Voir sur GitHub</a>`}
   ]},
   docs:{nom:"Documentation", items:[
@@ -385,8 +411,8 @@ const FOLDERS = {
     {id:"ressources", nom:"Ressources SysAdmin", ico:"archive", type:"Dossier", tags:["Mémento CLI","Sécurité","Procédures"],
      html:`<h1>🗄️ Ressources SysAdmin</h1><p>Accès centralisé à la documentation technique : mémento des commandes essentielles Linux et procédures de sécurité système avancées.</p>
      <div class="files" style="margin-top:14px">
-       <a class="file" href="${doc("Memo_Commandes_Linux.pdf")}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">${I.pdf}Mémento commandes Linux<small>PDF</small></a>
-       <a class="file" href="${doc("Procedures_Linux_Avancees.pdf")}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">${I.pdf}Procédure système & sécurité<small>PDF</small></a>
+       <div class="file" data-pdf="Memo_Commandes_Linux.pdf" data-ttl="Mémento commandes Linux">${I.pdf}Mémento commandes Linux<small>PDF</small></div>
+       <div class="file" data-pdf="Procedures_Linux_Avancees.pdf" data-ttl="Procédure système & sécurité">${I.pdf}Procédure système & sécurité<small>PDF</small></div>
      </div>`}
   ]}
 };
@@ -487,11 +513,19 @@ const APPS = {
     <p class="vnote" id="vnote">Chargement de la veille…</p>
     <div class="vlist"></div>`, onOpen:initVeille},
 
-  cv:{t:"CV_Alann_HOFFMANN.pdf", lbl:"CV.pdf", ico:"cv", w:520, h:400, html:()=>`
-    <h1>📄 Fichier CV</h1><p class="muted mono">Extraction des données du serveur en cours…</p>
-    <div class="card" style="margin-top:16px"><h3>${ME.prenomNom}</h3><p class="muted" style="margin:0">${ME.titre}</p></div>
-    <a class="btn" href="${ME.cv}" target="_blank" rel="noopener noreferrer">⬇️ Télécharger le fichier</a>
-    <a class="btn ghost" onclick="openApp('parcours')">🧭 Voir le parcours</a>`},
+  cv:{t:"CV_Alann_HOFFMANN.pdf", lbl:"CV.pdf", ico:"cv", open:()=>openPdf(ME.cv,"CV_Alann_HOFFMANN.pdf")},
+
+  pdf:{t:"Lecteur PDF", lbl:"Lecteur PDF", ico:"pdf", w:900, h:660, html:()=>`<div class="pdfv">
+    <div class="pdf-tb">
+      <button data-a="prev" title="Page précédente">◀</button><input data-a="page" value="1" inputmode="numeric" aria-label="Page"><span class="muted">/ <span class="tot">–</span></span><button data-a="next" title="Page suivante">▶</button>
+      <span class="sep"></span>
+      <button data-a="zout" title="Zoom arrière">−</button><span class="zl">100 %</span><button data-a="zin" title="Zoom avant">+</button><button data-a="fit" title="Ajuster à la largeur">↔<span class="fitlbl"> Ajuster</span></button>
+      <span class="grow"></span>
+      <a data-a="tab" target="_blank" rel="noopener noreferrer" title="Ouvrir dans un nouvel onglet">↗</a>
+      <a data-a="dl" title="Télécharger">⬇️</a>
+      <button data-a="print" class="pr" title="Imprimer (Ctrl+P)">🖨️ Imprimer</button>
+    </div>
+    <div class="pdf-pages"><div class="pdf-msg">Aucun document ouvert.</div></div></div>`, onOpen:initPdfViewer},
 
   contact:{t:"Courrier — Canal de communication", lbl:"Contact", ico:"mail", w:560, h:520, html:()=>`
     <h1>✉️ Canal de communication</h1>
@@ -551,7 +585,7 @@ function wireExplorer(win,f){
     win.querySelectorAll(".ex-side [data-f]").forEach(d=>d.classList.toggle("on",d.dataset.f===cur));};
   const show=id=>{const p=FOLDERS[cur].items.find(x=>x.id===id);if(!p)return;
     path.innerHTML=`<span data-root>📁 Ce PC</span> › <span data-root>${FOLDERS[cur].nom}</span> › <b>${p.nom}</b>`;
-    body.innerHTML=`<a class="btn ghost" data-root>← Retour</a><div style="margin:10px 0 14px">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>${p.html}${p.pdf?`<div style="margin-top:14px"><a class="btn" href="${doc(p.pdf)}" target="_blank" rel="noopener noreferrer">📄 ${p.btn}</a></div>`:""}`;
+    body.innerHTML=`<a class="btn ghost" data-root>← Retour</a><div style="margin:10px 0 14px">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>${p.html}${p.pdf?`<div style="margin-top:14px"><a class="btn" data-pdf="${p.pdf}" data-ttl="${p.nom}">📖 ${p.btn}</a></div>`:""}`;
     main.scrollTop=0;};
   win._show=(folder,id)=>{cur=folder;grid();show(id);};
   body.addEventListener("click",e=>{const fl=e.target.closest(".file[data-p]");if(fl)show(fl.dataset.p);});
@@ -566,6 +600,7 @@ const $=s=>document.querySelector(s);
 function openApp(id){
   closeStart();
   if(!APPS[id])return;
+  if(APPS[id].open)return APPS[id].open();
   if(opened[id]){const w=opened[id];w.classList.remove("min");focus(w);return w;}
   const a=APPS[id], w=document.createElement("div");
   const vw=innerWidth, vh=innerHeight-52, W=Math.min(a.w,vw-20), H=Math.min(a.h,vh-20);
@@ -734,6 +769,120 @@ function initVeille(w){
     if(ok.length>VEILLE_JOURS_VISIBLES){const b=el("button","btn ghost","Afficher les jours précédents");b.onclick=()=>{liste.querySelectorAll(".vday[hidden]").forEach(c=>c.hidden=false);b.remove();};liste.after(b);}
   });
 }
+
+/* ===================== LECTEUR PDF (pdf.js) ===================== */
+let pdfjsReady=null;
+function loadPdfJs(){
+  if(window.pdfjsLib)return Promise.resolve();
+  if(pdfjsReady)return pdfjsReady;
+  pdfjsReady=new Promise((res,rej)=>{const sc=document.createElement("script");sc.src=PDFJS+"pdf.min.js";
+    sc.onload=()=>{pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS+"pdf.worker.min.js";res();};
+    sc.onerror=()=>{pdfjsReady=null;rej(new Error("pdf.js"));};document.head.appendChild(sc);});
+  return pdfjsReady;
+}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-pdf]");if(!t)return;e.preventDefault();openPdf(t.dataset.pdf,t.dataset.ttl||t.dataset.pdf);});
+function openPdf(file,title){
+  const w=openApp("pdf");if(!w)return;
+  const url=doc(file);
+  w.querySelector(".title").textContent=title+" — Lecteur PDF";
+  const tb=w.querySelector(".pdf-tb");
+  tb.querySelector('[data-a="tab"]').href=url;
+  const dl=tb.querySelector('[data-a="dl"]');dl.href=url;dl.setAttribute("download",file);
+  pdfLoad(w,url,title);
+  return w;
+}
+async function pdfLoad(w,url,title){
+  const pages=w.querySelector(".pdf-pages"),tok=++w._tok;
+  w._pdf=null;w._title=title;w.querySelector(".tot").textContent="–";pdfUi(w);
+  pages.innerHTML='<div class="pdf-msg"><div class="spinner"></div>Chargement du document…</div>';
+  try{
+    await loadPdfJs();
+    const pdf=await pdfjsLib.getDocument(url).promise;
+    if(tok!==w._tok)return;
+    w._pdf=pdf;w._page=1;
+    w.querySelector(".tot").textContent=pdf.numPages;
+    await pdfFit(w);
+  }catch(err){
+    if(tok!==w._tok)return;
+    pages.innerHTML=`<div class="pdf-msg">⚠️ Impossible d'afficher ce document ici.<span style="font-size:12px">Vérifie que le fichier est bien dans le dossier <b>documents/</b>.</span><a class="btn" href="${url}" target="_blank" rel="noopener noreferrer">↗ Ouvrir dans un nouvel onglet</a></div>`;
+  }
+}
+async function pdfFit(w){
+  if(!w._pdf)return;const pages=w.querySelector(".pdf-pages");
+  const p1=await w._pdf.getPage(1),vp=p1.getViewport({scale:1});
+  w._scale=Math.max(.4,Math.min(2.5,(pages.clientWidth-40)/vp.width));
+  await pdfRender(w);
+}
+async function pdfRender(w){
+  const pdf=w._pdf;if(!pdf)return;
+  const pages=w.querySelector(".pdf-pages"),rt=++w._rtok,dpr=Math.min(2,window.devicePixelRatio||1);
+  const keep=w._page||1;pages.innerHTML="";const list=[];
+  for(let i=1;i<=pdf.numPages;i++){
+    const pg=await pdf.getPage(i);if(rt!==w._rtok)return;
+    const vp=pg.getViewport({scale:w._scale}),c=document.createElement("canvas");
+    c.width=Math.floor(vp.width*dpr);c.height=Math.floor(vp.height*dpr);c.style.width=Math.floor(vp.width)+"px";c.style.height=Math.floor(vp.height)+"px";
+    c.dataset.page=i;pages.appendChild(c);list.push([pg,vp,c]);
+  }
+  pdfUi(w);pdfGoto(w,keep,true);
+  for(const [pg,vp,c] of list){
+    if(rt!==w._rtok)return;
+    await pg.render({canvasContext:c.getContext("2d"),viewport:vp,transform:dpr!==1?[dpr,0,0,dpr,0,0]:null}).promise;
+  }
+}
+function pdfGoto(w,n,instant){
+  if(!w._pdf)return;n=Math.max(1,Math.min(w._pdf.numPages,n|0||1));
+  const pages=w.querySelector(".pdf-pages"),c=pages.querySelector(`canvas[data-page="${n}"]`);
+  if(c)pages.scrollTo({top:c.offsetTop-16,behavior:instant?"auto":"smooth"});
+  w._page=n;pdfUi(w);
+}
+function pdfUi(w){
+  const tb=w.querySelector(".pdf-tb"),has=!!w._pdf;
+  tb.querySelector('[data-a="page"]').value=has?w._page:"–";
+  tb.querySelector(".zl").textContent=has?Math.round(w._scale*100)+" %":"–";
+  tb.querySelectorAll("button").forEach(b=>b.disabled=!has);
+  if(has){tb.querySelector('[data-a="prev"]').disabled=w._page<=1;tb.querySelector('[data-a="next"]').disabled=w._page>=w._pdf.numPages;}
+}
+async function pdfPrint(w){
+  if(!w||!w._pdf)return;
+  const area=$("#printArea");area.innerHTML="";
+  toast("🖨️ Préparation de l'impression…",`${w._title} · ${w._pdf.numPages} page(s)`);
+  try{
+    for(let i=1;i<=w._pdf.numPages;i++){
+      const pg=await w._pdf.getPage(i),vp=pg.getViewport({scale:2}),c=document.createElement("canvas");
+      c.width=vp.width;c.height=vp.height;
+      await pg.render({canvasContext:c.getContext("2d"),viewport:vp}).promise;
+      const img=new Image();img.src=c.toDataURL("image/jpeg",.92);await img.decode().catch(()=>{});area.appendChild(img);
+    }
+    document.body.classList.add("printing");
+    const done=()=>{document.body.classList.remove("printing");area.innerHTML="";removeEventListener("afterprint",done);};
+    addEventListener("afterprint",done);
+    setTimeout(()=>{try{window.print();}catch(e){done();toast("⚠️ Impression bloquée","Utilise ⬇️ Télécharger ou ↗ Nouvel onglet pour imprimer.");}},50);
+  }catch(e){document.body.classList.remove("printing");area.innerHTML="";toast("⚠️ Impression impossible","Utilise ↗ Nouvel onglet pour imprimer ce document.");}
+}
+function initPdfViewer(w){
+  w._tok=0;w._rtok=0;w._scale=1;w._page=1;
+  const tb=w.querySelector(".pdf-tb"),pages=w.querySelector(".pdf-pages"),inp=tb.querySelector('[data-a="page"]');
+  tb.addEventListener("click",e=>{const b=e.target.closest("button[data-a]");if(!b||!w._pdf)return;
+    const a=b.dataset.a;
+    if(a==="prev")pdfGoto(w,w._page-1);
+    if(a==="next")pdfGoto(w,w._page+1);
+    if(a==="zin"){w._scale=Math.min(4,w._scale*1.2);pdfRender(w);}
+    if(a==="zout"){w._scale=Math.max(.3,w._scale/1.2);pdfRender(w);}
+    if(a==="fit")pdfFit(w);
+    if(a==="print")pdfPrint(w);
+  });
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")pdfGoto(w,parseInt(inp.value,10));});
+  let st;pages.addEventListener("scroll",()=>{clearTimeout(st);st=setTimeout(()=>{if(!w._pdf)return;
+    const mid=pages.scrollTop+pages.clientHeight/3;let cur=1;
+    pages.querySelectorAll("canvas").forEach(c=>{if(c.offsetTop<=mid)cur=+c.dataset.page;});
+    if(cur!==w._page){w._page=cur;pdfUi(w);}},80);});
+  pdfUi(w);
+}
+// Ctrl+P quand le lecteur PDF est au premier plan = imprime le document, pas le bureau
+document.addEventListener("keydown",e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="p"){const w=opened.pdf;
+    if(w&&!w.classList.contains("min")&&!w.classList.contains("inactive")&&w._pdf){e.preventDefault();pdfPrint(w);}}
+});
 
 /* ===================== ANIMATION RÉSEAU (fond) ===================== */
 (function(){
