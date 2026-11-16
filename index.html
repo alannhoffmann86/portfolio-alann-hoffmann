@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio HOFFMANN Alann - Technicien Système & Réseaux (BTS SIO SISR)">
+<meta name="author" content="HOFFMANN Alann">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portfolio Alann HOFFMANN | BTS SIO SISR">
+<meta property="og:description" content="Technicien Système & Réseaux. Découvrez mes projets Infrastructure, Windows Server, Linux et automatisation.">
+<meta property="og:url" content="https://alannhoffmann86.github.io/portfolio-alann-hoffmann/">
+<meta name="twitter:card" content="summary">
+<title>Portfolio de Alann HOFFMANN | SISR</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2300b4d8%22>_&gt;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<style>
+:root{
+  --accent:#00b4d8; --accent2:#0077a8; --orange:#f77f00; --green:#10b981;
+  --glass:rgba(20,26,40,.75); --glass-light:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.12); --text:#f1f5f9; --muted:#94a3b8;
+  --win-bg:#141a26; --win-bar:#1c2433; --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:Inter,"Segoe UI",system-ui,sans-serif;color:var(--text);background:#0b101e;user-select:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:var(--accent)}
+
+/* ---------- Fond d'écran ---------- */
+#wallpaper{position:fixed;inset:0;transition:background 1s}
+.wp-0{background:radial-gradient(ellipse at 25% 75%,#0369a1 0%,transparent 55%),radial-gradient(ellipse at 80% 25%,#1e3a8a 0%,transparent 50%),radial-gradient(ellipse at 70% 90%,#0e7490 0%,transparent 40%),#0b101e}
+.wp-1{background:radial-gradient(ellipse at 30% 30%,#7c2d12 0%,transparent 55%),radial-gradient(ellipse at 75% 80%,#c2410c 0%,transparent 45%),#0f0a08}
+.wp-2{background:radial-gradient(ellipse at 20% 30%,#065f46 0%,transparent 55%),radial-gradient(ellipse at 80% 80%,#0f766e 0%,transparent 50%),#04140f}
+.wp-3{background:#0b101e;background-image:linear-gradient(rgba(0,180,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.06) 1px,transparent 1px);background-size:40px 40px}
+#net{position:fixed;inset:0;opacity:.55;pointer-events:none}
+
+/* ---------- Écran de verrouillage ---------- */
+#lock{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:11vh 20px 9vh;background:radial-gradient(ellipse at 25% 75%,#0369a1 0%,transparent 55%),radial-gradient(ellipse at 80% 25%,#1e3a8a 0%,transparent 50%),#0b101e;transition:transform .7s cubic-bezier(.7,0,.3,1),opacity .7s;cursor:pointer}
+#lock.gone{transform:translateY(-100%);opacity:0;pointer-events:none}
+#lock .time{font-size:clamp(64px,12vw,128px);font-weight:600;letter-spacing:-2px;text-align:center;text-shadow:0 4px 30px rgba(0,0,0,.4)}
+#lock .date{font-size:clamp(16px,2.4vw,24px);text-align:center;opacity:.9}
+#lock .login{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1e3a8a);display:grid;place-items:center;font-size:36px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.4);flex-shrink:0}
+#lock .name{font-size:24px;font-weight:700}
+.typer{font-family:"Fira Code",monospace;font-size:14px;color:var(--accent);min-height:20px}
+.typer::after{content:"▌";color:var(--orange);animation:blink .8s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+#lock .hint{font-size:13px;opacity:.7;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+#loginBtn{padding:9px 28px;border-radius:6px;background:rgba(255,255,255,.15);border:1px solid var(--border);backdrop-filter:blur(10px)}
+#loginBtn:hover{background:rgba(255,255,255,.25)}
+
+/* ---------- Bureau ---------- */
+#desktop{position:fixed;inset:0 0 52px 0;padding:12px 10px;display:grid;grid-auto-flow:column;grid-template-rows:repeat(auto-fill,98px);grid-auto-columns:90px;gap:4px;align-content:start}
+.icon{width:86px;height:94px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 2px;border-radius:6px;border:1px solid transparent;text-align:center;font-size:12px;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+.icon:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.12)}
+.icon.sel{background:rgba(0,180,216,.25);border-color:rgba(0,180,216,.5)}
+.icon svg{width:46px;height:46px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+
+/* ---------- Fenêtres ---------- */
+.win{position:absolute;min-width:340px;min-height:220px;background:var(--win-bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;resize:both;animation:open .18s ease-out}
+@keyframes open{from{transform:scale(.94);opacity:0}}
+.win.closing{animation:close .15s ease-in forwards}
+@keyframes close{to{transform:scale(.94);opacity:0}}
+.win.min{display:none}
+.win.max{left:0!important;top:0!important;width:100%!important;height:calc(100% - 52px)!important;border-radius:0;resize:none}
+.win.inactive .bar{background:#171d29;color:var(--muted)}
+.bar{height:38px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding-left:12px;background:var(--win-bar);font-size:13px;cursor:default;touch-action:none}
+.bar svg{width:18px;height:18px}
+.bar .title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctrl{width:46px;height:38px;display:grid;place-items:center}
+.ctrl:hover{background:rgba(255,255,255,.1)}
+.ctrl.x:hover{background:#c42b1c}
+.ctrl svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.2}
+.content{flex:1;overflow:auto;padding:22px 26px;user-select:text;font-size:14px;line-height:1.6}
+.content::-webkit-scrollbar,.ex-main::-webkit-scrollbar,.chat-body::-webkit-scrollbar{width:10px}
+.content::-webkit-scrollbar-thumb,.ex-main::-webkit-scrollbar-thumb,.chat-body::-webkit-scrollbar-thumb{background:#3a4456;border-radius:5px;border:3px solid var(--win-bg)}
+.content h1{font-size:25px;margin-bottom:4px}
+.content h2{font-size:16px;margin:22px 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.content h2:first-child{margin-top:0}
+.content h3{font-size:15px}
+.content p{margin-bottom:10px;color:#d6dde7}
+.content ul{margin:0 0 10px 20px;color:#d6dde7}
+.content li{margin-bottom:3px}
+.muted{color:var(--muted)}
+.tag{display:inline-block;padding:3px 10px;margin:3px 4px 3px 0;border-radius:20px;background:rgba(0,180,216,.12);border:1px solid rgba(0,180,216,.3);font-size:12px;color:#b9ecf7}
+.tag.g{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.35);color:#b8f5dc}
+.tag.o{background:rgba(247,127,0,.12);border-color:rgba(247,127,0,.35);color:#fed7aa}
+.card{background:var(--glass-light);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:12px}
+.card h3{margin-bottom:4px}
+.card.hl{border-color:rgba(0,180,216,.5);background:rgba(0,180,216,.06);position:relative}
+.badge{position:absolute;top:-10px;right:14px;background:var(--accent);color:#000;font-size:11px;font-weight:700;padding:2px 9px;border-radius:4px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:5px;background:var(--accent2);color:#fff;text-decoration:none;font-size:13px;margin:4px 6px 4px 0;cursor:pointer}
+.btn:hover{background:#0891b2}
+.btn.ghost{background:rgba(255,255,255,.08);border:1px solid var(--border)}
+.btn.ghost:hover{background:rgba(255,255,255,.15)}
+.btn.off{opacity:.5;cursor:not-allowed;background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+.hero{display:flex;gap:20px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 10px;border-radius:20px;background:rgba(16,185,129,.12);color:#86efac;margin-top:6px}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 2s infinite}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tick{color:#22c55e;font-weight:700;margin-right:4px}
+.lvl{display:flex;gap:4px;height:8px;margin:5px 0 12px}
+.lvl i{flex:1;border-radius:2px;background:#243044}
+.lvl i.on{background:var(--accent);box-shadow:0 0 6px rgba(0,180,216,.4)}
+.lvl-row{display:flex;justify-content:space-between;font-size:13px;color:#d6dde7}
+.timeline{border-left:2px solid rgba(0,180,216,.35);margin-left:8px;padding-left:24px}
+.tl{position:relative;margin-bottom:24px}
+.tl::before{content:"";position:absolute;left:-31px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--win-bg);border:2px solid var(--orange)}
+.tl .d{font-family:"Fira Code",monospace;color:var(--accent);font-size:12.5px}
+.tl .pl{color:var(--muted);font-style:italic;font-size:13px;margin-bottom:4px}
+.mono{font-family:"Fira Code",monospace}
+
+/* Explorateur */
+.explorer{display:flex;height:calc(100% + 44px);margin:-22px -26px}
+.ex-side{width:190px;flex-shrink:0;background:#111621;border-right:1px solid var(--border);padding:12px 8px;font-size:13px;overflow:auto}
+.ex-side div{padding:6px 10px;border-radius:5px;display:flex;gap:8px;align-items:center;cursor:pointer}
+.ex-side div:hover,.ex-side div.on{background:rgba(255,255,255,.08)}
+.ex-side hr{border:0;border-top:1px solid var(--border);margin:8px 4px}
+.ex-main{flex:1;overflow:auto;padding:16px 22px}
+.ex-path{font-size:12px;color:var(--muted);padding:6px 10px;background:#0f141e;border:1px solid var(--border);border-radius:5px;margin-bottom:16px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ex-path span{cursor:pointer}.ex-path span:hover{color:#fff}
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.file{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;border-radius:6px;text-align:center;font-size:12.5px;cursor:pointer;border:1px solid transparent;word-break:break-word}
+.file:hover{background:rgba(255,255,255,.06);border-color:var(--border)}
+.file svg{width:52px;height:52px}
+.file small{color:var(--muted);font-size:11px}
+
+/* Terminal */
+.term{background:#070a10;margin:-22px -26px;height:calc(100% + 44px);padding:14px 16px;font-family:"Fira Code",Consolas,monospace;font-size:13px;line-height:1.55;color:#cbd5e1;overflow:auto}
+.term .l{white-space:pre-wrap;word-break:break-word}
+.term .p{color:var(--green)}.term .c{color:var(--accent)}.term .ok{color:#22c55e}.term .err{color:#f87171}.term .y{color:var(--orange)}
+.term-in{display:flex;gap:8px}.term-in input{flex:1;background:none;border:0;outline:0;color:#fff;font:inherit;caret-color:var(--accent)}
+
+/* Chat */
+.chat{display:flex;flex-direction:column;height:calc(100% + 44px);margin:-22px -26px}
+.chat-body{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:85%;padding:9px 13px;border-radius:12px;line-height:1.45;font-size:13.5px;animation:open .2s}
+.msg.bot{align-self:flex-start;background:#1f2a3c;border-bottom-left-radius:3px}
+.msg.me{align-self:flex-end;background:var(--accent2);border-bottom-right-radius:3px}
+.msg ul{margin:4px 0 0 18px}
+.chat-in{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);background:#0f141e}
+.chat-in input{flex:1;background:#1a2130;border:1px solid var(--border);border-radius:20px;padding:9px 14px;color:#fff;font:inherit;font-size:13px;outline:0}
+.chat-in input:focus{border-color:var(--accent)}
+.chat-in button{width:38px;height:38px;border-radius:50%;background:var(--accent2);display:grid;place-items:center}
+.chat-in button:disabled,.chat-in input:disabled{opacity:.5}
+.sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.sugg button{font-size:12px;padding:5px 11px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.04)}
+.sugg button:hover{border-color:var(--accent)}
+
+/* Veille */
+.pipe{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin:8px 0 12px}
+.pipe span.s{border:1px solid rgba(0,180,216,.35);padding:3px 9px;border-radius:4px;background:rgba(0,180,216,.06)}
+.pipe span.a{color:var(--orange)}
+.vnote{font-size:12.5px;color:var(--muted);border-left:3px solid var(--orange);padding:8px 12px;margin-bottom:16px;background:rgba(247,127,0,.05);border-radius:0 5px 5px 0}
+.vday{background:var(--glass-light);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:12px}
+.vday-d{color:var(--accent);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding-bottom:8px;margin-bottom:4px;border-bottom:1px solid var(--border)}
+.ventry{padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.07)}
+.ventry:last-child{border-bottom:0}
+.vsrc{color:var(--orange);font-size:11.5px;font-family:"Fira Code",monospace}
+.vtitle{display:block;color:var(--text);font-weight:600;text-decoration:none;margin:2px 0}
+a.vtitle:hover{color:var(--accent)}
+.vres{color:var(--muted);font-size:13px}
+.vsources{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:6px}
+.vsources a{display:block;padding:10px 12px;border-radius:6px;border:1px solid var(--border);background:var(--glass-light);text-decoration:none;color:var(--text);font-size:13px;font-weight:600}
+.vsources a small{display:block;color:var(--muted);font-weight:400;font-size:11.5px}
+.vsources a:hover{border-color:var(--accent)}
+
+/* Barre des tâches */
+#taskbar{position:fixed;left:0;right:0;bottom:0;height:52px;background:var(--glass);backdrop-filter:blur(30px) saturate(1.6);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;z-index:5000}
+#tb-apps{display:flex;gap:4px;align-items:center}
+.tb{width:44px;height:44px;border-radius:6px;display:grid;place-items:center;position:relative;transition:background .15s}
+.tb:hover{background:rgba(255,255,255,.08)}
+.tb svg{width:26px;height:26px}
+.tb.open::after{content:"";position:absolute;bottom:3px;width:6px;height:3px;border-radius:2px;background:#9aa0a6;transition:width .2s}
+.tb.active{background:rgba(255,255,255,.08)}
+.tb.active::after{width:16px;background:var(--accent)}
+.tb .tip{position:absolute;bottom:54px;white-space:nowrap;background:#1c2433;border:1px solid var(--border);padding:4px 10px;font-size:12px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity .15s}
+.tb:hover .tip{opacity:1;transition-delay:.4s}
+#tray{position:absolute;right:8px;display:flex;align-items:center;gap:4px;font-size:12px}
+#tray .t{padding:6px 10px;border-radius:6px;display:flex;align-items:center;gap:8px}
+#tray .t:hover{background:rgba(255,255,255,.08)}
+#tray svg{width:16px;height:16px}
+#clock{text-align:right;line-height:1.35}
+
+/* Menu Démarrer */
+#start{position:fixed;bottom:62px;left:50%;width:min(640px,96vw);transform:translate(-50%,20px);opacity:0;pointer-events:none;background:rgba(24,30,44,.92);backdrop-filter:blur(40px) saturate(1.5);border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);z-index:6000;transition:transform .2s,opacity .2s;overflow:hidden}
+#start.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+#start .search{margin:22px 28px 6px;display:flex;align-items:center;gap:10px;background:#111621;border:1px solid var(--border);border-bottom:2px solid var(--accent);border-radius:6px;padding:8px 12px}
+#start .search input{flex:1;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:13px}
+#start h4{font-size:13px;font-weight:600;margin:16px 34px 8px}
+#pinned{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:4px;padding:0 24px 18px;min-height:190px;max-height:52vh;overflow:auto;align-content:start}
+.pin{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 4px;border-radius:6px;font-size:12px;text-align:center}
+.pin:hover{background:rgba(255,255,255,.08)}
+.pin svg{width:34px;height:34px}
+#start .foot{display:flex;justify-content:space-between;align-items:center;padding:12px 30px;background:rgba(0,0,0,.25);border-top:1px solid var(--border)}
+#start .me{display:flex;align-items:center;gap:10px;font-size:13px}
+#start .me .avatar{width:32px;height:32px;font-size:13px}
+#power{width:36px;height:36px;border-radius:6px;display:grid;place-items:center}
+#power:hover{background:rgba(255,255,255,.1)}
+
+/* Menu contextuel + notif */
+#ctx{position:fixed;z-index:7000;min-width:220px;background:rgba(28,36,51,.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:8px;padding:4px;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;font-size:13px}
+#ctx div{padding:7px 14px;border-radius:4px;cursor:default}
+#ctx div:hover{background:rgba(255,255,255,.08)}
+#ctx hr{border:0;border-top:1px solid var(--border);margin:4px 0}
+#toast{position:fixed;right:14px;bottom:66px;width:340px;max-width:calc(100vw - 28px);background:rgba(28,36,51,.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:8px;padding:14px 16px;z-index:6500;transform:translateX(120%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#toast.show{transform:none}
+#toast .tt{display:block;font-weight:700;margin-bottom:3px}
+
+#shutdown{position:fixed;inset:0;background:#000;z-index:9500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;font-size:18px;text-align:center;padding:20px}
+.spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.net-svg{width:100%;max-width:640px;display:block;margin:6px auto 14px}
+
+@media (max-width:700px){
+  #desktop{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-template-rows:none;grid-auto-rows:98px;grid-auto-columns:auto;justify-items:center;overflow:auto}
+  .win{left:0!important;top:0!important;width:100%!important;height:calc(100% - 52px)!important;border-radius:0;resize:none}
+  .ex-side{display:none}
+  .icon{width:100%;font-size:11px}.icon span{word-break:break-word;max-width:100%}
+  #tray{display:none}
+  #tb-apps{gap:0}
+  #start{left:0;transform:translateY(20px);width:100vw;border-radius:12px 12px 0 0;bottom:52px}
+  #start.show{transform:none}
+  .content{padding:18px}
+}
+</style>
+</head>
+<body>
+<div id="wallpaper" class="wp-0"></div>
+<canvas id="net"></canvas>
+
+<div id="lock">
+  <div><div class="time" id="lockTime">00:00</div><div class="date" id="lockDate"></div></div>
+  <div class="login">
+    <div class="avatar">AH</div>
+    <div class="name">HOFFMANN Alann</div>
+    <div class="typer" id="typer1"></div>
+    <button id="loginBtn">Se connecter</button>
+    <div class="hint">Clique n'importe où ou appuie sur Entrée</div>
+  </div>
+</div>
+
+<div id="desktop"></div>
+<div id="windows"></div>
+
+<div id="start">
+  <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="startSearch" placeholder="Rechercher une appli, un projet, une techno…"></div>
+  <h4>Épinglé</h4>
+  <div id="pinned"></div>
+  <div class="foot">
+    <div class="me"><div class="avatar">AH</div>HOFFMANN Alann · BTS SIO SISR</div>
+    <button id="power" title="Arrêter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v9"/><path d="M6.3 6.3a8 8 0 1 0 11.4 0"/></svg></button>
+  </div>
+</div>
+
+<div id="taskbar">
+  <div id="tb-apps"></div>
+  <div id="tray">
+    <div class="t" title="Réseau : connecté"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 8.5a15 15 0 0 1 20 0"/><path d="M5 12a10 10 0 0 1 14 0"/><path d="M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="#fff"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></div>
+    <div class="t" id="clockT"><div id="clock"></div></div>
+  </div>
+</div>
+
+<div id="ctx">
+  <div data-a="refresh">🔄 Actualiser</div>
+  <div data-a="wall">🎨 Changer le fond d'écran</div>
+  <div data-a="net">🕸️ Animation réseau on/off</div>
+  <hr>
+  <div data-a="term">💻 Ouvrir dans le Terminal</div>
+  <div data-a="about">👤 Propriétés (profil)</div>
+</div>
+<div id="toast"></div>
+<div id="shutdown"><div class="spinner"></div><div id="sdText">Arrêt en cours…</div></div>
+
+<script>
+/* =====================================================================
+   ✏️  CONFIG : tes infos (modifie ici, tout le portfolio suit)
+   ===================================================================== */
+const ME = {
+  nom: "HOFFMANN Alann",
+  prenomNom: "Alann HOFFMANN",
+  titre: "Technicien Système & Réseaux · BTS SIO option SISR en alternance",
+  entreprise: "Viessmann - Faulquemont (57)",
+  recherche: "À l'écoute de nouvelles opportunités",
+  email: "alannhoffmann86@gmail.com",
+  tel: "06 46 53 09 62",
+  ville: "Brettnach (57320)",
+  linkedin: "https://www.linkedin.com/in/alann-hoffmann-515897359",
+  github: "https://github.com/alannhoffmann86",
+  cv: "documents/CV_Alann_HOFFMANN.pdf"
+};
+const ROLES = ["Technicien Système et Réseaux...","Administrateur Infrastructure...","Gestionnaire de Parc IT...","Déploiement Serveurs & Sécurité..."];
+const CHAT_API_URL = "https://portfolio-chat-api-ub2n.vercel.app/api/chat";
+const VEILLE_DOSSIER = "veille", VEILLE_JOURS_RECHERCHE = 14, VEILLE_JOURS_VISIBLES = 5;
+const doc = f => "documents/" + encodeURI(f);
+
+/* ===================== ICÔNES SVG ===================== */
+const I = {
+  pc:`<svg viewBox="0 0 48 48"><rect x="5" y="8" width="38" height="25" rx="3" fill="#0891b2"/><rect x="8" y="11" width="32" height="19" rx="1.5" fill="#bae6fd"/><path d="M8 26 18 18l7 6 6-5 9 7v4H8z" fill="#38bdf8"/><rect x="19" y="33" width="10" height="5" fill="#8fa3b8"/><rect x="13" y="38" width="22" height="3" rx="1.5" fill="#cfd8e3"/></svg>`,
+  folder:`<svg viewBox="0 0 48 48"><path d="M4 12a3 3 0 0 1 3-3h11l4 4h19a3 3 0 0 1 3 3v3H4z" fill="#e8a930"/><rect x="4" y="16" width="40" height="25" rx="3" fill="#ffc83d"/><rect x="4" y="16" width="40" height="4" fill="#ffd767"/></svg>`,
+  docs:`<svg viewBox="0 0 48 48"><path d="M4 12a3 3 0 0 1 3-3h11l4 4h19a3 3 0 0 1 3 3v3H4z" fill="#0284c7"/><rect x="4" y="16" width="40" height="25" rx="3" fill="#38bdf8"/><rect x="16" y="21" width="16" height="15" rx="1.5" fill="#fff"/><rect x="19" y="25" width="10" height="2" fill="#7dd3fc"/><rect x="19" y="29" width="10" height="2" fill="#7dd3fc"/></svg>`,
+  skills:`<svg viewBox="0 0 48 48"><rect x="7" y="5" width="34" height="38" rx="3" fill="#fff"/><rect x="7" y="5" width="34" height="8" rx="3" fill="#16a34a"/><path d="m13 21 3 3 5-6M13 30l3 3 5-6" stroke="#16a34a" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="24" y="20" width="12" height="3" rx="1.5" fill="#cbd5e1"/><rect x="24" y="29" width="12" height="3" rx="1.5" fill="#cbd5e1"/></svg>`,
+  timeline:`<svg viewBox="0 0 48 48"><rect x="5" y="6" width="38" height="36" rx="4" fill="#1e293b"/><path d="M15 12v24" stroke="#00b4d8" stroke-width="2.5"/><circle cx="15" cy="15" r="3.5" fill="#f77f00"/><circle cx="15" cy="24" r="3.5" fill="#f77f00"/><circle cx="15" cy="33" r="3.5" fill="#f77f00"/><rect x="22" y="13.5" width="15" height="3" rx="1.5" fill="#cbd5e1"/><rect x="22" y="22.5" width="12" height="3" rx="1.5" fill="#cbd5e1"/><rect x="22" y="31.5" width="14" height="3" rx="1.5" fill="#cbd5e1"/></svg>`,
+  news:`<svg viewBox="0 0 48 48"><rect x="5" y="8" width="38" height="32" rx="3" fill="#f1f5f9"/><rect x="5" y="8" width="38" height="8" rx="3" fill="#f77f00"/><rect x="10" y="21" width="12" height="12" rx="1" fill="#fdba74"/><rect x="25" y="21" width="13" height="2.5" rx="1" fill="#94a3b8"/><rect x="25" y="26" width="13" height="2.5" rx="1" fill="#94a3b8"/><rect x="25" y="31" width="9" height="2.5" rx="1" fill="#94a3b8"/><circle cx="38" cy="12" r="2" fill="#fff"/></svg>`,
+  pdf:`<svg viewBox="0 0 48 48"><path d="M11 4h18l10 10v28a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff"/><path d="M29 4v10h10" fill="#e2e8f0"/><rect x="5" y="22" width="26" height="12" rx="2" fill="#dc2626"/><text x="18" y="31.5" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle" font-family="Inter,sans-serif">PDF</text></svg>`,
+  cv:`<svg viewBox="0 0 48 48"><path d="M11 4h18l10 10v28a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff"/><path d="M29 4v10h10" fill="#e2e8f0"/><rect x="5" y="22" width="26" height="12" rx="2" fill="#dc2626"/><text x="18" y="31.5" font-size="8" font-weight="700" fill="#fff" text-anchor="middle" font-family="Inter,sans-serif">CV</text></svg>`,
+  mail:`<svg viewBox="0 0 48 48"><rect x="4" y="10" width="40" height="28" rx="3" fill="#0284c7"/><path d="m4 13 20 14 20-14" stroke="#e0f2fe" stroke-width="2.5" fill="none"/></svg>`,
+  term:`<svg viewBox="0 0 48 48"><rect x="4" y="7" width="40" height="34" rx="4" fill="#0f141e" stroke="#475569"/><rect x="4" y="7" width="40" height="6" rx="3" fill="#334155"/><path d="m11 21 6 5-6 5" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="20" y="30" width="11" height="2.5" rx="1" fill="#ddd"/></svg>`,
+  chat:`<svg viewBox="0 0 48 48"><path d="M8 8h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H20l-9 7v-7H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#00a0dc"/><circle cx="16" cy="21" r="2.6" fill="#fff"/><circle cx="24" cy="21" r="2.6" fill="#fff"/><circle cx="32" cy="21" r="2.6" fill="#fff"/></svg>`,
+  factory:`<svg viewBox="0 0 48 48"><path d="M4 42V22l10 6v-6l10 6v-6l10 6V8h8v34z" fill="#64748b"/><rect x="36" y="4" width="4" height="6" fill="#94a3b8"/><rect x="9" y="33" width="5" height="5" fill="#fde047"/><rect x="19" y="33" width="5" height="5" fill="#fde047"/><rect x="29" y="33" width="5" height="5" fill="#fde047"/></svg>`,
+  grad:`<svg viewBox="0 0 48 48"><path d="M24 8 2 18l22 10 22-10z" fill="#1e3a8a"/><path d="M11 23v9c0 3 6 6 13 6s13-3 13-6v-9l-13 6z" fill="#3b82f6"/><path d="M42 20v12" stroke="#f77f00" stroke-width="2.5"/><circle cx="42" cy="33" r="2.5" fill="#f77f00"/></svg>`,
+  legal:`<svg viewBox="0 0 48 48"><path d="M11 4h18l10 10v28a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e2e8f0"/><path d="M29 4v10h10" fill="#94a3b8"/><path d="M24 18v16M17 21h14M17 21l-3 7h6zM31 21l-3 7h6z" stroke="#475569" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>`,
+  bin:`<svg viewBox="0 0 48 48"><path d="M12 14h24l-2.5 27a3 3 0 0 1-3 2.7h-13a3 3 0 0 1-3-2.7z" fill="#cbd5e1" opacity=".9"/><rect x="9" y="10" width="30" height="5" rx="2" fill="#94a3b8"/><rect x="19" y="6" width="10" height="5" rx="1.5" fill="#94a3b8"/><path d="M19 20v18M24 20v18M29 20v18" stroke="#64748b" stroke-width="2"/></svg>`,
+  server:`<svg viewBox="0 0 48 48"><rect x="8" y="5" width="32" height="11" rx="2" fill="#475569"/><rect x="8" y="18.5" width="32" height="11" rx="2" fill="#475569"/><rect x="8" y="32" width="32" height="11" rx="2" fill="#475569"/><circle cx="14" cy="10.5" r="2" fill="#22c55e"/><circle cx="14" cy="24" r="2" fill="#22c55e"/><circle cx="14" cy="37.5" r="2" fill="#f77f00"/><rect x="22" y="9" width="13" height="3" rx="1" fill="#94a3b8"/><rect x="22" y="22.5" width="13" height="3" rx="1" fill="#94a3b8"/><rect x="22" y="36" width="13" height="3" rx="1" fill="#94a3b8"/></svg>`,
+  chart:`<svg viewBox="0 0 48 48"><rect x="5" y="6" width="38" height="36" rx="3" fill="#1e293b"/><path d="M10 33l8-9 6 5 7-10 7 6" stroke="#22c55e" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="31" cy="19" r="2.5" fill="#22c55e"/></svg>`,
+  ai:`<svg viewBox="0 0 48 48"><rect x="10" y="10" width="28" height="28" rx="5" fill="#0e7490"/><rect x="16" y="16" width="16" height="16" rx="3" fill="#a5f3fc"/><path d="M18 4v6M24 4v6M30 4v6M18 38v6M24 38v6M30 38v6M4 18h6M4 24h6M4 30h6M38 18h6M38 24h6M38 30h6" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round"/><text x="24" y="28" font-size="8" font-weight="700" fill="#164e63" text-anchor="middle" font-family="Inter,sans-serif">IA</text></svg>`,
+  web:`<svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="3" fill="#0f172a" stroke="#334155"/><rect x="4" y="8" width="40" height="7" rx="3" fill="#334155"/><circle cx="9" cy="11.5" r="1.4" fill="#f87171"/><circle cx="13" cy="11.5" r="1.4" fill="#facc15"/><circle cx="17" cy="11.5" r="1.4" fill="#4ade80"/><path d="m17 24-5 4 5 4M31 24l5 4-5 4M26 22l-4 12" stroke="#00b4d8" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>`,
+  linux:`<svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" rx="6" fill="#1f2937"/><ellipse cx="24" cy="27" rx="9" ry="11" fill="#f8fafc"/><ellipse cx="24" cy="18" rx="7" ry="7" fill="#111"/><circle cx="21.5" cy="17" r="1.6" fill="#fff"/><circle cx="26.5" cy="17" r="1.6" fill="#fff"/><path d="M21 21h6l-3 3z" fill="#f59e0b"/><ellipse cx="18" cy="38" rx="4" ry="2" fill="#f59e0b"/><ellipse cx="30" cy="38" rx="4" ry="2" fill="#f59e0b"/></svg>`,
+  win:`<svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" rx="6" fill="#1e3a8a"/><rect x="12" y="14" width="24" height="16" rx="2" fill="#60a5fa"/><rect x="20" y="30" width="8" height="4" fill="#93c5fd"/><rect x="15" y="34" width="18" height="2.5" rx="1" fill="#bfdbfe"/><circle cx="34" cy="14" r="5" fill="#f77f00"/><path d="M34 11.5v5M31.5 14h5" stroke="#fff" stroke-width="1.6"/></svg>`,
+  virus:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="11" fill="#dc2626"/><g stroke="#dc2626" stroke-width="3" stroke-linecap="round"><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></g><circle cx="20" cy="21" r="2.5" fill="#fecaca"/><circle cx="27" cy="27" r="3" fill="#fecaca"/></svg>`,
+  fire:`<svg viewBox="0 0 48 48"><rect x="4" y="10" width="40" height="28" rx="3" fill="#7f1d1d"/><g fill="#b91c1c"><rect x="7" y="13" width="10" height="6"/><rect x="19" y="13" width="10" height="6"/><rect x="31" y="13" width="10" height="6"/><rect x="13" y="21" width="10" height="6"/><rect x="25" y="21" width="10" height="6"/><rect x="7" y="29" width="10" height="6"/><rect x="19" y="29" width="10" height="6"/><rect x="31" y="29" width="10" height="6"/></g><path d="M24 44c-5 0-8-3-8-7 0-5 5-7 4-12 4 2 5 5 5 7 1-1 2-3 2-4 3 2 5 5 5 9 0 4-3 7-8 7z" fill="#f77f00"/></svg>`,
+  script:`<svg viewBox="0 0 48 48"><path d="M11 4h18l10 10v28a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#1e293b" stroke="#475569"/><path d="M29 4v10h10" fill="#334155"/><text x="24" y="33" font-size="9" font-weight="700" fill="#10b981" text-anchor="middle" font-family="Fira Code,monospace">.bat</text></svg>`,
+  ticket:`<svg viewBox="0 0 48 48"><path d="M6 14h36v7a3 3 0 0 0 0 6v7H6v-7a3 3 0 0 0 0-6z" fill="#f59e0b"/><path d="M30 14v20" stroke="#fef3c7" stroke-width="2" stroke-dasharray="3 3"/><rect x="11" y="20" width="14" height="2.5" rx="1" fill="#fff"/><rect x="11" y="25" width="10" height="2.5" rx="1" fill="#fff"/></svg>`,
+  archive:`<svg viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="9" rx="2" fill="#64748b"/><rect x="8" y="17" width="32" height="24" rx="2" fill="#94a3b8"/><rect x="19" y="22" width="10" height="4" rx="2" fill="#475569"/></svg>`,
+  file:`<svg viewBox="0 0 48 48"><path d="M11 4h18l10 10v28a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e2e8f0"/><path d="M29 4v10h10" fill="#94a3b8"/><rect x="14" y="22" width="20" height="2.5" rx="1" fill="#94a3b8"/><rect x="14" y="28" width="20" height="2.5" rx="1" fill="#94a3b8"/><rect x="14" y="34" width="13" height="2.5" rx="1" fill="#94a3b8"/></svg>`,
+  start:`<svg viewBox="0 0 48 48"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b4d8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient></defs><rect x="6" y="6" width="36" height="36" rx="10" fill="url(#sg)"/><text x="24" y="31" font-size="16" font-weight="800" fill="#fff" text-anchor="middle" font-family="Fira Code,monospace">_&gt;</text></svg>`
+};
+
+/* ===================== SCHÉMA RÉSEAU ===================== */
+function NET_SVG(){return `<svg class="net-svg" viewBox="0 0 640 260" font-family="Inter,sans-serif" font-size="12">
+  <g stroke="#475569" stroke-width="2"><line x1="320" y1="48" x2="320" y2="82"/><line x1="320" y1="122" x2="320" y2="150"/><line x1="320" y1="170" x2="110" y2="200"/><line x1="320" y1="170" x2="320" y2="200"/><line x1="320" y1="170" x2="530" y2="200"/></g>
+  <rect x="260" y="14" width="120" height="34" rx="17" fill="#0c4a6e" stroke="#0ea5e9"/><text x="320" y="36" fill="#e0f2fe" text-anchor="middle">☁️ Internet (WAN)</text>
+  <rect x="250" y="82" width="140" height="40" rx="6" fill="#7f1d1d" stroke="#f87171"/><text x="320" y="100" fill="#fff" text-anchor="middle" font-weight="600">🔥 pfSense</text><text x="320" y="114" fill="#fecaca" text-anchor="middle" font-size="10">Pare-feu · NAT · DMZ · VPN</text>
+  <rect x="270" y="150" width="100" height="22" rx="4" fill="#334155"/><text x="320" y="165" fill="#e2e8f0" text-anchor="middle" font-size="11">Switch LAN</text>
+  <rect x="30" y="200" width="160" height="46" rx="6" fill="#1e3a8a" stroke="#60a5fa"/><text x="110" y="219" fill="#fff" text-anchor="middle" font-weight="600">🪟 Windows Server</text><text x="110" y="235" fill="#bfdbfe" text-anchor="middle" font-size="10">AD DS · DNS · DHCP · GPO</text>
+  <rect x="240" y="200" width="160" height="46" rx="6" fill="#3f3f46" stroke="#a1a1aa"/><text x="320" y="219" fill="#fff" text-anchor="middle" font-weight="600">🐧 Linux</text><text x="320" y="235" fill="#e4e4e7" text-anchor="middle" font-size="10">Nginx · Samba · GLPI</text>
+  <rect x="450" y="200" width="160" height="46" rx="6" fill="#14532d" stroke="#4ade80"/><text x="530" y="219" fill="#fff" text-anchor="middle" font-weight="600">💻 Clients Windows</text><text x="530" y="235" fill="#bbf7d0" text-anchor="middle" font-size="10">Joints au domaine</text>
+</svg>`}
+
+/* ===================== DOSSIERS (Projets / Documentation) ===================== */
+const FOLDERS = {
+  projets:{nom:"Projets", items:[
+    {id:"ia", nom:"Serveur_IA_Local", ico:"ai", type:"Projet perso", tags:["Docker","Ollama","Open WebUI","n8n","Tailscale"], pdf:"Serveur_IA_Local_Hoffmann.pdf", btn:"Lire la documentation",
+     html:`<h1>🤖 Serveur IA Local & Automatisation</h1><p class="muted">Projet personnel · en production chez moi</p>
+     <h2>🎯 Objectif</h2><p>Déploiement d'un serveur d'IA auto-hébergé, sans dépendre du cloud, pour automatiser mes tâches. Première brique en place : ma veille technologique, publiée automatiquement sur ce portfolio.</p>
+     <h2>⚙️ Architecture</h2><ul><li><b>Ollama</b>, <b>Open WebUI</b> et <b>n8n</b> conteneurisés sous <b>Docker</b></li><li>Modèle <b>qwen3:14b</b> accéléré par GPU</li><li>Accès distant sécurisé par <b>Tailscale</b></li><li>Workflow n8n : flux RSS → résumé par l'IA → JSON publié sur GitHub Pages + notification Telegram</li><li>Redémarrage automatique de tous les services après coupure</li></ul>
+     <h2>🔁 Résultat visible</h2><p>La fenêtre <a onclick="openApp('veille')" style="cursor:pointer">Veille techno</a> de ce bureau lit directement les fichiers générés chaque jour par ce serveur.</p>`},
+    {id:"lab", nom:"Lab_Infra_BTS", ico:"server", type:"Épreuve BTS", tags:["pfSense","Windows Server","AD DS","Linux","VMware"],
+     html:`<h1>🏗️ Lab d'infrastructure (préparation épreuve)</h1><p class="muted">Machines virtuelles : pfSense, Linux, Windows Server, clients Windows</p>
+     ${NET_SVG()}
+     <h2>🧱 Briques déployées</h2><div class="grid2">
+      <div class="card"><h3>🔥 pfSense</h3><p class="muted" style="margin:0">Interfaces LAN/WAN/DMZ, NAT, passerelles VPN.</p><a class="btn ghost" onclick="openDoc('pfsense')">📄 Rapport</a></div>
+      <div class="card"><h3>🪟 Windows Server</h3><p class="muted" style="margin:0">AD DS, DNS, DHCP, GPO.</p><a class="btn ghost" onclick="openDoc('ad')">📄 Procédure</a></div>
+      <div class="card"><h3>🐧 Linux</h3><p class="muted" style="margin:0">Nginx (Virtual Hosts), Samba sécurisé.</p><a class="btn ghost" onclick="openDoc('web')">📄 Rapport</a></div>
+      <div class="card"><h3>🎫 GLPI</h3><p class="muted" style="margin:0">Parc informatique & helpdesk.</p><a class="btn ghost" onclick="openDoc('glpi')">📄 Doc</a></div>
+     </div>`},
+    {id:"supervision", nom:"Supervision_Zabbix", ico:"chart", type:"En cours", tags:["Zabbix","NetAlertX","Debian","VMware"],
+     html:`<h1>📈 Supervision réseau : Zabbix & NetAlertX</h1><p class="muted">Projet perso · en cours</p>
+     <h2>🎯 Objectif</h2><p>Superviser mon réseau domestique : voir en temps réel les appareils connectés, être alerté à l'apparition d'un équipement inconnu ou à la chute d'un service.</p>
+     <h2>⚙️ Mise en œuvre</h2><ul><li>VM <b>Debian</b> sous <b>VMware</b> dédiée</li><li><b>Zabbix</b> : hôtes, items, triggers, tableaux de bord</li><li><b>NetAlertX</b> : scan réseau et détection des nouveaux appareils</li><li>Étape suivante : superviser aussi le serveur IA</li></ul>
+     <span class="btn off">Documentation en cours de rédaction</span>`},
+    {id:"portfolio", nom:"Portfolio_Web", ico:"web", type:"Web", tags:["HTML/CSS/JS","GitHub Pages","Vercel","API Gemini"],
+     html:`<h1>🌐 Ce portfolio</h1><p class="muted">Tu es dedans 😄</p>
+     <h2>⚙️ Technique</h2><ul><li>Page unique HTML/CSS/JS, hébergée sur <b>GitHub Pages</b></li><li>Interface façon bureau : fenêtres déplaçables, barre des tâches, menu Démarrer, terminal</li><li><b>Assistant IA</b> via une fonction serverless <b>Vercel</b> + API <b>Gemini</b> (réponses filtrées par DOMPurify)</li><li><b>Veille</b> alimentée chaque jour par mon serveur IA local</li></ul>
+     <a class="btn" href="${ME.github}" target="_blank" rel="noopener noreferrer">🐙 Voir sur GitHub</a>`}
+  ]},
+  docs:{nom:"Documentation", items:[
+    {id:"web", nom:"Serveur Web & Fichiers", ico:"linux", type:"Rapport", tags:["Linux CLI","Nginx","Samba"], pdf:"Compte_rendu_serveur_web_nginx_et_samba.pdf", btn:"Lire le rapport",
+     html:`<h1>🐧 Serveur Web & Fichiers</h1><p>Déploiement complet d'un serveur Linux Ubuntu. Installation d'un serveur Web <b>Nginx</b> avec gestion des <b>Virtual Hosts</b> et mise en place d'un partage de fichiers <b>Samba</b> sécurisé.</p>`},
+    {id:"ad", nom:"Configuration PC & Serveur", ico:"win", type:"Procédure", tags:["Windows Server","Active Directory","GPO"], pdf:"Configuration PC windows et windows serveur.pdf", btn:"Lire la procédure",
+     html:`<h1>🪟 Configuration PC & Serveur</h1><p>Feuille de route et checklist de configuration d'infrastructure d'entreprise. Centralisation des identités via <b>Active Directory (AD DS)</b>, rôles <b>DNS/DHCP</b> et application de règles <b>GPO</b>.</p>`},
+    {id:"wannacry", nom:"Analyse Cyber WannaCry", ico:"virus", type:"Analyse", tags:["Ransomware","Sécurité SMB","Incident cyber"], pdf:"Incident Wanna Cry Hoffmann Alann.pdf", btn:"Lire l'analyse",
+     html:`<h1>🦠 Analyse Cyber : WannaCry</h1><p>Rapport d'analyse sur la cyberattaque mondiale historique du ransomware <b>WannaCry</b>. Étude des vulnérabilités critiques exploitées (<b>EternalBlue</b>, <b>DoublePulsar</b>) et des mécanismes de protection.</p>`},
+    {id:"pfsense", nom:"Installation pfSense", ico:"fire", type:"Rapport", tags:["pfSense","Pare-feu","Routage & NAT"], pdf:"Installation PFsense hoffmann.pdf", btn:"Lire le rapport",
+     html:`<h1>🔥 Installation pfSense</h1><p>Compte rendu technique sur la mise en place du système d'exploitation pare-feu/routeur open-source basé sur <b>FreeBSD</b>. Assignation d'interfaces réseau <b>LAN/WAN/DMZ</b>, <b>NAT</b> et passerelles <b>VPN</b>.</p>`},
+    {id:"script", nom:"Script d'aide (.bat)", ico:"script", type:"Rapport", tags:["Scripting Windows","Outils CLI","Automatisation"], pdf:"Rapport création script hoffmann.pdf", btn:"Voir le script",
+     html:`<h1>⌨️ Création de script d'aide</h1><p>Rapport sur l'écriture d'un script interactif Windows (<b>.bat</b>) servant d'explorateur de commandes pour l'administration système. Gestion des variables, de l'<b>UTF-8</b> et des menus structurés.</p>`},
+    {id:"glpi", nom:"Gestion de parc (GLPI)", ico:"ticket", type:"Documentation", tags:["GLPI","Ticketing","ITSM"], pdf:"Documentation_GLPI.pdf", btn:"Voir la documentation",
+     html:`<h1>🎫 Gestion de parc (GLPI)</h1><p>Déploiement et utilisation de la solution <b>GLPI</b> pour la gestion du parc informatique et le centre de support (<b>Helpdesk</b>).</p>`},
+    {id:"ressources", nom:"Ressources SysAdmin", ico:"archive", type:"Dossier", tags:["Mémento CLI","Sécurité","Procédures"],
+     html:`<h1>🗄️ Ressources SysAdmin</h1><p>Accès centralisé à la documentation technique : mémento des commandes essentielles Linux et procédures de sécurité système avancées.</p>
+     <div class="files" style="margin-top:14px">
+       <a class="file" href="${doc("Memo_Commandes_Linux.pdf")}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">${I.pdf}Mémento commandes Linux<small>PDF</small></a>
+       <a class="file" href="${doc("Procedures_Linux_Avancees.pdf")}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">${I.pdf}Procédure système & sécurité<small>PDF</small></a>
+     </div>`}
+  ]}
+};
+const ALL_ITEMS = Object.entries(FOLDERS).flatMap(([f,v])=>v.items.map(i=>({...i,folder:f})));
+
+/* ===================== APPLICATIONS ===================== */
+const APPS = {
+  about:{t:"Ce PC — Profil", lbl:"Ce PC", ico:"pc", w:700, h:560, html:()=>`
+    <div class="hero"><div class="avatar">AH</div><div><h1>${ME.nom}</h1><div class="typer" id="typer2"></div><div class="muted">${ME.titre}</div><div class="status">[STATUS: ONLINE] · ${ME.recherche}</div></div></div>
+    <h2>👋 Profil</h2>
+    <p>Doté d'un excellent relationnel et d'une forte orientation client, j'ai développé une véritable passion pour l'informatique, les infrastructures et les réseaux.</p>
+    <p>Après plusieurs années d'expérience en tant que technicien d'exploitation, je donne aujourd'hui une nouvelle impulsion à ma carrière. Je me spécialise dans l'administration système et la maintenance IT à travers un <b>BTS SIO option SISR en alternance</b>. <a onclick="openApp('bts')" style="cursor:pointer">&gt;_ Détails formation BTS SIO</a></p>
+    <p>Mon parcours initial en maintenance industrielle (BAC Pro MEI & CAP Électricien) m'a forgé une rigueur de dépannage « terrain » particulièrement méthodique. Récemment conforté par une immersion réussie au sein du SIE de Metz, je suis déterminé à assurer la fiabilité et la performance des systèmes d'information, tout en accompagnant efficacement les utilisateurs au quotidien.</p>
+    <h2>🖥️ Spécifications système</h2>
+    <table>
+      <tr><td class="muted">Hôte</td><td class="mono">SRV-SISR-01</td></tr>
+      <tr><td class="muted">Formation</td><td>BTS SIO option SISR (alternance) <a onclick="openApp('bts')" style="cursor:pointer">· détails</a></td></tr>
+      <tr><td class="muted">Entreprise</td><td>${ME.entreprise} <a onclick="openApp('viessmann')" style="cursor:pointer">· présentation</a></td></tr>
+      <tr><td class="muted">Localisation</td><td>${ME.ville}</td></tr>
+      <tr><td class="muted">Technologies</td><td><span class="tag">Windows Server / AD</span><span class="tag">Linux (Debian/Ubuntu)</span><span class="tag">VMware ESXi</span><span class="tag">Cisco IOS (VLAN/Routing)</span><span class="tag">PowerShell & Bash</span><span class="tag">pfSense / Pare-feu</span></td></tr>
+    </table>
+    <a class="btn" onclick="openApp('projets')">📁 Afficher les projets</a><a class="btn ghost" onclick="openApp('contact')">✉️ Ouvrir communication</a>`},
+
+  projets:{t:"Explorateur — Projets", lbl:"Projets", ico:"folder", w:860, h:580, html:()=>explorerHTML("projets"), onOpen:w=>wireExplorer(w,"projets")},
+  docs:{t:"Explorateur — Documentation", lbl:"Documentation", ico:"docs", w:860, h:580, html:()=>explorerHTML("docs"), onOpen:w=>wireExplorer(w,"docs")},
+
+  competences:{t:"Compétences.xlsx", lbl:"Compétences.xlsx", ico:"skills", w:780, h:580, html:()=>`
+    <h1>✅ Compétences</h1><p class="muted">Niveaux techniques + correspondance avec le référentiel BTS SIO</p>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card"><h3>🪟 Système</h3>${lvl("Windows Server / AD",4)}${lvl("Linux (Debian)",3)}${lvl("Virtualisation",4)}</div>
+      <div class="card"><h3>🌐 Réseau</h3>${lvl("Switching / VLANs",4)}${lvl("Routage / TCP-IP",3)}${lvl("Cisco Packet Tracer",4)}</div>
+      <div class="card"><h3>🧰 Outils</h3>${lvl("Scripting (Bash/PS)",3)}${lvl("Git / GitHub",3)}</div>
+    </div>
+    <h2>📋 Bloc 1 — Support et mise à disposition de services informatiques</h2>
+    <table><tr><th>Compétence</th><th>Réalisations</th></tr>
+      <tr><td>Gérer le patrimoine informatique</td><td><span class="tick">✔</span>GLPI · Gestion de parc Viessmann</td></tr>
+      <tr><td>Répondre aux incidents et aux demandes d'assistance</td><td><span class="tick">✔</span>Helpdesk GLPI (Viessmann)</td></tr>
+      <tr><td>Développer la présence en ligne de l'organisation</td><td><span class="tick">✔</span>Portfolio · Veille publiée auto</td></tr>
+      <tr><td>Travailler en mode projet</td><td><span class="tick">✔</span>Serveur IA local · Lab BTS</td></tr>
+      <tr><td>Mettre à disposition des utilisateurs un service informatique</td><td><span class="tick">✔</span>Nginx & Samba · AD/DNS/DHCP</td></tr>
+      <tr><td>Organiser son développement professionnel</td><td><span class="tick">✔</span>Veille techno automatisée · Portfolio</td></tr>
+    </table>
+    <h2>🌐 Bloc 2 — Administration des systèmes et des réseaux (SISR)</h2>
+    <table><tr><th>Compétence</th><th>Réalisations</th></tr>
+      <tr><td>Concevoir une solution d'infrastructure réseau</td><td><span class="tick">✔</span>Lab BTS · pfSense (LAN/WAN/DMZ)</td></tr>
+      <tr><td>Installer, tester et déployer une solution d'infrastructure réseau</td><td><span class="tick">✔</span>pfSense · AD/GPO · Nginx/Samba · Docker</td></tr>
+      <tr><td>Exploiter, dépanner et superviser une solution d'infrastructure réseau</td><td><span class="tick">✔</span>Zabbix/NetAlertX · Script d'aide .bat</td></tr>
+    </table>
+    <h2>🔐 Bloc 3 — Cybersécurité des services informatiques</h2>
+    <table><tr><th>Compétence</th><th>Réalisations</th></tr>
+      <tr><td>Protéger les données / sécuriser les équipements et les usages</td><td><span class="tick">✔</span>Analyse WannaCry · pfSense · Procédures sécurité Linux</td></tr>
+      <tr><td>Garantir la disponibilité, l'intégrité et la confidentialité</td><td><span class="tick">✔</span>Samba sécurisé · Tailscale · GPO</td></tr>
+    </table>`},
+
+  parcours:{t:"Parcours — journal d'activité", lbl:"Parcours", ico:"timeline", w:640, h:520, html:()=>`
+    <h1>🧭 Parcours</h1><p class="muted">Lecture des logs d'activité…</p><br>
+    <div class="timeline">
+      <div class="tl"><div class="d">2025 - Présent</div><h3>BTS SIO SISR (Alternance)</h3><div class="pl">Viessmann - Faulquemont (57)</div><p>Technicien support et infrastructure. Gestion de parc, administration système, tickets GLPI et projets d'amélioration réseau.</p><a class="btn ghost" onclick="openApp('viessmann')">🏭 Présentation de l'entreprise</a></div>
+      <div class="tl"><div class="d">2021 - 2024</div><h3>Technicien d'Exploitation</h3><div class="pl">Idex Energie</div><p>Maintenance préventive et curative, gestion d'un secteur en autonomie, relation client.</p></div>
+      <div class="tl"><div class="d">2018 - 2020</div><h3>BAC Pro MEI</h3><div class="pl">Lycée Inter-Entreprises</div><p>Maintenance des Équipements Industriels. Bases solides en électricité et mécanique.</p></div>
+      <div class="tl"><div class="d">Avant 2018</div><h3>CAP Électricien</h3></div>
+    </div>
+    <a class="btn" onclick="openApp('cv')">📄 Télécharger CV.pdf</a>`},
+
+  viessmann:{t:"Viessmann — Entreprise d'accueil", lbl:"Viessmann", ico:"factory", w:760, h:580, html:()=>`
+    <h1>🏭 Entreprise d'accueil : Viessmann</h1>
+    <p style="margin-top:10px">Implanté en Moselle depuis <b>1971</b>, le site de <b>Faulquemont</b> regroupe l'usine de production (<em>Viessmann Faulquemont SAS</em>) et le siège social commercial (<em>Viessmann France SAS</em>). Intégré à <b>Carrier Global Corporation</b> (division <em>Viessmann Climate Solutions</em>), ce site est un pilier industriel majeur de la transition énergétique en Europe.</p>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card"><h3>🏗️ Pôle industriel & R&D</h3><p class="muted" style="font-size:12px">Centre de compétence mondial</p><ul style="list-style:none;margin-left:0"><li>👥 <b>Effectif :</b> ~860 collaborateurs sur site</li><li>🏢 <b>Surface :</b> 85 000 m² couverts (dont 19 000 m² de centre logistique)</li><li>☀️ <b>Production :</b> ballons d'eau chaude sanitaire (ECS), capteurs solaires thermiques (1er fabricant français), pompes à chaleur et stockage d'énergie (Vitocharge VX3)</li></ul></div>
+      <div class="card hl"><span class="badge">ENVIRONNEMENT IT</span><h3>🌐 Infrastructure & SISR</h3><p class="muted" style="font-size:12px">Maintien en condition opérationnelle</p><p style="font-size:13px">Un site de production fonctionnant à flux tendu exige une <b>haute disponibilité</b> permanente du réseau et des systèmes :</p><ul style="list-style:none;margin-left:0;font-size:13px"><li>🎧 Support IT (Helpdesk GLPI) bureautique & usine</li><li>🖨️ Gestion du parc et terminaux industriels (imprimantes thermiques TSC / BarTender, scanners)</li><li>🖥️ Administration Active Directory, brassage et segmentation VLAN</li></ul></div>
+    </div>
+    <h2>🛠️ Mes missions au quotidien</h2>
+    <p>Au sein du service informatique de Faulquemont, j'assure le support technique de proximité auprès des équipes administratives, logistiques et des lignes de production. Mon rôle consiste à garantir la continuité de service du parc informatique, déployer et sécuriser les postes de travail, automatiser les tâches récurrentes et participer aux projets d'évolution de l'infrastructure réseau.</p>`},
+
+  bts:{t:"Spécifications BTS SIO", lbl:"BTS SIO", ico:"grad", w:720, h:540, html:()=>`
+    <h1>🎓 Spécifications BTS SIO</h1>
+    <p style="margin-top:10px">Le BTS <b>Services Informatiques aux Organisations</b> est un diplôme d'État (Bac+2) formant des experts IT. Il se divise en deux spécialités distinctes :</p>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card"><h3>Option A : SLAM</h3><p class="muted" style="font-size:12px">Solutions Logicielles et Applications Métiers</p><p>Orienté <b>développement</b>.</p><ul><li>Conception de logiciels</li><li>Bases de données (SQL)</li><li>Langages (Java, C#, Python)</li></ul></div>
+      <div class="card hl"><span class="badge">MON CHOIX</span><h3>Option B : SISR</h3><p style="font-size:12px;color:var(--orange)">Solutions d'Infrastructure, Systèmes et Réseaux</p><p>Orienté <b>administration système & réseaux</b>.</p><ul><li>Administration serveurs (Windows/Linux)</li><li>Architecture réseau (switching/routing)</li><li>Cybersécurité & virtualisation</li></ul></div>
+    </div>
+    <h2>🚀 Pourquoi SISR</h2>
+    <p>Mon parcours initial en <b>Maintenance des Équipements Industriels (MEI)</b> et en électricité m'a donné le goût du concret et du fonctionnement technique des systèmes physiques.</p>
+    <p>L'option SISR est la suite logique de cette expérience : concevoir et maintenir l'infrastructure qui permet aux données de circuler. J'aime comprendre comment interconnecter les équipements matériels, sécuriser les flux de bout en bout et garantir la haute disponibilité des services.</p>`},
+
+  veille:{t:"Veille technologique", lbl:"Veille techno", ico:"news", w:760, h:600, html:()=>`
+    <h1>📰 Veille technologique</h1>
+    <div class="pipe"><span class="s">Flux RSS</span><span class="a">→</span><span class="s">n8n</span><span class="a">→</span><span class="s">IA locale (Ollama)</span><span class="a">→</span><span class="s">GitHub Pages</span></div>
+    <h2>📡 Mes sources</h2>
+    <div class="vsources">
+      <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer">IT-Connect<small>Tutoriels SysAdmin</small></a>
+      <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">CERT-FR<small>Alertes cybersécurité</small></a>
+      <a href="https://korben.info/" target="_blank" rel="noopener noreferrer">Korben<small>Actualités tech</small></a>
+      <a href="https://thehackernews.com/" target="_blank" rel="noopener noreferrer">The Hacker News<small>Actualités internationales</small></a>
+      <a href="https://next.ink/" target="_blank" rel="noopener noreferrer">Next<small>Actualités numériques</small></a>
+    </div>
+    <h2>🗞️ Dernières publications suivies</h2>
+    <p class="vnote" id="vnote">Chargement de la veille…</p>
+    <div class="vlist"></div>`, onOpen:initVeille},
+
+  cv:{t:"CV_Alann_HOFFMANN.pdf", lbl:"CV.pdf", ico:"cv", w:520, h:400, html:()=>`
+    <h1>📄 Fichier CV</h1><p class="muted mono">Extraction des données du serveur en cours…</p>
+    <div class="card" style="margin-top:16px"><h3>${ME.prenomNom}</h3><p class="muted" style="margin:0">${ME.titre}</p></div>
+    <a class="btn" href="${ME.cv}" target="_blank" rel="noopener noreferrer">⬇️ Télécharger le fichier</a>
+    <a class="btn ghost" onclick="openApp('parcours')">🧭 Voir le parcours</a>`},
+
+  contact:{t:"Courrier — Canal de communication", lbl:"Contact", ico:"mail", w:560, h:520, html:()=>`
+    <h1>✉️ Canal de communication</h1>
+    <p class="muted">Je suis actuellement à la recherche de nouvelles opportunités. Mon port 25 (SMTP) est ouvert pour toute demande technique ou proposition.</p>
+    <div class="card"><b>📧 E-mail</b><br><a href="mailto:${ME.email}">${ME.email}</a></div>
+    <div class="card"><b>💼 LinkedIn</b><br><a href="${ME.linkedin}" target="_blank" rel="noopener noreferrer">Alann Hoffmann</a></div>
+    <div class="card"><b>📞 Téléphone</b><br>${ME.tel}</div>
+    <div class="card"><b>📍 Localisation</b><br>${ME.ville}</div>
+    <a class="btn" href="mailto:${ME.email}">Envoyer un e-mail</a><button class="btn ghost" onclick="copyMail(this)">📋 Copier l'e-mail</button>`},
+
+  chat:{t:"Agent IA Support", lbl:"Assistant IA", ico:"chat", w:440, h:560, html:()=>`
+    <div class="chat"><div class="chat-body"><div class="msg bot">Agent de support système opérationnel. Posez vos questions concernant l'architecture, les compétences ou les projets d'Alann.</div></div>
+    <div class="sugg"><button>Quelles sont ses compétences ?</button><button>Parle-moi du serveur IA</button><button>Où est-il en alternance ?</button></div>
+    <div class="chat-in"><input placeholder="Entrez votre requête…" maxlength="500" autocomplete="off" aria-label="Message pour le chatbot"><button aria-label="Envoyer"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M3 20.5 21 12 3 3.5v6.5l12 2-12 2z"/></svg></button></div></div>`, onOpen:initChat},
+
+  terminal:{t:"admin@infrastructure:~ (bash)", lbl:"Terminal", ico:"term", w:700, h:440, html:()=>`<div class="term" onclick="this.querySelector('input').focus()"><div class="out"></div><div class="term-in"><span class="p">admin@infra:~$</span><input autocomplete="off" spellcheck="false" aria-label="Saisie du terminal"></div></div>`, onOpen:initTerm},
+
+  mentions:{t:"Mentions légales", lbl:"Mentions légales", ico:"legal", w:640, h:540, html:()=>`
+    <h1>⚖️ Mentions légales</h1>
+    <h2>1. Éditeur du site</h2><p>Le présent site (portfolio personnel) est édité par :<br><b>${ME.nom}</b><br>Résidant à : ${ME.ville}, France<br>Téléphone : ${ME.tel}<br>Email : <a href="mailto:${ME.email}">${ME.email}</a></p>
+    <h2>2. Hébergement</h2><p>Ce site est hébergé par :<br><b>GitHub Pages</b> (GitHub, Inc.)<br>88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis.</p>
+    <h2>3. Propriété intellectuelle</h2><p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques. La reproduction de tout ou partie de ce site sur un support quel qu'il soit est formellement interdite sauf autorisation expresse de M. ${ME.nom}.</p>
+    <h2>4. Données personnelles et cookies</h2><p>Ce site vitrine ne collecte aucune donnée personnelle à l'insu des utilisateurs et n'utilise pas de cookies de traçage publicitaire. Les seules informations traitées sont celles que vous choisissez de communiquer volontairement via l'adresse email de contact, les liens de réseaux sociaux ou l'assistant IA.</p>
+    <h2>5. Développement</h2><p>Site développé par ${ME.nom} avec l'aide d'outils d'intelligence artificielle (Gemini, Claude).</p>`},
+
+  corbeille:{t:"Corbeille", lbl:"Corbeille", ico:"bin", w:540, h:360, html:()=>`
+    <div class="files">
+      <div class="file" onclick="toast('🗑️ Architecture_VLANs.old','Remplacé par le projet Serveur IA local. Parfois il faut savoir lâcher un projet 😅')">${I.file}Architecture_VLANs.old<small>Supprimé</small></div>
+      <div class="file" onclick="toast('🗑️ cv_final_v2.pdf','Remplacé par cv_final_v3_VRAIMENT_FINAL.pdf')">${I.file}cv_final_v2.pdf<small>Supprimé</small></div>
+      <div class="file" onclick="toast('🔒 id_rsa','Permission denied. Bien essayé 😏')">${I.file}id_rsa<small>Supprimé</small></div>
+    </div>`}
+};
+const DESKTOP = ["about","projets","docs","competences","parcours","viessmann","veille","cv","contact","chat","terminal","corbeille"];
+const TASKBAR = ["projets","docs","terminal","chat","veille"];
+const PINNED  = ["about","projets","docs","competences","parcours","viessmann","bts","veille","cv","contact","chat","terminal","mentions","corbeille"];
+
+function lvl(n,v){return `<div class="lvl-row"><span>${n}</span><span class="muted">${v}/5</span></div><div class="lvl">${[1,2,3,4,5].map(i=>`<i class="${i<=v?"on":""}"></i>`).join("")}</div>`}
+
+/* ===================== EXPLORATEUR ===================== */
+function explorerHTML(f){return `<div class="explorer">
+  <div class="ex-side">
+    <div data-f="projets" class="${f==="projets"?"on":""}">${mini("folder")} Projets</div>
+    <div data-f="docs" class="${f==="docs"?"on":""}">${mini("docs")} Documentation</div><hr>
+    <div onclick="openApp('competences')">${mini("skills")} Compétences</div>
+    <div onclick="openApp('veille')">${mini("news")} Veille</div>
+    <div onclick="openApp('cv')">${mini("cv")} CV</div>
+    <div onclick="openApp('about')">${mini("pc")} Ce PC</div>
+  </div>
+  <div class="ex-main"><div class="ex-path"></div><div class="ex-body"></div></div></div>`}
+function mini(k){return I[k].replace("<svg",'<svg width="18" height="18"')}
+function wireExplorer(win,f){
+  const body=win.querySelector(".ex-body"), path=win.querySelector(".ex-path"), main=win.querySelector(".ex-main");
+  let cur=f;
+  const grid=()=>{path.innerHTML=`<span data-root>📁 Ce PC</span> › <span data-root>${FOLDERS[cur].nom}</span>`;
+    body.innerHTML=`<div class="files">${FOLDERS[cur].items.map(p=>`<div class="file" data-p="${p.id}">${I[p.ico]}${p.nom}<small>${p.type}</small></div>`).join("")}</div>`;
+    win.querySelector(".title").textContent="Explorateur — "+FOLDERS[cur].nom;
+    win.querySelectorAll(".ex-side [data-f]").forEach(d=>d.classList.toggle("on",d.dataset.f===cur));};
+  const show=id=>{const p=FOLDERS[cur].items.find(x=>x.id===id);if(!p)return;
+    path.innerHTML=`<span data-root>📁 Ce PC</span> › <span data-root>${FOLDERS[cur].nom}</span> › <b>${p.nom}</b>`;
+    body.innerHTML=`<a class="btn ghost" data-root>← Retour</a><div style="margin:10px 0 14px">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>${p.html}${p.pdf?`<div style="margin-top:14px"><a class="btn" href="${doc(p.pdf)}" target="_blank" rel="noopener noreferrer">📄 ${p.btn}</a></div>`:""}`;
+    main.scrollTop=0;};
+  win._show=(folder,id)=>{cur=folder;grid();show(id);};
+  body.addEventListener("click",e=>{const fl=e.target.closest(".file[data-p]");if(fl)show(fl.dataset.p);});
+  win.addEventListener("click",e=>{if(e.target.closest("[data-root]")){grid();}const s=e.target.closest(".ex-side [data-f]");if(s){cur=s.dataset.f;grid();}});
+  grid();
+}
+function openDoc(id){const it=ALL_ITEMS.find(x=>x.id===id);if(!it)return;openApp(it.folder);opened[it.folder]._show(it.folder,id);}
+
+/* ===================== FENÊTRES ===================== */
+let Z=100, opened={}, cascade=0;
+const $=s=>document.querySelector(s);
+function openApp(id){
+  closeStart();
+  if(!APPS[id])return;
+  if(opened[id]){const w=opened[id];w.classList.remove("min");focus(w);return w;}
+  const a=APPS[id], w=document.createElement("div");
+  const vw=innerWidth, vh=innerHeight-52, W=Math.min(a.w,vw-20), H=Math.min(a.h,vh-20);
+  w.className="win"; w.dataset.id=id;
+  w.style.cssText=`width:${W}px;height:${H}px;left:${Math.max(10,(vw-W)/2-100+cascade*28)}px;top:${Math.max(10,(vh-H)/2-50+cascade*28)}px`;
+  cascade=(cascade+1)%6;
+  w.innerHTML=`<div class="bar">${I[a.ico]}<span class="title">${a.t}</span>
+    <button class="ctrl" data-c="min" aria-label="Réduire"><svg viewBox="0 0 10 10"><path d="M0 5h10"/></svg></button>
+    <button class="ctrl" data-c="max" aria-label="Agrandir"><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></button>
+    <button class="ctrl x" data-c="close" aria-label="Fermer"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0 0 10"/></svg></button></div>
+    <div class="content">${a.html()}</div>`;
+  $("#windows").appendChild(w); opened[id]=w;
+  w.addEventListener("pointerdown",()=>focus(w));
+  w.querySelector('[data-c="min"]').onclick=e=>{e.stopPropagation();w.classList.add("min");renderTaskbar();};
+  w.querySelector('[data-c="max"]').onclick=()=>w.classList.toggle("max");
+  w.querySelector('[data-c="close"]').onclick=()=>closeWin(id);
+  w.querySelector(".bar").addEventListener("dblclick",e=>{if(!e.target.closest(".ctrl"))w.classList.toggle("max")});
+  drag(w); if(a.onOpen)a.onOpen(w);
+  if(id==="about")typer(w.querySelector("#typer2"));
+  focus(w); return w;
+}
+function closeWin(id){const w=opened[id];if(!w)return;w.classList.add("closing");delete opened[id];setTimeout(()=>{w.remove();renderTaskbar()},140);renderTaskbar();}
+function focus(w){document.querySelectorAll(".win").forEach(x=>x.classList.add("inactive"));w.classList.remove("inactive");w.style.zIndex=++Z;renderTaskbar();}
+function drag(w){
+  const bar=w.querySelector(".bar");let sx,sy,ox,oy,on=false;
+  bar.addEventListener("pointerdown",e=>{if(e.target.closest(".ctrl")||innerWidth<=700)return;
+    if(w.classList.contains("max")){w.classList.remove("max");w.style.left=(e.clientX-w.offsetWidth/2)+"px";w.style.top="0px";}
+    on=true;sx=e.clientX;sy=e.clientY;ox=w.offsetLeft;oy=w.offsetTop;bar.setPointerCapture(e.pointerId);});
+  bar.addEventListener("pointermove",e=>{if(!on)return;w.style.left=Math.min(innerWidth-80,Math.max(-w.offsetWidth+80,ox+e.clientX-sx))+"px";w.style.top=Math.min(innerHeight-100,Math.max(0,oy+e.clientY-sy))+"px";});
+  bar.addEventListener("pointerup",e=>{if(on&&e.clientY<=2)w.classList.add("max");on=false;});
+}
+
+/* ===================== BUREAU / BARRE / DÉMARRER ===================== */
+function renderDesktop(){
+  $("#desktop").innerHTML=DESKTOP.map(id=>`<button class="icon" data-id="${id}">${I[APPS[id].ico]}<span>${APPS[id].lbl}</span></button>`).join("");
+  $("#desktop").querySelectorAll(".icon").forEach(b=>{
+    b.onclick=()=>{document.querySelectorAll(".icon").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");if(matchMedia("(pointer:coarse)").matches||innerWidth<=700)openApp(b.dataset.id);};
+    b.ondblclick=()=>openApp(b.dataset.id);
+    b.onkeydown=e=>{if(e.key==="Enter")openApp(b.dataset.id)};
+  });
+}
+function renderTaskbar(){
+  const ids=[...new Set([...TASKBAR,...Object.keys(opened)])];
+  const top=Object.values(opened).filter(w=>!w.classList.contains("min")).sort((a,b)=>b.style.zIndex-a.style.zIndex)[0];
+  $("#tb-apps").innerHTML=`<button class="tb" id="startBtn" aria-label="Démarrer">${I.start}<span class="tip">Démarrer</span></button>`+
+    ids.map(id=>`<button class="tb ${opened[id]?"open":""} ${top&&top.dataset.id===id?"active":""}" data-id="${id}">${I[APPS[id].ico]}<span class="tip">${APPS[id].lbl}</span></button>`).join("");
+  $("#startBtn").onclick=e=>{e.stopPropagation();$("#start").classList.toggle("show");if($("#start").classList.contains("show"))setTimeout(()=>$("#startSearch").focus(),150);};
+  $("#tb-apps").querySelectorAll(".tb[data-id]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.id,w=opened[id];
+    if(!w)return openApp(id);
+    if(w.classList.contains("min")){w.classList.remove("min");focus(w);}
+    else if(b.classList.contains("active")){w.classList.add("min");renderTaskbar();}
+    else focus(w);
+  });
+}
+function renderPinned(q=""){
+  q=q.toLowerCase().trim();
+  const list=PINNED.filter(id=>(APPS[id].t+" "+APPS[id].lbl).toLowerCase().includes(q));
+  const it=q?ALL_ITEMS.filter(p=>(p.nom+" "+p.tags.join(" ")).toLowerCase().includes(q)):[];
+  $("#pinned").innerHTML=(list.map(id=>`<button class="pin" data-id="${id}">${I[APPS[id].ico]}<span>${APPS[id].lbl}</span></button>`).join("")+
+    it.map(p=>`<button class="pin" data-item="${p.id}">${I[p.ico]}<span>${p.nom}</span></button>`).join(""))||`<p class="muted" style="grid-column:1/-1;padding:20px">Aucun résultat pour « ${q.replace(/</g,"&lt;")} »</p>`;
+  $("#pinned").querySelectorAll(".pin").forEach(b=>b.onclick=()=>b.dataset.id?openApp(b.dataset.id):openDoc(b.dataset.item));
+}
+function closeStart(){$("#start").classList.remove("show");if($("#startSearch").value){$("#startSearch").value="";renderPinned();}}
+$("#startSearch").oninput=e=>renderPinned(e.target.value);
+$("#startSearch").onkeydown=e=>{if(e.key==="Enter")$("#pinned .pin")?.click()};
+document.addEventListener("pointerdown",e=>{if(!e.target.closest("#start,#startBtn"))closeStart();if(!e.target.closest("#ctx"))$("#ctx").style.display="none";});
+$("#power").onclick=()=>{closeStart();const s=$("#shutdown");s.style.display="flex";$("#sdText").textContent="Arrêt en cours…";
+  setTimeout(()=>$("#sdText").textContent="Bon, en vrai, un admin système n'éteint jamais la prod 😎",1600);
+  setTimeout(()=>{s.style.display="none";toast("🔁 Redémarrage annulé","Uptime préservé. Haute disponibilité oblige.");},3800);};
+
+let wp=0, netOn=true;
+document.addEventListener("contextmenu",e=>{if(e.target.closest(".win,#taskbar,#start"))return;e.preventDefault();const c=$("#ctx");c.style.display="block";
+  c.style.left=Math.min(e.clientX,innerWidth-230)+"px";c.style.top=Math.min(e.clientY,innerHeight-190)+"px";});
+$("#ctx").onclick=e=>{const a=e.target.dataset.a;$("#ctx").style.display="none";
+  if(a==="wall"){wp=(wp+1)%4;$("#wallpaper").className="wp-"+wp;}
+  if(a==="net"){netOn=!netOn;$("#net").style.display=netOn?"block":"none";}
+  if(a==="refresh"){$("#desktop").style.opacity=0;setTimeout(()=>$("#desktop").style.opacity=1,150);}
+  if(a==="term")openApp("terminal"); if(a==="about")openApp("about");};
+
+/* ===================== TERMINAL ===================== */
+function esc(s){const d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+function initTerm(w){
+  const out=w.querySelector(".out"),inp=w.querySelector("input"),box=w.querySelector(".term"),hist=[];let hi=0;
+  const print=(t)=>{const d=document.createElement("div");d.className="l";d.innerHTML=t;out.appendChild(d);box.scrollTop=box.scrollHeight;};
+  const nav={accueil:"about",home:"about",profil:"about",apropos:"about",competences:"competences",skills:"competences",projets:"projets",documentation:"docs",docs:"docs",man:"docs",parcours:"parcours",veille:"veille",contact:"contact",cv:"cv",viessmann:"viessmann",entreprise:"viessmann",bts:"bts",chat:"chat",ia:"chat",mentions:"mentions"};
+  const navMsg={about:"Récupération des données utilisateur...",competences:"Analyse des modules chargés...",projets:"Montage des volumes de projets...",docs:"Ouverture de la bibliothèque de documentation...",parcours:"Lecture des logs d'activité...",veille:"Synchronisation des flux RSS...",contact:"Initialisation du port SMTP...",cv:"Téléchargement de l'archive CV en cours...",viessmann:"Chargement des informations sur Viessmann Faulquemont...",bts:"Lecture du référentiel BTS SIO...",chat:"Connexion à l'agent IA...",mentions:"Ouverture des mentions légales..."};
+  const C={
+    help:()=>`Commandes système : <span class="y">whoami, ls, status, ping [hôte], ipconfig, neofetch, date, clear, exit</span>\nNavigation : <span class="y">profil, competences, projets, docs, parcours, veille, contact, cv, viessmann, bts, chat, mentions</span>`,
+    whoami:()=>`${ME.nom}\n${ME.titre}\n${ME.entreprise}`,
+    ls:()=>`<span class="c">drwxr-xr-x</span>  projets/\n<span class="c">drwxr-xr-x</span>  documentation/\n<span class="c">drwxr-xr-x</span>  veille/\n-rw-r--r--  CV_Alann_HOFFMANN.pdf\n-rw-------  id_rsa <span class="err">(Permission Denied)</span>`,
+    dir:()=>C.ls(),
+    status:()=>`System: <span class="ok">ONLINE</span>\nNetwork Nodes: ACTIVE\nSecurity Policies: ENFORCED\nVeille IA: <span class="ok">publiée chaque jour</span>`,
+    ipconfig:()=>`Carte Ethernet SRV-SISR-01 :\n   Adresse IPv4. . . . . . : 192.168.10.42\n   Masque. . . . . . . . . : 255.255.255.0\n   Passerelle. . . . . . . : 192.168.10.254 (pfSense)\n   DNS . . . . . . . . . . : 192.168.10.1 (SRV-AD01)`,
+    neofetch:()=>`<span class="c">   ▄▄▄▄▄▄▄  </span> <b>admin@SRV-SISR-01</b>\n<span class="c">  █  _&gt;   █ </span> OS : PortfolioOS (BTS SIO Edition)\n<span class="c">  █       █ </span> Formation : BTS SIO SISR (alternance)\n<span class="c">   ▀▀▀▀▀▀▀  </span> Entreprise : Viessmann Faulquemont\n             Shell : bash / PowerShell\n             Uptime : depuis le 1er dépannage terrain`,
+    date:()=>new Date().toLocaleString("fr-FR"),
+    sudo:()=>C.su(), root:()=>C.su(), admin:()=>C.su(), sysadmin:()=>C.su(),
+    su:()=>`<span class="y">[WARNING]</span> Authentification superutilisateur requise.\nPassword: **********\n<span class="err"><b>ACCESS DENIED.</b></span> L'incident a été logué. 👀`,
+    exit:()=>{setTimeout(()=>closeWin("terminal"),200);return "logout";}
+  };
+  print(`Console d'administration sécurisée. Tapez <span class="y">'help'</span> pour les commandes.\n`);
+  inp.addEventListener("keydown",e=>{
+    if(e.key==="ArrowUp"){if(hi>0)inp.value=hist[--hi];e.preventDefault();return;}
+    if(e.key==="ArrowDown"){hi=Math.min(hi+1,hist.length);inp.value=hist[hi]??"";e.preventDefault();return;}
+    if(e.key!=="Enter")return;
+    const raw=inp.value.trim();inp.value="";print(`<span class="p">admin@infra:~$</span> ${esc(raw)}`);
+    if(!raw)return;hist.push(raw);hi=hist.length;
+    const [cmd,...args]=raw.split(/\s+/);const c=cmd.toLowerCase();
+    if(c==="clear"||c==="cls"){out.innerHTML="";return;}
+    if(nav[c]){print(navMsg[nav[c]]);setTimeout(()=>openApp(nav[c]),300);return;}
+    if(c==="ping"){const h=esc(args[0]||"8.8.8.8");print(`Envoi d'une requête 'ping' sur ${h} avec 32 octets de données :`);
+      let n=0;const t=setInterval(()=>{print(`Réponse de ${h} : octets=32 temps=${(8+Math.random()*12)|0} ms TTL=117`);if(++n===4){clearInterval(t);print(`<span class="ok">Paquets : envoyés = 4, reçus = 4, perdus = 0 (0% de perte)</span>`);}},450);return;}
+    print(C[c]?C[c]():`Commande invalide : ${esc(cmd)}. Exécutez <span class="y">'help'</span> pour obtenir de l'aide.`);
+  });
+  setTimeout(()=>inp.focus(),100);
+}
+
+/* ===================== ASSISTANT IA (Vercel + Gemini) ===================== */
+function sanitizeBot(html){return window.DOMPurify?DOMPurify.sanitize(html,{ALLOWED_TAGS:["strong","br","ul","li"],ALLOWED_ATTR:[]}):esc(html);}
+function initChat(w){
+  const body=w.querySelector(".chat-body"),inp=w.querySelector(".chat-in input"),btn=w.querySelector(".chat-in button"),sugg=w.querySelector(".sugg");let busy=false;
+  const add=(cls,html,isText)=>{const m=document.createElement("div");m.className="msg "+cls;if(isText)m.textContent=html;else m.innerHTML=html;body.appendChild(m);body.scrollTop=body.scrollHeight;return m;};
+  async function send(txt){
+    txt=(txt??inp.value).trim().slice(0,500);if(!txt||busy)return;
+    busy=true;inp.disabled=btn.disabled=true;sugg.style.display="none";
+    add("me",txt,true);inp.value="";
+    const typing=add("bot","⏳ Traitement des paquets...");
+    const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),20000);
+    try{
+      const r=await fetch(CHAT_API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:txt}),signal:ctrl.signal});
+      let d={};try{d=await r.json();}catch(e){}
+      typing.innerHTML=sanitizeBot(typeof d.reply==="string"&&d.reply.trim()?d.reply:`Petit souci technique 😅 Vous pouvez écrire directement à Alann : ${ME.email}`);
+    }catch(err){
+      typing.innerHTML=`<span style="color:var(--orange)">${err.name==="AbortError"?"[Erreur] Délai d'attente réseau dépassé.":"[Erreur] Impossible de joindre le serveur."}</span>`;
+    }finally{clearTimeout(to);busy=false;inp.disabled=btn.disabled=false;inp.focus();body.scrollTop=body.scrollHeight;}
+  }
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")send();});
+  btn.addEventListener("click",()=>send());
+  sugg.querySelectorAll("button").forEach(b=>b.onclick=()=>send(b.textContent));
+  setTimeout(()=>inp.focus(),100);
+}
+
+/* ===================== VEILLE (lit veille/AAAA-MM-JJ.json) ===================== */
+function initVeille(w){
+  const note=w.querySelector("#vnote"),liste=w.querySelector(".vlist");
+  const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!==undefined)e.textContent=txt;return e;};
+  const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  const texte=(v,m)=>String(v==null?"":v).slice(0,m);
+  const lienSur=u=>{try{const x=new URL(u);return(x.protocol==="https:"||x.protocol==="http:")?x.href:null;}catch(e){return null;}};
+  const dateLongue=iso=>{const p=iso.split("-");return new Date(+p[0],+p[1]-1,+p[2],12).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});};
+  const charger=j=>fetch(VEILLE_DOSSIER+"/"+j+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)
+    .then(d=>d&&typeof d.date==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(d.date)&&Array.isArray(d.articles)?d:null);
+  const carte=j=>{const c=el("article","vday");c.appendChild(el("div","vday-d",dateLongue(j.date)));
+    j.articles.slice(0,30).forEach(a=>{const l=el("div","ventry");l.appendChild(el("span","vsrc","["+texte(a.source,60)+"]"));
+      const titre=texte(a.titre,200)||texte(a.resume,80),href=lienSur(a.lien);let t;
+      if(href){t=el("a","vtitle",titre);t.href=href;t.target="_blank";t.rel="noopener noreferrer";}else t=el("span","vtitle",titre);
+      l.appendChild(t);l.appendChild(el("span","vres",texte(a.resume,400)));c.appendChild(l);});return c;};
+  const now=new Date(),jours=[];
+  for(let i=-1;i<VEILLE_JOURS_RECHERCHE-1;i++)jours.push(ymd(new Date(now.getFullYear(),now.getMonth(),now.getDate()-i,12)));
+  Promise.all(jours.map(charger)).then(res=>{
+    const ok=res.filter(Boolean).sort((a,b)=>a.date<b.date?1:-1);
+    if(!ok.length){note.textContent="Aucune publication disponible pour le moment. Les résumés apparaissent ici chaque jour.";return;}
+    const m=texte(ok[0].modele,40);
+    note.textContent="Résumés générés automatiquement par une IA exécutée en local"+(m?" ("+m+")":"")+" à partir de flux RSS. Ils peuvent comporter des erreurs : consulter les sources. Dernière mise à jour : "+dateLongue(ok[0].date)+".";
+    ok.forEach((j,i)=>{const c=carte(j);if(i>=VEILLE_JOURS_VISIBLES)c.hidden=true;liste.appendChild(c);});
+    if(ok.length>VEILLE_JOURS_VISIBLES){const b=el("button","btn ghost","Afficher les jours précédents");b.onclick=()=>{liste.querySelectorAll(".vday[hidden]").forEach(c=>c.hidden=false);b.remove();};liste.after(b);}
+  });
+}
+
+/* ===================== ANIMATION RÉSEAU (fond) ===================== */
+(function(){
+  const cv=$("#net"),cx=cv.getContext("2d");let P=[];
+  const rs=()=>{cv.width=innerWidth;cv.height=innerHeight;P=[];const n=Math.min(90,(cv.width*cv.height)/18000);
+    for(let i=0;i<n;i++)P.push({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.8+.8});};
+  const loop=()=>{if(netOn){cx.clearRect(0,0,cv.width,cv.height);
+    for(let i=0;i<P.length;i++){const p=P[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>cv.width)p.vx*=-1;if(p.y<0||p.y>cv.height)p.vy*=-1;
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle="#00b4d8";cx.fill();
+      for(let j=i+1;j<P.length;j++){const q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<120){cx.beginPath();cx.strokeStyle=`rgba(0,180,216,${(1-d/120)*.8})`;cx.lineWidth=.5;cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke();}}}}
+    requestAnimationFrame(loop);};
+  addEventListener("resize",rs);rs();loop();
+})();
+
+/* ===================== DIVERS ===================== */
+function typer(el){if(!el)return;let r=0,c=0,del=false;(function t(){if(!el.isConnected)return;const s=ROLES[r];c+=del?-1:1;el.textContent=s.slice(0,c);
+  let sp=del?40:80;if(!del&&c===s.length){sp=2000;del=true;}else if(del&&c===0){del=false;r=(r+1)%ROLES.length;sp=500;}setTimeout(t,sp);})();}
+function toast(t,m){const e=$("#toast");e.innerHTML=`<span class="tt">${t}</span>${m}`;e.classList.add("show");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("show"),4500);}
+function copyMail(b){try{navigator.clipboard.writeText(ME.email).then(()=>b.textContent="✅ Copié !",()=>b.textContent=ME.email);}catch(e){b.textContent=ME.email;}}
+function tick(){const d=new Date();
+  $("#clock").innerHTML=`${d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}<br>${d.toLocaleDateString("fr-FR")}`;
+  $("#lockTime").textContent=d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  const s=d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});$("#lockDate").textContent=s[0].toUpperCase()+s.slice(1);}
+let unlocked=false;
+function unlock(){if(unlocked)return;unlocked=true;$("#lock").classList.add("gone");
+  setTimeout(()=>{toast("👋 Bienvenue sur mon portfolio","Double-clique sur une icône, ouvre le Terminal (<b>help</b>) ou pose une question à l'Assistant IA.");if(innerWidth>700&&!location.hash)openApp("about");},700);}
+$("#lock").onclick=unlock;
+document.addEventListener("keydown",e=>{if(!unlocked&&(e.key==="Enter"||e.key===" "))unlock();if(e.key==="Escape")closeStart();});
+
+typer($("#typer1"));renderDesktop();renderTaskbar();renderPinned();tick();setInterval(tick,15000);
+// Lien direct vers une fenêtre : index.html#projets, #cv, #veille, #contact…
+if(location.hash&&APPS[location.hash.slice(1)]){unlock();setTimeout(()=>openApp(location.hash.slice(1)),750);}
+</script>
+</body>
+</html>
