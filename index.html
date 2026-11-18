@@ -52,10 +52,12 @@ a{color:var(--accent)}
 #loginBtn:hover{background:rgba(255,255,255,.25)}
 
 /* ---------- Bureau ---------- */
-#desktop{position:fixed;inset:0 0 52px 0;padding:12px 10px;display:grid;grid-auto-flow:column;grid-template-rows:repeat(auto-fill,98px);grid-auto-columns:90px;gap:4px;align-content:start}
-.icon{width:86px;height:94px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 2px;border-radius:6px;border:1px solid transparent;text-align:center;font-size:12px;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+#desktop{position:fixed;inset:0 0 52px 0}
+.icon{position:absolute;transition:left .18s ease,top .18s ease;touch-action:none;width:86px;height:94px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 2px;border-radius:6px;border:1px solid transparent;text-align:center;font-size:12px;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,.9)}
 .icon:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.12)}
 .icon.sel{background:rgba(0,180,216,.25);border-color:rgba(0,180,216,.5)}
+.icon.drag{transition:none;z-index:50;opacity:.85;background:rgba(0,180,216,.25);border-color:rgba(0,180,216,.5);cursor:grabbing}
+#dropGhost{position:absolute;width:86px;height:94px;border:1px dashed rgba(0,180,216,.7);border-radius:6px;background:rgba(0,180,216,.08);display:none;pointer-events:none;transition:left .08s,top .08s}
 .icon svg{width:46px;height:46px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
 
 /* ---------- Fenêtres ---------- */
@@ -104,10 +106,8 @@ table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
 th{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
 .tick{color:#22c55e;font-weight:700;margin-right:4px}
-.lvl{display:flex;gap:4px;height:8px;margin:5px 0 12px}
-.lvl i{flex:1;border-radius:2px;background:#243044}
-.lvl i.on{background:var(--accent);box-shadow:0 0 6px rgba(0,180,216,.4)}
-.lvl-row{display:flex;justify-content:space-between;font-size:13px;color:#d6dde7}
+.skills-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:14px}
+.skills-list .card{margin:0;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px}
 .timeline{border-left:2px solid rgba(0,180,216,.35);margin-left:8px;padding-left:24px}
 .tl{position:relative;margin-bottom:24px}
 .tl::before{content:"";position:absolute;left:-31px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--win-bg);border:2px solid var(--orange)}
@@ -242,7 +242,9 @@ a.vtitle:hover{color:var(--accent)}
 .net-svg{width:100%;max-width:640px;display:block;margin:6px auto 14px}
 
 @media (max-width:700px){
-  #desktop{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-template-rows:none;grid-auto-rows:98px;grid-auto-columns:auto;justify-items:center;overflow:auto}
+  #desktop{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:98px;justify-items:center;padding:12px 6px;overflow:auto}
+  .icon{position:static!important;transition:none}
+  #dropGhost{display:none!important}
   .win{left:0!important;top:0!important;width:100%!important;height:calc(100% - 52px)!important;border-radius:0;resize:none}
   .ex-side{display:none}
   .icon{width:100%;font-size:11px}.icon span{word-break:break-word;max-width:100%}
@@ -294,6 +296,7 @@ a.vtitle:hover{color:var(--accent)}
   <div data-a="refresh">🔄 Actualiser</div>
   <div data-a="wall">🎨 Changer le fond d'écran</div>
   <div data-a="net">🕸️ Animation réseau on/off</div>
+  <div data-a="arrange">🗂️ Réorganiser les icônes</div>
   <hr>
   <div data-a="term">💻 Ouvrir dans le Terminal</div>
   <div data-a="about">👤 Propriétés (profil)</div>
@@ -432,7 +435,7 @@ const APPS = {
       <tr><td class="muted">Formation</td><td>BTS SIO option SISR (alternance) <a onclick="openApp('bts')" style="cursor:pointer">· détails</a></td></tr>
       <tr><td class="muted">Entreprise</td><td>${ME.entreprise} <a onclick="openApp('viessmann')" style="cursor:pointer">· présentation</a></td></tr>
       <tr><td class="muted">Localisation</td><td>${ME.ville}</td></tr>
-      <tr><td class="muted">Technologies</td><td><span class="tag">Windows Server / AD</span><span class="tag">Linux (Debian/Ubuntu)</span><span class="tag">VMware ESXi</span><span class="tag">Cisco IOS (VLAN/Routing)</span><span class="tag">PowerShell & Bash</span><span class="tag">pfSense / Pare-feu</span></td></tr>
+      <tr><td class="muted">Technologies</td><td><span class="tag">Windows OS</span><span class="tag">Linux (Debian/Ubuntu)</span><span class="tag">VMware ESXi</span><span class="tag">Cisco IOS (VLAN/Routing)</span><span class="tag">PowerShell & Bash</span><span class="tag">pfSense / Pare-feu</span></td></tr>
     </table>
     <a class="btn" onclick="openApp('projets')">📁 Afficher les projets</a><a class="btn ghost" onclick="openApp('contact')">✉️ Ouvrir communication</a>`},
 
@@ -440,11 +443,13 @@ const APPS = {
   docs:{t:"Explorateur — Documentation", lbl:"Documentation", ico:"docs", w:860, h:580, html:()=>explorerHTML("docs"), onOpen:w=>wireExplorer(w,"docs")},
 
   competences:{t:"Compétences.xlsx", lbl:"Compétences.xlsx", ico:"skills", w:780, h:580, html:()=>`
-    <h1>✅ Compétences</h1><p class="muted">Niveaux techniques + correspondance avec le référentiel BTS SIO</p>
-    <div class="grid2" style="margin-top:14px">
-      <div class="card"><h3>🪟 Système</h3>${lvl("Windows Server / AD",4)}${lvl("Linux (Debian)",3)}${lvl("Virtualisation",4)}</div>
-      <div class="card"><h3>🌐 Réseau</h3>${lvl("Switching / VLANs",4)}${lvl("Routage / TCP-IP",3)}${lvl("Cisco Packet Tracer",4)}</div>
-      <div class="card"><h3>🧰 Outils</h3>${lvl("Scripting (Bash/PS)",3)}${lvl("Git / GitHub",3)}</div>
+    <h1>✅ Compétences</h1><p class="muted">Compétences techniques + correspondance avec le référentiel BTS SIO</p>
+    <div class="skills-list">
+      <div class="card">🪟 Windows OS</div>
+      <div class="card">🐧 Linux (Debian/Ubuntu)</div>
+      <div class="card">🧊 Virtualisation</div>
+      <div class="card">🌐 Cisco Packet Tracer</div>
+      <div class="card">🎧 Helpdesk</div>
     </div>
     <h2>📋 Bloc 1 — Support et mise à disposition de services informatiques</h2>
     <table><tr><th>Compétence</th><th>Réalisations</th></tr>
@@ -452,25 +457,25 @@ const APPS = {
       <tr><td>Répondre aux incidents et aux demandes d'assistance</td><td><span class="tick">✔</span>Helpdesk GLPI (Viessmann)</td></tr>
       <tr><td>Développer la présence en ligne de l'organisation</td><td><span class="tick">✔</span>Portfolio · Veille publiée auto</td></tr>
       <tr><td>Travailler en mode projet</td><td><span class="tick">✔</span>Serveur IA local · Lab BTS</td></tr>
-      <tr><td>Mettre à disposition des utilisateurs un service informatique</td><td><span class="tick">✔</span>Nginx & Samba · AD/DNS/DHCP</td></tr>
+      <tr><td>Mettre à disposition des utilisateurs un service informatique</td><td><span class="tick">✔</span>Nginx & Samba · AD/DNS/DHCP (lab)</td></tr>
       <tr><td>Organiser son développement professionnel</td><td><span class="tick">✔</span>Veille techno automatisée · Portfolio</td></tr>
     </table>
     <h2>🌐 Bloc 2 — Administration des systèmes et des réseaux (SISR)</h2>
     <table><tr><th>Compétence</th><th>Réalisations</th></tr>
       <tr><td>Concevoir une solution d'infrastructure réseau</td><td><span class="tick">✔</span>Lab BTS · pfSense (LAN/WAN/DMZ)</td></tr>
-      <tr><td>Installer, tester et déployer une solution d'infrastructure réseau</td><td><span class="tick">✔</span>pfSense · AD/GPO · Nginx/Samba · Docker</td></tr>
+      <tr><td>Installer, tester et déployer une solution d'infrastructure réseau</td><td><span class="tick">✔</span>pfSense · AD/GPO (lab) · Nginx/Samba · Docker</td></tr>
       <tr><td>Exploiter, dépanner et superviser une solution d'infrastructure réseau</td><td><span class="tick">✔</span>Zabbix/NetAlertX · Script d'aide .bat</td></tr>
     </table>
     <h2>🔐 Bloc 3 — Cybersécurité des services informatiques</h2>
     <table><tr><th>Compétence</th><th>Réalisations</th></tr>
       <tr><td>Protéger les données / sécuriser les équipements et les usages</td><td><span class="tick">✔</span>Analyse WannaCry · pfSense · Procédures sécurité Linux</td></tr>
-      <tr><td>Garantir la disponibilité, l'intégrité et la confidentialité</td><td><span class="tick">✔</span>Samba sécurisé · Tailscale · GPO</td></tr>
+      <tr><td>Garantir la disponibilité, l'intégrité et la confidentialité</td><td><span class="tick">✔</span>Samba sécurisé · Tailscale · GPO (lab)</td></tr>
     </table>`},
 
   parcours:{t:"Parcours — journal d'activité", lbl:"Parcours", ico:"timeline", w:640, h:520, html:()=>`
     <h1>🧭 Parcours</h1><p class="muted">Lecture des logs d'activité…</p><br>
     <div class="timeline">
-      <div class="tl"><div class="d">2025 - Présent</div><h3>BTS SIO SISR (Alternance)</h3><div class="pl">Viessmann - Faulquemont (57)</div><p>Technicien support et infrastructure. Gestion de parc, administration système, tickets GLPI et projets d'amélioration réseau.</p><a class="btn ghost" onclick="openApp('viessmann')">🏭 Présentation de l'entreprise</a></div>
+      <div class="tl"><div class="d">2025 - Présent</div><h3>BTS SIO SISR (Alternance)</h3><div class="pl">Viessmann - Faulquemont (57)</div><p>Technicien support et infrastructure. Gestion de parc, support utilisateurs, tickets GLPI et projets d'amélioration réseau.</p><a class="btn ghost" onclick="openApp('viessmann')">🏭 Présentation de l'entreprise</a></div>
       <div class="tl"><div class="d">2021 - 2024</div><h3>Technicien d'Exploitation</h3><div class="pl">Idex Energie</div><p>Maintenance préventive et curative, gestion d'un secteur en autonomie, relation client.</p></div>
       <div class="tl"><div class="d">2018 - 2020</div><h3>BAC Pro MEI</h3><div class="pl">Lycée Inter-Entreprises</div><p>Maintenance des Équipements Industriels. Bases solides en électricité et mécanique.</p></div>
       <div class="tl"><div class="d">Avant 2018</div><h3>CAP Électricien</h3></div>
@@ -482,7 +487,7 @@ const APPS = {
     <p style="margin-top:10px">Implanté en Moselle depuis <b>1971</b>, le site de <b>Faulquemont</b> regroupe l'usine de production (<em>Viessmann Faulquemont SAS</em>) et le siège social commercial (<em>Viessmann France SAS</em>). Intégré à <b>Carrier Global Corporation</b> (division <em>Viessmann Climate Solutions</em>), ce site est un pilier industriel majeur de la transition énergétique en Europe.</p>
     <div class="grid2" style="margin-top:18px">
       <div class="card"><h3>🏗️ Pôle industriel & R&D</h3><p class="muted" style="font-size:12px">Centre de compétence mondial</p><ul style="list-style:none;margin-left:0"><li>👥 <b>Effectif :</b> ~860 collaborateurs sur site</li><li>🏢 <b>Surface :</b> 85 000 m² couverts (dont 19 000 m² de centre logistique)</li><li>☀️ <b>Production :</b> ballons d'eau chaude sanitaire (ECS), capteurs solaires thermiques (1er fabricant français), pompes à chaleur et stockage d'énergie (Vitocharge VX3)</li></ul></div>
-      <div class="card hl"><span class="badge">ENVIRONNEMENT IT</span><h3>🌐 Infrastructure & SISR</h3><p class="muted" style="font-size:12px">Maintien en condition opérationnelle</p><p style="font-size:13px">Un site de production fonctionnant à flux tendu exige une <b>haute disponibilité</b> permanente du réseau et des systèmes :</p><ul style="list-style:none;margin-left:0;font-size:13px"><li>🎧 Support IT (Helpdesk GLPI) bureautique & usine</li><li>🖨️ Gestion du parc et terminaux industriels (imprimantes thermiques TSC / BarTender, scanners)</li><li>🖥️ Administration Active Directory, brassage et segmentation VLAN</li></ul></div>
+      <div class="card hl"><span class="badge">ENVIRONNEMENT IT</span><h3>🌐 Infrastructure & SISR</h3><p class="muted" style="font-size:12px">Maintien en condition opérationnelle</p><p style="font-size:13px">Un site de production fonctionnant à flux tendu exige une <b>haute disponibilité</b> permanente du réseau et des systèmes :</p><ul style="list-style:none;margin-left:0;font-size:13px"><li>🎧 Support IT (Helpdesk GLPI) bureautique & usine</li><li>🖨️ Gestion du parc et terminaux industriels (imprimantes thermiques TSC / BarTender, scanners)</li><li>🔌 Brassage et segmentation VLAN</li></ul></div>
     </div>
     <h2>🛠️ Mes missions au quotidien</h2>
     <p>Au sein du service informatique de Faulquemont, j'assure le support technique de proximité auprès des équipes administratives, logistiques et des lignes de production. Mon rôle consiste à garantir la continuité de service du parc informatique, déployer et sécuriser les postes de travail, automatiser les tâches récurrentes et participer aux projets d'évolution de l'infrastructure réseau.</p>`},
@@ -562,7 +567,6 @@ const DESKTOP = ["about","projets","docs","competences","parcours","viessmann","
 const TASKBAR = ["projets","docs","terminal","chat","veille"];
 const PINNED  = ["about","projets","docs","competences","parcours","viessmann","bts","veille","cv","contact","chat","terminal","mentions","corbeille"];
 
-function lvl(n,v){return `<div class="lvl-row"><span>${n}</span><span class="muted">${v}/5</span></div><div class="lvl">${[1,2,3,4,5].map(i=>`<i class="${i<=v?"on":""}"></i>`).join("")}</div>`}
 
 /* ===================== EXPLORATEUR ===================== */
 function explorerHTML(f){return `<div class="explorer">
@@ -634,14 +638,71 @@ function drag(w){
 }
 
 /* ===================== BUREAU / BARRE / DÉMARRER ===================== */
+/* Icônes déplaçables, aimantées à une grille, positions mémorisées */
+const CELL_W=90, CELL_H=98, ORG_X=10, ORG_Y=12, LAYOUT_KEY="ah-desktop-layout";
+const DEFAULT_POS={about:[0,0],projets:[0,1],docs:[0,2],competences:[0,3],parcours:[0,4],viessmann:[0,5],veille:[0,6],
+  cv:[1,0],contact:[1,1],chat:[1,2],terminal:[1,3],corbeille:[1,4]};
+let layout={},memSaved=null;
+const isMobile=()=>innerWidth<=700;
+function gridSize(){return{cols:Math.max(1,Math.floor((innerWidth-ORG_X*2)/CELL_W)),rows:Math.max(1,Math.floor((innerHeight-52-ORG_Y*2)/CELL_H))};}
+function computeLayout(saved){
+  const {cols,rows}=gridSize(),used=new Set(),out={};
+  const ok=p=>Array.isArray(p)&&p[0]>=0&&p[1]>=0&&p[0]<cols&&p[1]<rows&&!used.has(p[0]+","+p[1]);
+  const put=(id,p)=>{out[id]=p;used.add(p[0]+","+p[1]);};
+  DESKTOP.forEach(id=>{if(saved&&ok(saved[id]))put(id,saved[id]);});
+  DESKTOP.forEach(id=>{if(out[id])return;if(ok(DEFAULT_POS[id])){put(id,DEFAULT_POS[id]);return;}
+    for(let c=0;c<cols;c++)for(let r=0;r<rows;r++)if(!out[id]&&ok([c,r]))put(id,[c,r]);
+    if(!out[id])put(id,[0,0]);});
+  return out;
+}
+function loadLayout(){let saved=memSaved;try{saved=JSON.parse(localStorage.getItem(LAYOUT_KEY)||"null")||memSaved;}catch(e){}layout=computeLayout(saved);}
+function saveLayout(){memSaved=JSON.parse(JSON.stringify(layout));try{localStorage.setItem(LAYOUT_KEY,JSON.stringify(layout));}catch(e){}}
+function resetLayout(){memSaved=null;try{localStorage.removeItem(LAYOUT_KEY);}catch(e){}layout=computeLayout(null);placeIcons();}
+function placeIcons(){
+  document.querySelectorAll("#desktop .icon").forEach(b=>{const p=layout[b.dataset.id];
+    b.style.left=(ORG_X+p[0]*CELL_W)+"px";b.style.top=(ORG_Y+p[1]*CELL_H)+"px";});
+}
 function renderDesktop(){
-  $("#desktop").innerHTML=DESKTOP.map(id=>`<button class="icon" data-id="${id}">${I[APPS[id].ico]}<span>${APPS[id].lbl}</span></button>`).join("");
+  loadLayout();
+  $("#desktop").innerHTML='<div id="dropGhost"></div>'+DESKTOP.map(id=>`<button class="icon" data-id="${id}">${I[APPS[id].ico]}<span>${APPS[id].lbl}</span></button>`).join("");
+  placeIcons();
+  const ghost=$("#dropGhost");
   $("#desktop").querySelectorAll(".icon").forEach(b=>{
-    b.onclick=()=>{document.querySelectorAll(".icon").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");if(matchMedia("(pointer:coarse)").matches||innerWidth<=700)openApp(b.dataset.id);};
+    let st=null,dragging=false,justDragged=false;
+    b.addEventListener("pointerdown",e=>{
+      if(e.button!==0||isMobile())return;
+      st={x:e.clientX,y:e.clientY,l:b.offsetLeft,t:b.offsetTop};dragging=false;b.setPointerCapture(e.pointerId);
+    });
+    b.addEventListener("pointermove",e=>{
+      if(!st)return;const dx=e.clientX-st.x,dy=e.clientY-st.y;
+      if(!dragging&&Math.hypot(dx,dy)<6)return;
+      if(!dragging){dragging=true;b.classList.add("drag");document.querySelectorAll(".icon").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");ghost.style.display="block";}
+      const {cols,rows}=gridSize();
+      const L=Math.min(innerWidth-86,Math.max(0,st.l+dx)),T=Math.min(innerHeight-52-94,Math.max(0,st.t+dy));
+      b.style.left=L+"px";b.style.top=T+"px";
+      const c=Math.min(cols-1,Math.max(0,Math.round((L-ORG_X)/CELL_W))),r=Math.min(rows-1,Math.max(0,Math.round((T-ORG_Y)/CELL_H)));
+      b._target=[c,r];ghost.style.left=(ORG_X+c*CELL_W)+"px";ghost.style.top=(ORG_Y+r*CELL_H)+"px";
+    });
+    const end=()=>{
+      if(!st)return;st=null;
+      if(!dragging)return;
+      dragging=false;justDragged=true;setTimeout(()=>justDragged=false,0);
+      b.classList.remove("drag");ghost.style.display="none";
+      const id=b.dataset.id,from=layout[id],to=b._target||from;
+      const other=Object.keys(layout).find(k=>k!==id&&layout[k][0]===to[0]&&layout[k][1]===to[1]);
+      if(other)layout[other]=from;   // emplacement occupé → on échange les deux icônes
+      layout[id]=to;saveLayout();placeIcons();
+    };
+    b.addEventListener("pointerup",end);b.addEventListener("pointercancel",end);
+    b.onclick=()=>{if(justDragged)return;document.querySelectorAll(".icon").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");if(matchMedia("(pointer:coarse)").matches||isMobile())openApp(b.dataset.id);};
     b.ondblclick=()=>openApp(b.dataset.id);
     b.onkeydown=e=>{if(e.key==="Enter")openApp(b.dataset.id)};
   });
 }
+let rzT;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(isMobile())return;loadLayout();placeIcons();},150);});
+// Clic sur le fond du bureau = désélectionne
+document.addEventListener("pointerdown",e=>{if(e.target.id==="desktop")document.querySelectorAll(".icon").forEach(x=>x.classList.remove("sel"));});
+
 function renderTaskbar(){
   const ids=[...new Set([...TASKBAR,...Object.keys(opened)])];
   const top=Object.values(opened).filter(w=>!w.classList.contains("min")).sort((a,b)=>b.style.zIndex-a.style.zIndex)[0];
@@ -677,6 +738,7 @@ document.addEventListener("contextmenu",e=>{if(e.target.closest(".win,#taskbar,#
   c.style.left=Math.min(e.clientX,innerWidth-230)+"px";c.style.top=Math.min(e.clientY,innerHeight-190)+"px";});
 $("#ctx").onclick=e=>{const a=e.target.dataset.a;$("#ctx").style.display="none";
   if(a==="wall"){wp=(wp+1)%4;$("#wallpaper").className="wp-"+wp;}
+  if(a==="arrange"){resetLayout();}
   if(a==="net"){netOn=!netOn;$("#net").style.display=netOn?"block":"none";}
   if(a==="refresh"){$("#desktop").style.opacity=0;setTimeout(()=>$("#desktop").style.opacity=1,150);}
   if(a==="term")openApp("terminal"); if(a==="about")openApp("about");};
@@ -793,7 +855,7 @@ function openPdf(file,title){
 }
 async function pdfLoad(w,url,title){
   const pages=w.querySelector(".pdf-pages"),tok=++w._tok;
-  w._pdf=null;w._title=title;w.querySelector(".tot").textContent="–";pdfUi(w);
+  w._pdf=null;w._frame=null;w._title=title;w.querySelector(".tot").textContent="–";pages.style.padding="";pdfUi(w);
   pages.innerHTML='<div class="pdf-msg"><div class="spinner"></div>Chargement du document…</div>';
   try{
     await loadPdfJs();
@@ -804,7 +866,14 @@ async function pdfLoad(w,url,title){
     await pdfFit(w);
   }catch(err){
     if(tok!==w._tok)return;
-    pages.innerHTML=`<div class="pdf-msg">⚠️ Impossible d'afficher ce document ici.<span style="font-size:12px">Vérifie que le fichier est bien dans le dossier <b>documents/</b>.</span><a class="btn" href="${url}" target="_blank" rel="noopener noreferrer">↗ Ouvrir dans un nouvel onglet</a></div>`;
+    if(err&&err.name==="MissingPDFException"){
+      pages.innerHTML=`<div class="pdf-msg">📄❓ Document introuvable.<span style="font-size:12px">Le fichier <b>${esc(decodeURI(url))}</b> n'existe pas sur le serveur.<br>Vérifie son nom exact (majuscules, espaces) dans le dossier <b>documents/</b>.</span></div>`;
+      return;
+    }
+    // Plan B : pdf.js indisponible → lecteur PDF natif du navigateur, toujours DANS la fenêtre
+    pages.style.padding="0";
+    pages.innerHTML=`<iframe src="${url}#view=FitH" title="${esc(title)}" style="flex:1;width:100%;height:100%;border:0;background:#fff"></iframe>`;
+    w._frame=pages.querySelector("iframe");pdfUi(w);
   }
 }
 async function pdfFit(w){
@@ -840,9 +909,11 @@ function pdfUi(w){
   tb.querySelector('[data-a="page"]').value=has?w._page:"–";
   tb.querySelector(".zl").textContent=has?Math.round(w._scale*100)+" %":"–";
   tb.querySelectorAll("button").forEach(b=>b.disabled=!has);
+  if(w._frame)tb.querySelector('[data-a="print"]').disabled=false;
   if(has){tb.querySelector('[data-a="prev"]').disabled=w._page<=1;tb.querySelector('[data-a="next"]').disabled=w._page>=w._pdf.numPages;}
 }
 async function pdfPrint(w){
+  if(w&&w._frame){try{w._frame.contentWindow.focus();w._frame.contentWindow.print();}catch(e){toast("⚠️ Impression bloquée","Utilise ⬇️ Télécharger puis imprime le fichier.");}return;}
   if(!w||!w._pdf)return;
   const area=$("#printArea");area.innerHTML="";
   toast("🖨️ Préparation de l'impression…",`${w._title} · ${w._pdf.numPages} page(s)`);
@@ -862,14 +933,15 @@ async function pdfPrint(w){
 function initPdfViewer(w){
   w._tok=0;w._rtok=0;w._scale=1;w._page=1;
   const tb=w.querySelector(".pdf-tb"),pages=w.querySelector(".pdf-pages"),inp=tb.querySelector('[data-a="page"]');
-  tb.addEventListener("click",e=>{const b=e.target.closest("button[data-a]");if(!b||!w._pdf)return;
+  tb.addEventListener("click",e=>{const b=e.target.closest("button[data-a]");if(!b)return;
     const a=b.dataset.a;
+    if(a==="print")return pdfPrint(w);
+    if(!w._pdf)return;
     if(a==="prev")pdfGoto(w,w._page-1);
     if(a==="next")pdfGoto(w,w._page+1);
     if(a==="zin"){w._scale=Math.min(4,w._scale*1.2);pdfRender(w);}
     if(a==="zout"){w._scale=Math.max(.3,w._scale/1.2);pdfRender(w);}
     if(a==="fit")pdfFit(w);
-    if(a==="print")pdfPrint(w);
   });
   inp.addEventListener("keydown",e=>{if(e.key==="Enter")pdfGoto(w,parseInt(inp.value,10));});
   let st;pages.addEventListener("scroll",()=>{clearTimeout(st);st=setTimeout(()=>{if(!w._pdf)return;
@@ -881,7 +953,7 @@ function initPdfViewer(w){
 // Ctrl+P quand le lecteur PDF est au premier plan = imprime le document, pas le bureau
 document.addEventListener("keydown",e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="p"){const w=opened.pdf;
-    if(w&&!w.classList.contains("min")&&!w.classList.contains("inactive")&&w._pdf){e.preventDefault();pdfPrint(w);}}
+    if(w&&!w.classList.contains("min")&&!w.classList.contains("inactive")&&(w._pdf||w._frame)){e.preventDefault();pdfPrint(w);}}
 });
 
 /* ===================== ANIMATION RÉSEAU (fond) ===================== */
